@@ -62,7 +62,6 @@ Link\"{o}ping, Sweden\\
 
     The main objective of this study is to develop analytical tools that could be used to better represent the uncertainty in the estimation of pairwise interaction probability. We start with the description of a new Bayesian approach to estimate ecological interactions and of a related R package. We first illustrate the framework with simple quantitative examples, followed by an assessment of the quality of an empirically-estimated plant-pollinator network. Next, we use the framework to provide analytical criteria for improving the sampling of rare interations. Finally, we discuss the implications of uncertainty in the estimation of pairwise interactions on the properties of ecological networks. Through these efforts, we demonstrate both the utility of our approach and the importance of acknowledging the uncertainty inherent in ecological networks.
 
-
 % <!-- ## Background
 
 %   - Ecological interaction networks are usually considered deterministic, but nature is highly variable and interactions should be considered with their variance
@@ -76,6 +75,30 @@ Link\"{o}ping, Sweden\\
 %   - We illustre the framework with simple quantitative examples, and then with the assessment of the quality of an empirical estimate of plant-pollinator networks. 
 %   - We further use the framework to provide analytical criteria for improving the sampling of rare interations. 
 %   - We discuss the implications of the uncertainty in the estimation of pairwise interactions on the properties of ecological networks -->
+
+
+
+\section*{Different uncertainties in computing a network}
+
+THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE METHOD. DESPITE THE INTENSITY OF THE SAMPLING, THERE ARE SEVERAL HOLES.
+
+
+
+\section*{Why some interactions do not occur ?}
+
+It is getting more and more common to represent interactions as probabilities. Some theoretical models of network structure propose to represent interactions with probabilities, for instance the minmum potential model introduces gaps in the feeding niche of predators (Allesina et al. 2008), while a gaussian probability function is used to represent the niche by Williams et al. (2010). Eklof et al. (2013) introduced variability as well in the computation of network dimensions, allowing the absence of interactions within the n-dimension niche of every species. Empirical investigation of trait-matching constraints often consider the occurrence of interactions as binomial process (e.g. Rohr et al. 2016). There are also ways to perform analysis of probabilistic networks, with almost all metrics having a probabilistic version (Poisot et al. 2015). But there is not yet consensus on what an interaction probability between a pair of species means, and this is definitely a problem when comes time to estimate the uncertainty of both pairwise interactions and entire networks. 
+
+Starting from the problem described in the previous section, we consider that a pair of species have been observed $n$ times co-occurring at one location, and the number of times they interact is $k = 0$. We aim to evaluate the uncertainty of this interaction. What this is mean exactly ? We consider there are three nested level of uncertainty making this phenomenon a stochastic process :  
+
+\textit{Interaction uncertainty} First, and most fundamentally, we do not know if these species have the appropriate characteristics to interact or not. We define the probability of an interaction $L$ as $P(L)=\lambda$. Obviously, because $k=0$, it is very likely they can not interact if provided enough time and there were no environmental constraint for this interaction to happen. But it is nonetheless possible the interaction is a rare phenomenon that has never been documented before. This source of uncertainty is the one documented by trait-matching models. It arises because every model is imperfect and lack information (i.e. traits) about the constraints on the interaction. In other words, with sufficient sampling and all information accessible, this interaction probability should either tend to 0 or to 1 and the uncertainty vanish.  
+
+\textit{Process uncertainty} It could happen that the interaction is feasible, i.e. $L=1$, but that it does not occur at a given location or at a moment in time because there are local constraints preventing it to occur. We define the realization of the interaction process $X$ given an interaction is feasible as a stochastic process with associated probability $P(X|L)=\chi$. This phenomenon of interaction contingencies is usually not considered in network studies, but there is a rich literature in community ecology about the contingencies of interactions. We imagine for instance that an interaction between a gall and a parasitoid is not recorded at a location because it was the wrong time of the year and the gall has not yet formed (phenological constraints), because a late frost killed the larvae (an abiotic environmental constraint) , another parasitoid species competitively excluded the parasitoid species of interst (a biotic environmental constraint) or simply the parasitoid is too rare (an abundance constraint). 
+
+\textit{Detection uncertainty} Lastly, measurement errors are always source of uncertainty in the observation of ecological processes. We define the detection of an interaction $D$, given an interaction is feasible and occurs in the local conditions, as a stochastic process with associated probability $P(D|X,L)=\delta$. Detection failure could happen for several reasons, for instance if the rearing of a parasitoid fails with inappropriate lab conditions or because of species mis-identification. Some source of detection error could be minimized with appropriate sampling effort ($\chi$ will converge to one with increasing number of collected galls), but other sources are often difficult to reduce (e.g. the occurrence of cryptic species might require molecular analysis for appropriate taxonomic identification).
+
+\textit{What is an observation of "no interaction" ?} The combination of these three sources of uncertainty together leads to many potential explanations for the observation of an absence of interaction, but only the situation where $L = 0$ is a true absence therefore is relevant for the investigation of networks. While the observation of an interaction is straightforward to interpret, absence of interactions must be decomposed in different quantities. It is particularly important to rule out the situations where $D=0 \cup X = 1 \cup L=1$, i.e. the interaction occurred at the location but was not observed, and $D=1 \cup X = 0 \cup L =1$, the interaction would have been detected but did not occur. 
+
+It is important to keep in mind that for network analysis, ecologists seek to measure the occurrence of true absences, which is the joint event $L=1\cup X=1 \cup \D=1$), but in reality they measure the marginal probability $P(L) = k/n$. This reasonning explains why the above describe MLE estimation of the interaction probability is naive, and could be inappropriate in many instances, in particular when we have no knowledge of the detection and the process uncertainties.   
 
 \section*{Pairwise interactions as a Bernoulli process}
 
@@ -116,24 +139,15 @@ Link\"{o}ping, Sweden\\
     % Add section explaining process variation and detection probability here, how that will affect our ability to estimate.
 
 
-\section{Why some interactions do not occur ?}
-
-It is getting more and more common to represent interactions as probabilities. Some theoretical models of network structure propose to represent interactions with probabilities, for instance the minmum potential model introduces gaps in the feeding niche of predators (Allesina et al. 2008), while a gaussian probability function is used to represent the niche by Williams et al. (2010). Eklof et al. (2013) introduced variability as well in the computation of network dimensions, allowing the absence of interactions within the n-dimension niche of every species. Empirical investigation of trait-matching constraints often consider the occurrence of interactions as binomial process (e.g. Rohr et al. 2016). There are also ways to perform analysis of probabilistic networks, with almost all metrics having a probabilistic version (Poisot et al. 2015). But there is not yet consensus on what an interaction probability between a pair of species means, and this is definitely a problem when comes time to estimate the uncertainty of both pairwise interactions and entire networks. 
-
-Starting from the problem described in the previous section, we consider that a pair of species have been observed $n$ times co-occurring at one location, and the number of times they interact is $k = 0$. We aim to evaluate the uncertainty of this interaction. What this is mean exactly ? We consider there are three nested level of uncertainty making this phenomenon a stochastic process :  
-
-\textit{Interaction uncertainty} First, and most fundamentally, we do not know if these species have the appropriate characteristics to interact or not. We define the probability of an interaction $L$ as $P(L)=\lambda$. Obviously, because $k=0$, it is very likely they can not interact if provided enough time and there were no environmental constraint for this interaction to happen. But it is nonetheless possible the interaction is a rare phenomenon that has never been documented before. This source of uncertainty is the one documented by trait-matching models. It arises because every model is imperfect and lack information (i.e. traits) about the constraints on the interaction. In other words, with sufficient sampling and all information accessible, this interaction probability should either tend to 0 or to 1 and the uncertainty vanish.  
-
-\textit{Process uncertainty} It could happen that the interaction is feasible, i.e. $L=1$, but that it does not occur at a given location or at a moment in time because there are local constraints preventing it to occur. We define the realization of the interaction process $X$ given an interaction is feasible as a stochastic process with associated probability $P(X|L)=\chi$. This phenomenon of interaction contingencies is usually not considered in network studies, but there is a rich literature in community ecology about the contingencies of interactions. We imagine for instance that an interaction between a gall and a parasitoid is not recorded at a location because it was the wrong time of the year and the gall has not yet formed (phenological constraints), because a late frost killed the larvae (an abiotic environmental constraint) , another parasitoid species competitively excluded the parasitoid species of interst (a biotic environmental constraint) or simply the parasitoid is too rare (an abundance constraint). 
-
-\textit{Detection uncertainty} Lastly, measurement errors are always source of uncertainty in the observation of ecological processes. We define the detection of an interaction $D$, given an interaction is feasible and occurs in the local conditions, as a stochastic process with associated probability $P(D|X,L)=\delta$. Detection failure could happen for several reasons, for instance if the rearing of a parasitoid fails with inappropriate lab conditions or because of species mis-identification. Some source of detection error could be minimized with appropriate sampling effort ($\chi$ will converge to one with increasing number of collected galls), but other sources are often difficult to reduce (e.g. the occurrence of cryptic species might require molecular analysis for appropriate taxonomic identification).
-
-\textit{What is an observation of "no interaction" ?} The combination of these three sources of uncertainty together leads to many potential explanations for the observation of an absence of interaction, but only the situation where $L = 0$ is a true absence therefore is relevant for the investigation of networks. While the observation of an interaction is straightforward to interpret, absence of interactions must be decomposed in different quantities. It is particularly important to rule out the situations where $D=0 \cup X = 1 \cup L=1$, i.e. the interaction occurred at the location but was not observed, and $D=1 \cup X = 0 \cup L =1$, the interaction would have been detected but did not occur. 
-
-It is important to keep in mind that for network analysis, ecologists seek to measure the occurrence of true absences, which is the joint event $L=1\cup X=1 \cup \D=1$), but in reality they measure the marginal probability $P(L) = k/n$. This reasonning explains why the above describe MLE estimation of the interaction probability is naive, and could be inappropriate in many instances, in particular when we have no knowledge of the detection and the process uncertainties.   
+\section*{Estimating detection and process uncertainty}
 
 
-  \section*{Bayesian approach to infer interaction probabilities}
+
+
+
+
+
+\section*{Bayesian approach to infer interaction probabilities}
 
     \subsection*{Posterior distribution of the interaction probability}
 
@@ -323,6 +337,14 @@ Now, consider the case where the two species have never been observed interactin
 
 
 These trials yield a surprising result: it requires \textgreater30 [[or 23??]] observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
+
+
+
+\section*{Scaling up uncertainty from pairwise interactions to networks}
+
+
+
+
 
 
 \section*{Case study: estimating the uncertainty of a plant-herbivore network}
