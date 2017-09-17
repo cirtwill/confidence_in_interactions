@@ -1,0 +1,15 @@
+Task breakdown
+
+Intro: (AC and KW)
+  - general
+  - data description
+  - figure showing holes in webs (KW)
+Definitions (DG)
+Estimating detection and process variability (TR)
+MLE and CI (DG)
+Bayesian network approach (AE)
+Scaling of uncertainty from interaction to network properties (DG)
+Application (AC and KW)
+Box: (AE, tentative)
+  - trait-matching
+  - Bayes
