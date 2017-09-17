@@ -135,11 +135,11 @@ It is possible to compute the confidence interval for this estimate using any of
 
 The situation where $k = 0$ is also problematic because we have very few information to estimate $\lambda$, in particular when $n$ is also small. We therefore propose a Bayesian approach to solve this problem, building on two relevant features of such statistics : posterior distribution of parameter estimates and usage of prior information. 
 
-\section*{Bayesian approach to infer interaction probabilities}
+ \section*{Bayesian approach to infer interaction probabilities}
 
     \subsection*{Posterior distribution of the interaction probability}
 
-  We adopt a bayesian approach to estimate the distribution of the parameter $\theta$. According to Bayes principle, the posterior distribution of $\theta$ is:
+  We here adopt a Bayesian approach to estimate the distribution of the parameter $\theta$. According to Bayes principle, the posterior distribution of $\theta$ is:
 
   \begin{equation}
     \underbrace{P(\theta|X,n)}_{Posterior} = \frac{\overbrace{P(X|\theta,n)}^{Likelihood}\overbrace{P(\theta)}^{Prior}}{\underbrace{P(X|N)}_{Normalizer}} .
@@ -152,12 +152,9 @@ The situation where $k = 0$ is also problematic because we have very few informa
       \theta \sim Beta(\alpha,\beta) , \label{prior}
     \end{equation}
 
-
   \noindent which has two shape parameters, $\alpha$ and $\beta$. 
 
-
-  It might be complicated in many cases to compute the normalizer, but fortunately there is an analytical solution to the normalizer. The beta-binomial distribution is a conjugate distribution of the binomial distribution. This allows us to analytically compute the posterior distribution of a binomial model with a beta prior distribution. We can re-write the posterior distribution of $\theta$ as:
-
+ In some cases it can be complicated to compute the normalizer, but fortunately in our case it exists an analytical solution. The beta-binomial distribution is a conjugate distribution of the binomial distribution. This allows us to analytically compute the posterior distribution of a binomial model with a beta prior distribution. We can re-write the posterior distribution of $\theta$ as:
 
   \begin{equation}
     P(\theta|k,n) = \frac{\theta^{\alpha+k-1}(1-\theta)^{\beta+n-k-1}}{B(\alpha+k,\beta+n-k)} , \label{posterior}
@@ -170,15 +167,13 @@ The situation where $k = 0$ is also problematic because we have very few informa
   \end{equation}
 
   The posterior distribution of $\theta$ therefore follows the beta distribution with new parameters $\alpha'= \alpha+k$ and $\beta'=\beta+n-k$. The weight of the prior on the posterior distribution is understood from these definition of the parameters: the difference between the posterior and the prior will increase with $k$ and $n-k$. When plotted, we find the shape of the distribution gets narrower with $k$ and $n$ (see Fig X). 
-
-
-  The posterior distribution of $\theta$ could be computed with R with the following command:
-
-
-  \vspace{12pt}
-  \noindent\emph{dbeta(x = theta, shape1 = alpha+k, shape1 = beta+n-k)}
-  \vspace{12pt}
-
+%
+%  The posterior distribution of $\theta$ could be computed with R with the following command:
+%
+%
+%  \vspace{12pt}
+%  \noindent\emph{dbeta(x = theta, shape1 = alpha+k, shape1 = beta+n-k)}
+%  \vspace{12pt}
 
   \subsection*{Moments and other properties}
 
@@ -190,36 +185,30 @@ The situation where $k = 0$ is also problematic because we have very few informa
         \label{mean}
       \end{equation}
 
-
     and its \textbf{variance} is:  
       \begin{equation}
         Var(\theta|k) = \frac{(\alpha + k)(\beta + n - k)}{(\alpha + \beta + n)^{2}(\alpha + \beta + n +1)}
         \label{variance}
       \end{equation}
 
-
-    The \textbf{mode} of the distribution (which is not necessarily the maximum likelihood estimate) is:
+    The \textbf{mode} of the distribution is:
       \begin{equation}
         \hat{\theta} = \frac{\alpha + k - 1}{\alpha + \beta + n - 2} .
         \label{mode}
       \end{equation}
 
-
-  \subsection*{The prior distribution}
-    
-  Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution, which follows a beta distribution. These are call hyper parameters. We identify at least four ways to formulate the prior distribution of $\theta$. 
-
+  \subsection*{The prior distribution}    
+  Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution, which follows a beta distribution. These are called hyper parameters. Below we identify four ways to formulate the prior distribution of $\theta$. 
 
     \subsubsection*{Uninformative prior}
       
       In absence of any external information, an uniformative prior is the most conservative 
-      hypothesis for the distribution of $\theta$. The beta distribution is uninformative and follows 
-      a uniform distribution for $Beta(\alpha=1,\beta=1)$. 
-
+      hypothesis for the distribution of $\theta$. The beta distribution is in this case 
+      a uniform distribution  for $Beta(\alpha=1,\beta=1)$. 
 
     \subsubsection*{Distribution of connectance}
       
-      There is now a great collection of ecological network data for which know the distribution of connectance. Connectance of a network is measured as $C = L/S^2$, where $L$ is the number of links and $S$ is the number of species. It measures the filling of an interaction matrix and also expresses the average probability that any two species interact with each other. If one  knows only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
+      In the literature of ecological networks there is a solid collection of data for which know network connectance, and we can thereby define the connectance distribution. Connectance is measured as $C = L/S^2$, where $L$ is the number of interactions and $S$ is the number of species. It measures the filling of an interaction matrix and thereby expresses the average probability that any two species interact with each other. If we know only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
 
   \begin{equation}
     \alpha = \overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
@@ -229,39 +218,45 @@ The situation where $k = 0$ is also problematic because we have very few informa
     \beta = (1-\overline{C})(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) .
   \end{equation}
   
-  It is also possible to compute maximum likelihood estimates for a sample of the distribution of $C$. The following piece of R code provides an example: 
+%  It is also possible to compute maximum likelihood estimates for a sample of the distribution of $C$.
+%  
+%   The following piece of R code provides an example: 
+%
+%  \vspace{12pt}
+%  \noindent\emph{
+%    library(MASS)\\
+%    pars = fitdistr(x = vecC, "beta", start = list(shape1 = 1, shape2 = 1))\$estimate
+%  }
+%  \vspace{12pt}
+%
+%
+%  Where $vecC$ is a vector of known connectances for a set of networks. 
 
-  \vspace{12pt}
-  \noindent\emph{
-    library(MASS)\\
-    pars = fitdistr(x = vecC, "beta", start = list(shape1 = 1, shape2 = 1))\$estimate
-  }
-  \vspace{12pt}
 
-
-  Where $vecC$ is a vector of known connectances for a set of networks. 
-
-
-  \subsubsection*{Degree distribution}. 
-
-  Connectance is an average property for a given network, it represents the expected degree standardized by the number of species in the network. The standardized degree could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to fuel the prior distribution. The degree distribution could come from several networks, or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows us to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. The procedure for the estimation of the hyper parameters follows exactly the same approach as described above for connectance except that each measurement is at the species level instead of the network level. 
-
+  \subsubsection*{Degree distribution for the species in the network}.
+%
+The degree of a node in a network is defined as the number of interactions it has to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network. Connectance is an average property for a complete given network, and it represents the expected
+degree (expected number of interactions per species) standardized by the number of species in the network. The standardized degree could therefore be interpreted as an interaction probability. It is consequently possible to
+use the degree distribution to inform the prior distribution. The degree distribution could
+come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows us to apply information from known, abundant species to the rarest species for which interactions are less
+frequently documented. The procedure for the estimation of the hyper parameters follows
+the same approach as described above for connectance except that each
+measurement is at the individual species level instead of the network level.
 
   \subsubsection*{Trait-matching function}. 
-
-  It is possible to estimate the probability of interaction between a pair of species if there is knowledge of their traits and some functions relating trait matching to interaction probability (Morales-Castilla2015). There are several techniques published to perform this inferrence of interaction probability (REFS). Note that in this case the prior might not be beta distribution and numerical methods might be required to compute the posterior distribution.  
-
+  It is possible to estimate the probability of interaction between a pair of species if there is knowledge of their traits and some functions relating trait matching to interaction probability (Morales-Castilla2015). There are several techniques available to perform this inferrence of interaction probability (REFS). Note that in this case the prior might not be beta distribution and numerical methods might be required to compute the posterior distribution.  
 
 \section*{A quantitative example}
-
-The framework is best illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between speices $i$ and species $j$ in a given time interval and area, and $X = 2$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 2/10 = 0.2$.  Now consider we know that species $i$ is known to interact with 10 other species, which have the following standardized degrees:
+%Perhaps we want to also have a trait matching example in addition to the degree distribution example below?
+The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between speices $i$ and species $j$ in a given time interval and area, and $X = 2$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 2/10 = 0.2$. 
+% We should probabaly have a value  on the interaction probablitity that differs from the average of the degree distrbution
+ Now consider we know that species $i$ is known to interact with 10 other species, which have the following standardized degrees:
 
 \vspace{12pt}
 \noindent\emph{
     degree = c(0.66, 0.09, 0.06, 0.08, 0.04, 0.30, 0.06, 0.38, 0.03, 0.19)
     }.
   \vspace{12pt}
-
 
 Using these standardized degrees to inform our prior expectation of the 
 distribution of interaction probabilities and the R code from the 
@@ -274,7 +269,6 @@ The average interaction probability is 0.2163971 and the variance is 0.02353319.
 \vspace{12pt}
 \noindent\emph{    pars = fitdistr(x = degree, "beta", start = list(shape1 = 1, shape2 = 1),lower=c(0,0))\$estimate }.
   \vspace{12pt}
-
 
 The lower bound of (0,0) for the two parameters of the Beta distribution prevents the function from attempting to fit invalid (negative) parameter estimations.
 
@@ -301,7 +295,6 @@ which yields a value $E[\theta]=0.2057651$ [[I get 0.1993348]]. And the variance
 
 which yiealds a value $var[\theta] = 0.009579623$. [[I get 0.01025322]]
 
-
 The credible interval is not symmetric around the mean since the distribution is bounded between 0 and 1 and is not symmetric. In this case, a 95\% credible interval for the mean of theta is (0.0448479, 0.4308686) and can be computed using the quantile function \emph{qbeta}:
 
   \vspace{12pt}
@@ -310,8 +303,7 @@ The credible interval is not symmetric around the mean since the distribution is
     \\\noindent highCI = qbeta(p = 0.975, shape1 = alpha\_prime, shape2 = beta\_prime)}.
   \vspace{12pt}
 
-
-Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then "what is the probability these two species do not interact"? Since it will never be possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. Let this threshold probability be called $\theta*$. We use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The following script illustrates this probability for an increasing number of trials and $\theta*$=0.1:
+Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The following script illustrates this probability for an increasing number of trials and $\theta*$=0.1:
 
   \vspace{12pt}
 \noindent\emph{
@@ -323,9 +315,7 @@ Now, consider the case where the two species have never been observed interactin
     \\\noindent abline(h = 0.95,lty = 3)}.
   \vspace{12pt}
 
-
-These trials yield a surprising result: it requires \textgreater30 [[or 23??]] observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
-
+The exercise exemplified above yields a surprising result: it requires \textgreater30 [[or 23??]] observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
 
 
 \section*{Scaling up uncertainty from pairwise interactions to networks}
