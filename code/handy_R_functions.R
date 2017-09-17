@@ -35,3 +35,16 @@ credible_interval<-function(pars,p_lower,p_upper){
   return(c(lowCI,highCI))
 }
 
+plot_precision<-function(threshold,confidence,pars){
+  alpha=pars[[1]]
+  beta=pars[[2]]
+  n=seq(0,100,1)
+  k=0
+  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)
+  samples=length(which(cdf<confidence))
+  # plot(n,cdf,type="l",xlab="n",ylab="Cumulative distribution")
+  # abline(h=0.95,lty=3)
+  return(samples)
+}
+
+

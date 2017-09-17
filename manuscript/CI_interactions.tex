@@ -364,52 +364,28 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
   \subsection*{Finding the maximum likelihood estimate}
 
-      In a strict Bayesian framework, we wish to use a prior distribution that does not rely on any information from the study at hand. To that end, we use data from another well-described \emph{Salix} galler-parasitoid system (doi: 10.1073/pnas.1513633113). Note that this study used several genotypes of \emph{S. hookeriana} rather than different \emph{Salix} species. We take the degree distributions of four Cecidomyid galler species across \emph{S. hookeriana} genotypes as our prior distribution for the probability of interactions between gallers and \emph{Salix} species. Note that as an interaction frequency depends on the product of the degree of the galler and the degree of the plant involved, we wish to use as our prior the product of the degree distributions of plants and gallers.
-      Unfortunately, the product of two beta distributions is not beta-distributed. Instead, we will use the list of interaction probabilities, obtained by multiplying the two degree distributions.
+      In a strict Bayesian framework, we wish to use a prior distribution that does not rely on any information from the study at hand. To that end, we use data from another well-described \emph{Salix} galler-parasitoid system (doi: 10.1073/pnas.1513633113). Note that this study used several genotypes of \emph{S. hookeriana} rather than different \emph{Salix} species. We estimated frequencies of  \emph{S. hookeriana} genotype-galler and galler-parasitoid interactions [[host-parasitoid still to-do]] based on the normalized degree of each species in each network component (see \emph{Appendix S1} for details and code).
 
 
-      The degree distribution across \emph{S. hookeriana} genotypes was calculated from data deposited in Dryad using the following R code:
-
-      prior_web_data=read.csv(path_to_Dryad_file)
-      # Remove extra data on parasitoids, etc.
-      prior_web_data[,31:57]<-NULL
-      prior_web_data[,4:26]<-NULL
-      prior_web_data[,2]<-NULL
-      # Build a web with interactions=1 for any galler observed on any genotype
-      prior_web=matrix(nrow=26,ncol=4)
-      for(r in 1:length(levels(prior_web_data$Genotype))){
-        gen=levels(prior_web_data$Genotype)[r]
-        subset=prior_web_data[which(prior_web_data$Genotype==gen),]
-        for(c in 1:4){
-          if(sum(subset[,2+c])>0){
-            prior_web[r,c]=1
-          } else {
-            prior_web[r,c]=0
-          }
-        }        
-      }
-      # Now get the degree distributions from the web
-      deg_dist_Salix=rowSums(prior_web)/ncol(prior_web)
-      # Remove one genotype that never interacted
-      deg_dist_Salix<-deg_dist_Salix[which(rowSums(prior_web)>0)]
-      deg_dist_galler=colSums(prior_web)/nrow(prior_web)
-      # Interaction probabilities are the product of plant and galler probabilities
-      int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+      Using this prior distribution of galler-\emph{Salix} interaction frequencies, we can obtain parameters for the prior distribution of $\lambda$ in our dataset. Specifically, we obtain $\alpha$=2.807855, $\beta$=2.342815. We are then able to use these priors to estimate the posterior distriution of interaction probabilities given the additional information in our dataset.
 
 
+    \subsection*{Computing the posterior distribution}
 
-      Using this degree distribution we can obtain prior values for $\alpha$ and $\beta$ using the code above. We obtain
-      $\alpha$=2.807855, $\beta$=2.342815.
+      [[add references to formulae]]
 
-      For species where no co-occurances were observed, we can calculate the MLE estimates for the mean and variance of $\omega_{ij}$ directly from this prior. These are:
-      $\hat{\omega_{ij}}$=0.5451437, var($\omega$)=0.0481417.
-      This is consistent with the prior data, where the average interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. It may not be consistent with the degree distributions in our current dataset, however, especially since we are concerned with Salix species rather than genotypes within a species. We therefore want to update our distribution using known data from known co-occurances between species.
+      For species where no co-occurances were observed, we can calculate the MLE estimates for the mean and variance of $\lambda_{ij}$ directly from this prior. These are:
+      $\hat{\lambda_{ij}}$=0.5451437, var($\lambda$)=0.0481417.
+      This is consistent with the prior data, where the average interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. [[What's the connectance of our dataset, of we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may be because~\citep{Balbour2016} were considering genotypes of a single \emph{Salix} species and only four gallers from a single family rather than multiple \emph{Salix} species and galler families as is the case in our dataset.
 
 
-      For a pair of species where some co-occurances were observed, we base these estimates on the prior distribution above conditioned by the available data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distribution would become:
+      For a pair of species where some co-occurances were observed, we can update the prior distribution with these data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distribution would become:
 
-      $\hat{\omega_{ij}}$=7.405645e-03, var($\omega$)=1.938755e-05.
+
+      $\hat{\lambda_{ij}}$=7.405645 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.938755 $\times$ 10$^{-5}$.
       
+      With species $i$ and $j$ co-occurring at all 374 sites and never being observed to interact, the maximum likelihood expectation for the probability of an interaction $ij$ is very close to 0 and the variance about this estimate is very narrow. In most cases, however, species $i$ and $j$ did not co-occur at so many sites and our posterior mean and variance retain some influence of the prior.
+
 
       Realistic values for n when k=0, based on a sample of 20 random sites:
       n=1: 0.4565121 0.0403385
@@ -418,15 +394,21 @@ It is fairly straigthforward to compute most of network metrics when the differe
       n=4: 0.30684696 0.02324331
 
 
+      [[Plot distribution of interaction probabilities at some reasonable values of n]]
 
 
+  \subsection*{Computing the credible interval around a probability estimate}
+
+      As well as obtaining posterior means and variances, it is possible to calculate a 95\% credible interval about the posterior mean. 
 
 
-    \subsection*{Computing the posterior distribution}
+  \subsection*{How many samples are required to reach a minimal precision}
 
-  \subsection*{Computing the confidence interval around a probability estimate}
 
-    \subsection*{How many samples are required to reach a minimal precision}
+    - Have code for graphing or returning sample size set up.
+    - Plot Increase in sample sizes with decreasing threshold, increasing confidence.
+
+
 
 
   [[What if we have only one site? Can we use the number of observations of a pair of species interacting with any partners as the number of times they co-occur, and the number of interactions within the pair as k? This will be sort-of valid for insects but not for plants when researchers camp out by plant individuals... ]]

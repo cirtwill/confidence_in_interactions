@@ -1,0 +1,63 @@
+There are a wide variety of reasons why two species might not be observed to interact. One or both species might be rare and so might not be observed or might not encounter the other species. We may not have invested enough sampling effort, sampled at an appropriate time for all interactions (e.g., daytime sampling will miss nocturnal interactions), or our sampling method may be biased towards certain interactions (e.g., some species of caterpillar may be easier to rear than others). The species might interact under ideal conditions, but be prevented due to an unsuitable study site or indirect effects of other species. These different possibilities can be grouped into three hierarchical questions:
+
+
+1: For a given pair of species considered in isolation, can they interact? I.e., do they have compatible traits and co-occur?
+L=stochastic process, 1 if species interact and 0 if not.
+P(L)=$\omega$.
+
+
+Level 2: For a pair of species that can interact, do they interact at this site and time? I.e., is there nothing about the environment, phenology, community, or abundances of the species to prevent an interaction?
+P(X|L=1)=$\theta$
+
+
+Level 3: For a pair of species that can and do interact (if L=1 and X=1), do we detect the interaction? I.e., is there nothing about our sampling approach that prevents detection of the interaction?
+P(D|X=1,L=1)=$\phi$
+
+
+An interaction that is not observed (recorded as "0" in an interaction matrix and referred to as a "zero" hereafter) could be due to a failure at any of these three steps. We often want to know which interactions between species do and do not occur (at any site). Since a "zero" does not necessarily mean that an interaction does not occur, can we put uncertainty on this entry?
+
+
+More fundamentally, since we cannot have complete confidence in the "zeros" in an interaction matrix, how can we estimate $\omega$, the probability that two species interact? Is it sufficient to use a Maximum Likelihood Estimate (MLE) for $\omega$, such as $k$/$n$ where $k$ is the number of observed interactions and $n$ is the number of observed co-occurances of the two species?
+
+Is it possible to estimate detection probability (D) and process variability (L)?
+
+If we assume perfect detection and no process variability, can we get a distribution of $\omega$? Yes, probably. We can use the posterior P($\omega$|k) to obtain a mean and confidence interval for each observation, including those where we have no data (in which case, the posterior distribution is reduced to the prior).
+
+Finally, what are the consequences of this uncertainty as we scale up from particular interactions to network-level properties? For example, do the average and variance of a property (e.g., connectance) increase with detection and process uncertainty? Can we compute or map the uncertainty?
+
+In the Salix web specifically:
+  i) We can fill the holes in the meta-web.
+      - condition the prior based on connectance of another web? - could add traits later, but not for this first attempt.
+  ii) We can represent the uncertainty in the meta-web (zeros only - assume ones are correct).
+  iii) Compile a posterior distribution of network properties to get at the uncertainty at higher levels (do the mean and variances of properties increase with detection and process uncertainty)?
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+If $n$ is the number of observed co-occurances and $k$ is the number of observed interacctions, the traditional MLE of omega is k/n. But this is probably incorrect, because both phi and theta add variation. More accurately, k/n is the MLE of P(D,X,L): the probability of detecting an interaction that \emph{can} and \emph{does} occur. To put bounds on our trust in a "zero" observation, we want P(L=0).
+
+P(k=0)= P(D=0,X=1,L=1) % Interaction occurred but is not detected
+          + P(D=1,X=0,L=1) % Interaction detectable, but species do not interact at this site
+          + P(D=1,X=1,L=0) % Detection method and site suitable, interaction not feasible
+          + P(D=0,X=0,L=1) % Interaction not detectable and doesn't happen here
+          + P(D=0,X=1,L=0) % Interaction not detectable, not species suitable but site is
+          + P(D=1,X=0,L=0) % Detector good, interaction and site not feasible
+          + P(D=0,X=0,L=0) % Detector, site, and interaction all bad.
+
+
+P(D,X,L)=P(D|X,L)P(X|L)P(L)
+
+We can get a prior for P(L) based on e.g., degree distributions (generalists more likely to interact than 2 specialists). Estimating P(D|X,L) seems like a very difficult emprical problem. P(X|L) is more feasible, 
+
+Current document assumes P(X|L)=1, P(D|X,L)=1.
+
+P(\omega|k)=\frac{P(k|\omega)P(\omega)}{P(k)}
+- can use this when there is no information (such that posterior==prior).
+- P(D|X,L) should increase towards an asymptote as $n$ increases.
+
+
+
+
+
+
