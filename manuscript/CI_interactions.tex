@@ -350,45 +350,52 @@ These trials yield a surprising result: it requires \textgreater30 [[or 23??]] o
 
       The degree distribution across \emph{S. hookeriana} genotypes was calculated from data deposited in Dryad using the following R code:
 
-      prior_web=read.csv(path_to_Dryad_file)
-      deg_dist_Salix=with(prior_web,tapply(gall_total_rich,Genotype,mean))/4
-      gallers=cbind(prior_web$Genotype,prior_web[,27:30])
-      aSG_means=with(prior_web,tapply(aSG_abund,Genotype,mean))
-      rG_means=with(prior_web,tapply(rG_abund,Genotype,mean))
-      vLG_means=with(prior_web,tapply(vLG_abund,Genotype,mean))
-      SG_means=with(prior_web,tapply(SG_abund,Genotype,mean))
-      deg_dist_galler=c(length(which(aSG_means>0)),length(which(rG_means>0)),length(which(SG_means>0)),length(which(rG_means>0))      )/26
-      int_probs=as.numeric(deg_dist_galler\%*\%t(deg_dist_Salix))
+      prior_web_data=read.csv(path_to_Dryad_file)
+      # Remove extra data on parasitoids, etc.
+      prior_web_data[,31:57]<-NULL
+      prior_web_data[,4:26]<-NULL
+      prior_web_data[,2]<-NULL
+      # Build a web with interactions=1 for any galler observed on any genotype
+      prior_web=matrix(nrow=26,ncol=4)
+      for(r in 1:length(levels(prior_web_data$Genotype))){
+        gen=levels(prior_web_data$Genotype)[r]
+        subset=prior_web_data[which(prior_web_data$Genotype==gen),]
+        for(c in 1:4){
+          if(sum(subset[,2+c])>0){
+            prior_web[r,c]=1
+          } else {
+            prior_web[r,c]=0
+          }
+        }        
+      }
+      # Now get the degree distributions from the web
+      deg_dist_Salix=rowSums(prior_web)/ncol(prior_web)
+      # Remove one genotype that never interacted
+      deg_dist_Salix<-deg_dist_Salix[which(rowSums(prior_web)>0)]
+      deg_dist_galler=colSums(prior_web)/nrow(prior_web)
+      # Interaction probabilities are the product of plant and galler probabilities
+      int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
 
-      pars=fitdistr(x=int_probs,"beta",start=list(shape1=1,shape2=1))$estimate
-      alpha=pars[[1]]
-      beta=pars[[2]]
-      mu=alpha/(alpha+beta)
-      num=alpha*beta
-      den=(alpha+beta)**2*(alpha+beta)
-      sigma2=num/den
-
-
-      [[Checking this for reasonableness: sum is about 30, so we should have 30 galler-genotype combinations?]]
 
 
       Using this degree distribution we can obtain prior values for $\alpha$ and $\beta$ using the code above. We obtain
-      $\alpha$=2.175656, $\beta$=5.361083.
+      $\alpha$=2.807855, $\beta$=2.342815.
 
       For species where no co-occurances were observed, we can calculate the MLE estimates for the mean and variance of $\omega_{ij}$ directly from this prior. These are:
-      $\hat{\omega_{ij}}$=0.2886734, var($\omega$)=0.02724535.
+      $\hat{\omega_{ij}}$=0.5451437, var($\omega$)=0.0481417.
+      This is consistent with the prior data, where the average interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. It may not be consistent with the degree distributions in our current dataset, however, especially since we are concerned with Salix species rather than genotypes within a species. We therefore want to update our distribution using known data from known co-occurances between species.
 
 
       For a pair of species where some co-occurances were observed, we base these estimates on the prior distribution above conditioned by the available data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distribution would become:
 
-      $\hat{\omega_{ij}}$=0.005702349, var($\omega$)=1.486051e-05.
+      $\hat{\omega_{ij}}$=7.405645e-03, var($\omega$)=1.938755e-05.
       
 
       Realistic values for n when k=0, based on a sample of 20 random sites:
-      n=1: 0.25485794 0.02224566
-      n=2: 0.22813413 0.01846427
-      n=3: 0.20648283 0.01555013
-      n=4: 0.18858498 0.01326377
+      n=1: 0.4565121 0.0403385
+      n=2: 0.39267022 0.03335076
+      n=3: 0.34449379 0.02770543
+      n=4: 0.30684696 0.02324331
 
 
 
