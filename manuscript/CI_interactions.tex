@@ -98,45 +98,8 @@ Starting from the problem described in the previous section, we consider that a 
 
 \textit{What is an observation of "no interaction" ?} The combination of these three sources of uncertainty together leads to many potential explanations for the observation of an absence of interaction, but only the situation where $L = 0$ is a true absence therefore is relevant for the investigation of networks. While the observation of an interaction is straightforward to interpret, absence of interactions must be decomposed in different quantities. It is particularly important to rule out the situations where $D=0 \cup X = 1 \cup L=1$, i.e. the interaction occurred at the location but was not observed, and $D=1 \cup X = 0 \cup L =1$, the interaction would have been detected but did not occur. 
 
-It is important to keep in mind that for network analysis, ecologists seek to measure the occurrence of true absences, which is the joint event $L=1\cup X=1 \cup \D=1$), but in reality they measure the marginal probability $P(L) = k/n$. This reasonning explains why the above describe MLE estimation of the interaction probability is naive, and could be inappropriate in many instances, in particular when we have no knowledge of the detection and the process uncertainties.   
+It is important to keep in mind that for network analysis, ecologists seek to measure the occurrence of true absences, which is the joint event $L=1\cup X=1 \cup \D=1$), but in reality they measure the marginal probability $P(L) = k/n$. 
 
-\section*{Pairwise interactions as a Bernoulli process}
-
-    We consider the occurrence of an ecological interaction as a stochastic process. Provided that the two species could interact, this interaction could happen with a given probability. This probability is likely to be less than one (i.e., the interaction may not occur) because i) the two species may not encounter each other during a given time interval and within a given area, ii) there may be unknown environmental drivers affecting the realization of the interaction or iii) a third species might interfere and prevent the interaction from happenning (Poisot2015). 
-
-
-    We consider that the occurrence of an interaction is a Bernoulli trial. We define $\theta$ as the probability that two species interact with each other. Consequently, the number of success $X = k$ over $n$ trials will follow a binomial distribution: 
-    
-    \begin{equation}
-      X \sim Bin(n,\theta) ,
-    \end{equation}
-
-    \noindent and 
-
-    \begin{equation}
-       P(X = k|\theta,n) = {n \choose k}\theta^k(1-\theta)^{n-k} . 
-       \label{likelihood}
-    \end{equation}
-
-
-    \noindent The parameter $\theta$, the probability of observing an interaction over a given time interval
-    and area, is the quantity we want to estimate from empirical data. The variance of a 
-    Bernoulli experiment is simply n$\theta$(1-$\theta$).
-
-
-    The maximal likelihood estimate of $\theta$ is straightforward to find given $X=k$ and $n$. It is simply equal to:
-
-
-    \begin{equation}
-      \theta_{MLE} = \frac{k}{n}  .
-      \label{theta_MLE}
-    \end{equation}
-
-
-    It is possible to compute the confidence interval for this estimate using any of several methods, including the \emph{Wilson score interval}, the \emph{Clopper-Pearson interval}, and the \emph{Agresti-Coull Interval}. Finding this estimate is therefore quite straightforward, but it nonetheless has two drawbacks. First, $\theta$ is a random variable with a given uncertainty and whose distribution is unknown, it is not a single point estimate. Second, the number of trials $n$ might be very low in many instances (and some pairs of species might even not be documented), and consequently the uncertainty in the estimation of $\theta$ might be considerable. We therefore propose a Bayesian approach to solve these two problems. 
-
-
-    % Add section explaining process variation and detection probability here, how that will affect our ability to estimate.
 
 
 \section*{Estimating detection and process uncertainty}
@@ -144,8 +107,33 @@ It is important to keep in mind that for network analysis, ecologists seek to me
 
 
 
+\section*{Maximum likelihood estimate and confidence interval of interaction probability}
 
+Estimation of the detection and process uncertainties could be tedious, if not infeasible in some instances. As a consequence, for now, we will focus on the estimate of the interaction probability $\lambda$, assuming that both the detection and process probabilities, $\delta$ and $\chi$ respectively, are equal to 1. The occurrence of an interaction is a Bernoulli trial. Consequently, the number of success $k$ over $n$ trials will follow a binomial distribution: 
+    
+    \begin{equation}
+      X \sim Bin(n,\lambda) ,
+    \end{equation}
 
+    \noindent and 
+
+    \begin{equation}
+       P(X = k|\lambda,n) = {n \choose k}\lambda^k(1-\lambda)^{n-k} . 
+       \label{likelihood}
+    \end{equation}
+
+\noindent The parameter $\lambda$, the probability of observing an interaction over an infinite time interval and area, is the quantity we want to estimate from empirical data. The variance of a Bernoulli experiment is simply n$\lambda$(1-$\lambda$). It is important to remember this variance reports the variability of the number of success $k$ for $n$ trials, it is not the variance associated with the estimation of $\lambda$.
+
+The maximal likelihood estimate of $\lambda$ is straightforward to find given $k$ and $n$. It is simply equal to:
+
+    \begin{equation}
+      \theta_{MLE} = \frac{k}{n}  .
+      \label{theta_MLE}
+    \end{equation}
+
+It is possible to compute the confidence interval for this estimate using any of several methods, including the \emph{Wilson score interval}, the \emph{Clopper-Pearson interval}, and the \emph{Agresti-Coull Interval}. Finding this estimate is therefore quite straightforward, but it nonetheless has two drawbacks. First, $\lambda$ is a random variable with a given uncertainty and whose distribution is unknown, it is not a single point estimate. This means that even if $k = 0$ in a given sample, it does not implies necessarily that the two species will never interact. It means that no interaction is the most likely situation, but there is nonetheless a significant chance that the two species could interaction. In contrast with the situation where $k>0$, where we are sure that an interaction is feasible (in which case, the ratio $k/n$ is smaller than $n$ because of detection and process uncertainty), we are not sure that absence of interactions are caused by $L=0$. Second, and most importantly, the number of trials $n$ might be very low in many instances (and some pairs of species might even not be documented), and consequently the uncertainty in the estimation of $\lambda$ might be considerable. We illustrated at Fig. X how the estimate of $\lambda$ could vary with sampling size using the Clopper-Pearson interval. It shows that the 95\% confidence interval requires a signifcant amount of sampling in order to be sure that species are not interacting. 
+
+The situation where $k = 0$ is also problematic because we have very few information to estimate $\lambda$, in particular when $n$ is also small. We therefore propose a Bayesian approach to solve this problem, building on two relevant features of such statistics : posterior distribution of parameter estimates and usage of prior information. 
 
 \section*{Bayesian approach to infer interaction probabilities}
 
