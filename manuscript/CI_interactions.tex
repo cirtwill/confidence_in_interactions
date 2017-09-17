@@ -254,62 +254,33 @@ measurement is at the individual species level instead of the network level.
 
 \section*{A quantitative example}
 %Perhaps we want to also have a trait matching example in addition to the degree distribution example below?
-The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between speices $i$ and species $j$ in a given time interval and area, and $X = 2$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 2/10 = 0.2$. 
+The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between speices $i$ and species $j$ in a given time interval and area, and $X = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 3/10 = 0.3$. 
 % We should probabaly have a value  on the interaction probablitity that differs from the average of the degree distrbution
  Now consider we know that species $i$ is known to interact with 10 other species, which have the following standardized degrees:
 
 \vspace{12pt}
 \noindent\emph{
-    degree = c(0.66, 0.09, 0.06, 0.08, 0.04, 0.30, 0.06, 0.38, 0.03, 0.19)
+   degree = c(0.66, 0.09, 0.06, 0.08, 0.04, 0.16, 0.06, 0.38, 0.03, 0.02)
     }.
   \vspace{12pt}
 
-Using these standardized degrees to inform our prior expectation of the 
-distribution of interaction probabilities and the R code from the 
-connectance example, we obtain prior parameters $\alpha$=0.9034876 
-and $\beta$=3.6623995. Using these priors in equations~\ref{mean} 
-and~\ref{variance} above, we find an average interaction probability of 0.1993348 and a variance of 0.01025322 [[Different from Dom's values]].
-% n=number of observed co-occurances.
-The average interaction probability is 0.2163971 and the variance is 0.02353319. The hyper parameters are computed according to the following script, using the function \emph{fitdistr} from the R~\citep{R} package MASS~\citep{MASS}, yielding:
-
-\vspace{12pt}
-\noindent\emph{    pars = fitdistr(x = degree, "beta", start = list(shape1 = 1, shape2 = 1),lower=c(0,0))\$estimate }.
-  \vspace{12pt}
-
-The lower bound of (0,0) for the two parameters of the Beta distribution prevents the function from attempting to fit invalid (negative) parameter estimations.
-
-The average of the distribution is computed as follows:
-
-  \vspace{12pt}
-\noindent
-\emph{
-    \noindent n = 10
-    \\\noindent k = 2
-    \\\noindent alpha\_prime = alpha + k
-    \\\noindent beta\_prime = beta + n - k
-    \\\noindent mean\_theta = alpha\_prime/(alpha\_prime+beta\_prime)
-},
-  \vspace{12pt}
+The mean of these standardized degrees is 0.158, approximately half the $\theta_{MLE}$ obtained from the observed data. We can use these standardized degrees to inform our prior expectation of the 
+distribution of interaction probabilities. With some simple R code (function calculate_parameters, \emph{Appendix S2}), we obtain prior parameters $\alpha$=0.7559544
+and $\beta$=3.6710277. Using these priors in equations~\ref{mean} 
+and~\ref{variance} above (or in the R function calculate_distribution in \emph{Appendix S2}), we find a prior mean interaction probability of 0.1707607 and a prior variance of 0.0319860.
 
 
-which yields a value $E[\theta]=0.2057651$ [[I get 0.1993348]]. And the variance:
-
-  \vspace{12pt}
-\noindent\emph{alpha\_prime$\times$ beta\_prime\/(alpha\_prime+beta\_prime)$^2$\/(alpha\_prime+beta\_prime+1)},
-  \vspace{12pt}
+Adding the observed data (n=10, k=3) and using the same code,
+we obtain posterior hyper parameters $\alpha'$=3.755954 and $\beta'$=10.671028 and a posterior mean 0.2603423 and variance 0.0133475. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data has reduced the variance.
 
 
-which yiealds a value $var[\theta] = 0.009579623$. [[I get 0.01025322]]
+We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward (see function credible_interval in \emph{Appendix S2}). In this case, a 95\% credible interval for the mean of theta is (0.07755119, 0.50557509).
 
-The credible interval is not symmetric around the mean since the distribution is bounded between 0 and 1 and is not symmetric. In this case, a 95\% credible interval for the mean of theta is (0.0448479, 0.4308686) and can be computed using the quantile function \emph{qbeta}:
 
-  \vspace{12pt}
-\noindent\emph{
-    \noindent lowCI = qbeta(p = 0.025, shape1 = alpha\_prime, shape2 = beta\_prime)
-    \\\noindent highCI = qbeta(p = 0.975, shape1 = alpha\_prime, shape2 = beta\_prime)}.
-  \vspace{12pt}
+Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The 
+function plot_precision in \emph{Appendix S2} calculates distribution function for 
 
-Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The following script illustrates this probability for an increasing number of trials and $\theta*$=0.1:
+following script illustrates this probability for an increasing number of trials and $\theta*$=0.1:
 
   \vspace{12pt}
 \noindent\emph{
