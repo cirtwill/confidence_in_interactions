@@ -135,6 +135,8 @@ It is possible to compute the confidence interval for this estimate using any of
 
 The situation where $k = 0$ is also problematic because we have very few information to estimate $\lambda$, in particular when $n$ is also small. We therefore propose a Bayesian approach to solve this problem, building on two relevant features of such statistics : posterior distribution of parameter estimates and usage of prior information. 
 
+
+
 \section*{Bayesian approach to infer interaction probabilities}
 
     \subsection*{Posterior distribution of the interaction probability}
@@ -330,10 +332,7 @@ These trials yield a surprising result: it requires \textgreater30 [[or 23??]] o
 
 \section*{Scaling up uncertainty from pairwise interactions to networks}
 
-
-
-
-
+It is fairly straigthforward to compute most of network metrics when the different $\lambda$ of the adjacency matrix are known, without variance (Poisot et al. 2015). Several of these metrics derive directly from quantitative indices of network structure. It is not as easy however to understand how the uncertainty in these estimates do influence network metrics. There are multiple non-linearities in the computation of these metrics and that, because of Jensen's inequality (the principle stating that the average of non-linear function of a stochastic variable differs from the function of the average of that variable), any uncertainty could bias the average estimate of the metric and influence its variance as well. For instance, among all of the pairs of species for which only few co-occurrences are observed, many of them are truly interacting. If we consider all of these as having no links, then correcting for these false absence would inflate the number of links and therefore influence metrics such as connectance, nestedness and degree distribution. Computing network properties from probabilistic networks is one thing, but then computing them with uncertainties in these probabilities is another problem, far more challenging. Unfortunately, for now we could only rely on computer simulations to get an answer to this problem. In the following section, we will provide an example with the Salix dataset and show how the uncertainty arising from both absences of co-occurrences and false absences of interactions impact these metrics. We find uncertainty influences both the average and the variance of network metrics, putting in perspective traditional network comparison studies where these metrics are assumed fixed entities. 
 
 \section*{Case study: estimating the uncertainty of a plant-herbivore network}
 
