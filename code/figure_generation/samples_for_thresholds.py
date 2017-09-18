@@ -1,20 +1,25 @@
 ######### R code to generate data files:
-# % Getting distributions:
-# xdata=matrix(ncol=1001,nrow=201)
-# ydata=matrix(ncol=1001,nrow=201)
-# for(n in 0:200){
-#   dist=calculate_distribution(calculate_parameters(int_probs,2*n,0))
-#   x=seq(-10,10,length=1000)*sqrt(dist[[2]])+dist[[1]]
-#   hx=dnorm(x)
-#   xdata[n+1,]=c(2*n,x)
-#   ydata[n+1,]=c(2*n,hx)
+# % Getting cdfs:
+# pars=calculate_parameters(int_probs,0,0)
+# n=seq(0,100,1)
+
+# CDFs=matrix(nrow=9,ncol=104)
+# colnames(CDFs)=c("Threshold","Confidence","Samples",n)
+# r=1
+# for(threshold in c(0.5,0.1,0.01)){
+#   for(confidence in c(0.9,0.95,0.975)){
+#     cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)
+#     samples=length(which(cdf<confidence))
+#     CDFs[r,1]=threshold
+#     CDFs[r,2]=confidence
+#     CDFs[r,3]=samples
+#     CDFs[r,4:104]=cdf
+#     print(r)
+#     r=r+1
+#   }
 # }
 
-# % Data are along rows for pythonic convenience
-# colnames(xdata)=c("N",seq(1,1000))
-# colnames(ydata)=c("N",seq(1,1000))
-# write.table(xdata,file='../data/Salix_example/Salix_Galler/distfigure_xvals.tsv',sep='\t')
-# write.table(ydata,file='../data/Salix_example/Salix_Galler/distfigure_yvals.tsv',sep='\t')
+# write.table(CDFs,file='../data/Salix_example/Salix_Galler/samplefigure.tsv',sep='\t')
 
 import sys
 import math
@@ -41,23 +46,31 @@ colors=ColorBrewerScheme('Spectral')  # The blue is very beautiful but maybe har
 
 def read_Rfiles(filename):
   datadict={}
+  sampledict={}
 
   f=open(filename,'r')
   for line in f:
-    if line.split()[0]!='"N"':
-      N=int(line.split()[1])
-      vals=line.split()[2:]
-      datadict[N]=vals
+    if line.split()[0]!='"Threshold"':
+      threshold=float(line.split()[1])
+      confidence=float(line.split()[2])
+      samples=int(line.split()[3])
+      ys=line.split()[4:]
+      datadict[threshold]=ys
+      if threshold in sampledict:
+        sampledict[threshold][confidence]=samples
+      else:
+        sampledict[threshold]={confidence:samples}
   f.close()
-  return datadict
+  print sampledict
+  return datadict,sampledict
 
-def combiner(xdata,ydata):
+def combiner(datadict):
   pointdict={}
-  for N in xdata:
+  for threshold in datadict:
     pointlist=[]
-    for i in range(0,len(xdata[N])):
-      pointlist.append((float(xdata[N][i]),float(ydata[N][i])))
-    pointdict[N]=pointlist
+    for n in range(0,101):
+      pointlist.append((float(datadict[threshold][n]),float(datadict[threshold][n])))
+    pointdict[threshold]=pointlist
   return pointdict
 
 def format_graph(graph):
@@ -85,7 +98,7 @@ def format_graph(graph):
 
 def populate_graph(graph,pointdict):
   x=1
-  for N in [0,2,4,6,8,10,14,20,30,40,50]:
+  for threshold in pointdict:
     data=graph.add_dataset(pointdict[N])
     data.symbol.shape=0
     data.line.configure(linewidth=1,linestyle=1,color=x)
@@ -101,10 +114,9 @@ def populate_graph(graph,pointdict):
 
 grace=Grace(colors=colors)
 
-xdata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv')
-ydata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv')
+datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv')
 
-datasets=combiner(xdata,ydata)
+datasets=combiner(datadict)
 
 graph=grace.add_graph()
 graph=format_graph(graph)
