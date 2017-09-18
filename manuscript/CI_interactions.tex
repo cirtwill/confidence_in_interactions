@@ -345,26 +345,49 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
       $\hat{\lambda_{ij}}$=7.405645 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.938755 $\times$ 10$^{-5}$.
       
-      With species $i$ and $j$ co-occurring at all 374 sites and never being observed to interact, the maximum likelihood expectation for the probability of an interaction $ij$ is very close to 0 and the variance about this estimate is very narrow. In most cases, however, species $i$ and $j$ did not co-occur at so many sites and our posterior mean and variance retain some influence of the prior.
+      With species $i$ and $j$ co-occurring at all 374 sites and never being observed to interact, the maximum likelihood expectation for the probability of an interaction $ij$ is very close to 0 and the variance about this estimate is very narrow. In most cases, however, species $i$ and $j$ did not co-occur at so many sites and our posterior mean and variance retain some influence of the prior. Nevertheless, as the number of observed co-occurances increases, the posterior mean becomes closer to zero and the posterior variance decreases (Fig.~\ref{Salix_pdfs}).
 
 
-      Realistic values for n when k=0, based on a sample of 20 random sites:
-      n=1: 0.4565121 0.0403385
-      n=2: 0.39267022 0.03335076
-      n=3: 0.34449379 0.02770543
-      n=4: 0.30684696 0.02324331
-
-
-      [[Plot distribution of interaction probabilities at some reasonable values of n]]
+      \begin{figure}[ht]
+        \label{Salix_pdfs}
+        \caption{Posterior distributions for the probability of two species observed co-occurring but not interacting narrow and shift towards zero as the number of observed co-occurances increases. Here we show a selection of distributions ranging from the prior distribution (with N=0 observed co-occurances) to the distribution when there are 50 observed co-occurances.}
+        \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
+        \end{figure}
 
 
   \subsection*{Computing the credible interval around a probability estimate}
 
-      As well as obtaining posterior means and variances, it is possible to calculate a 95\% credible interval about the posterior mean. 
+
+      As well as obtaining posterior means and variances, it is possible to calculate a 95\% credible interval about the posterior mean. This is again straightforward to do in R (see the function "credible interval" in \emph{Appendix S2}). Calculating the 95\% credible intervals for species pairs with 0 to 50 observed co-occurrances without any observed interaction (as in Fig.~\ref{Salix_pdfs}), we see that the interval narrows dramatically as the number of observations increases. In no case, however, does the confidence interval include 0. Even for a pair of species which appeared together in all 374 sites but were never observed interacting, the confidence interval (0.001, 0.018) comes close to, but does not include zero. 
+
+
+      \begin{table}[h]
+        \caption{}
+        \label{interval_table}
+        \begin{tabular}{l | c c}
+        N & Lower bound & Upper bound \\
+        \hline
+        0   & 0.157 & 0.901 \\
+        2   & 0.099 & 0.743 \\
+        4   & 0.072 & 0.621 \\
+        6   & 0.057 & 0.530 \\
+        8   & 0.047 & 0.462 \\
+        10 & 0.040 & 0.408 \\
+        14 & 0.031 & 0.331 \\
+        20 & 0.023 & 0.258 \\
+        30 & 0.016 & 0.188 \\
+        40 & 0.012 & 0.148 \\
+        50 & 0.010 & 0.122 \\
+        \hline
+        374 & 0.001 & 0.018 \\
+        \hline
+        \end{tabular}
+        \end{table}
 
 
   \subsection*{How many samples are required to reach a minimal precision}
 
+    Rather than calculating confidence intervals for a posterior distribution after collecting data, we may wish to know how many data points are necessary to obtain a given level of confidence that two co-occurring species do not interact. The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler system is below 0.5, 0.1, or 0.01, we would need 6, 54, and 101 observed co-occurrances with no observed interaction (see function samples_required in~\emph{Appendix S2}). Given the low levels of replication in most network studies, this implies that we should have fairly low confidence in many "non-interacting" pairs of species. Even in the \emph{Salix}-galler dataset, [[how many pairs of species co-occur in >6,54,101 sites?]].  Discounting potential interactions, then, requires either a stronger prior expectation of no interaction (e.g., we can be highly confident that a palm tree will not predate upon a leopard no matter how many times the two species are observed together) or very extensive sampling.
 
     - Have code for graphing or returning sample size set up.
     - Plot Increase in sample sizes with decreasing threshold, increasing confidence.
