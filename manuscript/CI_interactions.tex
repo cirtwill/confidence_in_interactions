@@ -121,8 +121,6 @@ MLE is zero if no interactions detected, but there may still be a substantial pr
 
 
 
-<<<<<<< HEAD
-
 
 \section*{Why some interactions do not occur ?}
 
@@ -166,9 +164,6 @@ As a tentative solution to disentangling observation and process mechanisms, we 
 
 
 \section*{Bayesian approach to infer interaction probabilities}
-=======
- \section*{Bayesian approach to infer interaction probabilities}
->>>>>>> b092309e49105fb62f2da1532121863ddd275eac
 
     \subsection*{Posterior distribution of the interaction probability}
 
@@ -333,11 +328,16 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
     \subsection*{Computing the posterior distribution}
 
-      [[add references to formulae]]
 
-      For species where no co-occurances were observed, we can calculate the MLE estimates for the mean and variance of $\lambda_{ij}$ directly from this prior. These are:
-      $\hat{\lambda_{ij}}$=0.5451437, var($\lambda$)=0.0481417.
-      This is consistent with the prior data, where the average interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. [[What's the connectance of our dataset, of we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may be because~\citep{Balbour2016} were considering genotypes of a single \emph{Salix} species and only four gallers from a single family rather than multiple \emph{Salix} species and galler families as is the case in our dataset.
+      For species where no co-occurances were observed, we can 
+      calculate the MLE estimates for the mean and variance of 
+      $\lambda_{ij}$ directly from this prior following 
+      equations~\ref{mean} and~\ref{variance} 
+      (see \emph{Appendix S2} for R implementation). The prior 
+      distribution we obtain based on~\citet{Balbour2016} is:
+      $\hat{\lambda_{ij}}$=0.545, var($\lambda$)=0.048.
+      This is consistent with the prior data, where the average 
+      interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. [[What's the connectance of our dataset, if we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may reflect the differences in scale between a network containing different genotypes of a single \emph{Salix} species and four gallers from a single family and a network containing many \emph{Salix} species and gallers from many families as is the case in our dataset.
 
 
       For a pair of species where some co-occurances were observed, we can update the prior distribution with these data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distribution would become:
