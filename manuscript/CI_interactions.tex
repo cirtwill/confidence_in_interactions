@@ -281,7 +281,8 @@ measurement is at the individual species level instead of the network level.
 
 \section*{A quantitative example}
 %Perhaps we want to also have a trait matching example in addition to the degree distribution example below?
-The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between speices $i$ and species $j$ in a given time interval and area, and $X = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 3/10 = 0.3$. 
+% Are degree distributions valid priors for interaction probabilities in a unipartite web? For the Salix-gall dataset we're using interaction probabilities as priors (since the degree of both Salix and galler matter)... maybe we should rephrase this to predict the degree of species $i$ based on the degrees of 10 other species in the network?
+The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between species $i$ and species $j$ in a given time interval and area, and $X = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 3/10 = 0.3$. 
 % We should probabaly have a value  on the interaction probablitity that differs from the average of the degree distrbution
  Now consider we know that species $i$ is known to interact with 10 other species, which have the following standardized degrees:
 
@@ -298,28 +299,17 @@ and~\ref{variance} above (or in the R function calculate_distribution in \emph{A
 
 
 Adding the observed data (n=10, k=3) and using the same code,
-we obtain posterior hyper parameters $\alpha'$=3.755954 and $\beta'$=10.671028 and a posterior mean 0.2603423 and variance 0.0133475. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data has reduced the variance.
+we obtain posterior hyper parameters $\alpha'$=3.755954 and $\beta'$=10.671028 and a posterior mean 0.2603423 and variance 0.0133475 for the probability of. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data has reduced the variance.
 
 
 We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward (see function credible_interval in \emph{Appendix S2}). In this case, a 95\% credible interval for the mean of theta is (0.07755119, 0.50557509).
 
 
 Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The 
-function plot_precision in \emph{Appendix S2} calculates distribution function for 
+function plot_precision in \emph{Appendix S2} calculates distribution function for $\theta*$ with an increasing number of trials. The figure below illustrates this distribution for $\theta*$=0.1.
 
-following script illustrates this probability for an increasing number of trials and $\theta*$=0.1:
 
-  \vspace{12pt}
-\noindent\emph{
-    \noindent n = seq(0,100,1)
-    \\\noindent X = 0
-    \\\noindent theta\_star = 0.1
-    \\\noindent cdf = pbeta(theta\_star, shape1 = alpha+X, shape2 = beta+n-X)
-    \\\noindent plot(n,cdf, type = "l", xlab = "n", ylab = "Cumulative distribution")
-    \\\noindent abline(h = 0.95,lty = 3)}.
-  \vspace{12pt}
-
-The exercise exemplified above yields a surprising result: it requires \textgreater30 [[or 23??]] observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
+The exercise exemplified above yields a surprising result: it requires \textgreater21 observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
 
 
 \section*{Scaling up uncertainty from pairwise interactions to networks}

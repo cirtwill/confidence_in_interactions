@@ -1,5 +1,7 @@
 calculate_parameters<-function(priordata,n,k){
+  library(MASS)
   pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))$estimate
+  # The lower=c(0,0) prevents R from fitting invalid (negative) parameters
   alpha=pars[[1]]
   beta=pars[[2]]
   alpha_prime=alpha+k
