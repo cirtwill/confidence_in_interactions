@@ -100,20 +100,20 @@ def format_graph(graph):
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
   graph.world.xmin=0
-  graph.world.xmax=200
+  graph.world.xmax=150
   graph.world.ymin=-0
   graph.world.ymax=1
 
-  graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=0,major_size=.7,minor_size=.5,place='normal',major_linewidth=1,minor_linewidth=1)
+  graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,minor_size=.3,place='normal',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
 
-  graph.xaxis.tick.configure(major=50,onoff='on',minor_ticks=0,major_size=.5,place='normal',minor_size=.5,major_linewidth=1,minor_linewidth=1)
+  graph.xaxis.tick.configure(major=20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
 
   graph.xaxis.label.configure(text="Number of samples",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Cumulative density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(125,.75),loctype='world')
+    loc=(100,.75),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
 
   return graph
@@ -173,7 +173,7 @@ def add_samplelines(graph,sampledict):
   dots.symbol.configure(shape=3,color=11,size=.75,fill_color=11)
   dots.legend="P=0.975"
 
-  print 'sqif'
+  print 'dots added'
   return graph
 
 grace=Grace(colors=colors)

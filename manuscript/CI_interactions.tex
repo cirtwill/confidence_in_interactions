@@ -387,15 +387,19 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
   \subsection*{How many samples are required to reach a minimal precision}
 
-    Rather than calculating confidence intervals for a posterior distribution after collecting data, we may wish to know how many data points are necessary to obtain a given level of confidence that two co-occurring species do not interact. The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler system is below 0.5, 0.1, or 0.01, we would need 6, 54, and 101 observed co-occurrances with no observed interaction (see function samples_required in~\emph{Appendix S2}). Given the low levels of replication in most network studies, this implies that we should have fairly low confidence in many "non-interacting" pairs of species. Even in the \emph{Salix}-galler dataset, [[how many pairs of species co-occur in >6,54,101 sites?]].  Discounting potential interactions, then, requires either a stronger prior expectation of no interaction (e.g., we can be highly confident that a palm tree will not predate upon a leopard no matter how many times the two species are observed together) or very extensive sampling.
-
-    - Have code for graphing or returning sample size set up.
-    - Plot Increase in sample sizes with decreasing threshold, increasing confidence.
+    Rather than calculating confidence intervals for a posterior distribution after collecting data, we may wish to know how many data points are necessary to obtain a given level of confidence that two co-occurring species do not interact. The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler system is below 0.5, 0.1, or 0.01, we would need 6, 54, and 114 observed co-occurrances with no observed interaction (see function samples_required in~\emph{Appendix S2}). Given the low levels of replication in most network studies, this implies that we should have fairly low confidence in many "non-interacting" pairs of species. Even in the \emph{Salix}-galler dataset, [[how many pairs of species co-occur in >6,54,114 sites?]].  Discounting potential interactions, then, requires either a stronger prior expectation of no interaction (e.g., we can be highly confident that a palm tree will not predate upon a leopard no matter how many times the two species are observed together) or very extensive sampling.
 
 
+    \begin{figure}[ht]
+      \caption{The number of samples required to achieve a given level of confidence that an interaction probability is below a given threshold varies with both parameters. With a low threshold, our confidence that $\omega_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurance without interaction. Here we show the cumulartive density functions for thresholds probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points.}
+      \label{Salix_cdfs}
+      \includegraphics[width=.8\textwidth]{figures/Salix_Galler_samples_and_cdfs.eps}
+
+      \end{figure}
 
 
-  [[What if we have only one site? Can we use the number of observations of a pair of species interacting with any partners as the number of times they co-occur, and the number of interactions within the pair as k? This will be sort-of valid for insects but not for plants when researchers camp out by plant individuals... ]]
+
+  % [[What if we have only one site? Can we use the number of observations of a pair of species interacting with any partners as the number of times they co-occur, and the number of interactions within the pair as k? This will be sort-of valid for insects but not for plants when researchers camp out by plant individuals... ]]
 
 
 \clearpage
