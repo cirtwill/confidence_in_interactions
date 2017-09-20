@@ -1,8 +1,84 @@
+
+\documentclass[12pt]{article} 
+\usepackage{amsmath} 
+\usepackage[dvips]{graphicx}
+\usepackage{multirow} 
+\usepackage{geometry} 
+\usepackage{pdflscape}
+\usepackage[labelfont=bf]{caption} 
+\usepackage{setspace}
+\usepackage[running]{lineno} 
+% \usepackage[numbers,sort]{natbib}
+\usepackage[round]{natbib} 
+\usepackage{array}
+
+\newcommand{\methods}{\textit{Materials \& Methods}}
+\newcommand{\SI}{\textit{Appendix}~}
+
+\topmargin -1.5cm % 0.0cm 
+\oddsidemargin 0.0cm % 0.2cm 
+\textwidth 6.5in
+\textheight 9.0in % 21cm
+\footskip 1.0cm % 1.0cm
+
+\usepackage{authblk}
+
+\title{Supplemental information}
+
+
+\author{Authors}
+\date{\small$^1$Department of Physics, Chemistry\\ 
+and Biology (IFM)\\ 
+Link\"{o}ping University\\
+Link\"{o}ping, Sweden\\
+% \medskip
+% $^\dagger$ Corresponding author:\\
+% alyssa.cirtwill@gmail.com\\
+% +46 723 158464\\
+ }
+
+\renewcommand\Authands{ and }
+
+\begin{document} 
+\maketitle 
+\raggedright
+\setlength{\parindent}{15pt} 
+\clearpage
+
 \section*{Appendix S1: Obtaining prior interaction probabilities}
 
     \subsection*{Creating a binary interaction network}
 
-      Barbour \emph{et al.} sampled 145 branches from \emph{Salix hookeriana} of 26 genotypes. They recorded galls made by four species of Cecidomyid midges on each branch. We transformed these data to a binary genotype-galler network matrix, where an entry $ij$ was 1 if galler $i$ was observed on any branch of genotype $j$ and 0 otherwise. In total, this network contained 75 realized galler-genotype interactions out of a potential 104. The R code used to extract this network follows:
+      Barbour \emph{et al.} sampled 145 branches from 
+      \emph{Salix hookeriana} of 26 genotypes. They recorded galls 
+      made by four species of Cecidomyid midges on each branch. We 
+      transformed these data to a binary genotype-galler network 
+      matrix, where an entry $ij$ was 1 if galler $i$ was observed 
+      on any branch of genotype $j$ and 0 otherwise. In total, this 
+      network contained 75 realized galler-genotype interactions 
+      out of a potential 104. The R code used to extract this 
+      network follows:
+
+
+      \vspace{12pt}
+      \emph{
+      \noindent \hspace{-4pt} prior\_web\_data=read.csv(``tree\_level\_interaxn\_all\_plants\_traits\_size.csv")\\
+      \# Remove extra data on parasitoids, etc.\\
+      prior\_web\_data[,31:57]\textless-NULL\\
+      prior\_web\_data[,4:26]\textless-NULL\\
+      prior\_web\_data[,2]\textless-NULL\\
+      \# Build a web with interactions=1 for any galler observed on any genotype\\
+      prior\_web=matrix(nrow=26,ncol=4)\\
+      for(r in 1:length(levels(prior\_web\_data\$Genotype)))\{\\
+      \hspace{4pt}  gen=levels(prior\_web\_data\$Genotype)[r]\\
+      \hspace{4pt}  subset=prior\_web\_data[which(prior\_web\_data\$Genotype==gen),]\\
+      \hspace{4pt}  for(c in 1:4)\{\\
+      \hspace{8pt}    if(sum(subset[,2+c])\textgreater0)\{\\
+      \hspace{12pt}      prior\_web[r,c]=1\\
+      \hspace{8pt}    \} else \{\\
+      \hspace{12pt}      prior\_web[r,c]=0\\
+      \hspace{8pt}    \}\}\}
+      }
 
       % prior_web_data=read.csv('tree_level_interaxn_all_plants_traits_size.csv')
       % # Remove extra data on parasitoids, etc.
@@ -26,7 +102,29 @@
 
     \subsection*{Degree distributions and interaction probabilities}
 
-      Obtaining degree distributions from the binary interaction network is straightforward. To do this, we simply divide the total number of observed interaction partners for each species (row or column sums) with the number of potential interaction partners (number of column or rows). Degree distributions calculated, we can then calculate the probability of each interaction as the product of the normalized degrees of the two species. For example, the probability of an interaction between two species with normalized degrees of 0.5 (each interacts with half of the available partners) is 0.25. R code used to do this follows:
+      Obtaining degree distributions from the binary interaction 
+      network is straightforward. To do this, we simply divide the 
+      total number of observed interaction partners for each 
+      species (row or column sums) with the number of potential 
+      interaction partners (number of column or rows). Degree 
+      distributions calculated, we can then calculate the 
+      probability of each interaction as the product of the 
+      normalized degrees of the two species. For example, the 
+      probability of an interaction between two species with 
+      normalized degrees of 0.5 (each interacts with half of the 
+      available partners) is 0.25. R code used to do this follows:
+
+
+      \vspace{12pt}
+      \emph{
+      \noindent \hspace{-4pt} \# Now get the degree distributions from the web\\
+      deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
+      \# Remove one genotype that never interacted\\
+      deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
+      deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
+      \# Interaction probabilities are the product of plant and galler probabilities\\
+      int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
+      }
 
       %       # Now get the degree distributions from the web
       % deg_dist_Salix=rowSums(prior_web)/ncol(prior_web)
@@ -36,101 +134,104 @@
       % # Interaction probabilities are the product of plant and galler probabilities
       % int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
 
+\clearpage
 
 
 \section*{Appendix S2: Calculating posterior distributions and confidence intervals}
 
-  The following simple functions are implemented in the R language. Priordata is the list of interaction frequencies from the prior data, n is the number of sites with observed co-occurrance of species $i$ and $j$, and k is the number of sites with an observed interaction $ij$. When calculating the prior distribution, both n and k are 0. In the main text we assume 100\% confidence in observed interactions and therefore consider only cases where k=0. Only n varies between species pairs.
+  The following simple functions are implemented in the R language. 
+  Priordata is the list of interaction frequencies from the prior 
+  data, n is the number of sites with observed co-occurrance of 
+  species $i$ and $j$, and k is the number of sites with an 
+  observed interaction $ij$. When calculating the prior 
+  distribution, both n and k are 0. In the main text we assume 100\%
+  confidence in observed interactions and therefore consider only 
+  cases where k=0. Only n varies between species pairs.
 
 
-  To calculate the parameters $\alpha$ and $\beta$ of a prior or posterior distribution:
+  To calculate the parameters $\alpha$ and $\beta$ of a prior or 
+  posterior distribution:
 
   \vspace{12pt}
-  calculate\_parameters\textless-function(priordata,n,k)\{
-  \# Calculate the parameters of the prior distribution
-  pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))\$estimate
-  alpha=pars[[1]]
-  beta=pars[[2]]
-  \# Update the parameters with data. If n=0 and k=0, no change.
-  alpha\_prime=alpha+k
-  beta\_prime=beta+n-k
-  pars2=c(alpha\_prime,beta\_prime)
-  return(pars2)
+  \emph{
+  \noindent \hspace{-4pt}calculate\_parameters\textless-function(priordata,n,k)\{\\
+  \hspace{4pt} \# Calculate prior parameters\\
+  \hspace{4pt} start=list(shape1=1,shape2=1)
+  \hspace{80pt} pars=fitdistr(x=priordata,`beta',start=start,lower=c(0,0))\$estimate\\
+  \hspace{4pt} alpha=pars[[1]]\\
+  \hspace{4pt} beta=pars[[2]]\\
+  \hspace{4pt} \# Update the parameters with data. If n=0 and k=0, no change.\\
+  \hspace{4pt} alpha\_prime=alpha+k\\
+  \hspace{4pt} beta\_prime=beta+n-k\\
+  \hspace{4pt} pars2=c(alpha\_prime,beta\_prime)\\
+  \hspace{4pt} return(pars2) \}
   }
+  \vspace{12pt}
 
-    % calculate_parameters<-function(priordata,n,k){
-    %   pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))$estimate
-    %   alpha=pars[[1]]
-    %   beta=pars[[2]]
-    %   alpha_prime=alpha+k
-    %   beta_prime=beta+n-k
-    %   pars2=c(alpha_prime,beta_prime)
-    %   return(pars2)
-    % }
 
-    To calculate the maximum likelihood estimates of the mean and variance of the probability of interaction $\lambda_{ij}$:
+    To calculate the maximum likelihood estimates of the mean and 
+    variance of the probability of interaction $\lambda_{ij}$:
 
     \vspace{12pt}
-    calculate\_distribution\textless-function(pars){
-      \# alpha and beta may be from a prior or posterior distribution
-      alpha=pars[[1]]
-      beta=pars[[2]]
+    \emph{
+    calculate\_distribution\textless-function(pars)\{\\
+      \# alpha and beta may be from a prior or posterior distribution\\
+      alpha=pars[[1]]\\
+      beta=pars[[2]]\\
 
-      \# Calculate the MLE of the mean
-      mu\_num=alpha
-      mu\_den=alpha+beta
-      mu=mu\_num\/mu\_den
 
-      \# Calculate the MLE of the variance
-      sig\_num=alpha\*beta
-      den1=alpha+beta
-      den2=den1\*\*2
-      sig\_den=den1\*den2
-      sigma2=sig\_num\/sig\_den
+      \# Calculate the MLE of the mean\\
+      mu\_num=alpha\\
+      mu\_den=alpha+beta\\
+      mu=mu\_num\/mu\_den\\
 
-      return(c(mu,sigma2))
+
+      \# Calculate the MLE of the variance\\
+      sig\_num=alpha\*beta\\
+      den1=alpha+beta\\
+      den2=den1\*\*2\\
+      sig\_den=den1\*den2\\
+      sigma2=sig\_num\/sig\_den\\
+
+
+      return(c(mu,sigma2))\}
     }
-  
-  % calculate_distribution<-function(pars){
-  %       alpha=pars[[1]]
-  %       beta=pars[[2]]
-
-  %       mu_num=alpha
-  %       mu_den=alpha+beta
-  %       mu=mu_num/mu_den
-
-  %       sig_num=alpha*beta
-  %       den1=alpha+beta
-  %       den2=den1**2
-  %       sig_den=den1*den2
-  %       sigma2=sig_num/sig_den
-
-  %       return(c(mu,sigma2))
-  %     }
-
+  \vspace{12pt}
+      
 
   To calculate a credible interval based on the prior or posterior distribution, for given lower and upper bounds:
 
-  \vspace{12pt}
-  
-credible_interval<-function(pars,p_lower,p_upper){
-  alpha=pars[[1]]
-  beta=pars[[2]]
-  lowCI=qbeta(p=p_lower,shape1=alpha,shape2=beta)
-  highCI=qbeta(p=p_upper,shape1=alpha,shape2=beta)
-  return(c(lowCI,highCI))
-}
 
-plot_precision<-function(threshold,confidence,pars){
-  alpha=pars[[1]]
-  beta=pars[[2]]
-  n=seq(0,100,1)
-  k=0
-  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)
-  samples=length(which(cdf<confidence))
-  # plot(n,cdf,type="l",xlab="n",ylab="Cumulative distribution")
-  # abline(h=0.95,lty=3)
-  return(samples)
-}
+  \vspace{12pt}
+  \emph{
+  credible\_interval\textless-function(pars,p\_lower,p\_upper)\{\\
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    lowCI=qbeta(p=p\_lower,shape1=alpha,shape2=beta)\\
+    highCI=qbeta(p=p\_upper,shape1=alpha,shape2=beta)\\
+    return(c(lowCI,highCI))\}
+  }
+
+
+  \vspace{12pt}
+  \emph{
+  plot\_precision\textless-function(threshold,confidence,pars)\{\\
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    n=seq(0,100,1)\\
+    k=0\\
+    cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)\\
+    samples=length(which(cdf<confidence))\\
+    return(samples) \}
+  }
+
+
+\clearpage
+
+    \bibliographystyle{ecollett} 
+    \bibliography{manual_abbrev} % Abbreviate journal titles.
+
+
+\end{document}
 
 
