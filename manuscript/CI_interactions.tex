@@ -57,7 +57,7 @@ Link\"{o}ping, Sweden\\
     Ecological networks-- which include antagonistic food webs and host-parasite networks as well as plant-pollinator and plant-frugivore mutualist networks --are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive "snapshot" sample, or expert knowledge, interactions are assumed to occur at constant frequencies~\citep{Olesen2011a}. This assumption conflicts with known variation in interactions over time~\citep{Kitching1987,Olesen2011a} and space~\citep{Kitching1987,Baiser2012} and between individuals of a given species~\citep{Pires2011a,Fodrie2015,Novak2015}. Taking the variation in interaction frequencies into account would therefore represent a substantial increase in the realism of ecological networks as representations of ecological communities.
 
 
-    Efforts to account for variance in interaction frequencies are complicated by the fact that not only interaction frequencies but network structure vary over space and time. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. The removal of a species from a site will obviously also remove its interactions. Interactions can also be lost, however, if participating species remain present but do not co-occur temporally or are too rare to detect each other~\citep{Tylianakis2010}, or through changes to individual preferences~\citep{Fodrie2015}. Several researchers have pointed to the importance of sampling intensity for the assessment of network structure (e.g.,~\citealp{}). Despite this, the acknowledgement that insufficient sampling effort limits our ability to describe variation in ecological networks has not yet led to a quantitative framework to deal with the uncertainty of ecological interactions and of sampling.
+    Efforts to account for variance in interaction frequencies are complicated by the fact that not only interaction frequencies but network structure vary over space and time. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. The removal of a species from a site will obviously also remove its interactions. Interactions can also be lost, however, if participating species remain present but do not co-occur temporally or are too rare to detect each other~\citep{Tylianakis2010}, or through changes to individual preferences~\citep{Fodrie2015}. Several researchers have pointed to the importance of sampling intensity for the assessment of network structure (e.g.,~\citealp{Martinez1999,Bluthgen2006,XX}). Despite this, the acknowledgement that insufficient sampling effort limits our ability to describe variation in ecological networks has not yet led to a quantitative framework to deal with the uncertainty of ecological interactions and of sampling.
 
 
     The main objective of this study is to develop analytical tools that could be used to better represent the uncertainty in the estimation of pairwise interaction probability. We start with the description of a new Bayesian approach to estimate ecological interactions and of a related R package. [[We first illustrate the framework with a simple quantitative example. Next, we use the framework to provide analytical criteria for improving the sampling of rare interations. Finally, we discuss the implications of uncertainty in the estimation of pairwise interactions on the properties of ecological networks.]] Through these efforts, we demonstrate both the utility of our approach and the importance of acknowledging the uncertainty inherent in ecological networks.
@@ -312,7 +312,7 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
   \subsection*{Finding the maximum likelihood estimate}
 
-      In a strict Bayesian framework, we wish to use a prior distribution that does not rely on any information from the study at hand. To that end, we use data from another well-described \emph{Salix} galler-parasitoid system (doi: 10.1073/pnas.1513633113). Note that this study used several genotypes of \emph{S. hookeriana} rather than different \emph{Salix} species. We estimated frequencies of  \emph{S. hookeriana} genotype-galler and galler-parasitoid interactions [[host-parasitoid still to-do]] based on the normalized degree of each species in each network component (see \emph{Appendix S1} for details and code).
+      In a strict Bayesian framework, we wish to use a prior distribution that does not rely on any information from the study at hand. To that end, we use data from another well-described \emph{Salix} galler-parasitoid system~\citep{Barbour2016,Barbour2016Dryad}. Note that this study used several genotypes of \emph{S. hookeriana} rather than different \emph{Salix} species. We estimated frequencies of  \emph{S. hookeriana} genotype-galler and galler-parasitoid interactions [[host-parasitoid still to-do]] based on the normalized degree of each species in each network component (see \emph{Appendix S1} for details and code).
 
 
       Using this prior distribution of galler-\emph{Salix} interaction frequencies, we can obtain parameters for the prior distribution of $\lambda$ in our dataset. Specifically, we obtain $\alpha$=2.807855, $\beta$=2.342815. We are then able to use these priors to estimate the posterior distriution of interaction probabilities given the additional information in our dataset.
@@ -326,7 +326,7 @@ It is fairly straigthforward to compute most of network metrics when the differe
       $\lambda_{ij}$ directly from this prior following 
       equations~\ref{mean} and~\ref{variance} 
       (see \emph{Appendix S2} for R implementation). The prior 
-      distribution we obtain based on~\citet{Balbour2016} is:
+      distribution we obtain based on~\citet{Barbour2016,Barbour2016Dryad} is:
       $\hat{\lambda_{ij}}$=0.545, var($\lambda$)=0.048.
       This is consistent with the prior data, where the average 
       interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. [[What's the connectance of our dataset, if we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may reflect the differences in scale between a network containing different genotypes of a single \emph{Salix} species and four gallers from a single family and a network containing many \emph{Salix} species and gallers from many families as is the case in our dataset.
@@ -354,7 +354,7 @@ It is fairly straigthforward to compute most of network metrics when the differe
 
 
       \begin{table}[h]
-        \caption{95\% credible intervals for the interaction probability of two species that co-occur in $N$ sites but are never observed to interact, obtained using prior information from the \emph{Salix}-galler network in~\citet{Balbour2016}.}
+        \caption{95\% credible intervals for the interaction probability of two species that co-occur in $N$ sites but are never observed to interact, obtained using prior information from the \emph{Salix}-galler network in~\citet{Barbour2016,Barbour2016Dryad}.}
         \label{interval_table}
         \begin{tabular}{l | c c}
         N & Lower bound & Upper bound \\
@@ -397,7 +397,7 @@ It is fairly straigthforward to compute most of network metrics when the differe
 \clearpage
 
     \bibliographystyle{ecollett} 
-    \bibliography{manual_abbrev} % Abbreviate journal titles.
+    \bibliography{MyCollection} % Abbreviate journal titles.
 
 
 \end{document}
