@@ -73,7 +73,7 @@ def read_Rfiles(filename):
       datadict[threshold]=ys
   f.close()
 
-  g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv')
+  g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv','r')
   for line in g:
     if line.split()[0]!='"Threshold"':
       threshold=float(line.split()[1])
