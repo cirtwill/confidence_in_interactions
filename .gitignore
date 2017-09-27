@@ -1,0 +1,16 @@
+# LaTeX adjunct files automatically generated during compiling
+
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.dvi
+manuscript/*.log
+manuscript/*.ps
+manuscript/*.pdf
+
+# Nonsense Apple files
+manuscript/.DS_Store
+.DS_Store
+code/.Rapp.history
+code/figure_generation/.Rapp.history
+
