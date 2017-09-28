@@ -185,149 +185,167 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
 
     \subsection*{Posterior distribution of the interaction probability}
 
-  We here adopt a Bayesian approach to estimate the distribution of the parameter $\theta$. According to Bayes principle, the posterior distribution of $\theta$ is:
+      We here adopt a Bayesian approach to estimate the distribution of the parameter $\theta$. According to Bayes principle, the posterior distribution of $\theta$ is:
 
-  \begin{equation}
-    \underbrace{P(\theta|X,n)}_{Posterior} = \frac{\overbrace{P(X|\theta,n)}^{Likelihood}\overbrace{P(\theta)}^{Prior}}{\underbrace{P(X|N)}_{Normalizer}} .
-    \label{posterior}
-  \end{equation}
-
-  According to the above description, the likelihood is simply the binomial distribution (Eq.~\ref{likelihood}). Since $\theta$ is a probability it is bounded between 0 and 1 and consequently the most appropriate prior distribution is the beta:
-
-    \begin{equation}
-      \theta \sim Beta(\alpha,\beta) , \label{prior}
-    \end{equation}
-
-  \noindent which has two shape parameters, $\alpha$ and $\beta$. 
-
- In some cases it can be complicated to compute the normalizer, but fortunately in our case it exists an analytical solution. The beta-binomial distribution is a conjugate distribution of the binomial distribution. This allows us to analytically compute the posterior distribution of a binomial model with a beta prior distribution. We can re-write the posterior distribution of $\theta$ as:
-
-  \begin{equation}
-    P(\theta|k,n) = \frac{\theta^{\alpha+k-1}(1-\theta)^{\beta+n-k-1}}{B(\alpha+k,\beta+n-k)} , \label{posterior}
-  \end{equation}
-
-  \noindent where the function $B$ is the beta function:
-
-  \begin{equation}
-    Beta(\alpha+k,\beta+n-k) = \frac{\Gamma(\alpha+k)\Gamma(\beta+n-k)}{\Gamma(\alpha+\beta+n)} . \label{betafunction}
-  \end{equation}
-
-  The posterior distribution of $\theta$ therefore follows the beta distribution with new parameters $\alpha'= \alpha+k$ and $\beta'=\beta+n-k$. The weight of the prior on the posterior distribution is understood from these definition of the parameters: the difference between the posterior and the prior will increase with $k$ and $n-k$. When plotted, we find the shape of the distribution gets narrower with $k$ and $n$ (see Fig X). 
-%
-%  The posterior distribution of $\theta$ could be computed with R with the following command:
-%
-%
-%  \vspace{12pt}
-%  \noindent\emph{dbeta(x = theta, shape1 = alpha+k, shape1 = beta+n-k)}
-%  \vspace{12pt}
-
-  \subsection*{Moments and other properties}
-
-  The fact that the posterior distribution of $\theta$ follows a beta distribution makes it straightforward to compute moments and other properties. 
-
-  The \textbf{average} of $\theta$ is: 
       \begin{equation}
-        \bar{\theta} = \frac{\alpha+k}{\alpha+\beta+n} ,
-        \label{mean}
+        \underbrace{P(\theta|X,n)}_{Posterior} = \frac{\overbrace{P(X|\theta,n)}^{Likelihood}\overbrace{P(\theta)}^{Prior}}{\underbrace{P(X|N)}_{Normalizer}} .
+        \label{posterior}
       \end{equation}
 
-    and its \textbf{variance} is:  
+      According to the above description, the likelihood is simply the binomial distribution (Eq.~\ref{likelihood}). Since $\theta$ is a probability it is bounded between 0 and 1 and consequently the most appropriate prior distribution is the beta:
+
       \begin{equation}
-        Var(\theta|k) = \frac{(\alpha + k)(\beta + n - k)}{(\alpha + \beta + n)^{2}(\alpha + \beta + n +1)}
-        \label{variance}
+        \theta \sim Beta(\alpha,\beta) , \label{prior}
       \end{equation}
 
-    The \textbf{mode} of the distribution is:
+      \noindent which has two shape parameters, $\alpha$ and $\beta$. 
+
+     In some cases it can be complicated to compute the normalizer, but fortunately in our case an analytical solution exists. The beta-binomial distribution is a conjugate distribution of the binomial distribution. This allows us to analytically compute the posterior distribution of a binomial model with a beta prior distribution. We can re-write the posterior distribution of $\theta$ as:
+
       \begin{equation}
-        \hat{\theta} = \frac{\alpha + k - 1}{\alpha + \beta + n - 2} .
-        \label{mode}
+        P(\theta|k,n) = \frac{\theta^{\alpha+k-1}(1-\theta)^{\beta+n-k-1}}{B(\alpha+k,\beta+n-k)} , \label{posterior}
       \end{equation}
 
-  \subsection*{The prior distribution}    
-  Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution, which follows a beta distribution. These are called hyper parameters. Below we identify four ways to formulate the prior distribution of $\theta$. 
+      \noindent where the function $B$ is the beta function:
 
-    \subsubsection*{Uninformative prior}
-      
-      In absence of any external information, an uniformative prior is the most conservative 
-      hypothesis for the distribution of $\theta$. The beta distribution is in this case 
-      a uniform distribution  for $Beta(\alpha=1,\beta=1)$. 
+      \begin{equation}
+        Beta(\alpha+k,\beta+n-k) = \frac{\Gamma(\alpha+k)\Gamma(\beta+n-k)}{\Gamma(\alpha+\beta+n)} . \label{betafunction}
+      \end{equation}
 
-    \subsubsection*{Distribution of connectance}
-      
-      In the literature of ecological networks there is a solid collection of data for which know network connectance, and we can thereby define the connectance distribution. Connectance is measured as $C = L/S^2$, where $L$ is the number of interactions and $S$ is the number of species. It measures the filling of an interaction matrix and thereby expresses the average probability that any two species interact with each other. If we know only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
+      The posterior distribution of $\theta$ therefore follows the beta distribution with new parameters $\alpha'= \alpha+k$ and $\beta'=\beta+n-k$. The weight of the prior on the posterior distribution is understood from these definition of the parameters: the difference between the posterior and the prior will increase with $k$ and $n-k$. When plotted, we find the shape of the distribution gets narrower with $k$ and $n$ (Fig.~\ref{Salix_pdfs}). 
+      %
+      %  The posterior distribution of $\theta$ could be computed with R with the following command:
+      %
+      %
+      %  \vspace{12pt}
+      %  \noindent\emph{dbeta(x = theta, shape1 = alpha+k, shape1 = beta+n-k)}
+      %  \vspace{12pt}
 
-  \begin{equation}
-    \alpha = \overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
-  \end{equation}
-
-  \begin{equation}
-    \beta = (1-\overline{C})(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) .
-  \end{equation}
-  
-%  It is also possible to compute maximum likelihood estimates for a sample of the distribution of $C$.
-%  
-%   The following piece of R code provides an example: 
-%
-%  \vspace{12pt}
-%  \noindent\emph{
-%    library(MASS)\\
-%    pars = fitdistr(x = vecC, "beta", start = list(shape1 = 1, shape2 = 1))\$estimate
-%  }
-%  \vspace{12pt}
-%
-%
-%  Where $vecC$ is a vector of known connectances for a set of networks. 
+      \begin{figure}[ht]
+        \label{Salix_pdfs}
+        \caption{Using a prior distribution based on the \emph{Salix}-galler network in~\citet{Barbour2016}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ ranging from the prior distribution (N=0 observed co-occurances) to the distribution obtained when the pair of species has been observed co-occurring 50 times. The distribution narrows and approaches zero as the sample size increases, but never includes zero.}
+        \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
+        \end{figure}
 
 
-  \subsubsection*{Degree distribution for the species in the network}.
-%
-The degree of a node in a network is defined as the number of interactions it has to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network. Connectance is an average property for a complete given network, and it represents the expected
-degree (expected number of interactions per species) standardized by the number of species in the network. The standardized degree could therefore be interpreted as an interaction probability. It is consequently possible to
-use the degree distribution to inform the prior distribution. The degree distribution could
-come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows us to apply information from known, abundant species to the rarest species for which interactions are less
-frequently documented. The procedure for the estimation of the hyper parameters follows
-the same approach as described above for connectance except that each
-measurement is at the individual species level instead of the network level.
+    \subsection*{Moments and other properties}
 
-  \subsubsection*{Trait-matching function}. 
-  It is possible to estimate the probability of interaction between a pair of species if there is knowledge of their traits and some functions relating trait matching to interaction probability (Morales-Castilla2015). There are several techniques available to perform this inferrence of interaction probability (REFS). Note that in this case the prior might not be beta distribution and numerical methods might be required to compute the posterior distribution.  
+      The fact that the posterior distribution of $\theta$ follows a beta distribution makes it straightforward to compute moments and other properties. 
+
+      The \textbf{average} of $\theta$ is: 
+          \begin{equation}
+            \bar{\theta} = \frac{\alpha+k}{\alpha+\beta+n} ,
+            \label{mean}
+          \end{equation}
+
+        and its \textbf{variance} is:  
+          \begin{equation}
+            Var(\theta|k) = \frac{(\alpha + k)(\beta + n - k)}{(\alpha + \beta + n)^{2}(\alpha + \beta + n +1)}
+            \label{variance}
+          \end{equation}
+
+        The \textbf{mode} of the distribution is:
+          \begin{equation}
+            \hat{\theta} = \frac{\alpha + k - 1}{\alpha + \beta + n - 2} .
+            \label{mode}
+          \end{equation}
+
+    \subsection*{The prior distribution}    
+
+      Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution, which follows a beta distribution. These are called hyper parameters. Below we identify four ways to formulate the prior distribution of $\theta$. 
+
+
+      \subsubsection*{Uninformative prior}
+        
+          In absence of any external information, an uniformative prior is the most conservative hypothesis for the distribution of $\theta$. The beta distribution is in this case a uniform distribution  for $Beta(\alpha=1,\beta=1)$. 
+
+      \subsubsection*{Distribution of connectance}
+        
+          In the literature of ecological networks there is a solid collection of data for which know network connectance and from which we can define the connectance distribution. Connectance is measured as $C = L/S^2$, where $L$ is the number of interactions and $S$ is the number of species. It measures the filling of an interaction matrix and thereby expresses the average probability that any two species interact with each other. If we know only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
+
+          \begin{equation}
+          \alpha = \overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
+          \end{equation}
+
+          \begin{equation}
+          \beta = (1-\overline{C})(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) .
+          \end{equation}
+    
+          %  It is also possible to compute maximum likelihood estimates for a sample of the distribution of $C$.
+          %  
+          %   The following piece of R code provides an example: 
+          %
+          %  \vspace{12pt}
+          %  \noindent\emph{
+          %    library(MASS)\\
+          %    pars = fitdistr(x = vecC, "beta", start = list(shape1 = 1, shape2 = 1))\$estimate
+          %  }
+          %  \vspace{12pt}
+          %
+          %
+          %  Where $vecC$ is a vector of known connectances for a set of networks. 
+
+
+      \subsubsection*{Degree distribution for the species in the network - or - Interaction probabilities in a similar network}.
+
+          [[Should we still have this? At the workshop we talked about how interaction probabilities depend on the degrees of both species and so I'm using predicted interaction probabilities (degreeA*degreeB) in the galler example. A writeup for that process follows the original text:]]
+          The degree of a node in a network is defined as the number of interactions it has to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network. Connectance is an average property for a complete given network, and it represents the expected degree (expected number of interactions per species) standardized by the number of species in the network. The standardized degree could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to inform the prior distribution. The degree distribution could come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows us to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. The procedure for the estimation of the hyper parameters follows the same approach as described above for connectance except that each measurement is at the individual species level instead of the network level.
+
+         
+          If our focal network describes a similar system to that in a known network, we can use the distribution of interaction probabilities in that network to inform our prior. The probability of any interaction $L_ij$ depends on the degrees of species $i$ and $j$. The degree of a node is defined as the number of interactions it has with other nodes. Connectance, as the average number of links per species in the whole network, is thus also the expected degree for any given species normalized by the number of species in the network. Using normalized degrees $\Delta_i$ and $\Delta_j$ (i.e., degrees divided by the number of species in the network), we can obtain the probability of interaction $L_ij$=$\Delta_i$\times$\Delta_j$. The distribution of these interaction probabilities derived from a similar network or a suite of networks can be used to establish a prior distribution before any data from the focal network are collected. We could also use this approach to build a prior distribution using known interaction probabilities for some species in the focal network. The latter approach allows us to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. The procedure for the estimation of the hyper parameters follows the same approach as described above for connectance except that each measurement is at the individual interaction level instead of the network level.
+
+
+      \subsubsection*{Trait-matching function}. 
+
+          It is possible to estimate the probability of interaction between a pair of species if there is knowledge of their traits and some functions relating trait matching to interaction probability~\citep{Morales-Castilla2015}. There are several techniques available to perform this inferrence of interaction probability~\citep{} (REFS). Note that in this case the prior might not be beta distribution and numerical methods might be required to compute the posterior distribution.  
+
 
 \section*{A quantitative example}
-%Perhaps we want to also have a trait matching example in addition to the degree distribution example below?
-% Are degree distributions valid priors for interaction probabilities in a unipartite web? For the Salix-gall dataset we're using interaction probabilities as priors (since the degree of both Salix and galler matter)... maybe we should rephrase this to predict the degree of species $i$ based on the degrees of 10 other species in the network?
-The framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between species $i$ and species $j$ in a given time interval and area, and $X = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 3/10 = 0.3$. 
-% We should probabaly have a value  on the interaction probablitity that differs from the average of the degree distrbution
- Now consider we know that species $i$ is known to interact with 10 other species, which have the following standardized degrees:
 
-\vspace{12pt}
-\noindent\emph{
-   degree = c(0.66, 0.09, 0.06, 0.08, 0.04, 0.16, 0.06, 0.38, 0.03, 0.02)
-    }.
-  \vspace{12pt}
+  %Perhaps we want to also have a trait matching example in addition to the degree distribution example below?
+  % Are degree distributions valid priors for interaction probabilities in a unipartite web? For the Salix-gall dataset we're using interaction probabilities as priors (since the degree of both Salix and galler matter)... maybe we should rephrase this to predict the degree of species $i$ based on the degrees of 10 other species in the network?
+  The Bayesian framework can be illustrated with a simple quantiative example. Suppose we have $n = 10$ observations of co-occurrence between species $i$ and species $j$ in a given time interval and area, and $X = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\theta_{MLE} = 3/10 = 0.3$. 
+  % We should probabaly have a value  on the interaction probablitity that differs from the average of the degree distrbution
+   Now consider we know that species $i$ is known to interact with 10 other species, which have the following normalized degrees:
 
-The mean of these standardized degrees is 0.158, approximately half the $\theta_{MLE}$ obtained from the observed data. We can use these standardized degrees to inform our prior expectation of the 
-distribution of interaction probabilities. With some simple R code (function calculate\_parameters, \emph{Appendix S2}), we obtain prior parameters $\alpha$=0.7559544
-and $\beta$=3.6710277. Using these priors in equations~\ref{mean} 
-and~\ref{variance} above (or in the R function calculate\_distribution in \emph{Appendix S2}), we find a prior mean interaction probability of 0.1707607 and a prior variance of 0.0319860.
+    \vspace{12pt}
+    \noindent\emph{
+       degree = c(0.66, 0.18, 0.12, 0.16, 0.84, 0.32, 0.12, 0.76, 0.06, 0.04)
+        }.
+      \vspace{12pt}
 
+    If the network has 20 species total, then species $i$ has a normalized degree of 0.5 and
+    we can use this to obtain the following set of interaction probabilities for species $i$ and each of its interaction partners:
 
-Adding the observed data (n=10, k=3) and using the same code,
-we obtain posterior hyper parameters $\alpha'$=3.755954 and $\beta'$=10.671028 and a posterior mean 0.2603423 and variance 0.0133475 for the probability of. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data has reduced the variance.
-
-
-We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward (see function credible\_interval in \emph{Appendix S2}). In this case, a 95\% credible interval for the mean of theta is (0.07755119, 0.50557509).
+    \vspace{12pt}
+    \noindent\emph{
+       int_probs = c(0.33, 0.09, 0.06, 0.08, 0.42, 0.16, 0.06, 0.38, 0.03, 0.02)
+        }.
+      \vspace{12pt}
 
 
-Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$. The 
-function plot\_precision in \emph{Appendix S2} calculates distribution function for $\theta*$ with an increasing number of trials. The figure below illustrates this distribution for $\theta*$=0.1.
+    The mean of these interaction probabilities is 0.163, approximately half the $\theta_{MLE}$ obtained from the observed data. We can use the distribution of these interaction probabilities as our prior distribution and estimate the uncertainty surrounding our $\theta_{MLE}$. With some simple R code (function calculate\_parameters, \emph{Appendix S2}), we obtain prior parameters $\alpha$=1.050830
+    and $\beta$=5.365892. Using these priors in equations~\ref{mean} 
+    and~\ref{variance} above (or in the R function calculate\_distribution in \emph{Appendix S2}), we find a prior mean interaction probability of 0.16376436 and a prior variance of 0.02134199.
 
 
-The exercise exemplified above yields a surprising result: it requires \textgreater21 observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
+    Adding the observed data (n=10, k=3) and using the same code,
+    we obtain posterior hyper parameters $\alpha'$=4.05083 and $\beta'$=12.36589 and a posterior mean 0.247 and variance 0.011 for the probability of. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data has reduced the variance.
+
+
+    We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward in R (see function credible\_interval in \emph{Appendix S2}). In this case, a 95\% credible interval for the mean of theta is (0.077, 0.474).
+
+
+    Now, consider the case where the two species have never been observed interacting across $n$ trials. The question is then ``what is the probability these two species do not interact''? Since it is not possible to prove that the two species could never interact, given the framework above we must fix a threshold below which we consider that there is no interaction. We call this threshold probability $\theta*$. We then use the cumulative distribution function to estimate $P(\theta<\theta*|X=0,n)$ for different $n$. The 
+    function plot\_precision in \emph{Appendix S2} calculates distribution function for $\theta*$ with an increasing number of trials. The figure below illustrates this distribution for $\theta*$=0.1.
+
+
+    The exercise exemplified above yields a surprising result: it requires \textgreater24 observations of no interactions to be 95\% sure that the interaction probability is smaller than 0.1. Note the special case where there is no observation of the two species co-occurring and failing to interact, $n = 0$. In this situation, the posterior distribution converges to the prior distribution. 
 
 
 \section*{Scaling up uncertainty from pairwise interactions to networks}
 
-It is fairly straigthforward to compute most of network metrics when the different $\lambda$ of the adjacency matrix are known, without variance (Poisot et al. 2015). Several of these metrics derive directly from quantitative indices of network structure. It is not as easy however to understand how the uncertainty in these estimates do influence network metrics. There are multiple non-linearities in the computation of these metrics and that, because of Jensen's inequality (the principle stating that the average of non-linear function of a stochastic variable differs from the function of the average of that variable), any uncertainty could bias the average estimate of the metric and influence its variance as well. For instance, among all of the pairs of species for which only few co-occurrences are observed, many of them are truly interacting. If we consider all of these as having no links, then correcting for these false absence would inflate the number of links and therefore influence metrics such as connectance, nestedness and degree distribution. Computing network properties from probabilistic networks is one thing, but then computing them with uncertainties in these probabilities is another problem, far more challenging. Unfortunately, for now we could only rely on computer simulations to get an answer to this problem. In the following section, we will provide an example with the Salix dataset and show how the uncertainty arising from both absences of co-occurrences and false absences of interactions impact these metrics. We find uncertainty influences both the average and the variance of network metrics, putting in perspective traditional network comparison studies where these metrics are assumed fixed entities. 
+  It is fairly straigthforward to compute most of network metrics when the different $\lambda$ of the adjacency matrix are known, without variance (Poisot et al. 2015). Several of these metrics derive directly from quantitative indices of network structure. It is not as easy however to understand how the uncertainty in these estimates do influence network metrics. There are multiple non-linearities in the computation of these metrics and that, because of Jensen's inequality (the principle stating that the average of non-linear function of a stochastic variable differs from the function of the average of that variable), any uncertainty could bias the average estimate of the metric and influence its variance as well. For instance, among all of the pairs of species for which only few co-occurrences are observed, many of them are truly interacting. If we consider all of these as having no links, then correcting for these false absence would inflate the number of links and therefore influence metrics such as connectance, nestedness and degree distribution. Computing network properties from probabilistic networks is one thing, but then computing them with uncertainties in these probabilities is another problem, far more challenging. Unfortunately, for now we could only rely on computer simulations to get an answer to this problem. In the following section, we will provide an example with the Salix dataset and show how the uncertainty arising from both absences of co-occurrences and false absences of interactions impact these metrics. We find uncertainty influences both the average and the variance of network metrics, putting in perspective traditional network comparison studies where these metrics are assumed fixed entities. 
 
 \section*{Case study: estimating the uncertainty of a plant-herbivore network}
 
@@ -364,13 +382,6 @@ It is fairly straigthforward to compute most of network metrics when the differe
       $\hat{\lambda_{ij}}$=7.405645 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.938755 $\times$ 10$^{-5}$.
       
       With species $i$ and $j$ co-occurring at all 374 sites and never being observed to interact, the maximum likelihood expectation for the probability of an interaction $ij$ is very close to 0 and the variance about this estimate is very narrow. In most cases, however, species $i$ and $j$ did not co-occur at so many sites and our posterior mean and variance retain some influence of the prior. Nevertheless, as the number of observed co-occurances increases, the posterior mean becomes closer to zero and the posterior variance decreases (Fig.~\ref{Salix_pdfs}).
-
-
-      \begin{figure}[ht]
-        \label{Salix_pdfs}
-        \caption{Posterior distributions for the probability of two species observed co-occurring but not interacting narrow and shift towards zero as the number of observed co-occurances increases. Here we show a selection of distributions ranging from the prior distribution (with N=0 observed co-occurances) to the distribution when there are 50 observed co-occurances.}
-        \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
-        \end{figure}
 
 
   \subsection*{Computing the credible interval around a probability estimate}
