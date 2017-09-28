@@ -20,11 +20,11 @@ Box: (AE, tentative)
 Figures
 
 1. Metaweb with number of co-occurances
-2. CI for binomial
+2. CI for binomial CHECK
 3. PDFs of interaction probability with different values of n, k=0 CHECK
 4. Number of samples on y, threshold for no interaction on x, plotted for a couple of confidence levels (0.5,0.9,0.95,0.975). CHECK
 5. Connectance (or other network probability) vs. detection probability, based on drawing many networks from the posterior distribution.
   - will require building networks by 1: sampling each interaction from the posterior and then 2: sampling realized interactions based on detection probability and then 3: calculating connectance. 
-  6. Table of network metrics based on original data, with CI's based on Bayes.
+6. Table of network metrics based on original data, with CI's based on Bayes.
  
 
