@@ -28,3 +28,51 @@ Figures
 6. Table of network metrics based on original data, with CI's based on Bayes.
  
 
+Main questions from Dom:
+
+MAIN QUESTIONS :
+- ARE ABSENCE OF INTERACTIONS TRUE ABSENCES ?
+- CAN WE GET AT A CONFIDENCE INTERVAL AROUND THESE ABSENCES ?
+
+0. The problem : the mw holes
+
+1. A MLE estimate of w, such as k /n ?
+    - explain
+    - This is wrong because we have mis-identified the structure of the uncertainty in this process
+
+2. What means an interaction that is not detected ? What is the uncertainty ?
+    k:
+    n:
+    Detection uncertainty. P(D|X,L) = phi
+    Process uncertainty. P(X|L,D) = theta
+    Interaction uncertainty P(L|X,D) = omega
+
+3. How to estimate detection probability and process variability ?
+    hard to measure, solution : sample more !
+
+    -- use other species, for which it is known that the interaction is feasible, to estimate joint probability of detection and process (e.g. how many sites where the species are found interacting across the entire dataset)
+
+4. If we consider detection and no process variability, can we obtain a distribution of omega?
+    i) theory
+    ii) simple example
+
+
+    --> posterior distribution of the parameter w
+
+APPLICATION TO SALIX
+    i) try to fill the holes in the mw
+
+    ii) represent uncertainty in the mw
+   
+    iii) compile a posterior distribution of network properties to get at the uncertainty at the higher level
+        - do the average and variance of a property (e.g. connectance, nestedness) increase with detection and process uncertainty ?
+
+FIGURES
+
+1. Salix holes; frequency distribution of nb of observed co-occurrence
+2. Quantify uncertainty in the mw
+3. Fill the holes with prior information
+4. Connectance and nestedness varies over a detection probability gradient
+
+TABLES
+1. Summary description of the Salix data
