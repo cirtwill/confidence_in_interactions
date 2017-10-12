@@ -138,4 +138,4 @@ graph.remove_extraworld_drawing_objects()
 
 # print out the grace
 outfile=readfile+".jpg"
-grace.write_file(plot1.eps)
+grace.write_file('plot1.eps')
