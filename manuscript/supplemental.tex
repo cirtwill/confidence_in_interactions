@@ -99,6 +99,16 @@ Link\"{o}ping, Sweden\\
       %   }        
       % }
 
+      % Making prior galler-parasitoid web binary:
+      gp_web_nonbinary=read.csv('../data/Salix_example/prior_web_para_only.csv',header=TRUE,sep=',',row.names=1)
+      gp_web<-gp_web_nonbinary
+      for(r in 1:nrow(gp_web)){
+      for(c in 1:ncol(gp_web)){
+      if(gp_web_nonbinary[r,c]>0){
+      gp_web[r,c]<-1
+      }
+      }
+      }
 
     \subsection*{Degree distributions and interaction probabilities}
 
