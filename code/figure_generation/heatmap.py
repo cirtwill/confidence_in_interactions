@@ -83,6 +83,7 @@ print ndata[(63,34)]
 print ndata[(63,18)]
 
 
+
 # instantiate a sweet figgy fig
 colors = ColorBrewerScheme("PRGn",n=253) # this is the maximum number of colors
 
@@ -133,8 +134,13 @@ graph.autoscalex()
 graph.autotickx()
 
 # restrict y-axis scale to the same as the x-axis scale
-xmin,ymin,xmax,ymax = graph.get_world()
-graph.set_world(xmin,xmin,xmax,xmax)
+#xmin,ymin,xmax,ymax = graph.get_world()
+xmin = 0
+ymin = 0
+xmax = len(set(d[tr1id] for d in data))
+ymax = len(set(d[tr2id] for d in data))
+
+graph.set_world(xmin,ymin,xmax,ymax)
 graph.autoticky()
 
 # get rid of points that are out of bounds
