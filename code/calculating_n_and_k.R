@@ -1,4 +1,4 @@
-setwd("//storage.slu.se/Home$/kewo0002/My Documents/Projects/Gallers/data.dataframes/")
+setwd("C:/Users/kewo0002/confidence_in_interactions/data/Salix_example")
 
 #######################################################
 #### Create list of all combinations of galler-salix and 
@@ -6,7 +6,7 @@ setwd("//storage.slu.se/Home$/kewo0002/My Documents/Projects/Gallers/data.datafr
 #######################################################
 
 library("plyr")
-library(igraph)
+library("igraph")
 
 #### FUNCTIONS ####
 
@@ -98,7 +98,7 @@ matr_count_cooccur <- function(site,paras_galler,dataset)
 #### GALLER AND SALIX ####
 
 # read in full matrix of all interactions
-interactions <- read.csv("../original.data.from.paper/Salix_webs.csv",stringsAsFactors=FALSE)
+interactions <- read.csv("\\\\storage.slu.se/Home$/kewo0002/My Documents/Projects/Gallers/original.data.from.paper/Salix_webs.csv",stringsAsFactors=FALSE)
 
 # for just the galler-salix interactions, we only need certain columns
 galler_salix <- interactions[,c("X","X.5","X.9","X.14","X.18")]
@@ -148,17 +148,21 @@ toutput$interact <- as.numeric(levels(toutput$interact))[toutput$interact]
 range(toutput$cooccur)
 range(toutput$interact)
 
+# add numeric IDs to make plotting easier
+toutput$salix_ID <- mapvalues(toutput$Salix, from = levels(toutput$Salix), to = 1:length(levels(toutput$Salix)))
+toutput$galler_ID <- mapvalues(toutput$Rgaller, from = levels(toutput$Rgaller), to = 1:length(levels(toutput$Rgaller)))
+
 # get an idea of what the data looks like
 #plot(toutput$cooccur,toutput$interact)
 
-write.csv(toutput,file="../data/Salix_example/cooccur_interact_galler_salix.csv",quote=F)
+write.csv(toutput,file="cooccur_interact_galler_salix.csv",quote=F)
 
 
 
 #### GALLER AND PARASITOID ####
 
 # create a data frame of galler-parasitoid interactions
-int.matrix <- read.csv("df_interaction_matrix.csv",stringsAsFactors=FALSE)
+int.matrix <- read.csv("\\\\storage.slu.se/Home$/kewo0002/My Documents/Projects/Gallers/data.dataframes/df_interaction_matrix.csv",stringsAsFactors=FALSE)
 # set the nas to 0
 int.matrix[is.na(int.matrix)] <- 0
 # create a variable for each combination of site and time
@@ -220,10 +224,14 @@ toutput$interact <- as.numeric(levels(toutput$interact))[toutput$interact]
 range(toutput$cooccur)
 range(toutput$interact)
 
+# add a numeric ID to make plotting easier
+toutput$para_ID <- mapvalues(toutput$Rpara, from = levels(toutput$Rpara), to = 1:length(levels(toutput$Rpara)))
+toutput$galler_ID <- mapvalues(toutput$Rgaller, from = levels(toutput$Rgaller), to = 1:length(levels(toutput$Rgaller)))
+
 #take a look at the data
 #plot(toutput$cooccur,toutput$interact)
 
-write.csv(toutput,file="../data/Salix_example/cooccur_interact_galler_parasit.csv",quote=F)
+write.csv(toutput,file="cooccur_interact_galler_parasit.csv",quote=F)
 
 
 
