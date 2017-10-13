@@ -19,7 +19,8 @@
 #import math
 #from PyGrace.Extensions.panel import Panel,MultiPanelGrace
 
-
+## To run use:
+# python heatmap.py ../../data/Salix_example/cooccur_interact_galler_salix galler salix
 
 import random
 import sys
