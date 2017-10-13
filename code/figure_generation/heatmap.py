@@ -42,7 +42,9 @@ from PyGrace.Styles.el import ElGraph, ElLogColorBar, ElLinColorBar
 readfile = sys.argv[1]
 filename = readfile+'.csv'
 troph1 = sys.argv[2]
+tr1id = troph1+'_ID'
 troph2 = sys.argv[3]
+tr2id = troph2+'_ID'
 infile = open(filename)
 header=infile.readline().strip().split(',')
 
@@ -61,25 +63,25 @@ for d in data:
 	if float(d['interact']) == 0:
 		if float(d['cooccur']) == 0:
 			try:
-				ndata[(d[troph1],d[troph2])].append(0)
+				ndata[(float(d[tr1id]),float(d[tr2id]))].append(0)
 			except KeyError:
-				ndata[(d[troph1],d[troph2])] = 0
+				ndata[(float(d[tr1id]),float(d[tr2id]))] = 0
 		else:
 			try:
-				ndata[(d[troph1],d[troph2])].append(-float(d['cooccur']))
+				ndata[(float(d[tr1id]),float(d[tr2id]))].append(-float(d['cooccur']))
 			except KeyError:
-				ndata[(d[troph1],d[troph2])] = -float(d['cooccur'])
+				ndata[(float(d[tr1id]),float(d[tr2id]))] = -float(d['cooccur'])
 	else:
 		try:
-			ndata[(d[troph1],d[troph2])].append(float(d['interact']))
+			ndata[(float(d[tr1id]),float(d[tr2id]))].append(float(d['interact']))
 		except KeyError:
-			ndata[(d[troph1],d[troph2])] = float(d['interact'])
+			ndata[(float(d[tr1id]),float(d[tr2id]))] = float(d['interact'])
 
 
-print ndata[('elaeagnos','Oelaea')]
-print ndata[('appendiculata','Oelaea')]
-print ndata[('myrsinifolia','Oelaea')]
-print ndata[('foetida','Oelaea')]
+print ndata[(63,17)]
+print ndata[(63,5)]
+print ndata[(63,34)]
+print ndata[(63,18)]
 
 
 # instantiate a sweet figgy fig
@@ -104,11 +106,13 @@ colorbar = grace.add_graph(ElLogColorBar,domain=(-zlim,zlim),
 graph = grace.add_graph()
 graph.copy_format(ElGraph)
 
-row = 1
+
 for d in ndata:
 	color = colorbar.z2color(ndata[d])
-	graph.add_dataset([(row,row),(row+1,row+1)], SolidRectangle, color)
-	row += 1
+
+	graph.add_dataset([(d[0]-0.5,d[1]-0.5),(d[0]+0.5,d[1]+0.5)], SolidRectangle, color)
+
+
 # for (x0,y0,x1,y1,pdf) in data:
     # if pdf > 0.0:
     #     color = colorbar.z2color(pdf)
