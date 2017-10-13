@@ -110,7 +110,8 @@ graph.copy_format(ElGraph)
 
 for d in ndata:
 	color = colorbar.z2color(ndata[d])
-
+	if ndata[d] == 0:
+		color = 'white'
 	graph.add_dataset([(d[0]-0.5,d[1]-0.5),(d[0]+0.5,d[1]+0.5)], SolidRectangle, color)
 
 
