@@ -11,8 +11,8 @@ adj_list <- read.csv("cooccur_interact_galler_salix.csv")
 inter_matrix <- data.frame()
 
 # Run through each salix-galler combination
-for(salix in unique(adj_list$Salix)){
-  for(galler in unique(adj_list$Rgaller)){
+for(salix in sort(unique(adj_list$Salix))){
+  for(galler in sort(unique(adj_list$Rgaller))){
     # if they don't interact, set the matrix value to the negative of the number of times they cooccur
     if(adj_list[which(adj_list$Salix == salix & adj_list$Rgaller == galler),"interact"] == 0){
       inter_matrix[as.character(galler),as.character(salix)] <- -adj_list[which(adj_list$Salix == salix & adj_list$Rgaller == galler),"cooccur"]
@@ -45,8 +45,8 @@ adj_list_g_p <- read.csv("cooccur_interact_galler_parasit.csv")
 
 inter_matrix_g_p <- data.frame()
 
-for(para in unique(adj_list_g_p$Rpara)){
-  for(galler in unique(adj_list_g_p$Rgaller)){
+for(para in sort(unique(adj_list_g_p$Rpara))){
+  for(galler in sort(unique(adj_list_g_p$Rgaller))){
     if(adj_list_g_p[which(adj_list_g_p$Rpara == para & adj_list_g_p$Rgaller == galler),"interact"] == 0){
       inter_matrix_g_p[as.character(galler),as.character(para)] <- -adj_list_g_p[which(adj_list_g_p$Rpara == para & adj_list_g_p$Rgaller == galler),"cooccur"]
     }else{
