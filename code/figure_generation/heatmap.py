@@ -56,7 +56,7 @@ for line in infile:
 	pt = dict(zip(header,[i for i in sline]))
 	data.append(pt)
 infile.close()
-print data[0:7]
+# print data[0:7]
 
 ndata = {}
 for d in data:
@@ -78,10 +78,10 @@ for d in data:
 			ndata[(float(d[tr1id]),float(d[tr2id]))] = float(d['interact'])
 
 
-print ndata[(63,17)]
-print ndata[(63,5)]
-print ndata[(63,34)]
-print ndata[(63,18)]
+# print ndata[(63,17)]
+# print ndata[(63,5)]
+# print ndata[(63,34)]
+# print ndata[(63,18)]
 
 
 
@@ -139,8 +139,8 @@ graph.autotickx()
 #xmin,ymin,xmax,ymax = graph.get_world()
 xmin = 0
 ymin = 0
-xmax = len(set(d[tr1id] for d in data))
-ymax = len(set(d[tr2id] for d in data))
+xmax = len(set(d[tr1id] for d in data))+1
+ymax = len(set(d[tr2id] for d in data))+1
 
 graph.set_world(xmin,ymin,xmax,ymax)
 graph.autoticky()
@@ -150,4 +150,4 @@ graph.remove_extraworld_drawing_objects()
 
 # print out the grace
 outfile=readfile+".jpg"
-grace.write_file('plot1.eps')
+grace.write_file('../../manuscript/figures/'+tr1id+'_'+tr2id+'_heatmap.eps')
