@@ -99,16 +99,75 @@ Link\"{o}ping, Sweden\\
       %   }        
       % }
 
-      % Making prior galler-parasitoid web binary:
-      gp_web_nonbinary=read.csv('../data/Salix_example/prior_web_para_only.csv',header=TRUE,sep=',',row.names=1)
-      gp_web<-gp_web_nonbinary
-      for(r in 1:nrow(gp_web)){
-      for(c in 1:ncol(gp_web)){
-      if(gp_web_nonbinary[r,c]>0){
-      gp_web[r,c]<-1
+
+      To extract the galler-parsitoid network from the same study above:
+
+
+      \vspace{12pt}
+      \emph{
+      \noindent \hspace{-4pt} 
+      prior\_web\_data=read.csv('tree\_level\_interaxn\_all\_plants\_traits\_size.csv')\\
+      prior\_web\_data <- prior\_web\_data[,8:26]
+
+      \# Build a web with interactions=1 for any parasitoid on any galler
+      prior\_web=data.frame()
+
+      \# each column contains all interactions for a particular parasitoid-galler combination
+      for(column in 1:ncol(prior\_web\_data)){
+      \hspace{-4pt}   \# the column name gives the species which makes the gall, followed by the species emerging from the gall
+      \hspace{-4pt}   galler\_emerged=strsplit(colnames(prior\_web\_data)[column], "\_")
+      \hspace{-4pt}   galler = galler\_emerged[[1]][1]
+      \hspace{-4pt}   emerged = galler\_emerged[[1]][2]
+        
+      \hspace{-4pt}   \# the strength of the interaction is the sum of the column (number of galls across all branches sampled)
+      \hspace{-4pt}   linkstrength = sum(prior\_web_data[,column])
+      \hspace{-4pt}   prior\_web[as.character(galler),as.character(emerged)] <- linkstrength
+      } 
+
+      \# Make the naS into 0
+      prior\_web[is.na(prior\_web)] <- 0
+
+      \# remove emerging gallers with no parasitoids
+      prior\_web\_para\_only <- prior\_web[,c(2:6,8:9,12)]
+
+      \# convert interaction strengths to 1
+      prior\_web[which(prior\_web>0)] <- 1
+
+
+      write.csv(prior\_web\_para\_only, file="prior\_web\_para\_only.csv", quote=F)
       }
-      }
-      }
+
+      % # read in the data
+      % prior_web_data=read.csv('../data/Salix_example/tree_level_interaxn_all_plants_traits_size.csv')
+      % # just keep what we need
+      % prior_web_data <- prior_web_data[,8:26]
+
+      % # Build a web with interactions=1 for any parasitoid on any galler
+      % prior_web=data.frame()
+
+      % # each column contains all interactions for a particular parasitoid-galler combination
+      % for(column in 1:ncol(prior_web_data)){
+      %   # the column name gives the species which makes the gall, followed by the species emerging from the gall
+      %   # they need to be separated 
+      %   galler_emerged=strsplit(colnames(prior_web_data)[column], "_")
+      %   galler = galler_emerged[[1]][1]
+      %   emerged = galler_emerged[[1]][2]
+        
+      %   # the strength of the interaction is the sum of the column (number of galls across all branches sampled)
+      %   linkstrength = sum(prior_web_data[,column])
+      %   # put that into a dataframe
+      %   prior_web[as.character(galler),as.character(emerged)] <- linkstrength
+      % } 
+
+      % # Make the naS into 0
+      % prior_web[is.na(prior_web)] <- 0
+      % # Make the non-zero elements into 1
+      % prior_web[prior_web>0] <- 1
+      % # some of the emergers were the gallers, remove those columns if we're only
+      % # interested in galler-parasitoid interactions
+      % prior_web_para_only <- prior_web[,c(2:6,8:9,12)]
+      % write.csv(prior_web_para_only, file="prior_web_para_only.csv", quote=F)
+
 
     \subsection*{Degree distributions and interaction probabilities}
 
