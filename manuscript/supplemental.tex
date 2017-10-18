@@ -193,6 +193,12 @@ Link\"{o}ping, Sweden\\
       deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
       \# Interaction probabilities are the product of plant and galler probabilities\\
       int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
+
+      \# And for the galler-parasitoid web:\\
+      deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
+      deg\_dist\_parasitized=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
+      gp\_int\_probs=as.numeric(deg\_dist\_parasitized\%$*$\%t(deg\_dist\_parasitoid))
+
       }
 
       %       # Now get the degree distributions from the web
@@ -202,6 +208,11 @@ Link\"{o}ping, Sweden\\
       % deg_dist_galler=colSums(prior_web)/nrow(prior_web)
       % # Interaction probabilities are the product of plant and galler probabilities
       % int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+
+      % deg_dist_parasitoid=rowSums(prior_web_para_only)/ncol(prior_web_para_only)
+      % deg_dist_parasitized=colSums(prior_web_para_only)/nrow(prior_web_para_only)
+      % gp_int_probs=deg_dist_parasitized%*%t(deg_dist_parasitoid)
+
 
 \clearpage
 

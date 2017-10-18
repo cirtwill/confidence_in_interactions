@@ -358,7 +358,8 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
       In a strict Bayesian framework, we wish to use a prior distribution that does not rely on any information from the study at hand. To that end, we use data from another well-described \emph{Salix} galler-parasitoid system~\citep{Barbour2016,Barbour2016Dryad}. Note that this study used several genotypes of \emph{S. hookeriana} rather than different \emph{Salix} species. We estimated frequencies of  \emph{S. hookeriana} genotype-galler interactions based on the normalized degree of each species in each network component (see \emph{Appendix S1} for details and code).
 
 
-      Using this prior distribution of galler-\emph{Salix} interaction frequencies, we can obtain parameters for the prior distribution of $\lambda$ in our dataset. Specifically, we obtain $\alpha$=2.807855, $\beta$=2.342815. We are then able to use these priors to estimate the posterior distriution of interaction probabilities given the additional information in our dataset.
+      Using this prior distribution of galler-\emph{Salix} interaction frequencies, we can obtain parameters for the prior distribution of $\lambda$ in our dataset. Specifically, we obtain $\alpha$=2.807855, $\beta$=2.342815. For the galler-parasitoid component of the network, the corresponding prior parameters are $\alpha$=1.341479, $\beta$=9.487966.
+      We are then able to use these priors to estimate the posterior distriution of interaction probabilities given the additional information in our dataset.
 
 
     \subsection*{Computing the posterior distribution}
@@ -369,15 +370,17 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
       equations~\ref{mean} and~\ref{variance} 
       (see \emph{Appendix S2} for R implementation). The prior 
       distribution we obtain based on~\citet{Barbour2016,Barbour2016Dryad} is:
-      $\hat{\lambda_{ij}}$=0.545, var($\lambda$)=0.048.
+      $\hat{\lambda_{ij}}$=0.545, var($\lambda$)=0.048 for the \emph{Salix}-galler network and $\hat{\lambda_{ij}}$=0.124, var($\lambda$)=0.010 for the galler-parasitoid network.
       This is consistent with the prior data, where the average 
-      interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541. [[What's the connectance of our dataset, if we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may reflect the differences in scale between a network containing different genotypes of a single \emph{Salix} species and four gallers from a single family and a network containing many \emph{Salix} species and gallers from many families as is the case in our dataset.
+      interaction probability based on the degree distributions of Salix genotypes and gallers was 0.541 and that for gallers and parasitoids was 0.122. [[What's the connectance of our dataset, if we call greys 0?]] This probability does, however, seem rather high for our dataset. This discrepancy may reflect the differences in scale between a network containing different genotypes of a single \emph{Salix} species and four gallers from a single family and a network containing many \emph{Salix} species and gallers from many families as is the case in our dataset.
 
 
-      For a pair of species where some co-occurances were observed, we can update the prior distribution with these data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distribution would become:
+      For a pair of species where some co-occurances were observed, we can update the prior distribution with these data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. Thus $\alpha'$=$\alpha$ and $\beta'$=$\beta + n$. At the most extreme case, for a pair of species which co-occurred at all 374 sites and was never observed to interact, our distributions would become:
 
 
-      $\hat{\lambda_{ij}}$=7.405645 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.938755 $\times$ 10$^{-5}$.
+      $\hat{\lambda_{ij}}$=7.405645 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.938755 $\times$ 10$^{-5}$ for the \emph{Salix}-galler network and 
+      $\hat{\lambda_{ij}}$=3.485906 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=9.026737 $\times$ 10$^{-6}$ for the galler-parasitoid network.
+
       
       With species $i$ and $j$ co-occurring at all 374 sites and never being observed to interact, the maximum likelihood expectation for the probability of an interaction $ij$ is very close to 0 and the variance about this estimate is very narrow. In most cases, however, species $i$ and $j$ did not co-occur at so many sites and our posterior mean and variance retain some influence of the prior. Nevertheless, as the number of observed co-occurances increases, the posterior mean becomes closer to zero and the posterior variance decreases (Fig.~\ref{Salix_pdfs}).
 
@@ -390,22 +393,23 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
       \begin{table}[h]
         \caption{95\% credible intervals for the interaction probability of two species that co-occur in $N$ sites but are never observed to interact, obtained using prior information from the \emph{Salix}-galler network in~\citet{Barbour2016,Barbour2016Dryad}.}
         \label{interval_table}
-        \begin{tabular}{l | c c}
-        N & Lower bound & Upper bound \\
+        \begin{tabular}{l | c c | c c }
+        \multirow{2}{*}{N} & \multicolumn{2}{c}{\emph{Salix}-galler} & \multicolumn{2}{c}{galler-parasitoid}\\
+         & Lower bound & Upper bound \\
         \hline
-        0   & 0.157 & 0.901 \\
-        2   & 0.099 & 0.743 \\
-        4   & 0.072 & 0.621 \\
-        6   & 0.057 & 0.530 \\
-        8   & 0.047 & 0.462 \\
-        10 & 0.040 & 0.408 \\
-        14 & 0.031 & 0.331 \\
-        20 & 0.023 & 0.258 \\
-        30 & 0.016 & 0.188 \\
-        40 & 0.012 & 0.148 \\
-        50 & 0.010 & 0.122 \\
-        \hline
-        374 & 0.001 & 0.018 \\
+        0   & 0.157 & 0.901 & 0.008 & 0.364 \\
+        2   & 0.099 & 0.743 & 0.006 & 0.313 \\
+        4   & 0.072 & 0.621 & 0.006 & 0.274 \\
+        6   & 0.057 & 0.530 & 0.005 & 0.244 \\
+        8   & 0.047 & 0.462 & 0.004 & 0.219 \\
+        10  & 0.040 & 0.408 & 0.004 & 0.200 \\
+        14  & 0.031 & 0.331 & 0.003 & 0.169 \\
+        20  & 0.023 & 0.258 & 0.003 & 0.137 \\
+        30  & 0.016 & 0.188 & 0.002 & 0.104 \\
+        40  & 0.012 & 0.148 & 0.002 & 0.084 \\
+        50  & 0.010 & 0.122 & 0.001 & 0.071 \\
+        \hline                  
+        374 & 0.001 & 0.018 & \textless0.001 & 0.011 \\
         \hline
         \end{tabular}
         \end{table}
@@ -413,7 +417,9 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
 
   \subsection*{How many samples are required to reach a minimal precision}
 
-      Rather than calculating confidence intervals for a posterior distribution after collecting data, we may wish to know how many data points are necessary to obtain a given level of confidence that two co-occurring species do not interact. The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler system is below 0.5, 0.1, or 0.01, we would need six, 54, and 114 observed co-occurrances with no observed interaction (Fig.~\ref{Salix_cdfs}; see function samples\_required in~\emph{Appendix S2}). Given the low levels of replication in most network studies, this implies that we should have fairly low confidence in many "non-interacting" pairs of species. Even in the extensively replicated \emph{Salix}-galler dataset very few species pairs were observed co-occurring frequently enough to reach these thresholds (173/4992 pairs were observed at least six times, two pairs were observed at least 54 times, and no pair was observed more than 114 times). Discounting potential interactions, then, requires either a stronger prior expectation of no interaction (e.g., we can be highly confident that a palm tree will not predate upon a leopard no matter how many times the two species are observed together) or very extensive sampling.
+      Rather than calculating confidence intervals for a posterior distribution after collecting data, we may wish to know how many data points are necessary to obtain a given level of confidence that two co-occurring species do not interact. The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler network is below 0.5, 0.1, or 0.01, we would need six, 54, and 114 observed co-occurrances with no observed interaction (Fig.~\ref{Salix_cdfs}; see function samples\_required in~\emph{Appendix S2}). 
+      Although the prior distribution of interaction probabilities is narrower and closer to zero for the galler-parasitoid network, the number of samples required to be 95\% confident that the interaction probability is below a threshold still increases quickly; we would need 25 and 101 observed co-occurances with no observed interaction for threshold interaction probabilities of 0.1 and 0.01, respectively.
+      Given the low levels of replication in most network studies, this implies that we should have fairly low confidence in many "non-interacting" pairs of species. Even in the extensively replicated \emph{Salix}-galler dataset very few species pairs were observed co-occurring frequently enough to reach these thresholds (173/4992 pairs were observed at least six times, two pairs were observed at least 54 times, and no pair was observed more than 114 times). Discounting potential interactions, then, requires either a stronger prior expectation of no interaction (e.g., we can be highly confident that a palm tree will not predate upon a leopard no matter how many times the two species are observed together) or very extensive sampling.
 
 
       \begin{figure}[ht]
