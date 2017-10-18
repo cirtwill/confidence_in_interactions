@@ -33,10 +33,52 @@
 #     print(r)
 #     r=r+1
 #   }
+# # }
+
+# write.table(samples,file='../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv',sep='\t')
+# write.table(CDFs,file='../../data/Salix_example/Salix_Galler/samplefigure.tsv',sep='\t')
+
+
+# # Galler-parasitoid stuff
+# ######### R code to generate data files:
+# # % Getting cdfs:
+# gp_pars=calculate_parameters(gp_int_probs,0,0)
+# n=seq(0,500,1)
+
+# gp_CDFs=matrix(nrow=4,ncol=502)
+# colnames(gp_CDFs)=c("Threshold",n)
+# r=1
+# for(threshold in c(0.5,0.25,0.1,0.05)){
+#   # for(confidence in c(0.9,0.95,0.975)){
+#     cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)
+#     # samples=length(which(cdf<confidence))
+#     gp_CDFs[r,1]=threshold
+#     # CDFs[r,2]=confidence
+#     # CDFs[r,3]=samples
+#     gp_CDFs[r,2:502]=cdf
+#     print(r)
+#     r=r+1
+#   }
+
+
+
+# gp_samples=matrix(nrow=12,ncol=3)
+# colnames(gp_samples)=c("Threshold","Confidence","Samples")
+# r=1
+# for(threshold in c(0.5,0.25,0.1,0.05)){
+#   for(confidence in c(0.9,0.95,0.975)){
+#     cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)
+#     n_obs=length(which(cdf<confidence))
+#     gp_samples[r,1]=threshold
+#     gp_samples[r,2]=confidence
+#     gp_samples[r,3]=n_obs
+#     print(r)
+#     r=r+1
+#   }
 # }
 
-# write.table(samples,file='../data/Salix_example/Salix_Galler/samples_for_threshold.tsv',sep='\t')
-# write.table(CDFs,file='../data/Salix_example/Salix_Galler/samplefigure.tsv',sep='\t')
+# write.table(gp_samples,file='../../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')
+# write.table(gp_CDFs,file='../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',sep='\t')
 
 import sys
 import math
@@ -61,7 +103,7 @@ from PyGrace.Styles.el import ElGraph, ElLinColorBar, ElLogColorBar
 colors=ColorBrewerScheme('Spectral')  # The blue is very beautiful but maybe harder to see.
 # colors.add_color(120,120,120,'grey')
 
-def read_Rfiles(filename):
+def read_Rfiles(filename,nettype):
   datadict={}
   sampledict={}
 
@@ -73,7 +115,10 @@ def read_Rfiles(filename):
       datadict[threshold]=ys
   f.close()
 
-  g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv','r')
+  if nettype=='SG':
+    g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv','r')
+  else:
+    g=open('../../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv','r')    
   for line in g:
     if line.split()[0]!='"Threshold"':
       threshold=float(line.split()[1])
@@ -95,12 +140,15 @@ def combiner(datadict):
     pointdict[threshold]=pointlist
   return pointdict
 
-def format_graph(graph):
+def format_graph(graph,nettype):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
   graph.world.xmin=0
-  graph.world.xmax=150
+  if nettype=='SG':
+    graph.world.xmax=150
+  else:
+    graph.world.xmax=80
   graph.world.ymin=-0
   graph.world.ymax=1
 
@@ -113,12 +161,13 @@ def format_graph(graph):
   graph.xaxis.label.configure(text="Number of samples",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Cumulative density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(100,.75),loctype='world')
+    loc=(85,.75),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
+  graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.03)
 
   return graph
 
-def populate_graph(graph,pointdict):
+def populate_graph(graph,pointdict,nettype):
   for threshold in pointdict:
     if threshold==.5:
       x=1
@@ -132,15 +181,21 @@ def populate_graph(graph,pointdict):
     data=graph.add_dataset(pointdict[threshold])
     data.symbol.shape=0
     data.line.configure(linewidth=2,linestyle=x)
-    data.legend="Threshold="+str(threshold)
+    if nettype=='SG':
+      data.legend="Threshold="+str(threshold)
 
   bar95=graph.add_dataset([(0,0.95),(1000,.95)])
   bar95.symbol.shape=0
   bar95.line.configure(linewidth=1,linestyle=1,color=2)
 
+  if nettype=="SG":
+    graph.add_drawing_object(DrawText,text="Salix-Galler",char_size=1,just=2,x=75,y=1.05,loctype='world')
+  else:
+    graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=2,x=40,y=1.05,loctype='world')
+
   return graph
 
-def add_samplelines(graph,sampledict):
+def add_samplelines(graph,sampledict,nettype):
   dots95=[]
   dots90=[]
   dots975=[]
@@ -161,31 +216,43 @@ def add_samplelines(graph,sampledict):
   do=graph.add_dataset(dots90)
   do.line.linestyle=0
   do.symbol.configure(shape=2,color=5,size=.75,fill_color=5)
-  do.legend="P=0.90"
 
   dot=graph.add_dataset(dots95)
   dot.line.linestyle=0
   dot.symbol.configure(shape=1,color=2,size=.75,fill_color=2)
-  dot.legend="P=0.95"
 
   dots=graph.add_dataset(dots975)
   dots.line.linestyle=0
   dots.symbol.configure(shape=3,color=11,size=.75,fill_color=11)
-  dots.legend="P=0.975"
+
+  if nettype=='SG':
+    do.legend="P=0.90"
+    dot.legend="P=0.95"
+    dots.legend="P=0.975"
 
   print 'dots added'
   return graph
 
-grace=Grace(colors=colors)
 
-datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv')
+grace=MultiPanelGrace(colors=colors)
 
-datasets=combiner(datadict)
+for nettype in ['SG','GP']:
+  if nettype=='SG':
+    datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv',nettype)
+  else:
+    datadict,sampledict=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',nettype)    
 
-graph=grace.add_graph()
-graph=format_graph(graph)
-graph=populate_graph(graph,datasets)
-graph=add_samplelines(graph,sampledict)
-graph.set_view(0.15,0.15,0.95,0.65)
+  datasets=combiner(datadict)
+
+  graph=grace.add_graph(Panel)
+  graph=format_graph(graph,nettype)
+  graph=populate_graph(graph,datasets,nettype)
+  graph=add_samplelines(graph,sampledict,nettype)
+  # graph.set_view(0.15,0.15,0.95,0.65)
+
+# grace.automulti()
+grace.multi(rows=2,cols=1,vgap=.08)
+grace.hide_redundant_labels()
+grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Cumulative density",just=2,char_size=1,perpendicular_offset=0.07)
 
 grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs.eps')
