@@ -211,7 +211,7 @@ Link\"{o}ping, Sweden\\
 
       % deg_dist_parasitoid=rowSums(prior_web_para_only)/ncol(prior_web_para_only)
       % deg_dist_parasitized=colSums(prior_web_para_only)/nrow(prior_web_para_only)
-      % gp_int_probs=deg_dist_parasitized%*%t(deg_dist_parasitoid)
+      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
 
 
 \clearpage
