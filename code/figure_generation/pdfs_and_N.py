@@ -1,20 +1,22 @@
-######### R code to generate data files:
-# % Getting distributions:
-# xdata=matrix(ncol=1001,nrow=201)
-# ydata=matrix(ncol=1001,nrow=201)
-# for(n in 0:200){
-#   dist=calculate_distribution(calculate_parameters(int_probs,2*n,0))
-#   x=seq(-10,10,length=1000)*sqrt(dist[[2]])+dist[[1]]
-#   hx=dnorm(x)
-#   xdata[n+1,]=c(2*n,x)
-#   ydata[n+1,]=c(2*n,hx)
-# }
+######## R code to generate data files:
+# Getting distributions:
+xdata=matrix(ncol=1001,nrow=26)
+ydata=matrix(ncol=1001,nrow=26)
+for(n in 0:25){
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,2*n,0))
+  x=seq(-10,10,length=1000)*sqrt(dist[[2]])+dist[[1]]
+  hx=dnorm(x)
+  xdata[n+1,]=c(2*n,x)
+  ydata[n+1,]=c(2*n,hx)
+}
 
-# % Data are along rows for pythonic convenience
-# colnames(xdata)=c("N",seq(1,1000))
-# colnames(ydata)=c("N",seq(1,1000))
-# write.table(xdata,file='../data/Salix_example/Salix_Galler/distfigure_xvals.tsv',sep='\t')
-# write.table(ydata,file='../data/Salix_example/Salix_Galler/distfigure_yvals.tsv',sep='\t')
+# Data are along rows for pythonic convenience
+colnames(xdata)=c("N",seq(1,1000))
+colnames(ydata)=c("N",seq(1,1000))
+
+
+write.table(xdata,file='../data/Salix_example/Salix_Galler/distfigure_xvals.tsv',sep='\t')
+write.table(ydata,file='../data/Salix_example/Salix_Galler/distfigure_yvals.tsv',sep='\t')
 
 import sys
 import math
