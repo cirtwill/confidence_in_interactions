@@ -56,7 +56,9 @@ Link\"{o}ping, Sweden\\
       matrix, where an entry $ij$ was 1 if galler $i$ was observed 
       on any branch of genotype $j$ and 0 otherwise. In total, this 
       network contained 75 realized galler-genotype interactions 
-      out of a potential 104. The R code used to extract this 
+      out of a potential 104. One \emph{S. hookeriana} genotype did
+      not interact with any galles and was removed from the network.
+      The R code used to extract this 
       network follows:
 
 
@@ -78,6 +80,8 @@ Link\"{o}ping, Sweden\\
       \hspace{8pt}    \} else \{\\
       \hspace{12pt}      prior\_web[r,c]=0\\
       \hspace{8pt}    \}\}\}
+      \# Remove non-interactive genotype
+      prior\_web<-prior\_web[which(rowSums(prior\_web)\textgreater0),]
       }
 
       % prior_web_data=read.csv('../../data/Salix_example/tree_level_interaxn_all_plants_traits_size.csv')
@@ -98,6 +102,7 @@ Link\"{o}ping, Sweden\\
       %     }
       %   }        
       % }
+      % prior_web<-prior_web[which(rowSums(prior_web)>0),]
       % write.csv(prior_web,file='binary_prior_web_SG.csv',quote=F)
 
 
@@ -202,17 +207,18 @@ Link\"{o}ping, Sweden\\
 
       }
 
-            # Now get the degree distributions from the web
-      deg_dist_Salix=rowSums(prior_web)/ncol(prior_web)
-      # Remove one genotype that never interacted
-      deg_dist_Salix<-deg_dist_Salix[which(rowSums(prior_web)>0)]
-      deg_dist_galler=colSums(prior_web)/nrow(prior_web)
-      # Interaction probabilities are the product of plant and galler probabilities
-      int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
+      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
 
-      deg_dist_parasitoid=rowSums(prior_web_para_only)/ncol(prior_web_para_only)
-      deg_dist_parasitized=colSums(prior_web_para_only)/nrow(prior_web_para_only)
-      gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
+      %       # Now get the degree distributions from the web
+      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
+      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
+      % # Interaction probabilities are the product of plant and galler probabilities
+      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+
+      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
+      % deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
+      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
 
 
 \clearpage

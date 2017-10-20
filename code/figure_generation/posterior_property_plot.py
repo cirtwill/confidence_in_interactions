@@ -39,61 +39,96 @@ def read_summary_file(filename):
   f.close()
   return pointdict
 
-def format_graph(graph):
+def format_graph(graph,prop):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
 
-  graph.world.xmin=0.5
-  graph.world.ymin=0.2
-  graph.world.xmax=0.545
-  graph.world.ymax=0.55
-  graph.yaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-  graph.xaxis.tick.configure(major=0.02,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+  if prop=='C':
+    graph.world.xmin=0.5
+    graph.world.ymin=0.45
+    graph.world.xmax=0.55
+    graph.world.ymax=0.55
+    graph.yaxis.tick.configure(major=0.01,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.xaxis.tick.configure(major=0.01,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    xtext="Posterior connectance"
+    ytext="Detected connectance"
+    graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+  elif prop=='LS':
+    graph.world.xmin=33
+    graph.world.ymin=30
+    graph.world.xmax=39
+    graph.world.ymax=36.5
+    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.xaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    xtext="Posterior L/S"
+    ytext="Detected L/S"
+    graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
+  else:
+    graph.world.xmin=0
+    graph.world.ymin=0
+    graph.world.xmax=1
+    graph.world.ymax=1
+    graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.xaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    xtext="Posterior %Specialists"
+    ytext="Detected %Specialists"
 
-  graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
-  graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
+    graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
 
-  xtext="Posterior connectance"
-  ytext="Mean detected connectance"
   graph.xaxis.label.configure(text=xtext,char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
     loc=(0.55,.25),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
-  # graph.panel_label.configure(loc='iur',char_size=.75,dx=.02,dy=.02)
+  graph.panel_label.configure(loc='iur',char_size=.75,dx=.02,dy=.02)
 
   # if graphtype=='occurs':
   #   graph.add_drawing_object(DrawText,text="Salix-Galler",x=35,y=1500,char_size=1.5,just=2,loctype='world')
 
   return graph
 
-def populate_graph(graph,pointdict):
+def populate_graph(graph,pointdict,prop):
   col=10
   for proportion in sorted(pointdict,reverse=True):
     dots=graph.add_dataset(pointdict[proportion],type='xydy')
     dots.line.linestyle=0
-    dots.legend=str(proportion)+'% of links detected'
+    # if prop=='C':
+    #   dots.legend=str(proportion)+'% of links detected'
     dots.symbol.configure(shape=1,size=.5,fill_color=col)
     col-=1
 
+  # if prop=='C':
+  #   print pointdict[0.5]
 
   return graph
 
 def main():
 
-  grace=Grace(colors=colors)
-  graph=grace.add_graph()
-  graph=format_graph(graph)
+  grace=MultiPanelGrace(colors=colors)
+  for prop in ['C','LS']:
+    graph=grace.add_graph(Panel)
+    graph=format_graph(graph,prop)
 
-  pointdict=read_summary_file('../../data/randomised_webs/Connectance_table.tsv')
-  graph=populate_graph(graph,pointdict)
+    if prop=='C':
+      pointdict=read_summary_file('../../data/randomised_webs/Connectance_table.tsv')
+    elif prop=='LS':
+      pointdict=read_summary_file('../../data/randomised_webs/LS_table.tsv')
+    else:
+      pointdict=read_summary_file('../../data/randomised_webs/Specialists_table.tsv')
 
-  for graph in grace.graphs:
-    print graph.get_view()
-  grace.graphs[0].set_view(0.15,0.15,0.95,0.85)
+    graph=populate_graph(graph,pointdict,prop)
 
-  grace.write_file('../../manuscript/figures/Salix_Galler_posterior_C.eps')
+    for graph in grace.graphs:
+      print graph.get_view()
+
+  grace.multi(rows=2,cols=1,vgap=.07)
+    # grace.graphs[0].set_view(0.15,0.15,0.95,0.85)
+
+  grace.write_file('../../manuscript/figures/Salix_Galler_posterior_properties.eps')
 
   
 if __name__ == '__main__':
