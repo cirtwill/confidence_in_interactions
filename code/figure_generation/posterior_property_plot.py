@@ -39,59 +39,78 @@ def read_summary_file(filename):
   f.close()
   return pointdict
 
-def format_graph(graph,prop):
+def format_graph(graph,prop,nettype):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
 
   if prop=='C':
-    graph.world.xmin=0.5
-    graph.world.ymin=0.45
-    graph.world.xmax=0.55
-    graph.world.ymax=0.55
-    graph.yaxis.tick.configure(major=0.01,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    if nettype=='SG':
+      graph.world.xmin=0.52
+      graph.world.ymin=0.20
+      graph.world.xmax=0.575
+      graph.world.ymax=0.60
+    else:
+      graph.world.xmin=0.18
+      graph.world.ymin=0.075
+      graph.world.xmax=0.20
+      graph.world.ymax=0.20
+    graph.yaxis.tick.configure(major=0.05,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     graph.xaxis.tick.configure(major=0.01,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    xtext="Posterior connectance"
-    ytext="Detected connectance"
+    xtext="Posterior Connectance (C)"
+    ytext="Detected C"
     graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
     graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
   elif prop=='LS':
-    graph.world.xmin=33
-    graph.world.ymin=30
-    graph.world.xmax=39
-    graph.world.ymax=36.5
+    if nettype=='SG':
+      graph.world.xmin=27
+      graph.world.ymin=12
+      graph.world.xmax=30
+      graph.world.ymax=31
+    else:
+      graph.world.xmin=17
+      graph.world.ymin=8
+      graph.world.xmax=19
+      graph.world.ymax=20
+
     graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     graph.xaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    xtext="Posterior L/S"
-    ytext="Detected L/S"
+    xtext="Posterior Links per Resource (L/R)"
+    ytext="Detected L/R"
     graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
     graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
   else:
-    graph.world.xmin=0
-    graph.world.ymin=0
-    graph.world.xmax=1
-    graph.world.ymax=1
-    graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    graph.xaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    xtext="Posterior %Specialists"
-    ytext="Detected %Specialists"
+    if nettype=='SG':
+      graph.world.xmin=50
+      graph.world.ymin=20
+      graph.world.xmax=55
+      graph.world.ymax=57.5
+    else:
+      graph.world.xmin=22.5
+      graph.world.ymin=10
+      graph.world.xmax=25
+      graph.world.ymax=27.5      
+    graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.xaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    xtext="Posterior Links per Consumer (L/C)"
+    ytext="Detected L/C"
 
-    graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
-    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
+    graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
 
   graph.xaxis.label.configure(text=xtext,char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
     loc=(0.55,.25),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
-  graph.panel_label.configure(loc='iur',char_size=.75,dx=.02,dy=.02)
+  graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
 
   # if graphtype=='occurs':
   #   graph.add_drawing_object(DrawText,text="Salix-Galler",x=35,y=1500,char_size=1.5,just=2,loctype='world')
 
   return graph
 
-def populate_graph(graph,pointdict,prop):
+def populate_graph(graph,pointdict,prop,nettype):
   col=10
   for proportion in sorted(pointdict,reverse=True):
     dots=graph.add_dataset(pointdict[proportion],type='xydy')
@@ -101,32 +120,36 @@ def populate_graph(graph,pointdict,prop):
     dots.symbol.configure(shape=1,size=.5,fill_color=col)
     col-=1
 
-  # if prop=='C':
-  #   print pointdict[0.5]
-
+  
   return graph
 
 def main():
 
   grace=MultiPanelGrace(colors=colors)
-  for prop in ['C','LS']:
-    graph=grace.add_graph(Panel)
-    graph=format_graph(graph,prop)
+  for prop in ['C','LS','LG']:
+    for nettype in ['SG','GP']:
+      graph=grace.add_graph(Panel)
+      graph=format_graph(graph,prop,nettype)
 
-    if prop=='C':
-      pointdict=read_summary_file('../../data/randomised_webs/Connectance_table.tsv')
-    elif prop=='LS':
-      pointdict=read_summary_file('../../data/randomised_webs/LS_table.tsv')
-    else:
-      pointdict=read_summary_file('../../data/randomised_webs/Specialists_table.tsv')
+      if prop=='C':
+        pointdict=read_summary_file('../../data/randomised_webs/'+nettype+'_Connectance_table.tsv')
+      elif prop=='LS':
+        pointdict=read_summary_file('../../data/randomised_webs/'+nettype+'_LS_table.tsv') # Salix or galler
+      else:
+        pointdict=read_summary_file('../../data/randomised_webs/'+nettype+'_LG_table.tsv') # Galler or parasitoid
 
-    graph=populate_graph(graph,pointdict,prop)
+      graph=populate_graph(graph,pointdict,prop,nettype)
 
-    for graph in grace.graphs:
-      print graph.get_view()
+      # for graph in grace.graphs:
+      # print graph.get_view()
 
-  grace.multi(rows=2,cols=1,vgap=.07)
-    # grace.graphs[0].set_view(0.15,0.15,0.95,0.85)
+  grace.multi(rows=3,cols=2,vgap=.08)
+  grace.hide_redundant_labels()
+
+  grace.set_row_xaxislabel(colspan=(None,None),row=0,label="Posterior Connectance (C)",just=2,char_size=1,perpendicular_offset=0.05)
+  grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Posterior Links per Resource (L/R)",just=2,char_size=1,perpendicular_offset=0.05)
+  grace.set_row_xaxislabel(colspan=(None,None),row=2,label="Posterior Links per Consumer (L/C)",just=2,char_size=1,perpendicular_offset=0.05)
+
 
   grace.write_file('../../manuscript/figures/Salix_Galler_posterior_properties.eps')
 
