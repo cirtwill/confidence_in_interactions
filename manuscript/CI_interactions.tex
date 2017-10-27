@@ -453,10 +453,11 @@ THIS SECTIONS BUILDS ON THE SALIX DATA TO ILLUSTRATE THE GAPS THERE ARE IN THE M
     Considering the galler-parasitoid networks, the connectance, mean links per galler, and mean links per parasitoid (0.078, 9.99, and 7.45, respectively) are similar to those in the posterior webs with a detection filter of 50\% (Fig.~\ref{posterior_webs}). The~\citet{Barbour2016} network likely provides a better prior here than for the \emph{Salix}-galler networks, as both networks included different galler and parasitoid species. Although the two networks differ vastly in scale, and the inclusion of multiple \emph{Salix} species likely causes structural differences from~\citet{Barbour2016} despite the similar resolution of gallers and parasitoids, this result nevertheless suggests that even such a large and well-replicated network is missing a large proportion of interactions. This should be a strong warning to researchers comparing structural characteristics between networks - small structural differences are very likely to be completely masked by structural changes that would result if missing interactions were included.
 
 
-    \begin{figure}[h]
-    \label{posterior_webs}
+    \begin{figure}[ht]
     \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-parasitoid networks), and links per consumer (gallers in the \emph{Salix}-galler networks and parasitoids in the galler-parasitoid networks) for networks assembled using posterior distributions based on~\citet{Barbour2016,Barbour2016Dryad}. We created 100 "posterior-sampling" networks and then, for each of these, created 100 "detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties and the value of each property decreases with the proportion of links included in the detection-filter networks.}
-    \includegraphics*{}
+    \label{posterior_webs}    
+    \includegraphics[width=.8\textwidth]{Figures/Salix_Galler_posterior_properties.eps}
+    \end{figure}
 
   % [[What if we have only one site? Can we use the number of observations of a pair of species interacting with any partners as the number of times they co-occur, and the number of interactions within the pair as k? This will be sort-of valid for insects but not for plants when researchers camp out by plant individuals... ]]
 
