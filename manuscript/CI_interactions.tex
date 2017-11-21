@@ -10,6 +10,23 @@
 % \usepackage[numbers,sort]{natbib}
 \usepackage[round]{natbib} 
 \usepackage{array}
+\usepackage{hyperref}
+\usepackage{float}
+\makeatletter
+
+
+% this creates a custom and simpler ruled box style
+\newcommand\floatc@simplerule[2]{{\@fs@cfont #1 #2}\par}
+\newcommand\fs@simplerule{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@simplerule
+  \def\@fs@pre{\hrule height.8pt depth0pt \kern4pt}%
+  \def\@fs@post{\kern4pt\hrule height.8pt depth0pt \kern4pt \relax}%
+  \def\@fs@mid{\kern8pt}%
+  \let\@fs@iftopcapt\iftrue}
+
+% this code block defines the new and custom floatbox float environment
+\floatstyle{simplerule}
+\newfloat{floatbox}{thp}{lob}
+\floatname{floatbox}{Box}
 
 \newcommand{\methods}{\textit{Materials \& Methods}}
 \newcommand{\SI}{\textit{Appendix}~}
@@ -25,11 +42,13 @@
 \title{???A quantitative framework for investigating the reliability of network construction}
 
 
-\author{Dominique Gravel, \& Alyssa R. Cirtwill$^{1}$, Anna Ekl\"{o}f, Tomas Roslin, Kate Wootton}
+\author{Alyssa R. Cirtwill$^{1}$, Dominique Gravel, \&  Anna Ekl\"{o}f$^{1}$, Tomas Roslin$^{x,y}$, Kate Wootton$^{x}$}
 \date{\small$^1$Department of Physics, Chemistry\\ 
 and Biology (IFM)\\ 
 Link\"{o}ping University\\
 Link\"{o}ping, Sweden\\
+\medskip $^x$ Department of Ecology\\ P.O. Box 7044, Swedish University of Agricultural Sciences \\ SE-750 07 Uppsala, Sweden \\
+\medskip $^y$ Spatial Foodweb Ecology Group\\ Department of Agricultural Sciences \\ PO Box 27 (Latokartanonkaari 5)\\ FI-00014 University of Helsinki, Finland \\
 % \medskip
 % $^\dagger$ Corresponding author:\\
 % alyssa.cirtwill@gmail.com\\
@@ -46,23 +65,30 @@ Link\"{o}ping, Sweden\\
 
 \section*{Abstract}
 
-% A quantitative framework for investigating the reliability of network construction
-% D. Gravel, D. Carstensen, T. Poisot, D. Stouffer, A. Cirtwill
+
 
 \section*{Introduction}
 
-    % Present Salix data with holes as an example of uncertainty in data. Focus just on the white and grey, ignore uncertainty in the blacks
+    Representation of a species assemblage as a network offers a convenient summary of how the community is constructed as it simultaneously accounts for species composition and their interactions. A tabulation of the nodes (species) and of their relative abundances forms the basis for traditional metrics of community composition. On top of this information, interactions are represented by links between nodes so that networks provide additional, higher-order information on community structure. Empirical descriptions of ecological networks are, however, usually considered to be static representations of the communities and interactions they describe. This approach contrasts significantly with the widely recognized stochasticity of ecological communities \citep{Gotelli2000}. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
 
-  %DG : I cut down significantly the first paragraph, as I think we could assume readers know about networks and don't need to be convinced of their usage. 
-   Representation of species assemblages as a network offers a convenient summary of how communities are constructed, as it simultaneously account for species composition and their interactions. A tabulation of the nodes and of their relative abundances form the basis for traditional metrics of community composition. On top of this information, interactions are represented by links, so that networks provide additional, higher-order information on community structure. Empirical descriptions of ecological networks are however usually considered to be static representations of the communities and interactions they describe. This approach contrasts significantly with the widely recognized stochasticity of ecological communities \citep{Gotelli2000}. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. This assumption conflicts with known variation in interactions over time~\citep{Kitching1987,Olesen2011a} and space~\citep{Kitching1987,Baiser2012} and between individuals of a given species~\citep{Pires2011a,Fodrie2015,Novak2015}. 
 
-    Efforts to account for the variability in interaction occurrence and frequency are complicated by the fact that not only species but also interactions vary over space and time. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. The removal of a species from a site will obviously also remove its interactions, but the co-occurrence of potentially interacting species do not guarantee they will. Interactions can be lost, or not detected, if participating species remain present but do not co-occur temporally, are too rare to detect each other~\citep{Tylianakis2010}, because of environmental contingencies \citep{Poisot2015a} or through changes to individual preferences~\citep{Fodrie2015}. 
+    The assumption of static communities conflicts with known variation in both  the nodes and links included in a network. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. Likewise, interactions over space~\citep{Kitching1987,Baiser2012}, time~\citep{Kitching1987,Olesen2011a}, and between individuals of a given species~\citep{Pires2011a,Fodrie2015,Novak2015}. Moreover, variability in community composition and interactions may or may not be closely related. The removal of a species from a site will obviously also remove its interactions, but the co-occurrence of potentially interacting species do not guarantee they will interact at a given place and time. Interactions can be lost, or not detected, if participating species remain present but do not co-occur temporally, are too rare to detect each other~\citep{Tylianakis2010}, because of environmental contingencies \citep{Poisot2015a}, or through changes to individual preferences~\citep{Fodrie2015}. 
 
-    Beyond ``true" variation in network structure, several researchers have pointed to the importance of sampling intensity for the assessment of network structure (e.g.,~\citealp{Martinez1999,Bluthgen2006,XX}). Accumulation of interactions with increasing sampling effort suggests that it is even more challenging to document them than species richness \citep{Poisot2012}. As a result, it was proposed that interactions should be described probabilistically and network metrics computed accordingly \citep{Poisot2015b}. Despite this, the acknowledgment that insufficient sampling effort limits our ability to describe variation in ecological networks has not yet led to a quantitative methodology to deal with the uncertainty generated by spatiotemporal variation in ecological interactions and by sampling.
+    Beyond ``true" variation in network structure, several researchers have pointed to the importance of sampling intensity for the assessment of network structure (e.g.,~\citealp{Martinez1999,Bluthgen2006,XX}). Accumulation of interactions with increasing sampling effort suggests that it is even more challenging to document interactions than species richness \citep{Poisot2012}. As a result, it was proposed that interactions should be described probabilistically and network metrics computed accordingly \citep{Poisot2015b}. Despite this, the acknowledgment that insufficient sampling effort limits our ability to describe variation in ecological networks has not yet led to a quantitative methodology to deal with the uncertainty generated by spatiotemporal variation in ecological interactions and by sampling. Moreover, even in extremely well-sampled networks uneven sampling across species (or pairs of species) can lead to the assumption that some species do not interact because they co-occur rarely or have not yet been observed co-occuring (see Box 1). It is therefore likely that nearly all network studies are missing some interactions and could benefit from an approach that acknowledges this uncertainty.
 
+
+
+\begin{floatbox}{}
+
+  We have lots and lots of data, but still not enough for almost all pairs of species.   
 % DG : I wonder if a paragraph summarizing the extent of the problem with the salix data should not be provided here. Either within the text, or a box. But we need to convingly show how large is this problem even for such an extensive dataset
+% AC : I like the box idea. Since we refer to the Salix data throughout the manuscript it makes sense to make it stand out. 
 
-    In this study, we develop analytical tools to capture the uncertainty in the estimation of pairwise interactions. We focus on binary interactions as a first step, but the framework could be expanded to deal with interaction frequencies and strength. To define the problem, we first discuss the pervasive implications of uncertainty in the estimation of pairwise interactions on the properties of ecological networks. We then define a framework which identifies and dissects the different contributions to uncertainty of interaction. We illustrate this framework with a simple quantitative example using the most extensively sample network to date. Next, we use the framework to provide analytical criteria for improving the sampling of rare interactions. Finally, we offer tangible recommendations for improved descriptors of ecological interactions. Through these efforts, we demonstrate both the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies.
+  \caption{\emph{Salix} dataset}
+  \label{box1}
+\end{floatbox}
+
+    In this study, we develop analytical tools to capture the uncertainty in the estimation of pairwise interactions. We focus on binary interactions as a first step, but the framework could be expanded to deal with interaction frequencies and strength. To define the problem, we first discuss the pervasive implications of uncertainty in the estimation of pairwise interactions on the properties of ecological networks. We then define a framework which identifies and dissects the different contributions to uncertainty of interaction. We illustrate this framework with a simple quantitative example using the most extensively sampled network to date (see Box 1). Next, we use the framework to provide analytical criteria for improving the sampling of rare interactions. Finally, we offer tangible recommendations for improved descriptors of ecological interactions. Through these efforts, we demonstrate both the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies.
 
 
 \section*{Why do some interactions \emph{not} occur?}
