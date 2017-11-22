@@ -83,10 +83,25 @@ Link\"{o}ping, Sweden\\
   We have lots and lots of data, but still not enough for almost all pairs of species.   
 % DG : I wonder if a paragraph summarizing the extent of the problem with the salix data should not be provided here. Either within the text, or a box. But we need to convingly show how large is this problem even for such an extensive dataset
 % AC : I like the box idea. Since we refer to the Salix data throughout the manuscript it makes sense to make it stand out. 
+    
+    As a case study, we use an extensively sampled \emph{Salix}-galler-parasitoid meta-network. This dataset consists of a single community type sampled across Europe; willow (\emph{Salix}) species, willow-galling sawflies, and their natural enemies. The data were collected over 29 years at 374 unique locations across Europe, with a total of 641 site visits. Each site visit can be considered as a network in its own right and an independent sample from which to build the meta-network. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes. The high spatiotemporal resolution of this network and the unusually high sampling effort implemented at the site level makes this dataset particularly well suited for illustrating the difficulties in completely sampling a network and testing Bayesian approaches to overcome these difficulties.
+
+
+    We may begin by comparing the frequency of of co-occurence of taxa to reveal the challenge of having sufficient sampling to be confident that an interaction does not occur (Fig.~\ref{upper_limits}). Most pairs of species (3986/4992 \emph{Salix}-galler pairs and  9794/12096 galler-natural enemy pairs) are never found co-occurring, and for species that did occur the number of co-occurrences was generally low (mean=4.24, var=36.3 for \emph{Salix}-galler pairs; mean=3.87, var=28.8 for galler-natural enemy pairs; Fig.~\ref{histograms}A-B). For those species which interacted when co-occurring, the incidence of interaction was also low (mean=12.0, var=155 for \emph{Salix}-galler pairs; mean=4.04, var=29.3 for galler-natural enemy pairs; Fig.~\ref{histograms}C-D). Only 2.82\% of \emph{Salix}-galler pairs and 7.76\% of galler-natural enemy pairs were observed interacting at all. Thus, even in the most extensive data set that we could find, limited sampling is clearly a major source of uncertainty.
 
   \caption{\emph{Salix} dataset}
   \label{box1}
 \end{floatbox}
+
+%DG: be careful : occurrence, not occurance on the figures
+    \begin{figure}
+      \caption{\textbf{A-B)} Most pairs of \emph{Salix} and galler or galler and parasitoid species were never observed co-occurring despite the high levels of replication in our example dataset. For those pairs that were observed together at least once ($n_{ij}>0$), the number of observed co-occurrences was generally small (\textless10). Here we show a histogram of the number of pairs of species observed co-occurring at least once. 3986 pairs of species were never observed co-occurring: these pairs are omitted from the histogram. \textbf{C-D)} Most pairs of species that were observed at the same site were never observed interacting. Here we show a histogram of the number of observed interactions within pairs of co-occurring species. \textbf{E-F)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. Most pairs either are never observed interacting or interact almost every time they co-occur. The red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
+      \label{histograms}
+      \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_histogram.eps}
+      \end{figure}
+
+%DG: I really appreciate this figure, it makes the point so clear. 
+
 
     In this study, we develop analytical tools to capture the uncertainty in the estimation of pairwise interactions. We focus on binary interactions as a first step, but the framework could be expanded to deal with interaction frequencies and strength. To define the problem, we first discuss the pervasive implications of uncertainty in the estimation of pairwise interactions on the properties of ecological networks. We then define a framework which identifies and dissects the different contributions to uncertainty of interaction. We illustrate this framework with a simple quantitative example using the most extensively sampled network to date (see Box 1). Next, we use the framework to provide analytical criteria for improving the sampling of rare interactions. Finally, we offer tangible recommendations for improved descriptors of ecological interactions. Through these efforts, we demonstrate both the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies.
 
@@ -387,8 +402,8 @@ The bottom line is that separating different sources of uncertainty is difficult
       \label{histograms}
       \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_histogram.eps}
       \end{figure}
-%DG: I really appreciate this figure, it makes the point so clear. 
 
+%DG: I really appreciate this figure, it makes the point so clear. 
 %    \subsection*{Finding the maximum likelihood estimate}
 
   \subsection*{Computing the posterior distribution}
