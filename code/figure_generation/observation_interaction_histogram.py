@@ -108,7 +108,7 @@ def format_graph(graph,graphtype,nettype):
   if graphtype=='interacts':
     xtext="Observed interactions"
   else:
-    xtext="Observed co-occurances"
+    xtext="Observed co-occurences"
   if graphtype=='dotplot':
     ytext="Observed interactions"
   else:
@@ -177,9 +177,9 @@ grace.multi(rows=3,cols=2,vgap=.08,hgap=.04)
 grace.hide_redundant_labels()
 
 # Just add row labels and you're done.
-grace.set_row_xaxislabel(colspan=(None,None),row=0,label="Observed co-occurances",just=2,char_size=1,perpendicular_offset=0.05)
+grace.set_row_xaxislabel(colspan=(None,None),row=0,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
 grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Observed interactions",just=2,char_size=1,perpendicular_offset=0.05)
-grace.set_row_xaxislabel(colspan=(None,None),row=2,label="Observed co-occurances",just=2,char_size=1,perpendicular_offset=0.05)
+grace.set_row_xaxislabel(colspan=(None,None),row=2,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
 
 # grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Species pairs",just=2,char_size=1)
 # grace.graphs[0].set_view(0.15,0.73,0.55,0.95)
