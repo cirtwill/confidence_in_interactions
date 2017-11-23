@@ -45,6 +45,13 @@ Link\"{o}ping, Sweden\\
 \setlength{\parindent}{15pt} 
 \clearpage
 
+\section*{Appendix S1: Details of \emph{Salix} data collection}
+
+      The \emph{Salix}-galler-parasitoid meta-network dataset consists of a single community type sampled across Europe; willow (\emph{Salix}) species, willow-galling sawflies (Hymenoptera, Tenthredinidae, Nematinae, Euurina), and their natural enemies (hymenopteran parasitoids and coleopteran, lepidopteran, dipteran, and hymenopteran inquilines). The data were collected over 29 years (1982-2010) at 374 unique locations across Europe ranging from Sicily to the Arctic. Including repeated visits to a number of sites, the data set contains 641 site-visits, each of which can be considered as a network in its own right and an independent sample from which to build the meta-network. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 parasitoid nodes. Interactions were determined by dissecting and rearing gall inhabitants from 165,424 galls. The high spatiotemporal resolution of this network and the unusually high sampling effor implemented at the site level (641 site-visits, which can be considered as repeated samples of the network) makes this dataset particularly well suited for testing this method.
+
+
+
+
 \section*{Appendix S1: Obtaining prior interaction probabilities}
 
     \subsection*{Creating a binary interaction network}
@@ -203,18 +210,18 @@ Link\"{o}ping, Sweden\\
 
       }
 
-      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
-      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
+      SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
+      GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
 
-      %       # Now get the degree distributions from the web
-      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
-      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
-      % # Interaction probabilities are the product of plant and galler probabilities
-      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+            # Now get the degree distributions from the web
+      deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
+      deg_dist_galler=colSums(SG_web)/nrow(SG_web)
+      # Interaction probabilities are the product of plant and galler probabilities
+      sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
 
-      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
-      % deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
-      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
+      deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
+      deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
+      gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
 
 
 \clearpage
