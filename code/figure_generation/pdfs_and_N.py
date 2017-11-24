@@ -92,7 +92,7 @@ def format_graph(graph,nettype):
   graph.world.xmin=0
   graph.world.xmax=.6
   graph.world.ymin=-0
-  graph.world.ymax=40
+  graph.world.ymax=45
 
   graph.yaxis.tick.configure(major=50,onoff='off',minor_ticks=0,major_size=.7,minor_size=.5,place='both',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=0,format='decimal',prec=0)
@@ -103,10 +103,10 @@ def format_graph(graph,nettype):
   graph.xaxis.label.configure(text="Probability of interaction",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Probability density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(0.475,37),loctype='world')
+    loc=(0.475,25),loctype='world')
   if nettype=='SG':
-    graph.add_drawing_object(DrawText,text="N",x=0.545,y=37.5,char_size=.75,just=2,loctype='world')
-  graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
+    graph.add_drawing_object(DrawText,text="N",x=0.545,y=25.5,char_size=.75,just=2,loctype='world')
+  graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.01)
 
 
   return graph
