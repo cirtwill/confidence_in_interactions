@@ -124,7 +124,7 @@ def format_graph(graph,nettype):
   graph.yaxis.tick.configure(major=50,onoff='off',minor_ticks=0,major_size=.7,minor_size=.5,place='both',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=0,format='decimal',prec=0)
 
-  graph.xaxis.tick.configure(major=.1,onoff='on',minor_ticks=0,major_size=.5,place='normal',minor_size=.5,major_linewidth=1,minor_linewidth=1)
+  graph.xaxis.tick.configure(major=.1,onoff='on',minor_ticks=0,major_size=.5,place='both',minor_size=.5,major_linewidth=1,minor_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
 
   graph.xaxis.label.configure(text="Probability of interaction",char_size=1,just=2,place='normal')
