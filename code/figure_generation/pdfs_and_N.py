@@ -1,7 +1,8 @@
-# ####### R code to generate data files:
-# # Getting distributions:
+####### R code to generate data files:
+# Getting distributions:
 # xdata=matrix(ncol=1001,nrow=12)
 # ydata=matrix(ncol=1001,nrow=12)
+# MLEs=matrix(ncol=4,nrow=12)
 # ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))
 # for(i in 1:length(ns)){
 #   n=ns[i]
@@ -10,18 +11,25 @@
 #   hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))
 #   xdata[i,]=c(n,x)
 #   ydata[i,]=c(n,hx)
+
+#   MLE=calculate_mean_MLE(sg_int_probs,n,0)
+#   interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)
+#   MLEs[i,]=c(n,MLE,interval)
+
 # }
 
 # # Data are along rows for pythonic convenience
 # colnames(xdata)=c("N",seq(1,1000))
 # colnames(ydata)=c("N",seq(1,1000))
-
+# colnames(MLEs)=c("N","MLE","lower","upper")
 
 # write.table(xdata,file='../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv',sep='\t')
 # write.table(ydata,file='../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv',sep='\t')
+# write.table(MLEs,file='../../data/Salix_example/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
 
 # xdata=matrix(ncol=1001,nrow=12)
 # ydata=matrix(ncol=1001,nrow=12)
+# MLEs=matrix(ncol=4,nrow=12)
 # ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))
 # for(i in 1:length(ns)){
 #   n=ns[i]
@@ -30,15 +38,21 @@
 #   hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))
 #   xdata[i,]=c(n,x)
 #   ydata[i,]=c(n,hx)
+
+#   MLE=calculate_mean_MLE(gp_int_probs,n,0)
+#   interval=credible_interval(calculate_parameters(gp_int_probs,n,0),0.025,0.975)
+#   MLEs[i,]=c(n,MLE,interval)
+
 # }
 
 # # Data are along rows for pythonic convenience
 # colnames(xdata)=c("N",seq(1,1000))
 # colnames(ydata)=c("N",seq(1,1000))
-
+# colnames(MLEs)=c("N","MLE","lower","upper")
 
 # write.table(xdata,file='../../data/Salix_example/Galler_Parasitoid/distfigure_xvals.tsv',sep='\t')
 # write.table(ydata,file='../../data/Salix_example/Galler_Parasitoid/distfigure_yvals.tsv',sep='\t')
+# write.table(MLEs,file='../../data/Salix_example/Galler_Parasitoid/distfigure_MLEs.tsv',sep='\t')
 
 
 import sys
@@ -63,6 +77,19 @@ from PyGrace.Styles.el import ElGraph, ElLinColorBar, ElLogColorBar
 
 colors=ColorBrewerScheme('Spectral')  # The blue is very beautiful but maybe harder to see.
 # colors.add_color(120,120,120,'grey')
+
+def read_MLE(filename):
+  datadict={}
+  f=open(filename,'r')
+  for line in f:
+    if line.split()[0]!='"N"':
+      N=int(line.split()[1])
+      MLE=float(line.split()[2])
+      lower=float(line.split()[3])
+      upper=float(line.split()[4])
+      datadict[N]=((MLE,lower,upper))
+  f.close()
+  return datadict
 
 def read_Rfiles(filename):
   datadict={}
@@ -92,7 +119,7 @@ def format_graph(graph,nettype):
   graph.world.xmin=0
   graph.world.xmax=.6
   graph.world.ymin=-0
-  graph.world.ymax=45
+  graph.world.ymax=46
 
   graph.yaxis.tick.configure(major=50,onoff='off',minor_ticks=0,major_size=.7,minor_size=.5,place='both',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=0,format='decimal',prec=0)
@@ -103,7 +130,7 @@ def format_graph(graph,nettype):
   graph.xaxis.label.configure(text="Probability of interaction",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Probability density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(0.475,25),loctype='world')
+    loc=(0.475,25),loctype='world',size=2)
   if nettype=='SG':
     graph.add_drawing_object(DrawText,text="N",x=0.545,y=25.5,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.01)
@@ -111,8 +138,8 @@ def format_graph(graph,nettype):
 
   return graph
 
-def populate_graph(graph,pointdict,nettype):
-  cols=[1,2,5,9,11,12]
+def populate_graph(graph,pointdict,MLEdict,nettype):
+  cols=[2,3,5,9,10,11]
   x=0
   for N in [0,5,10,20,50,100]:
     data=graph.add_dataset(pointdict[N])
@@ -121,7 +148,21 @@ def populate_graph(graph,pointdict,nettype):
     data.fill.configure(pattern=1,color=cols[x],type=1)
     if nettype=='SG': 
       data.legend=str(N)
+
+    MLE=MLEdict[N][0]
+    lower=MLEdict[N][1]
+    upper=MLEdict[N][2]
+
+    MLEline=graph.add_dataset([(lower,graph.world.ymax-6.5+x),(upper,graph.world.ymax-6.5+x)])
+    MLEline.symbol.shape=0
+    MLEline.line.configure(linestyle=1,color=cols[x],linewidth=2)
+
+    MLEdot=graph.add_dataset([(MLE,graph.world.ymax-6.5+x)])
+    MLEdot.line.linestyle=0
+    MLEdot.symbol.configure(shape=3,color=1,fill_color=cols[x],size=.5)
+
     x+=1
+
 
   return graph
 
@@ -134,15 +175,18 @@ for nettype in ['SG','GP']:
   if nettype=='SG':
     xdata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv')
     ydata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv')
+    MLEfile='../../data/Salix_example/Salix_Galler/distfigure_MLEs.tsv'
   else:
     xdata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_xvals.tsv')
     ydata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_yvals.tsv')
+    MLEfile='../../data/Salix_example/Galler_Parasitoid/distfigure_MLEs.tsv'
 
   datasets=combiner(xdata,ydata)
+  MLEdict=read_MLE(MLEfile)
 
   graph=grace.add_graph(Panel)
   graph=format_graph(graph,nettype)
-  graph=populate_graph(graph,datasets,nettype)
+  graph=populate_graph(graph,datasets,MLEdict,nettype)
   graph.set_view(0.15,0.15,0.95,0.65)
 
 grace.multi(rows=2,cols=1,vgap=.04)

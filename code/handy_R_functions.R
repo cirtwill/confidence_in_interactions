@@ -11,6 +11,19 @@ calculate_parameters<-function(priordata,n,k){
 }
 
 
+calculate_mean_MLE<-function(priordata,n,k){
+  library(MASS)
+  pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))$estimate
+  # The lower=c(0,0) prevents R from fitting invalid (negative) parameters
+  alpha=pars[[1]]
+  beta=pars[[2]]
+
+  numerator=alpha+k
+  denominator=alpha+beta+n
+  MLE=numerator/denominator
+  return(MLE)
+}
+
 calculate_distribution<-function(pars){
   alpha=pars[[1]]
   beta=pars[[2]]
