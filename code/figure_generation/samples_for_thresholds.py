@@ -204,7 +204,13 @@ def add_samplelines(graph,sampledict,nettype):
     for threshold in sampledict[confidence]:
       liner=graph.add_dataset([(sampledict[confidence][threshold],0.1),(sampledict[confidence][threshold],0)])
       liner.symbol.shape=0
-      liner.line.configure(linewidth=.75,linestyle=1,color=1)
+      if confidence==0.9:
+        col=5
+      elif confidence==0.95:
+        col=2
+      else:
+        col=11
+      liner.line.configure(linewidth=2.75,linestyle=1,color=col)
 
   for threshold in sampledict[0.9]:
     dots90.append((sampledict[0.9][threshold],0.9)) 
