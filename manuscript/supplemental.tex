@@ -45,18 +45,135 @@ Link\"{o}ping, Sweden\\
 \setlength{\parindent}{15pt} 
 \clearpage
 
-\section*{Appendix S1: Details of \emph{Salix} data collection}
+\section*{Appendix S1: Calculating posterior distributions and confidence intervals}
 
-      The \emph{Salix}-galler-parasitoid meta-network dataset consists of a single community type sampled across Europe; willow (\emph{Salix}) species, willow-galling sawflies (Hymenoptera, Tenthredinidae, Nematinae, Euurina), and their natural enemies (hymenopteran parasitoids and coleopteran, lepidopteran, dipteran, and hymenopteran inquilines). The data were collected over 29 years (1982-2010) at 374 unique locations across Europe ranging from Sicily to the Arctic. Including repeated visits to a number of sites, the data set contains 641 site-visits, each of which can be considered as a network in its own right and an independent sample from which to build the meta-network. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 parasitoid nodes. Interactions were determined by dissecting and rearing gall inhabitants from 165,424 galls. The high spatiotemporal resolution of this network and the unusually high sampling effor implemented at the site level (641 site-visits, which can be considered as repeated samples of the network) makes this dataset particularly well suited for testing this method.
+  The following simple functions are implemented in the R language. They are 
+  also provided as R code in a separate file.
+  Priordata is the list of interaction frequencies from the prior 
+  data, n is the number of sites with observed co-occurrance of 
+  species $i$ and $j$, and k is the number of sites with an 
+  observed interaction $ij$. When calculating the prior 
+  distribution, both n and k are 0. In the main text we assume 100\%
+  confidence in observed interactions and therefore consider only 
+  cases where k=0. Only n varies between species pairs.
 
 
+  To calculate the parameters $\alpha$ and $\beta$ of a prior or 
+  posterior distribution:
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}calculate\_parameters\textless-function(priordata,n,k)\{\\
+  \vspace{4pt}
+    \# Calculate prior parameters\\
+    start=list(shape1=1,shape2=1)\\
+    pars=fitdistr(x=priordata,`beta',start=start,lower=c(0,0))\$estimate\\
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+  \vspace{4pt}
+    \# Update the parameters with data. If n=0 and k=0, no change.\\
+    alpha\_prime=alpha+k\\
+    beta\_prime=beta+n-k\\
+    pars2=c(alpha\_prime,beta\_prime)\\
+    return(pars2) \}
+  \end{em}
+  \vspace{12pt}
 
 
-\section*{Appendix S1: Obtaining prior interaction probabilities}
+    All of the following functions use the parameters returned by 
+    ``calculate\_parameters". To calculate the maximum likelihood estimates of 
+    the mean and variance of the probability of interaction $\lambda_{ij}$:
+
+    \vspace{12pt}
+    \begin{em}
+    \noindent \hspace{2pt}calculate\_distribution\textless-function(pars)\{\\
+     \vspace{4pt}
+     \# alpha and beta may be from a prior or posterior distribution\\
+      alpha=pars[[1]]\\
+      beta=pars[[2]]\\
+      \vspace{4pt}
+      \# Calculate the MLE of the mean\\
+      mu\_numerator=alpha\\
+      mu\_denominator=alpha+beta\\
+      mu=mu\_numerator/mu\_denomenator\\
+      \vspace{4pt}
+      \# Calculate the MLE of the variance\\
+      sig\_numerator=alpha\*beta\\
+      den1=alpha+beta\\
+      den2=den1$**$2\\
+      sig\_denomenator=den1$*$den2\\
+      sigma2=sig\_numerator/sig\_denomenator\\
+      return(c(mu,sigma2))\}
+    \end{em}
+  \vspace{12pt}
+      
+  \clearpage
+
+  To calculate a credible interval based on the prior or posterior distribution, for given lower and upper bounds:
+
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}credible\_interval\textless-function(pars,p\_lower,p\_upper)\{\\
+    \vspace{4pt}
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    lowCI=qbeta(p=p\_lower,shape1=alpha,shape2=beta)\\
+    highCI=qbeta(p=p\_upper,shape1=alpha,shape2=beta)\\
+    return(c(lowCI,highCI))\}
+  \end{em}
+  \vspace{12pt}
+
+  To calculate the number of samples required to reach a given level of confidence that the probability of interaction between two species ($\lambda_{ij}$) that have not been observed co-occurring is below a threshold value:
+
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}samples\_for\_threshold\textless-function(threshold,confidence,pars)\{\\
+    \vspace{4pt}
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    n=seq(0,100,1)\\
+    k=0\\ 
+    cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)\\
+    samples=length(which(cdf\textless confidence))\\
+    return(samples) \}
+  \end{em}
+
+
+\clearpage
+
+\section*{Appendix S2: Details of \emph{Salix} data collection}
+
+      The \emph{Salix}-galler-parasitoid meta-network dataset collected 
+      by~\citet{Kopelke2017} consists of a single community type sampled across 
+      Europe: willow (\emph{Salix}) species, willow-galling sawflies (
+      Hymenoptera, Tenthredinidae, Nematinae, Euurina), and their natural 
+      enemies (hymenopteran parasitoids and coleopteran, lepidopteran, dipteran, 
+      and hymenopteran inquilines). The data were collected over 29 years 
+      (1982-2010) at 374 unique locations across Europe ranging from Sicily to 
+      the Arctic. Including repeated visits to a number of sites, the data set 
+      contains 641 site-visits, each of which can be considered as a network in 
+      its own right and an independent sample from which to build the 
+      meta-network. The meta-network consists of 1,173 different interactions 
+      between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 parasitoid 
+      nodes. Interactions were determined by dissecting and rearing gall 
+      inhabitants from 165,424 galls. Some sites were visited repeatedly, for a 
+      total of 641 site-visits. We consider these to be repeated samples and 
+      take the 374 unique sites as our sample size. The high spatiotemporal 
+      resolution of this network and the unusually high sampling effort together 
+      make this dataset particularly well suited for testing Bayesian approaches 
+      to network structure.
+
+
+\clearpage
+
+
+\section*{Appendix S3: Obtaining prior interaction probabilities}
 
     \subsection*{Creating a binary interaction network}
 
-      Barbour \emph{et al.} sampled 145 branches from 
+      \citet{Barbour2016,Barbour2016Dryad} sampled 145 branches from 
       \emph{Salix hookeriana} of 26 genotypes. They recorded galls 
       made by four species of Cecidomyid midges on each branch. We 
       transformed these data to a binary genotype-galler network 
@@ -69,27 +186,30 @@ Link\"{o}ping, Sweden\\
       network follows:
 
 
-      \vspace{6pt}
-      \emph{
-      \noindent \hspace{-4pt} prior\_web\_data=read.csv(``tree\_level\_interaxn\_all\_plants\_traits\_size.csv")\\
-      \# Remove extra data on parasitoids, etc.\\
-      prior\_web\_data[,31:57]\textless-NULL\\
-      prior\_web\_data[,4:26]\textless-NULL\\
-      prior\_web\_data[,2]\textless-NULL\\
-      \# Build a web with interactions=1 for any galler observed on any genotype\\
-      prior\_web=matrix(nrow=26,ncol=4)\\
-      for(r in 1:length(levels(prior\_web\_data\$Genotype)))\{\\
-      \hspace{4pt}  gen=levels(prior\_web\_data\$Genotype)[r]\\
-      \hspace{4pt}  subset=prior\_web\_data[which(prior\_web\_data\$Genotype==gen),]\\
-      \hspace{4pt}  for(c in 1:4)\{\\
-      \hspace{8pt}    if(sum(subset[,2+c])\textgreater0)\{\\
-      \hspace{12pt}      prior\_web[r,c]=1\\
-      \hspace{8pt}    \} else \{\\
-      \hspace{12pt}      prior\_web[r,c]=0\\
-      \hspace{8pt}    \}\}\}
-      \# Remove non-interactive genotype
-      prior\_web\textless-prior\_web[which(rowSums(prior\_web)\textgreater0),]
-      }
+      \vspace{12pt}
+      \begin{em}
+      \noindent \hspace{2pt}prior\_web\_data=read.csv(``tree\_level\_interaxn\_all\_plants\_traits\_size.csv")\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Remove extra data on parasitoids, etc.\\
+      \noindent \hspace{2pt}prior\_web\_data[,31:57]\textless-NULL\\
+      \noindent \hspace{2pt}prior\_web\_data[,4:26]\textless-NULL\\
+      \noindent \hspace{2pt}prior\_web\_data[,2]\textless-NULL\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Build a web with interactions=1 for any galler observed on any genotype\\
+      \noindent \hspace{2pt}prior\_web=matrix(nrow=26,ncol=4)\\
+      \noindent \hspace{2pt}for(r in 1:length(levels(prior\_web\_data\$Genotype)))\{\\
+      \hspace{4pt}gen=levels(prior\_web\_data\$Genotype)[r]\\
+      \hspace{4pt}subset=prior\_web\_data[which(prior\_web\_data\$Genotype==gen),]\\
+      \hspace{4pt}for(c in 1:4)\{\\
+      \hspace{8pt}if(sum(subset[,2+c])\textgreater0)\{\\
+      \hspace{12pt}prior\_web[r,c]=1\\
+      \hspace{8pt}\} else \{\\
+      \hspace{12pt}prior\_web[r,c]=0\\
+      \hspace{8pt}\}\}\}\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Remove non-interactive genotype to obtain the final web\\
+      \noindent \hspace{2pt}prior\_web\textless-prior\_web[which(rowSums(prior\_web)\textgreater0),]
+      \end{em}
 
       % prior_web_data=read.csv('../../data/Salix_example/tree_level_interaxn_all_plants_traits_size.csv')
       % # Remove extra data on parasitoids, etc.
@@ -112,39 +232,44 @@ Link\"{o}ping, Sweden\\
       % prior_web<-prior_web[which(rowSums(prior_web)>0),]
       % write.csv(prior_web,file='binary_prior_web_SG.csv',quote=F)
 
-      \vspace{6pt}
-
+      \vspace{12pt}
+      \clearpage
 
       To extract the galler-parsitoid network from the same study above:
 
 
-      \vspace{6pt}
-      \noindent \emph{
-      \hspace{-4pt} prior\_web\_data=read.csv(``tree\_level\_interaxn\_all\_plants\_traits\_size.csv")\\
-      prior\_web\_data \textless- prior\_web\_data[,8:26]\\
-
-      \# Build a web with interactions=1 for any parasitoid on any galler\\
-      prior\_web=data.frame()\\
-
-      \# each column contains all interactions for a particular parasitoid-galler combination\\
-      for(column in 1:ncol(prior\_web\_data))\{\\
-      \hspace{-4pt}   \# the column name gives the species which makes the gall, followed by the species emerging from the gall\\
-      \hspace{-4pt}   galler\_emerged=strsplit(colnames(prior\_web\_data)[column], "\_")\\
-      \hspace{-4pt}   galler = galler\_emerged[[1]][1]\\
-      \hspace{-4pt}   emerged = galler\_emerged[[1]][2]\\
-        
-      \hspace{-4pt}   \# the strength of the interaction is the sum of the column (number of galls across all branches sampled)\\
-      \hspace{-4pt}   linkstrength = sum(prior\_web\_data[,column])\\
-      \hspace{-4pt}   prior\_web[as.character(galler),as.character(emerged)] \textless- linkstrength\\
-      \} 
-      \# Make the NAs into 0\\
-      prior\_web[is.na(prior\_web)] \textless- 0\\
-      \# remove emerging gallers with no parasitoids\\
-      prior\_web\_para\_only \textless- prior\_web[,c(2:6,8:9,12)]\\
-      \# convert interaction strengths to 1\\
-      prior\_web[which(prior\_web\textgreater0)] \textless- 1\\
-      write.csv(prior\_web\_para\_only, file=``prior\_web\_para\_only.csv", quote=F)
-      }\par
+      \vspace{12pt}
+      \begin{em}
+      \noindent \hspace{2pt}prior\_web\_data=read.csv(``tree\_level\_interaxn\_all\_plants\_traits\_size.csv")\\
+      \noindent \hspace{2pt}prior\_web\_data \textless- prior\_web\_data[,8:26]\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Build a web with interactions=1 for any parasitoid on any galler\\
+      \noindent \hspace{2pt}prior\_web=data.frame()\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# each column contains all interactions for a \noindent \hspace{2pt}particular parasitoid-galler combination\\
+      \noindent \hspace{2pt}for(column in 1:ncol(prior\_web\_data))\{\\
+      \hspace{4pt}\# the column name gives the species which makes the gall,\\
+      \hspace{4pt}\#followed by the species emerging from the gall\\
+      \hspace{4pt}galler\_emerged=strsplit(colnames(prior\_web\_data)[column], "\_")\\
+      \hspace{4pt}galler = galler\_emerged[[1]][1]\\
+      \hspace{4pt}emerged = galler\_emerged[[1]][2]\\
+      \vspace{4pt}
+      \hspace{4pt}\# the strength of the interaction is the sum of the column\\
+      \hspace{4pt}(number of galls across all branches sampled)\\
+      \hspace{4pt}linkstrength = sum(prior\_web\_data[,column])\\
+      \hspace{4pt}prior\_web[as.character(galler),as.character(emerged)] \textless- linkstrength\\
+      \}\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Make the NAs into 0\\
+      \noindent \hspace{2pt}prior\_web[is.na(prior\_web)] \textless- 0\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# remove emerging gallers with no parasitoids\\
+      \noindent \hspace{2pt}prior\_web\_para\_only \textless- prior\_web[,c(2:6,8:9,12)]\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# convert interaction strengths to 1\\
+      \noindent \hspace{2pt}prior\_web[which(prior\_web\textgreater0)] \textless- 1\\
+      \noindent \hspace{2pt}write.csv(prior\_web\_para\_only, file=``prior\_web\_para\_only.csv", quote=F)\\
+      \end{em}
 
       % % # read in the data
       % prior_web_data=read.csv('../../data/Salix_example/tree_level_interaxn_all_plants_traits_size.csv')
@@ -177,6 +302,7 @@ Link\"{o}ping, Sweden\\
       % prior_web_para_only <- prior_web[,c(2:6,8:9,12)]
       % write.csv(prior_web_para_only, file="binary_prior_web_para_only.csv", quote=F)
 
+      \clearpage
 
     \subsection*{Degree distributions and interaction probabilities}
 
@@ -194,133 +320,44 @@ Link\"{o}ping, Sweden\\
 
 
       \vspace{12pt}
-      \emph{
-      \noindent \hspace{-4pt} \# Now get the degree distributions from the web\\
-      deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
-      \# Remove one genotype that never interacted\\
-      deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
-      deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
-      \# Interaction probabilities are the product of plant and galler probabilities\\
-      int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
-
-      \# And for the galler-parasitoid web:\\
-      deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
-      deg\_dist\_parasitized=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
-      gp\_int\_probs=as.numeric(deg\_dist\_parasitized\%$*$\%t(deg\_dist\_parasitoid))
-
-      }
-
-      SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
-      GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
-
-            # Now get the degree distributions from the web
-      deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
-      deg_dist_galler=colSums(SG_web)/nrow(SG_web)
-      # Interaction probabilities are the product of plant and galler probabilities
-      sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
-
-      deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
-      deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
-      gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
+      \begin{em}
+      \noindent \hspace{2pt}\# Now get the degree distributions from the web\\
+      \noindent \hspace{2pt}deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Remove one genotype that never interacted\\
+      \noindent \hspace{2pt}deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
+      \noindent \hspace{2pt}deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Interaction probabilities are the product of plant and galler probabilities\\
+      \noindent \hspace{2pt}int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# And for the galler-parasitoid web:\\
+      \noindent \hspace{2pt}deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}deg\_dist\_parasitized=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}gp\_int\_probs=as.numeric(deg\_dist\_parasitized\%$*$\%t(deg\_dist\_parasitoid))\\
+      \end{em}
 
 
-\clearpage
+      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
+      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
 
+      %       # Now get the degree distributions from the web
+      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
+      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
+      % # Interaction probabilities are the product of plant and galler probabilities
+      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
 
-\section*{Appendix S2: Calculating posterior distributions and confidence intervals}
-
-  The following simple functions are implemented in the R language. 
-  Priordata is the list of interaction frequencies from the prior 
-  data, n is the number of sites with observed co-occurrance of 
-  species $i$ and $j$, and k is the number of sites with an 
-  observed interaction $ij$. When calculating the prior 
-  distribution, both n and k are 0. In the main text we assume 100\%
-  confidence in observed interactions and therefore consider only 
-  cases where k=0. Only n varies between species pairs.
-
-
-  To calculate the parameters $\alpha$ and $\beta$ of a prior or 
-  posterior distribution:
-
-  \vspace{12pt}
-  \emph{
-  \noindent \hspace{-4pt}calculate\_parameters\textless-function(priordata,n,k)\{\\
-  \hspace{4pt} \# Calculate prior parameters\\
-  \hspace{4pt} start=list(shape1=1,shape2=1)
-  \hspace{80pt} pars=fitdistr(x=priordata,`beta',start=start,lower=c(0,0))\$estimate\\
-  \hspace{4pt} alpha=pars[[1]]\\
-  \hspace{4pt} beta=pars[[2]]\\
-  \hspace{4pt} \# Update the parameters with data. If n=0 and k=0, no change.\\
-  \hspace{4pt} alpha\_prime=alpha+k\\
-  \hspace{4pt} beta\_prime=beta+n-k\\
-  \hspace{4pt} pars2=c(alpha\_prime,beta\_prime)\\
-  \hspace{4pt} return(pars2) \}
-  }
-  \vspace{12pt}
-
-
-    To calculate the maximum likelihood estimates of the mean and 
-    variance of the probability of interaction $\lambda_{ij}$:
-
-    \vspace{12pt}
-    \emph{
-    calculate\_distribution\textless-function(pars)\{\\
-      \# alpha and beta may be from a prior or posterior distribution\\
-      alpha=pars[[1]]\\
-      beta=pars[[2]]\\
-
-
-      \# Calculate the MLE of the mean\\
-      mu\_num=alpha\\
-      mu\_den=alpha+beta\\
-      mu=mu\_num\/mu\_den\\
-
-
-      \# Calculate the MLE of the variance\\
-      sig\_num=alpha\*beta\\
-      den1=alpha+beta\\
-      den2=den1\*\*2\\
-      sig\_den=den1\*den2\\
-      sigma2=sig\_num\/sig\_den\\
-
-
-      return(c(mu,sigma2))\}
-    }
-  \vspace{12pt}
-      
-
-  To calculate a credible interval based on the prior or posterior distribution, for given lower and upper bounds:
-
-
-  \vspace{12pt}
-  \emph{
-  credible\_interval\textless-function(pars,p\_lower,p\_upper)\{\\
-    alpha=pars[[1]]\\
-    beta=pars[[2]]\\
-    lowCI=qbeta(p=p\_lower,shape1=alpha,shape2=beta)\\
-    highCI=qbeta(p=p\_upper,shape1=alpha,shape2=beta)\\
-    return(c(lowCI,highCI))\}
-  }
-
-
-  \vspace{12pt}
-  \emph{
-  plot\_precision\textless-function(threshold,confidence,pars)\{\\
-    alpha=pars[[1]]\\
-    beta=pars[[2]]\\
-    n=seq(0,100,1)\\
-    k=0\\
-    cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)\\
-    samples=length(which(cdf<confidence))\\
-    return(samples) \}
-  }
+      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
+      % deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
+      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
 
 
 \clearpage
+
+
 
     \bibliographystyle{ecollett} 
-    \bibliography{manual_abbrev} % Abbreviate journal titles.
-
+    \bibliography{MyCollection}
 
 \end{document}
 
