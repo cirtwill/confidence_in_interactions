@@ -4,6 +4,14 @@ import networkx as nx
 import numpy as np 
 import scipy as sp 
 
+# Think I will have to do NODF in R. vegan function nestednodf(web,order=TRUE,weighted=FALSE) should get it done
+# vegan takes community data as a matrix. This may be a problem. 
+# Something like the following should convert interaction list to matrix:
+# library(igraph);
+# edge_list <- read.delim("data_file.txt", header = TRUE, sep = "\t");
+# G <- graph.data.frame(edge_list,directed=FALSE);
+# A <- as_adjacency_matrix(G,type="both",names=TRUE,sparse=FALSE,attr="weight");
+
 def web_reader(webdir,proportion,post_number,sample_number,nettype): 
   gallers=set()
   salixes=set()
