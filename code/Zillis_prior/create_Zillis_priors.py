@@ -7,7 +7,7 @@ import numpy as np
 import scipy as sp
 
 # # To create the data file:
-# SG_dataset=read.csv('../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)
+# SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)
 # SG_web=read.csv('figure_generation/binary_prior_web_SG.csv',row.names=1)
 # deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
 # deg_dist_galler=colSums(SG_web)/nrow(SG_web)
@@ -22,9 +22,9 @@ import scipy as sp
 #     SG_dataset[r,7:8]=dist
 #   }
 # }
-# write.table(SG_dataset,file='../data/Salix_example/Salix_Galler/posterior_probabilities.tsv')
+# write.table(SG_dataset,file='../../data/Salix_example/Salix_Galler/posterior_probabilities.tsv')
 
-# GP_dataset=read.csv('../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)
+# GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)
 # GP_web=read.csv('figure_generation/binary_prior_web_para_only.csv',row.names=1)
 # deg_dist_galler=rowSums(GP_web)/ncol(GP_web)
 # deg_dist_paras=colSums(GP_web)/nrow(GP_web)
@@ -39,7 +39,7 @@ import scipy as sp
 #     GP_dataset[r,7:8]=dist
 #   }
 # }
-# write.table(GP_dataset,file='../data/Salix_example/Galler_Parasitoid/posterior_probabilities.tsv')
+# write.table(GP_dataset,file='../../data/Salix_example/Galler_Parasitoid/posterior_probabilities.tsv')
 
 
 #   numpy.random.binomial(n,p,size) draws [size] samples from a binomial distribution
@@ -71,9 +71,9 @@ def read_data(datafile):
 
 def write_prior_web(ints,resources,consumers,flavour):
   if flavour=='SG':
-    f=open('../data/Salix_example/Zillis/Zillis_SG_prior.csv','w')
+    f=open('../../data/Salix_example/Zillis/Zillis_SG_prior.csv','w')
   else:
-    f=open('../data/Salix_example/Zillis/Zillis_GP_prior.csv','w')
+    f=open('../../data/Salix_example/Zillis/Zillis_GP_prior.csv','w')
   f.write(','+','.join(sorted(consumers))+'\n')
   for res in sorted(resources):
     f.write(res)
@@ -88,7 +88,7 @@ def write_prior_web(ints,resources,consumers,flavour):
 
 def main():
 
-  datafile='../data/Salix_example/Zillis/Zillis_web.csv'
+  datafile='../../data/Salix_example/Zillis/Zillis_web.csv'
 
   ints, Salix_sp, galler_sp, para_sp=read_data(datafile)
 
