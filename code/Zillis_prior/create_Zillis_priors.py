@@ -45,7 +45,7 @@ import scipy as sp
 #   numpy.random.binomial(n,p,size) draws [size] samples from a binomial distribution
 #   % Each observation is a Bernoulli, or a binomial with n=1. Use p=mean(posterior).
 
-def read_data(datafile):
+def read_data(datafile,site):
   ints={'SG':set(),'GP':set()}
   Salix_sp=set()
   galler_sp=set()
@@ -53,12 +53,22 @@ def read_data(datafile):
   f=open(datafile,'r')
   for line in f:
     newline=line.split('\r')[0]
-    if newline.split(',')[1]!='REARING_NUMBER':
-      Salix=newline.split(',')[10]
-      galler=newline.split(',')[11]
-      para=newline.split(',')[12] 
-      n_galls=int(newline.split(',')[13])
-      n_galls_parasit=int(newline.split(',')[14])
+    if site=='Zillertal':
+      if newline.split(',')[0]!='REARING_NUMBER':
+        Salix_ID=newline.split(',')[10]
+        galler=newline.split(',')[11]
+        para=newline.split(',')[12] 
+        n_galls=int(newline.split(',')[13])
+        n_galls_parasit=int(newline.split(',')[14])
+        Salix=newline.split(',')[15]
+    else:
+      if newline.split(',')[1]!='REARING_NUMBER':
+        Salix=newline.split(',')[10]
+        galler=newline.split(',')[11]
+        para=newline.split(',')[12] 
+        n_galls=int(newline.split(',')[13])
+        n_galls_parasit=int(newline.split(',')[14])
+    if newline.split(',')[0]!='REARING_NUMBER' and newline.split(',')[1]!='REARING_NUMBER':
       Salix_sp.add(Salix)
       galler_sp.add(galler)
       ints['SG'].add((Salix,galler))
@@ -69,11 +79,11 @@ def read_data(datafile):
   f.close()
   return ints, Salix_sp, galler_sp, para_sp
 
-def write_prior_web(ints,resources,consumers,flavour):
+def write_prior_web(ints,resources,consumers,flavour,site):
   if flavour=='SG':
-    f=open('../../data/Salix_example/Zillis/Zillis_SG_prior.csv','w')
+    f=open('../../data/Salix_example/Zillis/'+site+'_SG_prior.csv','w')
   else:
-    f=open('../../data/Salix_example/Zillis/Zillis_GP_prior.csv','w')
+    f=open('../../data/Salix_example/Zillis/'+site+'_GP_prior.csv','w')
   f.write(','+','.join(sorted(consumers))+'\n')
   for res in sorted(resources):
     f.write(res)
@@ -88,12 +98,14 @@ def write_prior_web(ints,resources,consumers,flavour):
 
 def main():
 
-  datafile='../../data/Salix_example/Zillis/Zillis_web.csv'
+  for site in ['Zillis','Zillertal']:
+    print site
+    datafile='../../data/Salix_example/Zillis/'+site+'_web.csv'
 
-  ints, Salix_sp, galler_sp, para_sp=read_data(datafile)
+    ints, Salix_sp, galler_sp, para_sp=read_data(datafile,site)
 
-  write_prior_web(ints['SG'],Salix_sp,galler_sp,'SG')
-  write_prior_web(ints['GP'],galler_sp,para_sp,'GP')
+    write_prior_web(ints['SG'],Salix_sp,galler_sp,'SG',site)
+    write_prior_web(ints['GP'],galler_sp,para_sp,'GP',site)
   
 if __name__ == '__main__':
   main()

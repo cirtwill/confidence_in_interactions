@@ -1,9 +1,9 @@
 # Returns prior distribution when n=0 and k=0. 
 # Otherwise, returns posterior distribution
 calculate_parameters<-function(priordata,n,k){
-  library(MASS)
+  library(fitdistrplus)
   # Calculate prior parameters
-  pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))$estimate
+  pars=fitdist(priordata,distr="beta",method="mle",start=list(shape1=10,shape2=10),lower=c(0,0))$estimate
   # The lower=c(0,0) prevents R from fitting invalid (negative) parameters
   alpha=pars[[1]]
   beta=pars[[2]]
