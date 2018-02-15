@@ -41,7 +41,6 @@ for(site in c("Zillis","Zillertal")){
       nesttable[k,4]<-mean(templist[,1])
       nesttable[k,5]<-sd(templist[,1])
     }
-
       k<-k+1
     }
     write.table(nesttable,file=paste0('../../data/Zillis_webs/',webtype,'_NODF_table_'+site+'.tsv',sep=''))
