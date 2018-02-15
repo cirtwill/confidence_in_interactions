@@ -6,44 +6,6 @@ from decimal import *
 import numpy as np
 import scipy as sp
 
-# # To create the data file:
-# SG_dataset=read.csv('../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)
-# SG_web=read.csv('figure_generation/binary_prior_web_SG.csv',row.names=1)
-# deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
-# deg_dist_galler=colSums(SG_web)/nrow(SG_web)
-# # Interaction probabilities are the product of plant and galler probabilities
-# sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
-# SG_dataset$post.mean<-1
-# SG_dataset$post.sd<-0
-# for(r in 1:nrow(SG_dataset)){
-#   if(SG_dataset$interact[r]==0){
-#     pars=calculate_parameters(sg_int_probs,SG_dataset$cooccur[r],0)
-#     dist=calculate_distribution(pars)
-#     SG_dataset[r,7:8]=dist
-#   }
-# }
-# write.table(SG_dataset,file='../data/Salix_example/Salix_Galler/posterior_probabilities.tsv')
-
-# GP_dataset=read.csv('../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)
-# GP_web=read.csv('figure_generation/binary_prior_web_para_only.csv',row.names=1)
-# deg_dist_galler=rowSums(GP_web)/ncol(GP_web)
-# deg_dist_paras=colSums(GP_web)/nrow(GP_web)
-# # Interaction probabilities are the product of plant and galler probabilities
-# gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))
-# GP_dataset$post.mean<-1
-# GP_dataset$post.sd<-0
-# for(r in 1:nrow(GP_dataset)){
-#   if(GP_dataset$interact[r]==0){
-#     pars=calculate_parameters(gp_int_probs,GP_dataset$cooccur[r],0)
-#     dist=calculate_distribution(pars)
-#     GP_dataset[r,7:8]=dist
-#   }
-# }
-# write.table(GP_dataset,file='../data/Salix_example/Galler_Parasitoid/posterior_probabilities.tsv')
-
-
-#   numpy.random.binomial(n,p,size) draws [size] samples from a binomial distribution
-#   % Each observation is a Bernoulli, or a binomial with n=1. Use p=mean(posterior).
 
 def read_in_data(datafile):
   pdict={}
@@ -111,15 +73,15 @@ def posterior_sampling(pdict):
   return random_ints
 
 
-def write_posterior_webs(random_ints,postdir):
+def write_posterior_webs(random_ints,postdir,site):
   for i in range(1,101):
-    outfile=open(postdir+'/P'+str(i)+'.web','w')
+    outfile=open(postdir+'/P'+str(i)+'_'+site+'.web','w')
     for (plant, galler) in random_ints:
       if random_ints[(plant,galler)][i-1]==1:
         outfile.write(plant+'\t'+galler+'\n')
     outfile.close()
 
-def filter_posterior_webs(postdir,proportion,altdir):
+def filter_posterior_webs(postdir,proportion,altdir,site):
   for postweb in os.listdir(postdir):
     linklist=[]
     f=open(postdir+postweb,'r')
@@ -152,12 +114,12 @@ def main():
 
       pdict=read_in_data(datafile) # Get posterior dist for each interaction 
       random_ints=posterior_sampling(pdict) # Calculate a set of random trails for each int
-      write_posterior_webs(random_ints,postdir) # Create a set of random posterior webs
+      write_posterior_webs(random_ints,postdir,site) # Create a set of random posterior webs
 
       for proportion in [0.5,0.6,0.7,0.8,0.9,0.95,0.99]:
         print nettype, proportion
         # proportion=0.8 # Eventually I probably want to do this for different proportions of links detected
-        filter_posterior_webs(postdir,proportion,altdir)
+        filter_posterior_webs(postdir,proportion,altdir,site)
 
 
   
