@@ -138,19 +138,17 @@ def filter_posterior_webs(postdir,proportion,altdir):
 def main():
 
   for site in ['Zillis','Zillertal']:
-    sys.exit()
-    # I can rebuild it.
     for nettype in ['SG','GP']:
       if nettype=='SG':
-        datafile='../data/Salix_example/Salix_Galler/posterior_probabilities.tsv'
+        datafile='../../data/Salix_example/Zillis/Salix_Galler/posterior_probabilities_'+site+'.tsv'
       else:
-        datafile='../data/Salix_example/Galler_Parasitoid/posterior_probabilities.tsv'
+        datafile='../../data/Salix_example/Zillis/Galler_Parasitoid/posterior_probabilities_'+site+'.tsv'
       if nettype=="SG":
-        postdir='../data/randomised_webs/posterior/'
-        altdir='../data/randomised_webs/detection_filter/'
+        postdir='../../data/Zillis_webs/posterior/'
+        altdir='../../data/Zillis_webs/detection_filter/'
       else:
-        postdir='../data/randomised_webs/gp_posterior/'
-        altdir='../data/randomised_webs/gp_detection_filter/'
+        postdir='../../data/Zillis_webs/gp_posterior/'
+        altdir='../../data/Zillis_webs/gp_detection_filter/'
 
       pdict=read_in_data(datafile) # Get posterior dist for each interaction 
       random_ints=posterior_sampling(pdict) # Calculate a set of random trails for each int
@@ -158,7 +156,7 @@ def main():
 
       for proportion in [0.5,0.6,0.7,0.8,0.9,0.95,0.99]:
         print nettype, proportion
-      # proportion=0.8 # Eventually I probably want to do this for different proportions of links detected
+        # proportion=0.8 # Eventually I probably want to do this for different proportions of links detected
         filter_posterior_webs(postdir,proportion,altdir)
 
 

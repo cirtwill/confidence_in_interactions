@@ -1,5 +1,4 @@
 source('../handy_R_functions.R')
-# This prior isn't working with fitdistr, somehow. :(
 
 # To create the data file:
 for(subweb in  c('Zillis','Zillertal')){
