@@ -103,13 +103,13 @@ def Zillis_yaxes(prop,graph):
     ytext="Links/resource"
   elif prop=='LG':
     graph.world.ymin=0
-    graph.world.ymax=20
-    graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=11
+    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/consumer"
   else:
     graph.world.ymin=0
-    graph.world.ymax=20
-    graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=4
+    graph.yaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext='NODF'
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
 
@@ -129,13 +129,13 @@ def Zillertal_yaxes(prop,graph):
     ytext="Links/resource"
   elif prop=='LG':
     graph.world.ymin=0
-    graph.world.ymax=20
-    graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=11
+    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/consumer"
   else:
     graph.world.ymin=0
-    graph.world.ymax=20
-    graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=4
+    graph.yaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext='NODF'
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
 
