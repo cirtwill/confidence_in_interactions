@@ -182,30 +182,31 @@ def populate_graph(graph,prop,nettype,obs,whiskers):
 
 def main():
 
-  grace=MultiPanelGrace(colors=colors)
-  for prop in ['C','LS','LG','NODF']:
-    for nettype in ['SG','GP']:
-      graph=grace.add_graph(Panel)
-      graph=format_graph(graph,prop,nettype)
+  for site in ['Zillis','Zillertal']:
+    grace=MultiPanelGrace(colors=colors)
+    for prop in ['C','LS','LG','NODF']:
+      for nettype in ['SG','GP']:
+        graph=grace.add_graph(Panel)
+        graph=format_graph(graph,prop,nettype)
 
-      if prop=='C':
-        whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_Connectance_table.tsv')
-      elif prop=='LS':
-        whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LS_table.tsv') # Salix or galler
-      elif prop=='LG':
-        whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LG_table.tsv') # Galler or parasitoid
-      else:
-        whiskers,obs=read_NODF_file('../../data/randomised_webs/'+nettype+'_NODF_table.tsv') # Galler or parasitoid
+        if prop=='C':
+          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_Connectance_table.tsv')
+        elif prop=='LS':
+          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LS_table.tsv') # Salix or galler
+        elif prop=='LG':
+          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LG_table.tsv') # Galler or parasitoid
+        else:
+          whiskers,obs=read_NODF_file('../../data/randomised_webs/'+nettype+'_NODF_table.tsv') # Galler or parasitoid
 
-      graph=populate_graph(graph,prop,nettype,obs,whiskers)
-
-
-  grace.multi(rows=4,cols=2,vgap=.04,hgap=.07)
-  grace.hide_redundant_labels()
-  grace.set_row_xaxislabel(colspan=(None,None),row=3,label="Percent of links detected",just=2,char_size=1,perpendicular_offset=0.05)
+        graph=populate_graph(graph,prop,nettype,obs,whiskers)
 
 
-  grace.write_file('../../manuscript/figures/Salix_Galler_posterior_properties.eps')
+    grace.multi(rows=4,cols=2,vgap=.04,hgap=.07)
+    grace.hide_redundant_labels()
+    grace.set_row_xaxislabel(colspan=(None,None),row=3,label="Percent of links detected",just=2,char_size=1,perpendicular_offset=0.05)
+
+
+    grace.write_file('../../manuscript/figures/Salix_Galler_posterior_properties_'+site+'.eps')
 
   
 if __name__ == '__main__':
