@@ -89,7 +89,58 @@ def obs_breaker(obsdict):
     mindots.append((prop,np.mean(obsdict[prop])-np.std(obsdict[prop])))
   return maxdots,meandots,mindots
 
-def format_graph(graph,prop,nettype):
+def Zillis_yaxes(prop,graph):
+  if prop=='C':
+    graph.world.ymin=0.0
+    graph.world.ymax=0.12
+    graph.yaxis.tick.configure(major=0.03,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+    ytext="Connectance"
+  elif prop=='LS':
+    graph.world.ymin=0
+    graph.world.ymax=6
+    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext="Links/resource"
+  elif prop=='LG':
+    graph.world.ymin=0
+    graph.world.ymax=20
+    graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext="Links/consumer"
+  else:
+    graph.world.ymin=0
+    graph.world.ymax=20
+    graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext='NODF'
+  graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
+
+  return graph
+
+def Zillertal_yaxes(prop,graph):
+  if prop=='C':
+    graph.world.ymin=0
+    graph.world.ymax=0.12
+    graph.yaxis.tick.configure(major=0.03,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+    ytext="Connectance"
+  elif prop=='LS':
+    graph.world.ymin=0
+    graph.world.ymax=6
+    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext="Links/resource"
+  elif prop=='LG':
+    graph.world.ymin=0
+    graph.world.ymax=20
+    graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext="Links/consumer"
+  else:
+    graph.world.ymin=0
+    graph.world.ymax=20
+    graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    ytext='NODF'
+  graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
+
+  return graph
+def format_graph(graph,prop,nettype,site):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
@@ -99,52 +150,33 @@ def format_graph(graph,prop,nettype):
   graph.xaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
   graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
-
-  if prop=='C':
-    if nettype=='SG':
-      graph.world.ymin=0.20
-      graph.world.ymax=0.6500000000001
-      graph.yaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-      graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
-    else:
+  if nettype=='SG' and site=='Zillis':
+    graph=Zillis_yaxes(prop,graph)
+  elif nettype=='SG' and site=='Zillertal':
+    graph=Zillertal_yaxes(prop,graph)
+  elif nettype=='GP':
+    if prop=='C':
       graph.world.ymin=0.075
       graph.world.ymax=0.225
       graph.yaxis.tick.configure(major=0.05,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
-    ytext="Connectance"
-  elif prop=='LS':
-    if nettype=='SG':
-      graph.world.ymin=12
-      graph.world.ymax=33
-      graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    else:
+      ytext="Connectance"
+    elif prop=='LS':
       graph.world.ymin=8
       graph.world.ymax=22
       graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/resource"
-  elif prop=='LG':
-    if nettype=='SG':
-      graph.world.ymin=20
-      graph.world.ymax=62
-      graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    else:
+      ytext="Links/resource"
+    elif prop=='LG':
       graph.world.ymin=10
       graph.world.ymax=30     
       graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/consumer"
-  else:
-    if nettype=='SG':
-      graph.world.ymin=0
-      graph.world.ymax=20
-      graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      ytext="Links/consumer"
     else:
       graph.world.ymin=0
       graph.world.ymax=8     
       graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="NODF"
-
-
-  graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
+      ytext="NODF"
+    graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.5,
     loc=(0.625,3),loctype='world')
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
@@ -187,16 +219,16 @@ def main():
     for prop in ['C','LS','LG','NODF']:
       for nettype in ['SG','GP']:
         graph=grace.add_graph(Panel)
-        graph=format_graph(graph,prop,nettype)
+        graph=format_graph(graph,prop,nettype,site)
 
         if prop=='C':
-          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_Connectance_table.tsv')
+          whiskers,obs=read_summary_file('../../data/Zillis_webs/'+nettype+'_Connectance_table_'+site+'.tsv')
         elif prop=='LS':
-          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LS_table.tsv') # Salix or galler
+          whiskers,obs=read_summary_file('../../data/Zillis_webs/'+nettype+'_LS_table_'+site+'.tsv') # Salix or galler
         elif prop=='LG':
-          whiskers,obs=read_summary_file('../../data/randomised_webs/'+nettype+'_LG_table.tsv') # Galler or parasitoid
+          whiskers,obs=read_summary_file('../../data/Zillis_webs/'+nettype+'_LG_table_'+site+'.tsv') # Galler or parasitoid
         else:
-          whiskers,obs=read_NODF_file('../../data/randomised_webs/'+nettype+'_NODF_table.tsv') # Galler or parasitoid
+          whiskers,obs=read_NODF_file('../../data/Zillis_webs/'+nettype+'_NODF_table_'+site+'.tsv') # Galler or parasitoid
 
         graph=populate_graph(graph,prop,nettype,obs,whiskers)
 
