@@ -23,9 +23,9 @@
 # colnames(ydata)=c("N",seq(1,1000))
 # colnames(MLEs)=c("N","MLE","lower","upper")
 
-# write.table(xdata,file='../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv',sep='\t')
-# write.table(ydata,file='../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv',sep='\t')
-# write.table(MLEs,file='../../data/Salix_example/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
+# write.table(xdata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv',sep='\t')
+# write.table(ydata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv',sep='\t')
+# write.table(MLEs,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
 
 # xdata=matrix(ncol=1001,nrow=12)
 # ydata=matrix(ncol=1001,nrow=12)
@@ -50,9 +50,9 @@
 # colnames(ydata)=c("N",seq(1,1000))
 # colnames(MLEs)=c("N","MLE","lower","upper")
 
-# write.table(xdata,file='../../data/Salix_example/Galler_Parasitoid/distfigure_xvals.tsv',sep='\t')
-# write.table(ydata,file='../../data/Salix_example/Galler_Parasitoid/distfigure_yvals.tsv',sep='\t')
-# write.table(MLEs,file='../../data/Salix_example/Galler_Parasitoid/distfigure_MLEs.tsv',sep='\t')
+# write.table(xdata,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_xvals.tsv',sep='\t')
+# write.table(ydata,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_yvals.tsv',sep='\t')
+# write.table(MLEs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_MLEs.tsv',sep='\t')
 
 
 import sys
@@ -173,13 +173,19 @@ grace.set_label_scheme('dummy')
 
 for nettype in ['SG','GP']:
   if nettype=='SG':
-    xdata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv')
-    ydata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv')
-    MLEfile='../../data/Salix_example/Salix_Galler/distfigure_MLEs.tsv'
+    # xdata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv')
+    # ydata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv')
+    # MLEfile='../../data/Salix_example/Salix_Galler/distfigure_MLEs.tsv'
+    xdata=read_Rfiles('../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv')
+    ydata=read_Rfiles('../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv')
+    MLEfile='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv'
   else:
-    xdata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_xvals.tsv')
-    ydata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_yvals.tsv')
-    MLEfile='../../data/Salix_example/Galler_Parasitoid/distfigure_MLEs.tsv'
+    # xdata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_xvals.tsv')
+    # ydata=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/distfigure_yvals.tsv')
+    # MLEfile='../../data/Salix_example/Galler_Parasitoid/distfigure_MLEs.tsv'
+    xdata=read_Rfiles('../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_xvals.tsv')
+    ydata=read_Rfiles('../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_yvals.tsv')
+    MLEfile='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_MLEs.tsv'
 
   datasets=combiner(xdata,ydata)
   MLEdict=read_MLE(MLEfile)
@@ -193,4 +199,4 @@ grace.multi(rows=2,cols=1,vgap=.04)
 grace.hide_redundant_labels()
 grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Probability density",just=2,char_size=1,perpendicular_offset=.04)
 
-grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N.eps')
+grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N_Zillis.eps')

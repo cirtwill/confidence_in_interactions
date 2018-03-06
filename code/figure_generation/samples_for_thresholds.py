@@ -35,8 +35,8 @@
 #   }
 # # }
 
-# write.table(samples,file='../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv',sep='\t')
-# write.table(CDFs,file='../../data/Salix_example/Salix_Galler/samplefigure.tsv',sep='\t')
+# write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')
+# write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
 
 
 # # Galler-parasitoid stuff
@@ -77,8 +77,8 @@
 #   }
 # }
 
-# write.table(gp_samples,file='../../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')
-# write.table(gp_CDFs,file='../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+# write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')
+# write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
 
 import sys
 import math
@@ -244,9 +244,11 @@ grace=MultiPanelGrace(colors=colors)
 
 for nettype in ['SG','GP']:
   if nettype=='SG':
-    datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv',nettype)
+    # datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv',nettype)
+    datadict,sampledict=read_Rfiles('../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',nettype)
   else:
-    datadict,sampledict=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',nettype)    
+    # datadict,sampledict=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',nettype)    
+    datadict,sampledict=read_Rfiles('../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',nettype)    
 
   datasets=combiner(datadict)
 
@@ -261,4 +263,4 @@ grace.multi(rows=2,cols=1,vgap=.08)
 grace.hide_redundant_labels()
 grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Cumulative density",just=2,char_size=1,perpendicular_offset=0.07)
 
-grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs.eps')
+grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs_Zillis.eps')
