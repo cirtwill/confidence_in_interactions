@@ -171,6 +171,60 @@ Link\"{o}ping, Sweden\\
 
 \section*{Appendix S3: Obtaining prior interaction probabilities}
 
+    \subsection*{Degree distributions and interaction probabilities}
+
+      Obtaining degree distributions from the binary interaction 
+      network is straightforward. To do this, we simply divide the 
+      total number of observed interaction partners for each 
+      species (row or column sums) with the number of potential 
+      interaction partners (number of column or rows). Degree 
+      distributions calculated, we can then calculate the 
+      probability of each interaction as the product of the 
+      normalised degrees of the two species. For example, the 
+      probability of an interaction between two species with 
+      normalised degrees of 0.5 (each interacts with half of the 
+      available partners) is 0.25. R code used to do this follows:
+
+
+      \vspace{12pt}
+      \begin{em}
+      \noindent \hspace{2pt}\# Now get the degree distributions from the web\\
+      \noindent \hspace{2pt}deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Remove one genotype that never interacted\\
+      \noindent \hspace{2pt}deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
+      \noindent \hspace{2pt}deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Interaction probabilities are the product of plant and galler probabilities\\
+      \noindent \hspace{2pt}int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# And for the galler-parasitoid web:\\
+      \noindent \hspace{2pt}deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}deg\_dist\_parasitized=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}gp\_int\_probs=as.numeric(deg\_dist\_parasitized\%$*$\%t(deg\_dist\_parasitoid))\\
+      \end{em}
+
+
+      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
+      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
+
+      %       # Now get the degree distributions from the web
+      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
+      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
+      % # Interaction probabilities are the product of plant and galler probabilities
+      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+
+      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
+      % deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
+      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
+
+
+\clearpage
+
+\section*{Appendix S4: Analyses using alternative prior}
+
+  We repeated our analyses using an alternative prior derived from a study of a similar \emph{Salix}-galler-natural enemy system in North America~\citep{Barbour2016,Barbour2016Dryad}. We note that this study used several genotypes of \emph{Salix hookeriana} rather than different \emph{Salix} species and so did not produce networks of similar size and connectedness to those in~\citep{Kopelke2016}.  To obtain the priors based on~\citet{Barbour2016}, we estimated frequencies of  \emph{S. hookeriana} genotype-galler interactions based on the normalised degree of each node (species or genotype) in each network component.
+
     \subsection*{Creating a binary interaction network}
 
       \citet{Barbour2016,Barbour2016Dryad} sampled 145 branches from 
@@ -304,55 +358,28 @@ Link\"{o}ping, Sweden\\
 
       \clearpage
 
-    \subsection*{Degree distributions and interaction probabilities}
 
-      Obtaining degree distributions from the binary interaction 
-      network is straightforward. To do this, we simply divide the 
-      total number of observed interaction partners for each 
-      species (row or column sums) with the number of potential 
-      interaction partners (number of column or rows). Degree 
-      distributions calculated, we can then calculate the 
-      probability of each interaction as the product of the 
-      normalised degrees of the two species. For example, the 
-      probability of an interaction between two species with 
-      normalised degrees of 0.5 (each interacts with half of the 
-      available partners) is 0.25. R code used to do this follows:
+    \subsection*{Prior and posterior distributions}
+
+      Using the binary networks described above, we obtained prior parameters $\alpha$=2.51 and $\beta$=1.89 for the \emph{Salix}-galler component and $\alpha$=1.34, $\beta$=9.49 for the galler-natural enemy component of the network. After calculating these prior parameters, we were then able to estimate the posterior distribution of interaction probabilities given the additional information in our dataset.
+      For species where no co-occurrences were observed ($n=0$), we can calculate the estimates for the mean and variance of $\lambda_{ij}$ directly from the prior parameters following equations~\ref{mean} and~\ref{variance} (see \emph{Appendix S1} for R implementation). For the \emph{Salix}-galler network, the prior distribution was: $\bar\lambda$=0.570, var($\lambda$)=0.056. The prior distribution for the galler-natural enemy network was: $\bar\lambda$=0.124, var($\lambda$)=0.010. 
 
 
-      \vspace{12pt}
-      \begin{em}
-      \noindent \hspace{2pt}\# Now get the degree distributions from the web\\
-      \noindent \hspace{2pt}deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# Remove one genotype that never interacted\\
-      \noindent \hspace{2pt}deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
-      \noindent \hspace{2pt}deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# Interaction probabilities are the product of plant and galler probabilities\\
-      \noindent \hspace{2pt}int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# And for the galler-parasitoid web:\\
-      \noindent \hspace{2pt}deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
-      \noindent \hspace{2pt}deg\_dist\_parasitized=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
-      \noindent \hspace{2pt}gp\_int\_probs=as.numeric(deg\_dist\_parasitized\%$*$\%t(deg\_dist\_parasitoid))\\
-      \end{em}
+      For a pair of species with some observed co-occurrences ($n>0$), we can update the prior distribution with these data. If we consider only pairs of species which were observed to co-occur but not to interact, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs, giving $\alpha'$=$\alpha$ and $\beta'$=$\beta + n_{ij}$. As the most extreme case, consider a pair of species which co-occurred at all 374 sites and was never observed to interact. Using the priors described above, our distributions would become 
+      $\bar\lambda_{ij}$=6.63 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=1.74 $\times$ 10$^{-5}$ for the \emph{Salix}-galler network and 
+      $\bar\lambda_{ij}$=3.49 $\times$ 10$^{-3}$, var($\lambda_{ij}$)=9.03 $\times$ 10$^{-6}$ for the galler-natural enemy network. Distributions for both network components were close to 0 with small variance about our estimate of $\lambda$; species $i$ and $j$ are unlikely to interact at sites or times not included in our sample.
 
 
-      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
-      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
+    \subsection*{Credible intervals and sampling requirements}
 
-      %       # Now get the degree distributions from the web
-      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
-      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
-      % # Interaction probabilities are the product of plant and galler probabilities
-      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
-
-      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
-      % deg_dist_parasitized=colSums(GP_web)/nrow(GP_web)
-      % gp_int_probs=as.numeric(deg_dist_parasitized%*%t(deg_dist_parasitoid))
+      For most pairs of species $i$ and $j$, however, $n_{ij}$ was much less than 374 and our posterior mean and variance therefore retain more of the influence of the prior. We can see this in the increasing means and variances as we decrease $n_{ij}$ (Fig.~\ref{Salix_pdfs}). The 95\% credible interval around the estimate of $\lambda$ also widens as $n_{ij}$ decreases, from (0.001, 0.017) and (\textless0.001, 0.11) for hypothetical \emph{Salix}-galler and galler-natural enemy pairs that might be observed co-occurring at all 374 sites without any observed interaction to (0.152,0.931) and (0.008, 0.364) for \emph{Salix}-galler and galler-natural enemy pairs that were never observed co-occurring.
 
 
-\clearpage
+      If we want to be 95\% confident that the interaction probability for two species in the \emph{Salix}-galler network is below 0.1, 0.05, or 0.01, we would need 51, 106, and 550 observed co-occurrences with no observed interaction, respectively (Fig.~\ref{Salix_cdfs}; see function samples\_for\_threshold in~\emph{Appendix S1}). The number of samples required to be 95\% confident that the interaction probability between galler and natural enemy species is below a threshold also increases quickly as the threshold decreases; we would need 25, 62, and 352 observed co-occurrence with no observed interaction for threshold interaction probabilities of 0.1, 0.05, and 0.01, respectively. 
+
+
+    \subsection*{Scaling up to network metrics}
+
 
 
 
