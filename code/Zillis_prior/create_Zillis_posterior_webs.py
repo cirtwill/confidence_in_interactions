@@ -99,7 +99,8 @@ def filter_posterior_webs(postdir,proportion,altdir,site):
 
 def main():
 
-  for site in ['Zillis','Zillertal']:
+  for site in ['Zillis']:
+  # for site in ['Zillis','Zillertal']:
     for nettype in ['SG','GP']:
       if nettype=='SG':
         datafile='../../data/Salix_example/Zillis/Salix_Galler/posterior_probabilities_'+site+'.tsv'

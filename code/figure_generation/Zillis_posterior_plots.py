@@ -90,26 +90,24 @@ def obs_breaker(obsdict):
   return maxdots,meandots,mindots
 
 def Zillis_yaxes(prop,graph):
+  graph.world.ymin=0.0
   if prop=='C':
-    graph.world.ymin=0.0
-    graph.world.ymax=0.12
-    graph.yaxis.tick.configure(major=0.03,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=0.07
+    graph.yaxis.tick.configure(major=0.02,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
     ytext="Connectance"
   elif prop=='LS':
-    graph.world.ymin=0
-    graph.world.ymax=6
-    graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=4
+    graph.yaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/resource"
   elif prop=='LG':
-    graph.world.ymin=0
-    graph.world.ymax=11
+    graph.world.ymax=7
     graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/consumer"
   else:
-    graph.world.ymin=0
-    graph.world.ymax=4
-    graph.yaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.world.ymax=2.25
+    graph.yaxis.tick.configure(major=.5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+    graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
     ytext='NODF'
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
 
@@ -147,6 +145,7 @@ def format_graph(graph,prop,nettype,site):
   # Xaxis will be strength of filter
   graph.world.xmin=0.45
   graph.world.xmax=1.0
+  graph.world.ymin=0.0
   graph.xaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
   graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
@@ -156,23 +155,19 @@ def format_graph(graph,prop,nettype,site):
     graph=Zillertal_yaxes(prop,graph)
   elif nettype=='GP':
     if prop=='C':
-      graph.world.ymin=0.075
-      graph.world.ymax=0.225
+      graph.world.ymax=0.2
       graph.yaxis.tick.configure(major=0.05,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
       ytext="Connectance"
     elif prop=='LS':
-      graph.world.ymin=8
-      graph.world.ymax=22
+      graph.world.ymax=18
       graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       ytext="Links/resource"
     elif prop=='LG':
-      graph.world.ymin=10
-      graph.world.ymax=30     
+      graph.world.ymax=23    
       graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       ytext="Links/consumer"
     else:
-      graph.world.ymin=0
       graph.world.ymax=8     
       graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       ytext="NODF"
@@ -214,7 +209,8 @@ def populate_graph(graph,prop,nettype,obs,whiskers):
 
 def main():
 
-  for site in ['Zillis','Zillertal']:
+  for site in ['Zillis']:
+  # for site in ['Zillis','Zillertal']:
     grace=MultiPanelGrace(colors=colors)
     for prop in ['C','LS','LG','NODF']:
       for nettype in ['SG','GP']:
