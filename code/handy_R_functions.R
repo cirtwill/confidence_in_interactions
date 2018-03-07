@@ -18,8 +18,8 @@ calculate_parameters<-function(priordata,n,k){
 # Returns maximum likelihood estimator for interaction probability
 # Based on parameters returned by calculate_parameters
 calculate_mean_MLE<-function(priordata,n,k){
-  library(MASS)
-  pars=fitdistr(x=priordata,"beta",start=list(shape1=1,shape2=1),lower=c(0,0))$estimate
+  library(fitdistrplus)
+  pars=fitdist(priordata,distr="beta",method="mle",start=list(shape1=10,shape2=10),lower=c(0,0))$estimate
   # The lower=c(0,0) prevents R from fitting invalid (negative) parameters
   alpha=pars[[1]]
   beta=pars[[2]]
@@ -69,7 +69,7 @@ credible_interval<-function(pars,p_lower,p_upper){
 samples_for_threshold<-function(threshold,confidence,pars){
   alpha=pars[[1]]
   beta=pars[[2]]
-  n=seq(0,1000,1)
+  n=seq(0,4000,1)
   k=0
   cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)
   samples=length(which(cdf<confidence))

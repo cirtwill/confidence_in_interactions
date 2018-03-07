@@ -146,10 +146,12 @@ def format_graph(graph,nettype):
   return graph
 
 def populate_graph(graph,pointdict,MLEdict,nettype):
-  cols=[2,3,5,9,10,11]
+  # cols=[2,3,5,9,10,11]
+  cols=[11,9,7,5,3,2]
   x=0
   y=0
-  for N in [0,5,10,20,50,100]:
+  # for N in [0,5,10,20,50,100]:
+  for N in [100,50,20,10,5,0]:
     data=graph.add_dataset(pointdict[N])
     data.symbol.shape=0
     data.line.configure(linewidth=1,linestyle=1,color=cols[x])
@@ -161,11 +163,11 @@ def populate_graph(graph,pointdict,MLEdict,nettype):
     lower=MLEdict[N][1]
     upper=MLEdict[N][2]
 
-    MLEline=graph.add_dataset([(lower,graph.world.ymax-14+y),(upper,graph.world.ymax-14+y)])
+    MLEline=graph.add_dataset([(lower,graph.world.ymax-4-y),(upper,graph.world.ymax-4-y)])
     MLEline.symbol.shape=0
     MLEline.line.configure(linestyle=1,color=cols[x],linewidth=3)
 
-    MLEdot=graph.add_dataset([(MLE,graph.world.ymax-14+y)])
+    MLEdot=graph.add_dataset([(MLE,graph.world.ymax-4-y)])
     MLEdot.line.linestyle=0
     MLEdot.symbol.configure(shape=3,color=1,fill_color=cols[x],size=.75)
 

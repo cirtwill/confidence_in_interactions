@@ -1,7 +1,8 @@
 source('../handy_R_functions.R')
 
 # To create the data file:
-for(subweb in  c('Zillis','Zillertal')){
+subweb="Zillis"
+# for(subweb in  c('Zillis','Zillertal')){
   SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)
   SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)
   deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
@@ -37,5 +38,5 @@ for(subweb in  c('Zillis','Zillertal')){
   }
   write.table(GP_dataset,file=paste0('../../data/Salix_example/Zillis/Galler_Parasitoid/posterior_probabilities_',subweb,'.tsv',sep=''))
 
-}
+# }
 

@@ -1,39 +1,33 @@
-# ######### R code to generate data files:
-# # % Getting cdfs:
-# pars=calculate_parameters(int_probs,0,0)
-# n=seq(0,500,1)
+# ######## R code to generate data files:
+# % Getting cdfs:
+# pars=calculate_parameters(sg_int_probs,0,0)
+# n=seq(0,2000,1)
 
-# CDFs=matrix(nrow=4,ncol=502)
+# CDFs=matrix(nrow=3,ncol=2002)
 # colnames(CDFs)=c("Threshold",n)
 # r=1
-# for(threshold in c(0.5,0.25,0.1,0.05)){
-#   # for(confidence in c(0.9,0.95,0.975)){
+# for(threshold in c(0.1,0.05,0.01)){
 #     cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)
-#     # samples=length(which(cdf<confidence))
 #     CDFs[r,1]=threshold
-#     # CDFs[r,2]=confidence
-#     # CDFs[r,3]=samples
-#     CDFs[r,2:502]=cdf
+#     CDFs[r,2:2002]=cdf
 #     print(r)
 #     r=r+1
-#   }
-# # }
+# }
 
 
-# samples=matrix(nrow=12,ncol=3)
+# samples=matrix(nrow=9,ncol=3)
 # colnames(samples)=c("Threshold","Confidence","Samples")
 # r=1
-# for(threshold in c(0.5,0.25,0.1,0.05)){
+# for(threshold in c(0.1,0.05,0.01)){
 #   for(confidence in c(0.9,0.95,0.975)){
-#     cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)
-#     n_obs=length(which(cdf<confidence))
+#     n_obs=samples_for_threshold(threshold,confidence,pars)
 #     samples[r,1]=threshold
 #     samples[r,2]=confidence
 #     samples[r,3]=n_obs
 #     print(r)
 #     r=r+1
 #   }
-# # }
+# }
 
 # write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')
 # write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
@@ -45,16 +39,12 @@
 # gp_pars=calculate_parameters(gp_int_probs,0,0)
 # n=seq(0,500,1)
 
-# gp_CDFs=matrix(nrow=4,ncol=502)
+# gp_CDFs=matrix(nrow=3,ncol=502)
 # colnames(gp_CDFs)=c("Threshold",n)
 # r=1
-# for(threshold in c(0.5,0.25,0.1,0.05)){
-#   # for(confidence in c(0.9,0.95,0.975)){
+# for(threshold in c(0.1,0.05,0.01)){
 #     cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)
-#     # samples=length(which(cdf<confidence))
 #     gp_CDFs[r,1]=threshold
-#     # CDFs[r,2]=confidence
-#     # CDFs[r,3]=samples
 #     gp_CDFs[r,2:502]=cdf
 #     print(r)
 #     r=r+1
@@ -62,13 +52,12 @@
 
 
 
-# gp_samples=matrix(nrow=12,ncol=3)
+# gp_samples=matrix(nrow=9,ncol=3)
 # colnames(gp_samples)=c("Threshold","Confidence","Samples")
 # r=1
-# for(threshold in c(0.5,0.25,0.1,0.05)){
+# for(threshold in c(0.1,0.05,0.01)){
 #   for(confidence in c(0.9,0.95,0.975)){
-#     cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)
-#     n_obs=length(which(cdf<confidence))
+#     n_obs=samples_for_threshold(threshold,confidence,gp_pars)
 #     gp_samples[r,1]=threshold
 #     gp_samples[r,2]=confidence
 #     gp_samples[r,3]=n_obs
@@ -116,9 +105,9 @@ def read_Rfiles(filename,nettype):
   f.close()
 
   if nettype=='SG':
-    g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv','r')
+    g=open('../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv','r')
   else:
-    g=open('../../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv','r')    
+    g=open('../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv','r')    
   for line in g:
     if line.split()[0]!='"Threshold"':
       threshold=float(line.split()[1])
@@ -135,7 +124,7 @@ def combiner(datadict):
   pointdict={}
   for threshold in datadict:
     pointlist=[]
-    for n in range(0,501):
+    for n in range(0,len(datadict[threshold])):
       pointlist.append((n,float(datadict[threshold][n])))
     pointdict[threshold]=pointlist
   return pointdict
@@ -146,45 +135,47 @@ def format_graph(graph,nettype):
   graph.frame.linewidth=1
   graph.world.xmin=0
   if nettype=='SG':
-    graph.world.xmax=150
+    graph.world.xmax=1300
+    major=250
   else:
-    graph.world.xmax=80
+    graph.world.xmax=300
+    major=50
   graph.world.ymin=-0
   graph.world.ymax=1
 
   graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,minor_size=.3,place='normal',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
 
-  graph.xaxis.tick.configure(major=20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+  graph.xaxis.tick.configure(major=major,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=0)
 
   graph.xaxis.label.configure(text="Number of samples",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Cumulative density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(85,.75),loctype='world')
+    loc=(750,.65),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.03)
 
   return graph
 
 def populate_graph(graph,pointdict,nettype):
-  for threshold in pointdict:
-    if threshold==.5:
+  for threshold in sorted(pointdict):
+    print threshold
+    if threshold==.1:
       x=1
-    elif threshold==.25:
+    elif threshold==.05:
       x=3
-    elif threshold==.1:
-      x=5
-    else:
+    elif threshold==.01:
       x=2
 
+    print len(pointdict[threshold])
     data=graph.add_dataset(pointdict[threshold])
     data.symbol.shape=0
     data.line.configure(linewidth=2,linestyle=x)
     if nettype=='SG':
       data.legend="Threshold="+str(threshold)
 
-  bar95=graph.add_dataset([(0,0.95),(1000,.95)])
+  bar95=graph.add_dataset([(0,0.95),(2000,.95)])
   bar95.symbol.shape=0
   bar95.line.configure(linewidth=1,linestyle=1,color=2)
 
