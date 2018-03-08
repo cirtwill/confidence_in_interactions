@@ -50,7 +50,7 @@ Link\"{o}ping, Sweden\\
   The following simple functions are implemented in the R language. They are 
   also provided as R code in a separate file.
   Priordata is the list of interaction frequencies from the prior 
-  data, n is the number of sites with observed co-occurrance of 
+  data, n is the number of sites with observed co-occurrence of 
   species $i$ and $j$, and k is the number of sites with an 
   observed interaction $ij$. When calculating the prior 
   distribution, both n and k are 0. In the main text we assume 100\%
@@ -95,14 +95,14 @@ Link\"{o}ping, Sweden\\
       \# Calculate the MLE of the mean\\
       mu\_numerator=alpha\\
       mu\_denominator=alpha+beta\\
-      mu=mu\_numerator/mu\_denomenator\\
+      mu=mu\_numerator/mu\_denominator\\
       \vspace{4pt}
       \# Calculate the MLE of the variance\\
       sig\_numerator=alpha\*beta\\
       den1=alpha+beta\\
       den2=den1$**$2\\
-      sig\_denomenator=den1$*$den2\\
-      sigma2=sig\_numerator/sig\_denomenator\\
+      sig\_denominator=den1$*$den2\\
+      sigma2=sig\_numerator/sig\_denominator\\
       return(c(mu,sigma2))\}
     \end{em}
   \vspace{12pt}
@@ -289,7 +289,7 @@ Link\"{o}ping, Sweden\\
       \vspace{12pt}
       \clearpage
 
-      To extract the galler-parsitoid network from the same study above:
+      To extract the galler-parasitoid network from the same study above:
 
 
       \vspace{12pt}
@@ -396,7 +396,7 @@ Link\"{o}ping, Sweden\\
 
 
       \begin{figure}[ht]
-        \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. Note that the number of samples required to reach any given threshold is larger for \textbf{A)} the \emph{Salix}-galler network than for \textbf{B)} the galler-natural enemy network. In the galler-natural enemy network, the credible interval for a pair of species with no observed co-occurrances was 0.364. All pairs of species therefore have $\lambda$\textless0.5.}
+        \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. Note that the number of samples required to reach any given threshold is larger for \textbf{A)} the \emph{Salix}-galler network than for \textbf{B)} the galler-natural enemy network. In the galler-natural enemy network, the credible interval for a pair of species with no observed co-occurrences was 0.364. All pairs of species therefore have $\lambda$\textless0.5.}
         \label{Salix_cdfs}
         \includegraphics[width=.8\textwidth]{figures/Salix_Galler_samples_and_cdfs.eps}
 
@@ -404,7 +404,7 @@ Link\"{o}ping, Sweden\\
 
 
       \begin{figure}[ht]
-      \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), and links per consumer for networks assembled using posterior distributions based on a smaller, North American \emph{Salix}-galler-natural enemy system~\citep{Barbour2016,Barbour2016Dryad}. We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
+      \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a smaller, North American \emph{Salix}-galler-natural enemy system~\citep{Barbour2016,Barbour2016Dryad}. We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
       \label{posterior_webs}    
       \includegraphics[width=.8\textwidth]{Figures/Salix_Galler_posterior_properties.eps}
       \end{figure}
