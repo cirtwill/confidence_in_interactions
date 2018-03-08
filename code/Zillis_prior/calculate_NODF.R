@@ -1,7 +1,8 @@
 library(vegan)
 library(igraph)
 
-for(site in c("Zillis","Zillertal")){
+site="Zillis"
+# for(site in c("Zillis","Zillertal")){
 # for(site in c("Zillertal")){
   for(webtype in c("SG","GP")){
     if(webtype=="SG"){
@@ -46,4 +47,4 @@ for(site in c("Zillis","Zillertal")){
     }
     write.table(nesttable,file=paste0('../../data/Zillis_webs/',webtype,'_NODF_table_',site,'.tsv',sep=''))
   }
-}
+# }

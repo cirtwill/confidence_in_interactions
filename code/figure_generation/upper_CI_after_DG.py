@@ -33,7 +33,6 @@ def read_Rfiles(filename):
       upper=float(line.split()[-1])
       dataset.append((n,upper))
   f.close()
-
   return dataset
 
 def format_graph(graph):
@@ -41,7 +40,7 @@ def format_graph(graph):
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
   graph.world.xmin=0
-  graph.world.xmax=32
+  graph.world.xmax=40
   graph.world.ymin=-0
   graph.world.ymax=1
 
@@ -67,7 +66,7 @@ def populate_graph(graph,dataset):
 
   bar95=graph.add_dataset([(0,0.1),(1000,.1)])
   bar95.symbol.shape=0
-  bar95.line.configure(linewidth=2,linestyle=2,color=2)
+  bar95.line.configure(linewidth=2,linestyle=3,color=2)
 
   return graph
 
