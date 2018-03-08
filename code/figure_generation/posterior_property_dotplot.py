@@ -22,6 +22,10 @@ colors=ColorBrewerScheme('Blues')  # The blue is very beautiful but maybe harder
 colors.add_color(130,20,20,'red')
 # colors.add_color(120,120,120,'grey')
 
+obsvals={'SG':{'C':0.028,'LS':2.71,'LG':1.47,'NODF':0.5600535},
+'GP':{'C':0.078,'LS':9.99,'LG':7.45,'NODF':6.853653}}
+
+
 def read_summary_file(filename):
   whiskers={0.5:[],0.6:[],0.7:[],0.8:[],0.9:[],0.95:[],0.99:[]}
   obs={0.5:[],0.6:[],0.7:[],0.8:[],0.9:[],0.95:[],0.99:[]}
@@ -66,7 +70,6 @@ def read_NODF_file(filename):
   f.close()
   return whiskers, obs
 
-
 def mean_calculator(listdict):
   dots=[]
   for prop in listdict:
@@ -103,34 +106,34 @@ def format_graph(graph,prop,nettype):
   if prop=='C':
     if nettype=='SG':
       graph.world.ymin=0.20
-      graph.world.ymax=0.6500000000001
-      graph.yaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.world.ymax=0.700000000001
+      graph.yaxis.tick.configure(major=0.2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
       graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
     else:
       graph.world.ymin=0.075
-      graph.world.ymax=0.225
-      graph.yaxis.tick.configure(major=0.05,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-      graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
+      graph.world.ymax=0.25
+      graph.yaxis.tick.configure(major=0.1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
     ytext="Connectance"
   elif prop=='LS':
     if nettype=='SG':
       graph.world.ymin=12
-      graph.world.ymax=33
-      graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.world.ymax=35
+      graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     else:
       graph.world.ymin=8
-      graph.world.ymax=22
-      graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.world.ymax=25
+      graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/resource"
   elif prop=='LG':
     if nettype=='SG':
       graph.world.ymin=20
-      graph.world.ymax=62
-      graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.world.ymax=65
+      graph.yaxis.tick.configure(major=20,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     else:
       graph.world.ymin=10
       graph.world.ymax=30     
-      graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.yaxis.tick.configure(major=10,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="Links/consumer"
   else:
     if nettype=='SG':
@@ -139,14 +142,14 @@ def format_graph(graph,prop,nettype):
       graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     else:
       graph.world.ymin=0
-      graph.world.ymax=8     
-      graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
+      graph.world.ymax=9     
+      graph.yaxis.tick.configure(major=3,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
     ytext="NODF"
 
-
+  graph.world.ymin=0
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.5,
-    loc=(0.625,3),loctype='world')
+    loc=(0.625,4),loctype='world')
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
   if prop=='C' and nettype=='SG':
     graph.xaxis.label.configure(text='Salix-Galler',place='opposite',char_size=1.25,just=2,loctype='world')
@@ -156,6 +159,11 @@ def format_graph(graph,prop,nettype):
   return graph
 
 def populate_graph(graph,prop,nettype,obs,whiskers):
+  obsval=obsvals[nettype][prop]
+  obsline=graph.add_dataset([(-1,obsval),(1,obsval)])
+  obsline.symbol.shape=0
+  obsline.line.configure(linestyle=2,linewidth=2,color='red')
+
   maxdots,meandots,mindots=obs_breaker(obs)
   maxline=graph.add_dataset(maxdots,type='xy')
   maxline.symbol.shape=0
@@ -174,7 +182,12 @@ def populate_graph(graph,prop,nettype,obs,whiskers):
   dots.line.linestyle=0
   dots.symbol.configure(shape=1,size=.5,fill_color=6)
 
+  obsline2=graph.add_dataset([(-1,obsval),(1,obsval)])
+  obsline2.symbol.shape=0
+  obsline2.line.configure(linestyle=3,linewidth=2,color='red')
+
   if prop=="NODF" and nettype=="GP":
+    obsline.legend="Observed"
     meandots.legend="Observed mean"
     dots.legend="Filtered mean"
 

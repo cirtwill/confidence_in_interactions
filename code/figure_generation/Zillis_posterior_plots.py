@@ -22,6 +22,9 @@ colors=ColorBrewerScheme('Blues')  # The blue is very beautiful but maybe harder
 colors.add_color(130,20,20,'red')
 # colors.add_color(120,120,120,'grey')
 
+obsvals={'SG':{'C':0.028,'LS':2.71,'LG':1.47,'NODF':0.5600535},
+'GP':{'C':0.078,'LS':9.99,'LG':7.45,'NODF':6.853653}}
+
 def read_summary_file(filename):
   whiskers={0.5:[],0.6:[],0.7:[],0.8:[],0.9:[],0.95:[],0.99:[]}
   obs={0.5:[],0.6:[],0.7:[],0.8:[],0.9:[],0.95:[],0.99:[]}
@@ -65,7 +68,6 @@ def read_NODF_file(filename):
       whiskers[proportion].append(sample_mean)
   f.close()
   return whiskers, obs
-
 
 def mean_calculator(listdict):
   dots=[]
@@ -138,6 +140,7 @@ def Zillertal_yaxes(prop,graph):
   graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
 
   return graph
+
 def format_graph(graph,prop,nettype,site):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
@@ -173,7 +176,7 @@ def format_graph(graph,prop,nettype,site):
       ytext="NODF"
     graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.5,
-    loc=(0.625,3),loctype='world')
+    loc=(0.635,3.8),loctype='world')
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
   if prop=='C' and nettype=='SG':
     graph.xaxis.label.configure(text='Salix-Galler',place='opposite',char_size=1.25,just=2,loctype='world')
@@ -183,6 +186,11 @@ def format_graph(graph,prop,nettype,site):
   return graph
 
 def populate_graph(graph,prop,nettype,obs,whiskers):
+  obsval=obsvals[nettype][prop]
+  obsline=graph.add_dataset([(-1,obsval),(1,obsval)])
+  obsline.symbol.shape=0
+  obsline.line.configure(linestyle=2,linewidth=2,color='red')
+
   maxdots,meandots,mindots=obs_breaker(obs)
   maxline=graph.add_dataset(maxdots,type='xy')
   maxline.symbol.shape=0
@@ -201,8 +209,13 @@ def populate_graph(graph,prop,nettype,obs,whiskers):
   dots.line.linestyle=0
   dots.symbol.configure(shape=1,size=.5,fill_color=6)
 
+  obsline2=graph.add_dataset([(-1,obsval),(1,obsval)])
+  obsline2.symbol.shape=0
+  obsline2.line.configure(linestyle=3,linewidth=2,color='red')
+
   if prop=="NODF" and nettype=="GP":
-    meandots.legend="Observed mean"
+    obsline.legend="Observed"
+    meandots.legend="Posterior mean"
     dots.legend="Filtered mean"
 
   return graph
