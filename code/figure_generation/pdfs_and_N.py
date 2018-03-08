@@ -120,12 +120,15 @@ def format_graph(graph,nettype):
   graph.world.xmin=0
   if nettype=='SG':
     graph.world.xmax=.1
+    # graph.world.xmax=.8
     major=.02
+    # major=.2
   else:
     graph.world.xmax=.3000001
     major=.05
   graph.world.ymin=-0
   graph.world.ymax=72
+  # graph.world.ymax=55
 
   graph.yaxis.tick.configure(major=50,onoff='off',minor_ticks=0,major_size=.7,minor_size=.5,place='both',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=0,format='decimal',prec=0)
@@ -138,7 +141,9 @@ def format_graph(graph,nettype):
   graph.yaxis.label.configure(text="Probability density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
     loc=(0.08,35),loctype='world',size=2)
+    # loc=(0.625,35),loctype='world',size=2)
   if nettype=='SG':
+    # graph.add_drawing_object(DrawText,text="N",x=0.665,y=35.5,char_size=.75,just=2,loctype='world')
     graph.add_drawing_object(DrawText,text="N",x=0.085,y=35.5,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.02)
 
@@ -211,3 +216,4 @@ grace.hide_redundant_labels()
 grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Probability density",just=2,char_size=1,perpendicular_offset=.04)
 
 grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N_Zillis.eps')
+# grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N.eps')

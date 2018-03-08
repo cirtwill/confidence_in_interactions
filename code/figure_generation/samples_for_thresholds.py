@@ -31,6 +31,8 @@
 
 # write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')
 # write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+# # write.table(samples,file='../data/Salix_example/Salix_Galler/samples_for_threshold.tsv',sep='\t')
+# # write.table(CDFs,file='../data/Salix_example/Salix_Galler/samplefigure.tsv',sep='\t')
 
 
 # # Galler-parasitoid stuff
@@ -68,6 +70,8 @@
 
 # write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')
 # write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+# # write.table(gp_samples,file='../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')
+# # write.table(gp_CDFs,file='../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',sep='\t')
 
 import sys
 import math
@@ -106,8 +110,10 @@ def read_Rfiles(filename,nettype):
 
   if nettype=='SG':
     g=open('../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv','r')
+    # g=open('../../data/Salix_example/Salix_Galler/samples_for_threshold.tsv','r')
   else:
     g=open('../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv','r')    
+    # g=open('../../data/Salix_example/Galler_Parasitoid/samples_for_threshold.tsv','r')    
   for line in g:
     if line.split()[0]!='"Threshold"':
       threshold=float(line.split()[1])
@@ -142,6 +148,8 @@ def format_graph(graph,nettype):
     major=50
   graph.world.ymin=-0
   graph.world.ymax=1
+  # graph.world.xmax=750
+  # major=250
 
   graph.yaxis.tick.configure(major=.20,onoff='on',minor_ticks=1,major_size=.5,minor_size=.3,place='normal',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
@@ -153,6 +161,7 @@ def format_graph(graph,nettype):
   graph.yaxis.label.configure(text="Cumulative density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
     loc=(750,.65),loctype='world')
+    # loc=(400,.65),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.03)
 
@@ -180,9 +189,10 @@ def populate_graph(graph,pointdict,nettype):
   bar95.line.configure(linewidth=1,linestyle=1,color=2)
 
   if nettype=="SG":
-    graph.add_drawing_object(DrawText,text="Salix-Galler",char_size=1,just=2,x=75,y=1.05,loctype='world')
+    graph.add_drawing_object(DrawText,text="Salix-Galler",char_size=1,just=0,x=0,y=1.05,loctype='world')
   else:
-    graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=2,x=40,y=1.05,loctype='world')
+    # graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=2,x=40,y=1.05,loctype='world')
+    graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=0,x=0,y=1.05,loctype='world')
 
   return graph
 
@@ -254,4 +264,5 @@ grace.multi(rows=2,cols=1,vgap=.08)
 grace.hide_redundant_labels()
 grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Cumulative density",just=2,char_size=1,perpendicular_offset=0.07)
 
+# grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs.eps')
 grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs_Zillis.eps')
