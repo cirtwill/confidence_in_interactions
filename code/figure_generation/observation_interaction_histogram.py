@@ -132,7 +132,7 @@ def populate_graph(graph,occurs,graphtype):
   if graphtype=='occurs':
     col=11
   elif graphtype=='interacts':
-    col=2
+    col=3
   else:
     dots=graph.add_dataset(occurs,type='xy')
     dots.symbol.configure(fill_color=1,color=1,size=.4)
@@ -140,7 +140,7 @@ def populate_graph(graph,occurs,graphtype):
 
     lines=graph.add_dataset([(0,0),(1000,1000)])
     lines.symbol.shape=0
-    lines.line.configure(color=2,linestyle=3,linewidth=2)
+    lines.line.configure(color=3,linestyle=3,linewidth=2)
   if graphtype!='dotplot':
     occ=graph.add_dataset(occurs,type='bar')
     occ.symbol.configure(fill_color=col,color=1,size=.2)

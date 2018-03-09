@@ -1,4 +1,4 @@
-####### R code to generate data files:
+# ###### R code to generate data files:
 # Getting distributions:
 # xdata=matrix(ncol=1001,nrow=12)
 # ydata=matrix(ncol=1001,nrow=12)
@@ -6,6 +6,7 @@
 # ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))
 # for(i in 1:length(ns)){
 #   n=ns[i]
+#   print(n)
 #   dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))
 #   x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]
 #   hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))
@@ -117,31 +118,45 @@ def format_graph(graph,nettype):
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
   graph.world.xmin=0
-  graph.world.xmax=.6
+  if nettype=='SG':
+    graph.world.xmax=.1
+    # graph.world.xmax=.8
+    major=.02
+    # major=.2
+  else:
+    graph.world.xmax=.3000001
+    major=.05
   graph.world.ymin=-0
-  graph.world.ymax=46
+  graph.world.ymax=72
+  # graph.world.ymax=55
 
   graph.yaxis.tick.configure(major=50,onoff='off',minor_ticks=0,major_size=.7,minor_size=.5,place='both',major_linewidth=1,minor_linewidth=1)
   graph.yaxis.ticklabel.configure(char_size=0,format='decimal',prec=0)
 
-  graph.xaxis.tick.configure(major=.1,onoff='on',minor_ticks=0,major_size=.5,place='both',minor_size=.5,major_linewidth=1,minor_linewidth=1)
-  graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=1)
+
+  graph.xaxis.tick.configure(major=major,onoff='on',minor_ticks=0,major_size=.5,place='both',minor_size=.5,major_linewidth=1,minor_linewidth=1)
+  graph.xaxis.ticklabel.configure(char_size=.75,format='decimal',prec=2)
 
   graph.xaxis.label.configure(text="Probability of interaction",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Probability density",char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(0.475,25),loctype='world',size=2)
+    loc=(0.08,35),loctype='world',size=2)
+    # loc=(0.625,35),loctype='world',size=2)
   if nettype=='SG':
-    graph.add_drawing_object(DrawText,text="N",x=0.545,y=25.5,char_size=.75,just=2,loctype='world')
-  graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.01)
+    # graph.add_drawing_object(DrawText,text="N",x=0.665,y=35.5,char_size=.75,just=2,loctype='world')
+    graph.add_drawing_object(DrawText,text="N",x=0.085,y=35.5,char_size=.75,just=2,loctype='world')
+  graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.02)
 
 
   return graph
 
 def populate_graph(graph,pointdict,MLEdict,nettype):
-  cols=[2,3,5,9,10,11]
+  # cols=[2,3,5,9,10,11]
+  cols=[11,9,7,5,3,2]
   x=0
-  for N in [0,5,10,20,50,100]:
+  y=0
+  # for N in [0,5,10,20,50,100]:
+  for N in [100,50,20,10,5,0]:
     data=graph.add_dataset(pointdict[N])
     data.symbol.shape=0
     data.line.configure(linewidth=1,linestyle=1,color=cols[x])
@@ -153,14 +168,15 @@ def populate_graph(graph,pointdict,MLEdict,nettype):
     lower=MLEdict[N][1]
     upper=MLEdict[N][2]
 
-    MLEline=graph.add_dataset([(lower,graph.world.ymax-6.5+x),(upper,graph.world.ymax-6.5+x)])
+    MLEline=graph.add_dataset([(lower,graph.world.ymax-4-y),(upper,graph.world.ymax-4-y)])
     MLEline.symbol.shape=0
-    MLEline.line.configure(linestyle=1,color=cols[x],linewidth=2)
+    MLEline.line.configure(linestyle=1,color=cols[x],linewidth=3)
 
-    MLEdot=graph.add_dataset([(MLE,graph.world.ymax-6.5+x)])
+    MLEdot=graph.add_dataset([(MLE,graph.world.ymax-4-y)])
     MLEdot.line.linestyle=0
-    MLEdot.symbol.configure(shape=3,color=1,fill_color=cols[x],size=.5)
+    MLEdot.symbol.configure(shape=3,color=1,fill_color=cols[x],size=.75)
 
+    y+=2
     x+=1
 
 
@@ -200,3 +216,4 @@ grace.hide_redundant_labels()
 grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Probability density",just=2,char_size=1,perpendicular_offset=.04)
 
 grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N_Zillis.eps')
+# grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N.eps')
