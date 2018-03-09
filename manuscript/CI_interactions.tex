@@ -348,50 +348,6 @@ alyssa.cirtwill@gmail.com\\
       For most pairs of species $i$ and $j$, however, $n_{ij}$ was much less than 374 and our posterior mean and variance therefore retain more of the influence of the prior. We can see this in the increasing means and variances as we decrease $n_{ij}$ (Fig.~\ref{Salix_pdfs}). The change in distribution as $n_{ij}$ decreases can also be shown  by calculating 95\% credible intervals for $\lambda$ (see the function ``credible\_interval" in \emph{Appendix S2}). The 95\% credible interval around the estimate of $\lambda$ also widens as $n_{ij}$ decreases from (0.001, 0.017) and (\textless0.001, 0.11) for hypothetical \emph{Salix}-galler and galler-natural enemy pairs that might be observed co-occurring at all 374 sites without any observed interaction to (0.152,0.931) and (0.008, 0.364) for \emph{Salix}-galler and galler-natural enemy pairs that were never observed co-occurring. The 95\% credible interval for hypothetical \emph{Salix}-galler pairs widened from (0.006, 0.022) if the pair co-occurred at all sites to (0.013, 0.049) if they co-occurred at none. The 95\% credible interval for hypothetical galler-natural enemy pairs, meanwhile, widened from (0.00001, 0.008) to (0.0005, 0.304).
 
 
-% %DG: the following subsection could be moved to the appendix if we need to cut down
-% Add to appendix. 
-
-%   \subsection*{Computing the credible interval around a probability estimate}
-
-%       As well as obtaining posterior means and variances, it is possible to calculate a 95\% credible interval about the posterior mean. This is again straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S2}). Calculating the 95\% credible intervals for species pairs with 0 to 50 observed co-occurrences without any observed interaction (as in Fig.~\ref{Salix_pdfs}), we see that the interval narrows dramatically as the number of observations increases. In no case, however, does the confidence interval include 0. Even for a pair of species which appeared together in all 374 sites but were never observed interacting, the confidence interval (0.001, 0.018) comes close to, but does not include zero (Table~\ref{interval_table}). In other words, even with a very large data set, we will have problems in establishing that a given species pair can never interact.
-
-%       % # R code to make the table:
-%       % output=matrix(nrow=length(ns),ncol=5)
-%       % ns=c(0,1,2,5,10,15,20,25,50,100,150,200,374)
-%       % output[,1]=ns
-%       % for(r in 1:nrow(output)){
-%       %   interval1=credible_interval(calculate_parameters(sg_int_probs,ns[r],0),0.025,0.975)    
-%       %   interval2=credible_interval(calculate_parameters(gp_int_probs,ns[r],0),0.025,0.975)    
-%       %   output[r,2:3]=interval1
-%       %   output[r,4:5]=interval2
-%       % }
-
-%       \begin{table}[h]
-%         \caption{95\% credible intervals for the interaction probability of two species that co-occur in $N$ sites but are never observed to interact, obtained using prior information from the \emph{Salix}-galler network in~\citet{Barbour2016,Barbour2016Dryad}. [Tomas notes that this is conceptually very similar to Fig.~\ref{Salix_pdfs}]}
-%         \label{interval_table}
-%         \begin{tabular}{l | c c | c c }
-%         \multirow{2}{*}{N} & \multicolumn{2}{c}{\emph{Salix}-galler} & \multicolumn{2}{c}{galler-natural enemy}\\
-%          & Lower bound & Upper bound \\
-%         \hline
-%         0   & 0.152 & 0.931 & 0.008 & 0.364 \\
-%         1   & 0.110 & 0.843 & 0.007 & 0.337 \\
-%         2   & 0.087 & 0.760 & 0.006 & 0.313 \\
-%         5   & 0.053 & 0.573 & 0.005 & 0.258 \\
-%         10  & 0.033 & 0.400 & 0.004 & 0.200 \\
-%         15  & 0.023 & 0.306 & 0.003 & 0.163 \\
-%         20  & 0.018 & 0.247 & 0.003 & 0.137 \\
-%         25  & 0.015 & 0.208 & 0.002 & 0.119 \\
-%         50  & 0.008 & 0.115 & 0.001 & 0.071 \\
-%         100 & 0.004 & 0.061 & 0.001 & 0.039 \\
-%         150 & 0.003 & 0.041 & \textless0.001 & 0.027 \\
-%         200 & 0.002 & 0.031 & \textless0.001 & 0.021 \\
-%         \hline
-%         374 & 0.001 & 0.017 & \textless0.001 & 0.011 \\
-%         \hline
-%         \end{tabular}
-%         \end{table}
-
-
   \subsection*{How many samples are required to reach a minimal precision}
 
 
@@ -519,7 +475,7 @@ alyssa.cirtwill@gmail.com\\
       \begin{figure}[ht]
         \caption{Using prior distribution based on the \emph{Salix}-galler and galler-natural enemy networks in~\citet{Barbour2016}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for each $\lambda$ in each network ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. \textbf{A)} The posterior distributions for the \emph{Salix}-galler component are always wider and farther from zero than those for \textbf{B)} the galler-natural enemy component. This is likely because the prior distribution for the galler-natural enemy component of the network was both narrower and had a mean closer to that in the~\citet{Kopelke2017} data than did the \emph{Salix}-galler component.}
         \label{Salix_pdfs}
-        \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
+        \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N_Zillis.eps}
         \end{figure}
 
 
@@ -527,7 +483,7 @@ alyssa.cirtwill@gmail.com\\
       \begin{figure}[ht]
         \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. Note that the number of samples required to reach any given threshold is larger for \textbf{A)} the \emph{Salix}-galler network than for \textbf{B)} the galler-natural enemy network. In the galler-natural enemy network, the credible interval for a pair of species with no observed co-occurrances was 0.364. All pairs of species therefore have $\lambda$\textless0.5.}
         \label{Salix_cdfs}
-        \includegraphics[width=.8\textwidth]{figures/Salix_Galler_samples_and_cdfs.eps}
+        \includegraphics[width=.8\textwidth]{figures/Salix_Galler_samples_and_cdfs_Zillis.eps}
 
         \end{figure}
 
