@@ -46,21 +46,27 @@
 
 % AC : Assuming I'm going to be corresponding author on this but happy to let anyone else step in if you're eager
 
-\author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1}$, Tomas Roslin$^{2,3}$, Kate Wootton$^{2}$, Dominique Gravel$^{4}$}
-\date{\small$^1$Department of Physics, Chemistry\\ 
-and Biology (IFM)\\ 
+\author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1\ddagger}$, Tomas Roslin$^{2,3\star}$, Kate Wootton$^{2\diamond}$, Dominique Gravel$^{4\triangleright}$}
+\date{\begin{minipage}[h]{0.45\textwidth}
+\small$^1$ Department of Physics,\\
+Chemistry and Biology (IFM)\\ 
 Link\"{o}ping University\\
 Link\"{o}ping, Sweden\\
-\medskip $^2$ Department of Ecology\\ P.O. Box 7044, Swedish University of Agricultural Sciences \\ SE-750 07 Uppsala, Sweden \\
-\medskip $^3$ Spatial Foodweb Ecology Group\\ Department of Agricultural Sciences \\ PO Box 27 (Latokartanonkaari 5)\\ FI-00014 University of Helsinki, Finland \\
-\medskip$^4$ D\'{e}partement de biologie\\ 
+$^2$ Department of Ecology\\ 
+P.O. Box 7044\\ 
+Swedish University of Agricultural Sciences \\ 
+SE-750 07 Uppsala, Sweden 
+\end{minipage}\hspace{.05\textwidth}\begin{minipage}[h]{0.45\textwidth}
+\small$^3$ Spatial Foodweb Ecology Group\\ 
+Department of Agricultural Sciences \\ 
+PO Box 27 (Latokartanonkaari 5)\\ 
+FI-00014 University of Helsinki, Finland\\
+$^4$ D\'{e}partement de biologie\\ 
 Universit\'{e} de Sherbrooke\\ 
-Sherbrooke, Canada\\ 
-\medskip
-$^\dagger$ Corresponding author:\\
-alyssa.cirtwill@gmail.com\\
-+46 723 158464\\
+Sherbrooke, Canada
+\end{minipage}
 }
+
 
 \renewcommand\Authands{ and }
 
@@ -69,8 +75,58 @@ alyssa.cirtwill@gmail.com\\
 \raggedright
 \setlength{\parindent}{15pt} 
 
-\clearpage
+\vspace{-.25in}
+\begin{minipage}[h]{0.25\textwidth}
+\small$^\dagger$ Corresponding author:\\
+alyssa.cirtwill@gmail.com\\
+tel: +46 723 158464
+\end{minipage}\hspace{.05\textwidth}\begin{minipage}[h]{0.22\textwidth}
+\small$^\ddagger$ anna.eklof@liu.se\\
+$^\star$ tomas.roslin@slu.se
+\end{minipage}\hspace{.05\textwidth}\begin{minipage}[h]{0.38\textwidth}
+\small$^\diamond$ kate.wootton@slu.se\\
+$^\triangleright$ dominique.gravel@usherbrooke.ca
+\end{minipage}
+
+
+{\small
+\section*{\small Statement of authorship}
+
+AC and DG wrote the code. AC performed statistical analyses. All authors contributed to writing and revising the manuscript. TR contributed dat. [[Anything missing?]]
+
+
+\section*{\small Data accessibility}
+
+All data used in this study have been independently published and are accessible following the references provided in text.
+
+
+\section*{\small Keywords}
+
+ecological networks; probabilistic interactions; Bayesian networks; sampling error; spatial variability; temporal variability
+
+
+\section*{\small Details}
+
+\begin{minipage}[h]{0.6\textwidth}
+\begin{itemize}
+\item Running title: Quantitative network construction
+\item Article type: Ideas and Perspectives
+\item Number of references: 36
+\item Number of figs, tables, \& text boxes: 8 % Limit is 10
+\end{itemize}
+\end{minipage}\begin{minipage}[h]{0.4\textwidth}
+\begin{itemize}
+\item Text box 1 word count: 381
+\item Text box 2 word count: 210
+\item Abstract word count: 200
+\item Main text word count: 6482 % Including 18 page numbers. % No abstract, acknowledgements, references, table or figure legends. Limit is 7500
+\end{itemize}
+\end{minipage}
+}
+
+\newpage
 % Main text can be up to 7500 words, 10 fig., tables, boxes
+\begin{spacing}{2.0}
 
 \section*{Abstract}
 
@@ -83,10 +139,9 @@ alyssa.cirtwill@gmail.com\\
 
 % AC: Good idea - I've also changed the "In this study, we ..." paragraph to make it sound less like we just built some software and hopefully emphasise the conceptual side more.
 
-\linenumbers
+% \linenumbers
 \clearpage
 
-\begin{spacing}{2.0}
 \section*{Introduction}
 
     Representing an assemblage of species as a network offers a convenient summary of how the community is constructed as a network simultaneously describes species composition and interactions between species. A tabulation of the nodes (species) and their relative abundances forms the basis for traditional metrics of community composition. To move from these simpler metrics to a network framework, the tabulation of nodes is combined with interactions (links between nodes) so that networks provide additional, higher-order information on community structure. While this additional information is useful (as, for example, interactions can affect changes in species abundances over time), empirical descriptions of ecological networks are still limited because they are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
@@ -209,7 +264,7 @@ alyssa.cirtwill@gmail.com\\
      The beta-binomial distribution is a conjugate distribution of the binomial distribution. This allows us to analytically compute the posterior distribution of a binomial model with a beta prior distribution. We can re-write the posterior distribution of $\lambda$ as:
 
       \begin{equation}
-        P(\lambda|k,n) = \frac{\lambda^{\alpha+k-1}(1-\lambda)^{\beta+n-k-1}}{B(\alpha+k,\beta+n-k)} , \label{posterior}
+        P(\lambda|k,n) = \frac{\lambda^{\alpha+k-1}(1-\lambda)^{\beta+n-k-1}}{B(\alpha+k,\beta+n-k)} , \label{posterior2}
       \end{equation}
 
       
@@ -398,7 +453,14 @@ alyssa.cirtwill@gmail.com\\
 
   % [Here we need to be very hands-on and remember the invitation letter form Ecol Letters:
   % As a contribution primarily to methodology, the manuscript will not be considered for ``Ideas \& Perspectives". (Please recall my message concerning your past presubmission inquiry.) However, Ecology Letters is entertaining the idea of a new section for ``Novel Methods". As we have not advertised this, I would ask you to keep that information in confidence. If acceptable to an Associate Editor and reviewers, your paper could be the first, or one of the first, contributions to this new section. Accordingly, the work would be subject to considerable scrutiny and I would urge you to make the paper as strong as you can. This would include demonstrating the need for this new method (i.e. outlining how this is different than other approaches currently in use and how they fail at some important task), documenting the robustness and accuracy of the approach, performing case study, and making robust high-quality code freely available.]
+
+
+\section*{Acknowledgements}
+
+  [[Anything to add here?]
+
 \end{spacing}
+\clearpage
 
 \section*{Boxes and figures}
 
@@ -429,7 +491,8 @@ alyssa.cirtwill@gmail.com\\
       %   output[r,2:3]=interval1
       %   output[r,4:5]=interval2
       % }
-
+      \medskip
+        \textbf{Table 1:} Here we give the lower and upper bounds of 95\% credible intervals for the probability of interaction $\lambda$ between \emph{Salix}-galler or galler-natural enemy pairs that have been observed co-occurring $n$ times but have never been observed interacting.
         \begin{tabular}{l  c c  c c }
         \multirow{2}{*}{$n$} & \multicolumn{2}{c}{\emph{Salix}-galler} & \multicolumn{2}{c}{galler-natural enemy}\\
          & Lower bound & Upper bound & Lower bound & Upper bound \\
