@@ -12,6 +12,7 @@
 \usepackage{array}
 \usepackage{hyperref,url}
 \usepackage{float}
+\usepackage{mdframed}
 \makeatletter
 
 
@@ -23,10 +24,9 @@
   \def\@fs@mid{\kern8pt}%
   \let\@fs@iftopcapt\iftrue}
 
-% this code block defines the new and custom floatbox float environment
-\floatstyle{simplerule}
-\newfloat{floatbox}{thp}{lob}
-\floatname{floatbox}{Box}
+% this code block defines the new and custom mdframed environment
+\newmdenv[rightline=true,bottomline=true,topline=true,leftline=true,linewidth=2pt]{fullbox}
+
 
 \newcommand{\methods}{\textit{Materials \& Methods}}
 \newcommand{\SI}{\textit{Appendix}~}
@@ -41,10 +41,6 @@
 
 \title{A quantitative framework for investigating the reliability of network construction}
 
-% DG : if ok with all of you, I would appreciate being last author
-% AC : Makes sense to me since Dom was the originator of this ms and laid a lot of the groundwork.
-
-% AC : Assuming I'm going to be corresponding author on this but happy to let anyone else step in if you're eager
 
 \author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1\ddagger}$, Tomas Roslin$^{2,3\star}$, Kate Wootton$^{2\diamond}$, Dominique Gravel$^{4\triangleright}$}
 \date{\begin{minipage}[h]{0.45\textwidth}
@@ -217,7 +213,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
   The variance of a Bernoulli experiment is $n\lambda$(1-$\lambda$). It is important to remember that this variance describes the variability of the number of successes $k$ for $n$ trials and is not the variance associated with the estimation of $\lambda$. Given this variance, it is possible to compute the confidence interval for the MLE of $\lambda$ using any of several methods, including the \emph{Wilson score interval}, the \emph{Clopper-Pearson interval}, and the \emph{Agresti-Coull interval} (for details, see [\citealp{Brown2001}]). Finding this estimate is therefore quite straightforward, but it nonetheless has two drawbacks. First, $\lambda$ is not a single point estimate but rather a random variable with an unknown distribution. This means that if $k = 0$ in a given sample, this does not necessarily imply that the two species will never interact. Rather, $k = 0$ implies that `no interaction' is the most likely outcome when the species do co-occur but there is nonetheless a substantial chance that the two species \emph{could} interact. In the situation where $k>0$, in contrast, we are sure that the interaction is feasible ($L = 1$) but still cannot be sure of the cause if the interaction is not observed at some sites/times (i.e., we cannot say why $k<n$). There may be local constraints ($X=0$) or we might simply not observe the interaction in every sample ($D<1$). 
 
 
-  Second, where the number of samples $n$ is very low (some pairs of species may never have been documented as co-occurring), there will be considerable uncertainty around our estimate of $\lambda$. In Fig.~\ref{upper_limits} and Box~\ref{box2}, we derive the Clopper-Pearson interval to explore how the estimate of $\lambda$ varies with sample size. At a small sample size, the 95\% confidence interval spans all values of $\lambda$. To establish that species are not interacting with any acceptable certainty requires tens of observations of the two species co-occurring but not interacting. As most data sets will lack such extensive sampling across all species pairs, we can use a Bayesian approach to supplement what data we do have with other sources of information.
+  Second, where the number of samples $n$ is very low (some pairs of species may never have been documented as co-occurring), there will be considerable uncertainty around our estimate of $\lambda$. In Fig.~\ref{upper_limits} and Box 2, we derive the Clopper-Pearson interval to explore how the estimate of $\lambda$ varies with sample size. At a small sample size, the 95\% confidence interval spans all values of $\lambda$. To establish that species are not interacting with any acceptable certainty requires tens of observations of the two species co-occurring but not interacting. As most data sets will lack such extensive sampling across all species pairs, we can use a Bayesian approach to supplement what data we do have with other sources of information.
 
 
 \section*{Bayesian approach to infer interaction probabilities}
@@ -337,13 +333,13 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
     The mean of these interaction probabilities is 0.176, approximately two-thirds the $\lambda_{MLE}$ obtained from the observed data. We can use the distribution of these interaction probabilities as our prior distribution and estimate the uncertainty surrounding our $\lambda_{MLE}$. With some simple R code (function ``calculate\_parameters", \emph{Appendix S1}), we obtain prior parameters $\alpha$=0.998 and $\beta$=4.63. Using these priors in equations~\ref{mean} and~\ref{variance} above (or in the R function ``calculate\_distribution" in \emph{Appendix S1}), we find a prior $\bar\lambda$=0.177 and var($\lambda$)=0.026. Adding the observed data ($n=10$, $k=3$) and using the same code, we obtain posterior parameters $\alpha'$=4.00 and $\beta'$=11.6 and a posterior $\bar\lambda$=0.256 and var($\lambda$)=0.012. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data about interactions between species $i$ and $j$ has reduced the variance. We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward in R (see function ``credible\_interval" in \emph{Appendix S1}). In this case, a 95\% credible interval for $\bar\lambda$ is (0.080, 0.491).
 
 
-    Now, consider the case where the two species have never been observed interacting across $n$ trials, i-e. $k=0$. The question is then ``what is the probability that these two species do not interact''? Since it is not possible to prove that the two species could never interact (strictly speaking, in a Bayesian approach $\lambda=0$ is impossible), we must fix a threshold below which we consider that there is no interaction ($\lambda \sim 0$). We call this threshold probability $\lambda*$. We then use the cumulative distribution function to estimate $P(\lambda<\lambda*|L=0,n)$ for different $n$. The function ``samples\_for\_threshold" in \emph{Appendix S1} calculates distribution function for $\lambda*$ with an increasing number of trials. This yields a surprising result: it requires \textgreater24 observations of no interactions to be 95\% sure that the interaction probability is smaller than $\lambda*$=0.1 (recall Fig.~\ref{upper_limits}, Box~\ref{box2}). Note the special case where there is no observation of the two species co-occurring, $n = 0$.  In this situation, the posterior distribution converges to the prior distribution since the data include no information on the probability with which species might interact should they co-occur.
+    Now, consider the case where the two species have never been observed interacting across $n$ trials, i-e. $k=0$. The question is then ``what is the probability that these two species do not interact''? Since it is not possible to prove that the two species could never interact (strictly speaking, in a Bayesian approach $\lambda=0$ is impossible), we must fix a threshold below which we consider that there is no interaction ($\lambda \sim 0$). We call this threshold probability $\lambda*$. We then use the cumulative distribution function to estimate $P(\lambda<\lambda*|L=0,n)$ for different $n$. The function ``samples\_for\_threshold" in \emph{Appendix S1} calculates distribution function for $\lambda*$ with an increasing number of trials. This yields a surprising result: it requires \textgreater24 observations of no interactions to be 95\% sure that the interaction probability is smaller than $\lambda*$=0.1 (recall Fig.~\ref{upper_limits}, Box 2). Note the special case where there is no observation of the two species co-occurring, $n = 0$.  In this situation, the posterior distribution converges to the prior distribution since the data include no information on the probability with which species might interact should they co-occur.
 
 
 \section*{Scaling up to networks - an empirical example}
 
 
-    In the following section, we will provide an empirical example based on the well-sampled system of \emph{Salix}  plants, herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}; see Box~\ref{box1} or \emph{Appendix S2} for a description). Using this dataset, we will demonstrate the derivation of prior distributions for the \emph{Salix}-galler and galler-natural enemy components of these networks and the differences between these priors and posterior distributions which include all information available in this dataset~\citep{Kopelke2017}. Finally, we will calculate network properties using a suite of networks sampled from these posterior distributions and show how the uncertainty around interactions that have not been observed impact these metrics. 
+    In the following section, we will provide an empirical example based on the well-sampled system of \emph{Salix}  plants, herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}; see Box 1 or \emph{Appendix S2} for a description). Using this dataset, we will demonstrate the derivation of prior distributions for the \emph{Salix}-galler and galler-natural enemy components of these networks and the differences between these priors and posterior distributions which include all information available in this dataset~\citep{Kopelke2017}. Finally, we will calculate network properties using a suite of networks sampled from these posterior distributions and show how the uncertainty around interactions that have not been observed impact these metrics. 
 
 
   \subsection*{Computing the posterior distribution}
@@ -399,24 +395,28 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 \end{spacing}
 \clearpage
 
+\captionsetup{singlelinecheck=false, font={stretch=2}}
+
 \section*{Boxes and figures}
 
 
-\begin{floatbox}{}
-
+\begin{fullbox}{}
+  \begin{spacing}{2.0}
+    \textbf{Box 1: }\emph{Salix}-galler-natural enemy dataset.\\
     \indent As a case study, we use an extensively sampled \emph{Salix}-galler-natural enemy meta-network. This dataset consists of a single community type sampled across Europe: willow (\emph{Salix}) species, willow-galling sawflies, and their natural enemies. The data were collected over 29 years at 374 unique locations across Europe with a total of 641 site visits. Each site visit or each unique site can be considered as a network in its own right or as an independent sample from which to build the meta-network. Here we take the more conservative approach and pool visits to the same site for a sample size of 374 sub-networks. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes. The high spatiotemporal resolution of this network and the unusually high sampling effort implemented at the site level makes this dataset particularly well suited for illustrating the difficulties in completely sampling a network and testing Bayesian approaches to overcome these difficulties.\\
     \indent We may begin by comparing the frequency of co-occurrences for pairs of species in each part of the network to reveal the challenge of having sufficient sampling to be confident that an interaction does not occur. Most pairs of species (3,986/4,992 \emph{Salix}-galler pairs and  9,794/12,096 galler-natural enemy pairs) are never found co-occurring and, for species that did occur together, the total number of co-occurrences was generally low (mean=4.24, variance=36.3 for \emph{Salix}-galler pairs; mean=3.87, variance=28.8 for galler-natural enemy pairs; Fig.~\ref{histograms}A-B). The bulk of these co-occurring species pairs were never observed to interact: only 2.82\% of \emph{Salix}-galler pairs and 7.76\% of galler-natural enemy pairs were observed interacting at one or more sites. Of those pairs that did interact, the incidence of interaction was also low (mean=12.0, variance=155 for \emph{Salix}-galler pairs; mean=4.04, variance=29.3 for galler-natural enemy pairs; Fig.~\ref{histograms}C-D). Thus, even in the most extensive data set that we could find, there was very little empirical data for each species pair. This suggests that limited sampling is a major source of uncertainty in all empirical networks. This dataset also illustrates the potential for increased sampling to not necessarily reveal more interactions as a pair of species that is able to interact may not be observed interacting in all samples where the pair co-occurs (Fig.~\ref{histograms}E-F).
-  \caption{\emph{Salix} dataset}
-  \label{box1}
-\end{floatbox}
+  \end{spacing}
+\end{fullbox}
+
+\clearpage
+
+\begin{fullbox}{}
+    \begin{spacing}{2.0}
+    \textbf{Box 2: }Calculating the credible interval around a probability estimate\\
+  \indent Here we describe the derivation of the Clopper-Pearson credible interval for the estimated probability of interaction $\lambda$ of a pair of species observed co-occurring $n$ times and interacting $k$ times. As we are most interested in the probability of interaction between species pairs that have never been observed co-occurring, we consider only the case where $k=0$ over a variety of $n$. This is straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S1}). 
 
 
-\begin{floatbox}{}
-  
-  Here we describe the derivation of the Clopper-Pearson credible interval for the estimated probability of interaction $\lambda$ of a pair of species observed co-occurring $n$ times and interacting $k$ times. As we are most interested in the probability of interaction between species pairs that have never been observed co-occurring, we consider only the case where $k=0$ over a variety of $n$. This is straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S1}). 
-
-
-  First, we must obtain the $\alpha$ and $\beta$ parameters for the prior distribution. In this study we obtained these parameters using the R~\citep{R} function fitdist from the package fitdistrplus~\citep{fitdistrplus}. Once $\alpha$ and $\beta$ are known, we can update them using our observed data. Specifically, we are interested in $\alpha'=\alpha+k$ and $\beta'=\beta+n-k$. These parameters can then be used to calculate a credible interval using the R~\citep{R} function qbeta. In the table below, we present the 95\% credible intervals for \emph{Salix}-galler and galler-natural enemy pairs with different numbers of observed co-occurrences ($n$) and no observed interactions ($k=0$). Both sets of intervals rely on prior information derived from the Zillis sub-network~\citep{Kopelke2017}.
+  First, we must obtain the $\alpha$ and $\beta$ parameters for the prior distribution. In this study we obtained these parameters using the R~\citep{R} function fitdist from the package fitdistrplus~\citep{fitdistrplus}. Once $\alpha$ and $\beta$ are known, we can update them using our observed data. Specifically, we are interested in $\alpha'=\alpha+k$ and $\beta'=\beta+n-k$. These parameters can then be used to calculate a credible interval using the R~\citep{R} function qbeta. In the table below, we present the 95\% credible intervals for \emph{Salix}-galler and galler-natural enemy pairs with different numbers of observed co-occurrences ($n$) and no observed interactions ($k=0$), calculated using prior information derived from the Zillis sub-network~\citep{Kopelke2017}.
 
       % % # R code to make the table:
       % ns=c(0,1,2,5,10,15,20,25,50,100,150,200,374)
@@ -429,7 +429,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
       %   output[r,4:5]=interval2
       % }
       \medskip
-        \textbf{Table 1:} Here we give the lower and upper bounds of 95\% credible intervals for the probability of interaction $\lambda$ between \emph{Salix}-galler or galler-natural enemy pairs that have been observed co-occurring $n$ times but have never been observed interacting.
+        \textbf{Table 1:} Here we give the lower and upper bounds of 95\% credible intervals for the probability of interaction $\lambda$ between \emph{Salix}-galler or galler-natural enemy pairs that have been observed co-occurring $n$ times but have never been observed interacting.\\
         \begin{tabular}{l  c c  c c }
         \multirow{2}{*}{$n$} & \multicolumn{2}{c}{\emph{Salix}-galler} & \multicolumn{2}{c}{galler-natural enemy}\\
          & Lower bound & Upper bound & Lower bound & Upper bound \\
@@ -450,14 +450,13 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
         374 & 0.006 & 0.022 & 1.18 $\times10^{-5}$ & 0.008 \\
         \hline
         \end{tabular}
+    \end{spacing}
+\end{fullbox}
 
-  \caption{Calculating the credible interval around a probability estimate}
-  \label{box2}
-\end{floatbox}
+\clearpage
 
 
-
-    \begin{figure}
+  \begin{figure}[h!]
       \caption{\textbf{A-B)} Most pairs of \emph{Salix} and gallers or gallers and natural enemies were never observed co-occurring despite the high levels of replication in our example dataset. For those pairs that were observed together at least once ($n_{ij}>0$), the number of observed co-occurrences was generally small (\textless10). Here we show a histogram of the number of pairs of species observed co-occurring at least once. 3986 \emph{Salix}-galler and 9794 galler-enemy pairs were never observed co-occurring: these pairs are omitted from the histogram. \textbf{C-D)} Most pairs of species that were observed at the same site were never observed interacting. Here we show a histogram of the number of observed interactions within pairs of co-occurring species. Species which co-occurred but never interacted are included in these histograms. \textbf{E-F)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. \emph{Salix}-galler pairs either are never observed interacting or interact almost every time they co-occur, while galler-enemy pairs had more variable frequencies of interaction. In panels E and F the red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
       \label{histograms}
       % \includegraphics*[width=.8\textwidth]{Salix_Galler_histogram.eps}
@@ -467,30 +466,30 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
   \begin{figure}[h!]
     \caption{A simple example will illustrate the problem of imperfect detection of interactions. Assume that we want to infer the probability of an interaction between two species, $i$ and $j$. Now assume that in reality, interaction between $i$ and $j$ is completely impossible (i.e. the true $\lambda=0$) but the observer does not know this and seeks to estimate this interaction probability ($\lambda$). The number of observed interactions will follow a binomial distribution with number of interactions $k$ and number of observations $n$. Using this distribution, we can compute the credible interval of the estimated probability $\lambda$. Even assuming no added detection error in observing the incidence of the interaction, a single observation of species co-occurrence reveals very little regarding the probability of the interaction as the credible interval for a pair of species with one observation essentially spans from 0 to 1. Only with 35 observations will the upper limit of the credible interval be lowered to 0.1. Thus, adding more observations is certainly useful in controlling uncertainty, but the number of observations added needs to be very high. Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for $\lambda$ when $k=0$ ($i$ and $j$ have not been observed interacting) for a variety of $n$ (observed co-occurrences of $i$ and $j$). Using a Bayesian approach with an informative prior can reduce the confidence interval about $\lambda$ for a given sample size. A threshold interaction probability of 0.1 is indicated by the dashed red line. }
     \label{upper_limits}
-    % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
-  \end{figure}
+    % \includegraphics*[width=.8\textwidth]{upper_limit_DG.eps}
+    \end{figure}
 
 
-      \begin{figure}[ht]
-        \caption{Using prior distributions based on the \emph{Salix}-galler and galler-natural enemy networks sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ in each network component ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. \textbf{A)} The posterior distributions for $\lambda$ in the \emph{Salix}-galler component are narrower at low $n$ but shrink less with increased sampling than those for \textbf{B)} the distributions of $\lambda$ in the galler-natural enemy component.}
-        \label{Salix_pdfs}
-        % \includegraphics*[width=.8\textwidth]{figures/Salix_Galler_pdfs_increasing_N_Zillis.eps}
-        \end{figure}
+  \begin{figure}[h!]
+    \caption{Using prior distributions based on the \emph{Salix}-galler and galler-natural enemy networks sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ in each network component ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. \textbf{A)} The posterior distributions for $\lambda$ in the \emph{Salix}-galler component are narrower at low $n$ but shrink less with increased sampling than those for \textbf{B)} the distributions of $\lambda$ in the galler-natural enemy component.}
+    \label{Salix_pdfs}
+    % \includegraphics*[width=.8\textwidth]{Salix_Galler_pdfs_increasing_N_Zillis.eps}
+    \end{figure}
 
 
 
-      \begin{figure}[ht]
-        \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. \textbf{A)} In the \emph{Salix}-galler network component, the 95\% credible interval for $\lambda_{ij}$ when $n$=0 was (0.013, 0.049). We can therefore be at least 95\% confident that $\lambda_{ij}$ is below thresholds of 0.1 or 0.05 without any observed co-occurrence of species $i$ and $j$. To be confident that $\lambda_{ij}$ is less than 0.01, however, would require more observed co-occurrences than there are sites in our dataset. \textbf{B)} In the galler-parasitoid network component, the 95\% credible interval for $\lambda_{ij}$ was substantially broader and many observed co-occurrences ($\approx$ 15-35) are required to be 95\% confident that $\lambda_{ij}$ is below thresholds of 0.1 or 0.05.}
-        \label{Salix_cdfs}
-        % \includegraphics[width=.8\textwidth]{figures/Salix_Galler_samples_and_cdfs_Zillis.eps}
+  \begin{figure}[h!]
+    \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. \textbf{A)} In the \emph{Salix}-galler network component, the 95\% credible interval for $\lambda_{ij}$ when $n$=0 was (0.013, 0.049). We can therefore be at least 95\% confident that $\lambda_{ij}$ is below thresholds of 0.1 or 0.05 without any observed co-occurrence of species $i$ and $j$. To be confident that $\lambda_{ij}$ is less than 0.01, however, would require more observed co-occurrences than there are sites in our dataset. \textbf{B)} In the galler-parasitoid network component, the 95\% credible interval for $\lambda_{ij}$ was substantially broader and many observed co-occurrences ($\approx$ 15-35) are required to be 95\% confident that $\lambda_{ij}$ is below thresholds of 0.1 or 0.05.}
+    \label{Salix_cdfs}
+    % \includegraphics[width=.8\textwidth]{Salix_Galler_samples_and_cdfs_Zillis.eps}
 
-        \end{figure}
+    \end{figure}
 
 
-    \begin{figure}[ht]
+  \begin{figure}[h!]
     \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a single sub-network in the~\citet{Kopelke2017} dataset (Zillis). We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
     \label{posterior_webs}    
-    % \includegraphics[width=.8\textwidth]{Figures/Salix_Galler_posterior_properties_Zillis.eps}
+    % \includegraphics[width=.8\textwidth]{Salix_Galler_posterior_properties_Zillis.eps}
     \end{figure}
 
 
