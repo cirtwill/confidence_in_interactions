@@ -43,7 +43,7 @@
 
 
 \author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1\ddagger}$, Tomas Roslin$^{2\star}$, Kate Wootton$^{2\diamond}$, Dominique Gravel$^{3\triangleright}$}
-\date{\begin{minipage}[h]{0.45\textwidth}
+\date{\begin{minipage}[h]{0.6\textwidth}
 \small$^1$ Department of Physics,\\
 Chemistry and Biology (IFM)\\ 
 Link\"{o}ping University\\
@@ -55,7 +55,7 @@ SE-750 07 Uppsala, Sweden\\
 $^3$ D\'{e}partement de biologie\\ 
 Universit\'{e} de Sherbrooke\\ 
 Sherbrooke, Canada
-\end{minipage}\hspace{.05\textwidth}\begin{minipage}[h]{0.45\textwidth}
+\end{minipage}\begin{minipage}[h]{0.4\textwidth}
 \small$^\dagger$ Corresponding author:\\
 alyssa.cirtwill@gmail.com\\
 tel: +46 723 158464\\
@@ -105,7 +105,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 \begin{itemize}
 \item Text box 1 word count: 381
 \item Text box 2 word count: 210
-\item Abstract word count: 200
+\item Abstract word count: 199
 \item Main text word count: 6482 % Including 18 page numbers. % No abstract, acknowledgements, references, table or figure legends. Limit is 7500
 \end{itemize}
 \end{minipage}
@@ -117,7 +117,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
 \section*{Abstract}
 
-  Descriptions of ecological networks typically assume that the same interspecific interactions occur each time a community is observed. This contrasts with the known stochasticity of ecological communities: community composition, species abundances, and link structure all vary in space and time. Moreover, finite sampling generates variation in the set of interactions actually observed. Here we develop the conceptual and analytical tools needed to capture uncertainty in the estimation of pairwise interactions. To define the problem, we identify the different contributions to the uncertainty of an interaction and its implications for the estimation of network properties. We then outline a framework to quantify the uncertainty around each interaction. We illustrate this framework using the most extensively sampled network to date. We found significant uncertainty in estimates for the probability of most pairwise interactions which we could, however, limit with informative priors. Through these efforts, we demonstrate the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies. Most importantly, we stress that networks are best thought of as systems constructed from random variables, the stochastic nature of which must be acknowledged for an accurate representation. Doing so will fundamentally change networks analyses but should yield greater realism.
+  Descriptions of ecological networks typically assume that the same interspecific interactions occur each time a community is observed. This contrasts with the known stochasticity of ecological communities: community composition, species abundances, and link structure all vary in space and time. Moreover, finite sampling generates variation in the set of interactions actually observed. Here we develop the conceptual and analytical tools needed to capture uncertainty in the estimation of pairwise interactions. To define the problem, we identify the different contributions to the uncertainty of an interaction and its implications for the estimation of network properties. We then outline a framework to quantify the uncertainty around each interaction. We illustrate this framework using the most extensively sampled network to date. We found significant uncertainty in estimates for the probability of most pairwise interactions which we could, however, limit with informative priors. Through these efforts, we demonstrate the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies. Most importantly, we stress that networks are best thought of as systems constructed from random variables, the stochastic nature of which must be acknowledged for an accurate representation. Doing so will fundamentally change networks analyses and yield greater realism.
   % Can be up to 200 words. This is 200 exactly.
 
 
@@ -126,7 +126,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
 \section*{Introduction}
 
-    Representing an assemblage of species as a network offers a convenient summary of how the community is constructed as a network simultaneously describes species composition and interactions between species. A tabulation of the nodes (species) and their relative abundances forms the basis for traditional metrics of community composition. To move from these simpler metrics to a network framework, the tabulation of nodes is combined with interactions (links between nodes) so that networks provide additional, higher-order information on community structure. While this additional information is useful (as, for example, interactions can affect changes in species abundances over time), empirical descriptions of ecological networks are still limited because they are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
+    Representing an assemblage of species as a network offers a convenient summary of how the community is constructed as networks simultaneously describe species composition and interactions between species. A tabulation of the nodes (species) and their relative abundances forms the basis for traditional metrics of community composition such as alpha diversity. To move from these simpler metrics to a network framework, the tabulation of nodes is combined with interactions (links between nodes) so that networks provide additional, higher-order information on community structure. While this additional information is useful (as, for example, interactions can affect changes in species abundances over time), empirical descriptions of ecological networks are still limited because they are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
 
 
     The assumption of static communities contrasts significantly with the widely recognised stochasticity of ecological communities~\citep{Gotelli2000}. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. Likewise, interactions vary over space~\citep{Kitching1987,Baiser2012}, time~\citep{Kitching1987,Olesen2011a}, and between individuals of a given species~\citep{Pires2011a,Fodrie2015,Novak2015}. We emphasise that variability in community composition and interactions may or may not be closely related. The removal of a species from a site will obviously also remove its interactions but, conversely, the co-occurrence of potentially interacting species does not in itself guarantee that they will interact at a given place and time. Interactions can be lost if the interaction partners remain present but are separated in time or are too rare to detect each other~\citep{Tylianakis2010}. Interactions can also fail to occur because of environmental contingencies~\citep{Poisot2015}, or through changes to individual preferences~\citep{Fodrie2015}. 
