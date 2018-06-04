@@ -42,28 +42,33 @@
 \title{A quantitative framework for investigating the reliability of network construction}
 
 
-\author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1\ddagger}$, Tomas Roslin$^{2\star}$, Kate Wootton$^{2\diamond}$, Dominique Gravel$^{3\triangleright}$}
-\date{\begin{minipage}[h]{0.6\textwidth}
+\author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1}$, Tomas Roslin$^{2}$, Kate Wootton$^{2}$, Dominique Gravel$^{3}$}
+\date{
+% \begin{minipage}[h]{0.6\textwidth}
 \small$^1$ Department of Physics,\\
 Chemistry and Biology (IFM)\\ 
 Link\"{o}ping University\\
 Link\"{o}ping, Sweden\\
-$^2$ Department of Ecology\\ 
+\medskip
+\small$^2$ Department of Ecology\\ 
 P.O. Box 7044\\ 
 Swedish University of Agricultural Sciences \\ 
 SE-750 07 Uppsala, Sweden\\
-$^3$ D\'{e}partement de biologie\\ 
+\medskip
+\small$^3$ D\'{e}partement de biologie\\ 
 Universit\'{e} de Sherbrooke\\ 
 Sherbrooke, Canada
-\end{minipage}\begin{minipage}[h]{0.4\textwidth}
+\medskip
 \small$^\dagger$ Corresponding author:\\
 alyssa.cirtwill@gmail.com\\
-tel: +46 723 158464\\
-$^\ddagger$ anna.eklof@liu.se\\
-$^\star$ tomas.roslin@slu.se\\
-$^\diamond$ kate.wootton@slu.se\\
-$^\triangleright$ dominique.gravel@usherbrooke.ca
-\end{minipage}
+\medskip
+\medskip
+\normalsize Running head: Constructing quantitative interaction networks
+% tel: +46 723 158464\\
+% $^\ddagger$ anna.eklof@liu.se\\
+% $^\star$ tomas.roslin@slu.se\\
+% $^\diamond$ kate.wootton@slu.se\\
+% $^\triangleright$ dominique.gravel@usherbrooke.ca
 }
 
 
@@ -76,40 +81,26 @@ $^\triangleright$ dominique.gravel@usherbrooke.ca
 
 \vspace{-.4in}
 
-{\small
-\section*{\small Statement of authorship}
+% {\small
 
-DG designed the analytical approach. AC and DG wrote the code. AC performed statistical analyses. All authors contributed to writing and revising the manuscript.
+% \section*{\small Details}
 
-
-\section*{\small Data accessibility}
-
-All data used in this study have been independently published and are accessible following the references provided in text.
-
-
-\section*{\small Keywords}
-
-ecological networks; probabilistic interactions; Bayesian networks; sampling error; spatial variability; temporal variability; uncertainty
-
-
-\section*{\small Details}
-
-\begin{minipage}[h]{0.6\textwidth}
-\begin{itemize}
-\item Running title: Quantitative network construction
-\item Article type: Ideas and Perspectives
-\item Number of references: 36
-\item Number of figs, tables, \& text boxes: 8 % Limit is 10
-\end{itemize}
-\end{minipage}\begin{minipage}[h]{0.4\textwidth}
-\begin{itemize}
-\item Text box 1 word count: 381
-\item Text box 2 word count: 210
-\item Abstract word count: 199
-\item Main text word count: 6482 % Including 18 page numbers. % No abstract, acknowledgements, references, table or figure legends. Limit is 7500
-\end{itemize}
-\end{minipage}
-}
+% \begin{minipage}[h]{0.6\textwidth}
+% \begin{itemize}
+% \item Running title: Quantitative network construction
+% \item Article type: Ideas and Perspectives
+% \item Number of references: 36
+% \item Number of figs, tables, \& text boxes: 8 % Limit is 10
+% \end{itemize}
+% \end{minipage}\begin{minipage}[h]{0.4\textwidth}
+% \begin{itemize}
+% \item Text box 1 word count: 381
+% \item Text box 2 word count: 210
+% \item Abstract word count: 199
+% \item Main text word count: 6482 % Including 18 page numbers. % No abstract, acknowledgements, references, table or figure legends. Limit is 6000-7000 including figs, tables, references. approx. 10K all in :/
+% \end{itemize}
+% \end{minipage}
+% }
 
 \newpage
 
@@ -117,22 +108,32 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
 \section*{Abstract}
 
-  Descriptions of ecological networks typically assume that the same interspecific interactions occur each time a community is observed. This contrasts with the known stochasticity of ecological communities: community composition, species abundances, and link structure all vary in space and time. Moreover, finite sampling generates variation in the set of interactions actually observed. Here we develop the conceptual and analytical tools needed to capture uncertainty in the estimation of pairwise interactions. To define the problem, we identify the different contributions to the uncertainty of an interaction and its implications for the estimation of network properties. We then outline a framework to quantify the uncertainty around each interaction. We illustrate this framework using the most extensively sampled network to date. We found significant uncertainty in estimates for the probability of most pairwise interactions which we could, however, limit with informative priors. Through these efforts, we demonstrate the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies. Most importantly, we stress that networks are best thought of as systems constructed from random variables, the stochastic nature of which must be acknowledged for an accurate representation. Doing so will fundamentally change networks analyses and yield greater realism.
-  % Can be up to 200 words. This is 200 exactly.
+  \begin{enumerate}
+
+    \item  Descriptions of ecological networks typically assume that the same interspecific interactions occur each time a community is observed. This contrasts with the known stochasticity of ecological communities: community composition, species abundances, and link structure all vary in space and time. Moreover, finite sampling generates variation in the set of interactions actually observed. 
+    \item Here we develop the conceptual and analytical tools needed to capture uncertainty in the estimation of pairwise interactions. To define the problem, we identify the different contributions to the uncertainty of an interaction and its implications for the estimation of network properties. We then outline a framework to quantify the uncertainty around each interaction. We illustrate this framework using the most extensively sampled network to date. 
+    \item We found significant uncertainty in estimates for the probability of most pairwise interactions which we could, however, limit with informative priors. This uncertainty scaled up to summary measures of network structure such as connectance or nestedness. Even with informative priors, our results suggest that the relatively well-sampled network we use as a test case is missing many interactions that may occur rarely or under different local conditions. 
+    \item Through these efforts, we demonstrate the utility of our approach and the importance of acknowledging the uncertainty inherent in network studies. Most importantly, we stress that networks are best thought of as systems constructed from random variables, the stochastic nature of which must be acknowledged for an accurate representation. Doing so will fundamentally change networks analyses and yield greater realism.
+  % Can be up to 350 words for MEE. This is 200 exactly.
+\end{enumerate}
 
 
-\linenumbers
+\section*{\small Keywords}
+
+ecological networks; probabilistic interactions; Bayesian networks; sampling error; spatial variability; temporal variability; uncertainty
+
+% \linenumbers
 \clearpage
 
 \section*{Introduction}
 
-    Representing an assemblage of species as a network offers a convenient summary of how the community is constructed as networks simultaneously describe species composition and interactions between species. A tabulation of the nodes (species) and their relative abundances forms the basis for traditional metrics of community composition such as alpha diversity. To move from these simpler metrics to a network framework, the tabulation of nodes is combined with interactions (links between nodes) so that networks provide additional, higher-order information on community structure. While this additional information is useful (as, for example, interactions can affect changes in species abundances over time), empirical descriptions of ecological networks are still limited because they are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
+    Representing an assemblage of species as a network offers a convenient summary of how the community is constructed as networks simultaneously describe species composition and interactions between species. A tabulation of the nodes (species) and their relative abundances forms the basis for traditional metrics of community composition such as alpha diversity. To move from these simpler metrics to a network framework, the tabulation of nodes is combined with interactions (links between nodes) so that networks provide additional, higher-order information on community structure. Despite this additional information, empirical descriptions of ecological networks are still limited because they are usually considered to be static representations of the communities and interactions they describe. That is, whether the network is assembled based on aggregated data, a single intensive ``snapshot" sample, or expert knowledge, interactions are assumed to occur deterministically wherever and whenever the community is observed~\citep{Olesen2011a}. 
 
 
-    The assumption of static communities contrasts significantly with the widely recognised stochasticity of ecological communities~\citep{Gotelli2000}. Community composition and species abundances vary from site to site~\citep{Baiser2012} and over time within a site~\citep{Olesen2011a}. Likewise, interactions vary over space~\citep{Kitching1987,Baiser2012}, time~\citep{Kitching1987,Olesen2011a}, and between individuals of a given species~\citep{Pires2011a,Fodrie2015,Novak2015}. We emphasise that variability in community composition and interactions may or may not be closely related. The removal of a species from a site will obviously also remove its interactions but, conversely, the co-occurrence of potentially interacting species does not in itself guarantee that they will interact at a given place and time. Interactions can be lost if the interaction partners remain present but are separated in time or are too rare to detect each other~\citep{Tylianakis2010}. Interactions can also fail to occur because of environmental contingencies~\citep{Poisot2015}, or through changes to individual preferences~\citep{Fodrie2015}. 
+    The assumption of static communities contrasts significantly with the known stochasticity of ecological communities~\citep{Gotelli2000}. Community composition and species abundances vary over space~\citep{Baiser2012} and time~\citep{Olesen2011a} while interactions vary over space~\citep{Kitching1987,Baiser2012}, time~\citep{Kitching1987,Olesen2011a}, and between individuals~\citep{Pires2011a,Fodrie2015,Novak2015}. Moreover, variability in community composition and interactions may or may not be closely related. The removal of a species from a site will obviously also remove its interactions but, conversely, the co-occurrence of potentially interacting species does not guarantee that the species will interact at a given place and time. Interactions can be lost if the interaction partners remain present but are separated in time or are too rare to detect each other~\citep{Tylianakis2010}. Interactions can also fail to occur because of environmental contingencies~\citep{Poisot2015}, or through changes to individual preferences~\citep{Fodrie2015}. 
 
 
-    Beyond ``true" variation in network structure, several researchers have pointed to the importance of sampling intensity for the assessment of network structure (e.g.,~\citealp{Martinez1999,Bluthgen2006,Bluthgen2007}). An assessment of the accumulation of interactions with increasing sampling effort suggests that it is even more challenging to document interactions than species~\citep{Poisot2012}. As a result, it has been proposed that interactions should be described probabilistically and network metrics computed accordingly~\citep{Poisot2016}. Early work in this vein includes food-web models using likelihood-based approaches~\citep{Allesina2008} or Gaussian~\citep{Williams2010} or binomial~\citep{Rohr2016} probability functions for each possible interaction. These models may include information about species' traits~\citep{Rohr2016} or may attempt to reproduce empirical network structures using a set of simple rules~\citep{Allesina2008,Williams2010}.
+    Beyond ``true" variation in network structure, several researchers have pointed to the effects of sampling intensity on network structure (e.g.,~\citealp{Martinez1999,Bluthgen2006,Bluthgen2007}). An assessment of the accumulation of interactions with increasing sampling effort suggests that it is even more challenging to document interactions than species~\citep{Poisot2012}. As a result, it has been proposed that interactions should be described probabilistically and network metrics computed accordingly~\citep{Poisot2016}. Early work in this vein includes food-web models using likelihood-based approaches~\citep{Allesina2008} or Gaussian~\citep{Williams2010} or binomial~\citep{Rohr2016} probability functions for each possible interaction. These models may include information about species' traits~\citep{Rohr2016} or may attempt to reproduce empirical network structures using a set of simple rules~\citep{Allesina2008,Williams2010}.
 
 
     Despite these preliminary efforts, to date we lack the quantitative methodology to deal with the uncertainty generated by spatiotemporal variation in ecological interactions and by sampling. Even in extremely well-sampled networks, uneven sampling across species (or pairs of species) can lead to the erroneous inference that some species do not interact because they co-occur rarely or have not yet been observed together - even if they do interact when they do co-occur (see Box 1 for an example). Nearly all network studies will thus neglect some interactions, necessitating an approach that acknowledges this uncertainty.
@@ -143,40 +144,46 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
 \section*{Why do some interactions \emph{not} occur?}
 
-  To define the problems associated with quantifying ecological interaction networks, we will start from the perspective of an empirical community ecologist faced with the task of describing a previously unknown interaction network. This ecologist will be interested in generating a description of the species/nodes present and the links between them~\citep{Roslin2016}.  Importantly, the information sought is conveyed by both the presence and \emph{absence} of links. Presences and absences are not, however, equally certain. An observed link will always remain an observed link but there are multiple reasons why a given link may not be observed. Thus, the detection of any interaction is a stochastic process. We define three nested levels of uncertainty contributing to this stochasticity: interaction uncertainty, process uncertainty, and detection uncertainty.
+  To define the problems associated with quantifying ecological interaction networks, we will start from the perspective of an empirical community ecologist faced with the task of describing a previously unknown interaction network. This ecologist will be interested in generating a description of the species/nodes present and the links between them~\citep{Roslin2016}.  Importantly, the information sought is conveyed by both the presence and \emph{absence} of links. Presences and absences are not, however, equally certain. An observed link definitely occurred, but there are multiple reasons why a given link may not be observed whether or not the interaction truly occurred. The detection of any interaction is a stochastic process. We define three nested levels of uncertainty contributing to this stochasticity: interaction uncertainty, process uncertainty, and detection uncertainty.
+
 
     \subsection*{Interaction uncertainty} 
 
-      First, and most fundamentally, we do not know whether or not a pair of species have the appropriate characteristics (or traits) to interact. We define the probability of an interaction $L$ given those characteristics $\mathbf{T}$ as $P(L | \mathbf{T})=\lambda$. Obviously, if $k$ (the number of observed interactions) is 0, it is possible that the two species would not interact even if there were no external constraints (e.g., temporal or environmental separation) preventing the interaction from co-occurring. As a simple example, a prey species may be too large to be consumed by a particular predator. In such cases, $\lambda$ would take a value of 0 and there would be no uncertainty. 
+      First, and most fundamentally, we do not know whether or not a pair of species have the appropriate characteristics (or traits) to interact. We define the probability of an interaction $L$ given characteristics $\mathbf{T}$ as $P(L | \mathbf{T})=\lambda$. If two species have incompatible traits, they may not interact even if there are no other constraints (e.g., temporal separation of species, inability to detect cryptic species) preventing the interaction from being observed. As a simple example, a prey species may be too large to be consumed by a particular predator. In such cases, $\lambda$ would take a value of 0 and there would be no uncertainty. 
 
-      Nevertheless, it is also possible that the interaction is a rare phenomenon with $\lambda>0$ that has not yet been documented. This source of uncertainty is the one documented by trait-matching models~\citep{Bartomeus2016}. It arises because every model is imperfect and lacks information (i.e. about traits) that could be used to define constraints on the interaction~\citep{Dormann2017}. Further study may, however, eventually reveal the traits of interest and allow us to reduce interaction uncertainty. In other words, with sufficient sampling and all information accessible, this interaction probability $\lambda$ should either tend to 0 or to 1. 
+      Based on an observed network, however, it is often unclear whether an unobserved interaction is impossible due to incompatible traits or a rare phenomenon with $\lambda>0$. This uncertainty is partly addressed by trait-matching models~\citep{Bartomeus2016}. Nevertheless, every model is imperfect and lacks information (i.e. about traits) that could be used to define constraints on interactions~\citep{Dormann2017}. Some interaction uncertainty therefore remains in current trait-matching models. As more information about the influence of traits on interactions is uncovered, this uncertainty is likely to be reduced and $\lambda$ should either tend to 0 or to 1. 
+
 
     \subsection*{Process uncertainty} 
 
-     Even when an interaction is feasible, i.e. $L=1$, it may not occur at a given location or moment in time because of local constraints such as inclement weather or the lack of suitable habitat. We define the realisation of the interaction process with the variable $X$, given that the interaction is feasible, as a stochastic process with associated probability $P(X|L=1)=\chi$. This phenomenon of interaction contingencies is usually not considered in network studies, but there is a rich literature in community ecology about the contingencies of interactions. Phenological matching~\citep{MillerRushing2010,Gezon2016}, species preferences~\citep{Pires2011,Novak2015,Coux2016}, and fear effects of other species~\citep{Luttbeg2005,Wirsing2008} are just some of the factors contributing to variation in the frequency of interactions between a given pair of species. Although some of the factors leading to process uncertainty can be addressed in mesocosm studies of networks (e.g., environmental conditions can be held stable), process uncertainty is likely inevitable in the field. 
+     Even when an interaction is feasible, i.e. $L=1$, it may still not occur at a given location or moment in time because of local constraints such as inclement weather or the lack of suitable habitat. We define the local realisation of an interaction with the variable $X$, given that the interaction is feasible, as a stochastic process with associated probability $P(X|L=1)=\chi$. This phenomenon of interaction contingencies is usually not considered in network studies, but there is a rich literature in community ecology about the contingencies of interactions. Phenological matching~\citep{MillerRushing2010,Gezon2016}, species preferences~\citep{Pires2011,Novak2015,Coux2016}, and fear effects of other species~\citep{Luttbeg2005,Wirsing2008} are just some of the factors contributing to variation in the frequency of interactions between a given pair of species. Some of the factors leading to process uncertainty can be addressed in mesocosm studies of networks (e.g., environmental conditions can be held stable) or could be included in models along the line of trait-matching models (e.g., phenological matching). In the field, however, process uncertainty is likely inevitable.
 
 
     \subsection*{Detection uncertainty} 
 
-      Lastly, measurement errors are a pervasive source of uncertainty in the observation of ecological processes. Given that an interaction is feasible and occurs under the local conditions ($L$=1 and $X$=1), we may define the detection of an interaction, $D$, as a stochastic process with the associated probability $P(D|X=1,L=1)=\delta$. Detection failure could happen for several reasons including failure to rear a parasitoid, species mis-identification, or because the interaction is very rare (see~\citet{Wirta2014} for examples of some of these difficulties and partial solutions to them). Some sources of detection error can be minimised with appropriate sampling effort ($\delta$ will converge to one with increasing number of samples), but other sources are often difficult to reduce (e.g. the occurrence of cryptic species might require molecular analysis for appropriate taxonomic identification as in~\citealt{Wirta2014,Frost2016}).
+      Lastly, measurement errors are a pervasive source of uncertainty in the observation of ecological processes. Given that an interaction is feasible and occurs under the local conditions ($L$=1 and $X$=1), we may define the detection of an interaction, $D$, as a stochastic process with the associated probability $P(D|X=1,L=1)=\delta$. Detection failure could happen for many reasons (see~\citet{Wirta2014} for examples of some of these difficulties and partial solutions to them). Some sources of detection error can be minimised with appropriate sampling effort ($\delta$ will converge to one with increasing number of samples), but other sources are often difficult to reduce (e.g. the occurrence of cryptic species might require molecular analysis for appropriate taxonomic identification as in~\citealt{Wirta2014,Frost2016}). 
 
 
 \section*{Estimating detection and process uncertainty}
 
-    Together, the combination of these three sources of uncertainty --interaction uncertainty, process uncertainty, and detection uncertainty-- results in a range of potential explanations for the observation of an absence of interaction ($D$, $X$, and/or $L = 0$). The ecologist wanting to describe the network, however, is specifically interested in the situation where $L = 0$ (i.e., in true absences). Thus, while there is no difficulty interpreting the observation of an interaction, the observation of an absence of an interaction offers more of a challenge since it must be decomposed into different quantities. It is particularly important to rule out the situations where $D=0 \cup X = 1 \cup L=1$, i.e. where the interaction occurred at the location but was not observed, and $D=1 \cup X = 0 \cup L =1$, i.e., where the interaction is feasible and would have been detected but did not occur at the local site. The occurrence of a true absence, our quantity of interest, corresponds to the joint event $L=0 \cup X=1 \cup D=1$ but in reality an empirical ecologist will measure the marginal probability $P(L) = k/n$ where $k$ is again the number of observed interactions and $n$ the number of observed co-occurrences.
+    An observed interaction indicates that an interaction was feasible, occurred at the study site during sampling, and was detectable. That is, $L = 1$, $X = 1$, and $D = 1$. An unobserved interaction could be due to any of the three sources of uncertainty ($D$, $X$, and/or $L = 0$). Only the case where $L = 0$ is a true absence of interaction --the usual interpretation of a $0$ value in an interaction matrix. It is particularly important to rule out the situations where $D=0 \cup X = 1 \cup L=1$, i.e. where the interaction occurred at the location but was not observed, and $X = 0 \cup L =1$, i.e., where the interaction is feasible but did not occur at the local site. 
+    % The occurrence of a true absence, our quantity of interest, corresponds to the joint event $L=0 \cup X=1 \cup D=1$ but %% AC: Doesn't a true absence just mean $L=0$ regardless of our ability to detect/local conditions? 
+    Using empirical data, however, it is impossible to distinguish between sources of variation. An empirical ecologist will measure the marginal probability $P(L) = k/n$, where $k$ is the number of observed interactions and $n$ the number of observed co-occurrences. This probability does not contain any information about $D$ or $X$.
 
 
-    The considerations above raise a major challenge: when faced with empirical data, how may we infer whether unobserved interactions went undetected due to sampling or whether they truly do not occur? How then may we refine our sampling approaches to reduce uncertainties, and do we gain insights into the impact of multiple processes on field observations? Importantly, some sources of uncertainty can be minimised with appropriate sampling design and efforts while other sources are difficult or impossible to reduce since they are generated by chance variation created by the very process in which we are interested. Given this multifaceted problem of uncertainty, what can we do to separate the different types of variation and reduce those that can be reduced?
+    The considerations above raise major challenges: when faced with empirical data, how may we infer whether unobserved interactions truly do not occur? How may we refine our sampling approaches to reduce uncertainties gain insights into the impact of multiple processes on field observations? Importantly, some sources of uncertainty within these three broad groupings can be minimised with appropriate sampling (e.g., sampling in a variety of weather conditions, combining different methods of detection) while other sources are difficult or impossible to reduce since they are generated by the process in which we are interested (e.g., variation in individual preferences or traits). Given this multifaceted problem of uncertainty, what can we do to separate the different types of variation and reduce those that can be reduced?
 
 
-    The obvious rule of thumb is to ``sample more" (see Fig.~\ref{upper_limits} for a demonstration of the power of increasing sample size). Sampling more will clearly reduce uncertainty regarding the upper bound of the probability of interaction and it will also increase the probability of detecting unlikely interactions (e.g.,. interactions where $L$=1 but process uncertainty is high).
-    Despite these benefits, we note that there are limits to the utility of increased sampling. Since the probability of observing the co-occurrence of two species will always be higher than the probability of observing their interaction (since the probability of interaction is conditional on both interaction partners being present; see Fig.~\ref{histograms}E-F), we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions. Thus, the more we sample, the more zeros will appear in our interaction matrix.
+    The obvious rule of thumb is to ``sample more" (Fig.~\ref{upper_limits}). Sampling more will reduce uncertainty about the upper bound of the interaction probability and will also increase the probability of detecting unlikely or cryptic interactions (e.g., interactions where $L$=1 but process or detection uncertainty is high). Despite these benefits, we note that there are limits to the utility of increased sampling. Since the probability of observing the co-occurrence of two species will always be higher than the probability of observing their interaction (since the probability of interaction is conditional on both interaction partners being present), we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions (Fig.~\ref{histograms}E-F). Thus, the more we sample, the more zeros will appear in our interaction matrix.
 
 
-    In one endeavour to determine whether unobserved interactions were undetected due to sampling, or whether they truly do not occur,~\citet{Weinstein2017} used repeated sampling rounds to estimate the daily probability of detecting a hummingbird interaction, and to thereby model detection and process uncertainty. While conceptually attractive, this approach is unsuitable for interactions occurring over longer time scales (e.g., associations between hosts and parasitoids with a single generation per year), or very rare interactions which might not occur on any of the sampling days or might involve individuals of a species that is not under observation. What is worse, the problem persists that the absence of an interaction of a given day could  either be because it was impossible on that day despite being otherwise feasible [$P(X|D=1,L=1)=0$], because interaction did occur but could not be observed [$P(D|X=1,L=1)=0$], or any combination of the two. From a conceptual perspective, this approach therefore fails to satisfactorily distinguish between sources of uncertainty. Most importantly, if two species are never observed co-occurring during several days of sampling then we have learned nothing about their probability of interacting if they should ever co-occur. In other words, there is no information about interactions without co-occurrence.
+    An added complication is that increased sampling will not reduce uncertainty evenly across interactions. To record an interaction between A and B, we need to identify both partners correctly (a non-trivial problem in many food webs; e.g.~\citealp{Kaartinen2011,Roslin2016}) and be able to resolve all interactions with a similar likelihood. For both molecular and rearing techniques, certain types of interactions may go unnoticed due to technical challenges~\citep{Wirta2014}. This can bias the set of recorded interactions towards those that are easier to observe.
 
 
-    An added complication is that not all sources of uncertainty are proportional to sample size. To record an interaction between A and B, we need to identify both partners correctly (a non-trivial problem in many food webs; e.g.~\citealp{Kaartinen2011,Roslin2016}) and be able to resolve all interactions with a similar likelihood. For both molecular and rearing techniques, certain types of interactions may go unnoticed due to technical challenges~\citep{Wirta2014}. This can bias the set of recorded interactions. The bottom line is that separating different sources of uncertainty is difficult indeed. As an alternative to abandoning empirical networks or continuing to ignore the uncertainty inherent in undetected observations, we propose that some insight regarding the detectability of interactions between species not found co-occurring in a focal system may be gained from data on other species pairs in the same or a similar system. 
+    A slight variation on the theme of ``sample more" is to sample repeatedly. In one endeavour to uncover the cause of unobserved interactions,~\citet{Weinstein2017} used repeated sampling rounds to estimate the daily probability of detecting an interaction and thereby model detection and process uncertainty. While conceptually attractive, this approach is unsuitable for interactions occurring over longer time scales (e.g., associations between hosts and parasitoids with a single generation per year), or very rare interactions which might not occur on any of the sampling days. Worse, the problem persists that the absence of an interaction on a given day could be because it was impossible on that day despite being otherwise feasible [$P(X|L=1)=0$], because interaction did occur but could not be observed [$P(D|X=1,L=1)=0$]. From a conceptual perspective, this approach therefore fails to satisfactorily distinguish between sources of uncertainty. 
+
+
+    Most importantly, if two species are never observed co-occurring during several days of sampling then repeated sampling reveals nothing about their probability of interacting if they should ever co-occur. The bottom line is that separating different sources of uncertainty is difficult indeed. Nevertheless, we propose that information on the probability of detecting interactions in a focal system can be obtained by combining repeated sampling with prior information from the same or a similar system.
 
 
 \section*{A naive quantification of uncertainty}
@@ -382,6 +389,18 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 \section*{Acknowledgements}
 
   The authors thank Daniel Cartensen for fruitful discussion of the ideas in this manuscript. We also thank K\'{e}vin Cazalles for providing feedback on the manuscript. The authors also appreciate support from the Swedish Research Council (VR) for grant \#2016-06872 (to TR). Additional funding was provided by a Formas grant (\#942-2015-1262) to AE.
+
+
+\section*{Statement of authorship}
+
+DG designed the analytical approach. AC and DG wrote the code. AC performed statistical analyses. All authors contributed to writing and revising the manuscript.
+
+
+\section*{Data accessibility}
+
+All data used in this study have been independently published and are accessible following the references provided in text.
+
+
 
 \end{spacing}
 \clearpage
