@@ -101,11 +101,11 @@ def Zillis_yaxes(prop,graph):
   elif prop=='LS':
     graph.world.ymax=4
     graph.yaxis.tick.configure(major=1,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/resource"
+    ytext="Links per Salix"
   elif prop=='LG':
     graph.world.ymax=7
     graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/consumer"
+    ytext="Links per galler"
   else:
     graph.world.ymax=2.25
     graph.yaxis.tick.configure(major=.5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
@@ -126,12 +126,12 @@ def Zillertal_yaxes(prop,graph):
     graph.world.ymin=0
     graph.world.ymax=6
     graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/resource"
+    ytext="Links per Salix"
   elif prop=='LG':
     graph.world.ymin=0
     graph.world.ymax=11
     graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-    ytext="Links/consumer"
+    ytext="Links per galler"
   else:
     graph.world.ymin=0
     graph.world.ymax=4
@@ -165,11 +165,11 @@ def format_graph(graph,prop,nettype,site):
     elif prop=='LS':
       graph.world.ymax=18
       graph.yaxis.tick.configure(major=4,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-      ytext="Links/resource"
+      ytext="Links per galler"
     elif prop=='LG':
       graph.world.ymax=23    
       graph.yaxis.tick.configure(major=5,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
-      ytext="Links/consumer"
+      ytext="Links per natural enemy"
     else:
       graph.world.ymax=8     
       graph.yaxis.tick.configure(major=2,onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
@@ -178,10 +178,10 @@ def format_graph(graph,prop,nettype,site):
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.5,
     loc=(0.635,3.8),loctype='world')
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
-  if prop=='C' and nettype=='SG':
-    graph.xaxis.label.configure(text='Salix-Galler',place='opposite',char_size=1.25,just=2,loctype='world')
-  elif prop=='C' and nettype=='GP':
-    graph.xaxis.label.configure(text="Galler-Parasitoid",place='opposite',char_size=1.25,just=2,loctype='world')
+  # if prop=='C' and nettype=='SG':
+  #   graph.xaxis.label.configure(text='Salix-Galler',place='opposite',char_size=1.25,just=2,loctype='world')
+  # elif prop=='C' and nettype=='GP':
+    # graph.xaxis.label.configure(text="Galler-Parasitoid",place='opposite',char_size=1.25,just=2,loctype='world')
 
   return graph
 
@@ -224,9 +224,9 @@ def main():
 
   for site in ['Zillis']:
   # for site in ['Zillis','Zillertal']:
-    grace=MultiPanelGrace(colors=colors)
-    for prop in ['C','LS','LG','NODF']:
-      for nettype in ['SG','GP']:
+    for nettype in ['SG','GP']:
+      grace=MultiPanelGrace(colors=colors)
+      for prop in ['C','LS','NODF','LG']:
         graph=grace.add_graph(Panel)
         graph=format_graph(graph,prop,nettype,site)
 
@@ -242,12 +242,12 @@ def main():
         graph=populate_graph(graph,prop,nettype,obs,whiskers)
 
 
-    grace.multi(rows=4,cols=2,vgap=.04,hgap=.07)
-    grace.hide_redundant_labels()
-    grace.set_row_xaxislabel(colspan=(None,None),row=3,label="Percent of links detected",just=2,char_size=1,perpendicular_offset=0.05)
+      grace.multi(rows=2,cols=2,vgap=.04,hgap=.1)
+      grace.hide_redundant_labels()
+      grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Percent of links detected",just=2,char_size=1.5,perpendicular_offset=0.05)
 
 
-    grace.write_file('../../manuscript/figures/Salix_Galler_posterior_properties_'+site+'.eps')
+      grace.write_file('../../manuscript/figures/'+nettype+'_posterior_properties_'+site+'.eps')
 
   
 if __name__ == '__main__':

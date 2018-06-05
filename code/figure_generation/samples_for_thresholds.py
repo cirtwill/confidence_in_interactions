@@ -143,9 +143,13 @@ def format_graph(graph,nettype):
   if nettype=='SG':
     graph.world.xmax=1300
     major=250
+    graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
+      loc=(750,.65),loctype='world')
   else:
     graph.world.xmax=300
     major=50
+    graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
+      loc=(155,.65),loctype='world')
   graph.world.ymin=-0
   graph.world.ymax=1
   # graph.world.xmax=750
@@ -159,11 +163,9 @@ def format_graph(graph,nettype):
 
   graph.xaxis.label.configure(text="Number of samples",char_size=1,just=2,place='normal')
   graph.yaxis.label.configure(text="Cumulative density",char_size=1,just=2)
-  graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-    loc=(750,.65),loctype='world')
     # loc=(400,.65),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
-  graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.03)
+  # graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.03)
 
   return graph
 
@@ -181,18 +183,18 @@ def populate_graph(graph,pointdict,nettype):
     data=graph.add_dataset(pointdict[threshold])
     data.symbol.shape=0
     data.line.configure(linewidth=2,linestyle=x)
-    if nettype=='SG':
-      data.legend="Threshold="+str(threshold)
+    # if nettype=='SG':
+    data.legend="Threshold="+str(threshold)
 
   bar95=graph.add_dataset([(0,0.95),(2000,.95)])
   bar95.symbol.shape=0
   bar95.line.configure(linewidth=1,linestyle=1,color=2)
 
-  if nettype=="SG":
-    graph.add_drawing_object(DrawText,text="Salix-Galler",char_size=1,just=0,x=0,y=1.05,loctype='world')
-  else:
+  # if nettype=="SG":
+    # graph.add_drawing_object(DrawText,text="Salix-Galler",char_size=1,just=0,x=0,y=1.05,loctype='world')
+  # else:
     # graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=2,x=40,y=1.05,loctype='world')
-    graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=0,x=0,y=1.05,loctype='world')
+    # graph.add_drawing_object(DrawText,text="Galler-Parasitoid",char_size=1,just=0,x=0,y=1.05,loctype='world')
 
   return graph
 
@@ -232,18 +234,19 @@ def add_samplelines(graph,sampledict,nettype):
   dots.line.linestyle=0
   dots.symbol.configure(shape=3,color=11,size=.75,fill_color=11)
 
-  if nettype=='SG':
-    do.legend="P=0.90"
-    dot.legend="P=0.95"
-    dots.legend="P=0.975"
+  # if nettype=='SG':
+  do.legend="P=0.90"
+  dot.legend="P=0.95"
+  dots.legend="P=0.975"
 
   print 'dots added'
   return graph
 
 
-grace=MultiPanelGrace(colors=colors)
 
 for nettype in ['SG','GP']:
+  # grace=MultiPanelGrace(colors=colors)
+  grace=Grace(colors=colors)
   if nettype=='SG':
     # datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv',nettype)
     datadict,sampledict=read_Rfiles('../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',nettype)
@@ -253,16 +256,17 @@ for nettype in ['SG','GP']:
 
   datasets=combiner(datadict)
 
-  graph=grace.add_graph(Panel)
+  # graph=grace.add_graph(Panel)
+  graph=grace.add_graph()
   graph=format_graph(graph,nettype)
   graph=populate_graph(graph,datasets,nettype)
   graph=add_samplelines(graph,sampledict,nettype)
   # graph.set_view(0.15,0.15,0.95,0.65)
 
 # grace.automulti()
-grace.multi(rows=2,cols=1,vgap=.08)
-grace.hide_redundant_labels()
-grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Cumulative density",just=2,char_size=1,perpendicular_offset=0.07)
+  # grace.multi(rows=2,cols=1,vgap=.08)
+  # grace.hide_redundant_labels()
+  # grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Cumulative density",just=2,char_size=1,perpendicular_offset=0.07)
 
-# grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs.eps')
-grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs_Zillis.eps')
+  # grace.write_file('../../manuscript/figures/Salix_Galler_samples_and_cdfs.eps')
+  grace.write_file('../../manuscript/figures/'+nettype+'_samples_and_cdfs_Zillis.eps')

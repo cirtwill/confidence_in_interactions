@@ -119,10 +119,10 @@ def format_graph(graph,graphtype,nettype):
     loc=(100,.75),loctype='world')
   # graph.add_drawing_object(DrawText,text="Threshold",x=150,y=.9,char_size=.75,just=2,loctype='world')
 
-  if graphtype=='occurs' and nettype=='SG':
-    graph.add_drawing_object(DrawText,text="Salix-Galler",x=35,y=2500,char_size=1.25,just=2,loctype='world')
-  elif graphtype=='occurs' and nettype=='GP':
-    graph.add_drawing_object(DrawText,text="Galler-Parasitoid",x=35,y=2500,char_size=1.25,just=2,loctype='world')
+  # if graphtype=='occurs' and nettype=='SG':
+  #   graph.add_drawing_object(DrawText,text="Salix-Galler",x=35,y=2500,char_size=1.25,just=2,loctype='world')
+  # elif graphtype=='occurs' and nettype=='GP':
+  #   graph.add_drawing_object(DrawText,text="Galler-Parasitoid",x=35,y=2500,char_size=1.25,just=2,loctype='world')
 
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
 
@@ -148,10 +148,9 @@ def populate_graph(graph,occurs,graphtype):
 
   return graph
 
-grace=MultiPanelGrace(colors=colors)
-
-for graphtype in ['occurs','interacts','dotplot']:
-  for nettype in ['SG','GP']:
+for nettype in ['SG','GP']:
+  grace=MultiPanelGrace(colors=colors)
+  for graphtype in ['occurs','interacts','dotplot']:
     if nettype=='SG':
       occurs=read_Rfiles('../../data/Salix_example/Salix_Galler/nonzero_cooccurances.tsv')
       interacts=read_Rfiles('../../data/Salix_example/Salix_Galler/observed_interactions.tsv')
@@ -170,21 +169,21 @@ for graphtype in ['occurs','interacts','dotplot']:
     graph=grace.add_graph(Panel)
     graph=format_graph(graph,graphtype,nettype)
     graph=populate_graph(graph,dataset,graphtype)
-# graph.set_view(0.15,0.15,0.95,0.65)
+  # graph.set_view(0.15,0.15,0.95,0.65)
 
-grace.multi(rows=3,cols=2,vgap=.08,hgap=.04)
-# graph.set_view(0.15,0.15,0.95,0.65)
-grace.hide_redundant_labels()
+  grace.multi(rows=3,cols=1,vgap=.08,hgap=.04)
+  # graph.set_view(0.15,0.15,0.95,0.65)
+  grace.hide_redundant_labels()
 
-# Just add row labels and you're done.
-grace.set_row_xaxislabel(colspan=(None,None),row=0,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
-grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Observed interactions",just=2,char_size=1,perpendicular_offset=0.05)
-grace.set_row_xaxislabel(colspan=(None,None),row=2,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
+  # Just add row labels and you're done.
+  grace.set_row_xaxislabel(colspan=(None,None),row=0,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
+  grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Observed interactions",just=2,char_size=1,perpendicular_offset=0.05)
+  grace.set_row_xaxislabel(colspan=(None,None),row=2,label="Observed co-occurences",just=2,char_size=1,perpendicular_offset=0.05)
 
-# grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Species pairs",just=2,char_size=1)
-# grace.graphs[0].set_view(0.15,0.73,0.55,0.95)
-# grace.graphs[1].set_view(0.15,0.44,0.55,0.66)
-# grace.graphs[2].set_view(0.15,0.15,0.55,0.37)
-# for graph in grace.graphs:
-#   print graph.get_view()
-grace.write_file('../../manuscript/figures/Salix_Galler_histogram.eps')
+  # grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Species pairs",just=2,char_size=1)
+  # grace.graphs[0].set_view(0.15,0.73,0.55,0.95)
+  # grace.graphs[1].set_view(0.15,0.44,0.55,0.66)
+  # grace.graphs[2].set_view(0.15,0.15,0.55,0.37)
+  # for graph in grace.graphs:
+  #   print graph.get_view()
+  grace.write_file('../../manuscript/figures/'+nettype+'_histogram.eps')

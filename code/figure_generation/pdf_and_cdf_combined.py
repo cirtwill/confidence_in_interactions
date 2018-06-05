@@ -61,6 +61,7 @@ import math
 import random
 from decimal import *
 import numpy as np
+import samples_for_thresholds as cdf
 
 #Pygrace libraries
 from PyGrace.grace import Grace
@@ -147,22 +148,15 @@ def format_graph(graph,nettype):
     graph.add_drawing_object(DrawText,text="N",x=0.085,y=35.5,char_size=.75,just=2,loctype='world')
   elif nettype=='GP':
     graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
-      loc=(0.25,35),loctype='world',size=2)
+      loc=(0.22,35),loctype='world',size=2)
     # graph.add_drawing_object(DrawText,text="N",x=0.665,y=35.5,char_size=.75,just=2,loctype='world')
-    graph.add_drawing_object(DrawText,text="N",x=0.265,y=35.5,char_size=.75,just=2,loctype='world')
+    graph.add_drawing_object(DrawText,text="N",x=0.235,y=35.5,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.02)
 
 
   return graph
 
 def populate_graph(graph,pointdict,MLEdict,nettype):
-
-  if nettype=='GP':
-    for x in [0.01,0.05,0.10]:
-      vertline=graph.add_dataset([(x,0),(x,1000)])
-      vertline.symbol.shape=0
-      vertline.line.linestyle=3
-
   # cols=[2,3,5,9,10,11]
   cols=[11,9,7,5,3,2]
   x=0
@@ -176,13 +170,6 @@ def populate_graph(graph,pointdict,MLEdict,nettype):
     # if nettype=='SG': 
     data.legend=str(N)
 
-    y+=2
-    x+=1
-
-
-  x=0
-  y=0
-  for N in [100,50,20,10,5,0]:
     MLE=MLEdict[N][0]
     lower=MLEdict[N][1]
     upper=MLEdict[N][2]
@@ -198,6 +185,7 @@ def populate_graph(graph,pointdict,MLEdict,nettype):
     y+=2
     x+=1
 
+
   return graph
 
 # grace=MultiPanelGrace(colors=colors)
@@ -205,9 +193,10 @@ def populate_graph(graph,pointdict,MLEdict,nettype):
 # grace.set_label_scheme('dummy')
 
 for nettype in ['SG','GP']:
-  grace=Grace(colors=colors)
-  # grace.add_label_scheme('dummy',['A: Salix-Galler','B: Galler-Parasitoid'])
-  # grace.set_label_scheme('dummy')
+  grace=MultiPanelGrace(colors=colors)
+  grace.add_label_scheme('dummy',['A','B'])
+  grace.set_label_scheme('dummy')
+  # PDF graph
   if nettype=='SG':
     # xdata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_xvals.tsv')
     # ydata=read_Rfiles('../../data/Salix_example/Salix_Galler/distfigure_yvals.tsv')
@@ -231,9 +220,27 @@ for nettype in ['SG','GP']:
   graph=populate_graph(graph,datasets,MLEdict,nettype)
   graph.set_view(0.15,0.15,0.95,0.65)
 
-  # grace.multi(rows=2,cols=1,vgap=.04)
-  # grace.hide_redundant_labels()
+
+  # CDF graph
+  if nettype=='SG':
+    # datadict,sampledict=read_Rfiles('../../data/Salix_example/Salix_Galler/samplefigure.tsv',nettype)
+    datadict,sampledict=cdf.read_Rfiles('../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',nettype)
+  else:
+    # datadict,sampledict=read_Rfiles('../../data/Salix_example/Galler_Parasitoid/samplefigure.tsv',nettype)    
+    datadict,sampledict=cdf.read_Rfiles('../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',nettype)    
+
+  datasets=cdf.combiner(datadict)
+
+  graph2=grace.add_graph(Panel)
+  graph2=cdf.format_graph(graph2,nettype)
+  graph2=cdf.populate_graph(graph2,datasets,nettype)
+  graph2=cdf.add_samplelines(graph2,sampledict,nettype)
+  graph2.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.02)
+
+
+  grace.multi(rows=2,cols=1,vgap=.1)
+  grace.hide_redundant_labels()
   # grace.set_col_yaxislabel(rowspan=(None,None),col=0,label="Probability density",just=2,char_size=1,perpendicular_offset=.04)
 
-  grace.write_file('../../manuscript/figures/'+nettype+'_pdfs_increasing_N_Zillis.eps')
+  grace.write_file('../../manuscript/figures/'+nettype+'_pdfs_cdf_Zillis.eps')
 # grace.write_file('../../manuscript/figures/Salix_Galler_pdfs_increasing_N.eps')
