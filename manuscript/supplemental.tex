@@ -50,104 +50,76 @@ alyssa.cirtwill@gmail.com\\
 \setlength{\parindent}{15pt} 
 \clearpage
 
-\section*{Appendix S1: Calculating posterior distributions and confidence intervals}
+% Definite first
+\section*{Appendix S1: Calculating uninformative and informative priors}
 
-  The following simple functions are implemented in the R language. They are 
-  also provided as R code in a separate file.
-  Priordata is the list of interaction frequencies from the prior 
-  data, $n$ is the number of sites with observed co-occurrence of 
-  species $i$ and $j$, and $k$ is the number of sites with an 
-  observed interaction $ij$. When calculating the prior 
-  distribution, both $n$ and $k$ are 0. In the main text we assume 100\%
-  confidence in observed interactions and therefore consider only 
-  cases where $k$=0. Only $n$ varies between species pairs.
-
-
-  To calculate the parameters $\alpha$ and $\beta$ of a prior or 
-  posterior distribution:
-
-  \vspace{12pt}
-  \begin{em}
-  \noindent \hspace{2pt}calculate\_parameters\textless-function(priordata,n,k)\{\\
-  \vspace{4pt}
-    \# Calculate prior parameters\\
-    start=list(shape1=1,shape2=1)\\
-    pars=fitdistr(x=priordata,`beta',start=start,lower=c(0,0))\$estimate\\
-    alpha=pars[[1]]\\
-    beta=pars[[2]]\\
-  \vspace{4pt}
-    \# Update the parameters with data. If n=0 and k=0, no change.\\
-    alpha\_prime=alpha+k\\
-    beta\_prime=beta+n-k\\
-    pars2=c(alpha\_prime,beta\_prime)\\
-    return(pars2) \}
-  \end{em}
-  \vspace{12pt}
-
-
-    All of the following functions use the parameters returned by 
-    ``calculate\_parameters". To calculate the maximum likelihood estimates of 
-    the mean and variance of the probability of interaction $\lambda_{ij}$:
-
-    \vspace{12pt}
-    \begin{em}
-    \noindent \hspace{2pt}calculate\_distribution\textless-function(pars)\{\\
-     \vspace{4pt}
-     \# alpha and beta may be from a prior or posterior distribution\\
-      alpha=pars[[1]]\\
-      beta=pars[[2]]\\
-      \vspace{4pt}
-      \# Calculate the MLE of the mean\\
-      mu\_numerator=alpha\\
-      mu\_denominator=alpha+beta\\
-      mu=mu\_numerator/mu\_denominator\\
-      \vspace{4pt}
-      \# Calculate the MLE of the variance\\
-      sig\_numerator=alpha\*beta\\
-      den1=alpha+beta\\
-      den2=den1$**$2\\
-      sig\_denominator=den1$*$den2\\
-      sigma2=sig\_numerator/sig\_denominator\\
-      return(c(mu,sigma2))\}
-    \end{em}
-  \vspace{12pt}
+    \subsection*{Uninformative prior}
       
-  \clearpage
+        In the absence of any external information, an uninformative prior is the most conservative hypothesis for the distribution of $\lambda$. The beta distribution is in this case a uniform distribution, specified with hyper parameters $\alpha=1$ and $\beta=1$. 
 
-  To calculate a credible interval based on the prior or posterior distribution, for given lower and upper bounds:
+    \subsection*{Distribution of connectance}
+      
+        The ecological network literature boasts a collection of networks for which connectance has been calculated and for which we can thus define the connectance distribution. Connectance is measured as $C = L/S^2$, where $L$ is the number of interactions and $S$ is the number of species. It measures the filling of an interaction matrix and thereby expresses the average probability that any two species interact with each other. If we know only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
+
+        \begin{equation}
+        \alpha = \overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
+        \end{equation}
+
+        \begin{equation}
+        \beta = (1-\overline{C})(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) .
+        \end{equation}
+  
+
+    \subsection*{Degree distribution or interaction probabilities}
+
+        The degree of a node in a network is defined as its number of connections to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network and the normalised degree (i.e., degree divided by the number of potential interaction partners) could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to inform the prior distribution. The degree distribution could come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows researchers to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. That is, we can use detection probabilities for interactions between abundant species to set bounds on detection probabilities for interactions involving rare species.
 
 
-  \vspace{12pt}
-  \begin{em}
-  \noindent \hspace{2pt}credible\_interval\textless-function(pars,p\_lower,p\_upper)\{\\
-    \vspace{4pt}
-    alpha=pars[[1]]\\
-    beta=pars[[2]]\\
-    lowCI=qbeta(p=p\_lower,shape1=alpha,shape2=beta)\\
-    highCI=qbeta(p=p\_upper,shape1=alpha,shape2=beta)\\
-    return(c(lowCI,highCI))\}
-  \end{em}
-  \vspace{12pt}
-
-  To calculate the number of samples required to reach a given level of confidence that the probability of interaction between two species ($\lambda_{ij}$) that have not been observed co-occurring is below a threshold value:
+        If our focal network describes a system similar to that in a known network, we can use the distribution of interaction probabilities in that network to inform our prior. The probability of any interaction $L_{ij}$ depends on the degrees of species $i$ and $j$. Using normalised degrees $\Delta_i$ and $\Delta_j$, we can obtain the probability of interaction $L_{ij}$=$\Delta_i\times\Delta_j$. Similar to the procedure for degree distribution, the distribution of these interaction probabilities can be used to establish a prior distribution before any data from the focal network are collected. For distributions of either degrees or interaction probabilities, the procedure for the estimation of the hyper parameters follows the same approach as described above for connectance except that each measurement is at the individual interaction level instead of the network level.
 
 
-  \vspace{12pt}
-  \begin{em}
-  \noindent \hspace{2pt}samples\_for\_threshold\textless-function(threshold,confidence,pars)\{\\
-    \vspace{4pt}
-    alpha=pars[[1]]\\
-    beta=pars[[2]]\\
-    n=seq(0,100,1)\\
-    k=0\\ 
-    cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)\\
-    samples=length(which(cdf\textless confidence))\\
-    return(samples) \}
-  \end{em}
+    \subsection*{Trait-matching function} 
 
+        As a fourth and final approach, it may be possible to obtain the prior distribution of $\lambda$ using the outcome of a trait-matching model, provided such a model has been parameterised using external data and relevant traits are available. In such a case, the prior distribution would follow the function $P(\lambda|\mathbf{T})=f(\mathbf{T})$ based on a set of traits for both species $\mathbf{T}$. There are several techniques available to perform this inference of interaction probability, some of which are Bayesian, and we refer interested readers to~\citet{Bartomeus2016} and~\citet{Weinstein2017} for recent reviews about this topic. Note that in this case the prior might not be beta-distributed and numerical methods might be required to compute the posterior distribution.  
+
+
+        Trait-matching functions reduce uncertainty around the feasibility of interactions. Interactions between species with extremely mis-matched traits are very unlikely, and we can therefore be more confident that an unobserved interaction does not occur. This approach could be extended to models including environmental or phenological constraints, allowing researchers to reduce process uncertainty as well. Such models are, however, likely to be large and therefore may pose a risk of over-fitting.
+
+    \subsection*{A quantitative example}
+
+      The Bayesian framework can be illustrated with a simple quantitative example. Suppose we have $n = 10$ observations of co-occurrence between species $i$ and species $j$ in a given time interval and area, and $k = 3$ observations of interactions. The maximum likelihood estimate of the interaction probability is simply $\lambda_{MLE} = 3/10 = 0.3$. 
+      
+
+      Now consider we know that species $i$ is known to interact with 10 species (other than species $j$), which have the following degrees:
+
+        \vspace{12pt}
+        \noindent\emph{
+          degree=c(14, 4, 2, 3, 17, 6, 2, 15, 1, 1)
+            }.
+          \vspace{12pt}
+
+        If the network has 20 species total, this gives the normalised degrees:
+
+        \vspace{12pt}
+        \noindent\emph{
+          norm\_degree=c(0.65, 0.20, 0.10, 0.15, 0.85, 0.30, 0.10, 0.75, 0.05, 0.05)}.
+          \vspace{12pt}
+
+        Species $i$ has a normalised degree of 0.55 (it interacts with species $j$ and 10 other species). We can combine the normalised degree of $i$ with the normalised degrees of its interaction partners to obtain the following set of interaction probabilities for species $i$ and each of its interaction partners:
+
+        \vspace{12pt}
+        \noindent\emph{
+           int\_probs = c(0.358, 0.110, 0.055, 0.082, 0.468, 0.165, 0.055, 0.412, 0.028, 0.028) }.
+          \vspace{12pt}
+
+        The mean of these interaction probabilities is 0.176, approximately two-thirds the $\lambda_{MLE}$ obtained from the observed data. We can use the distribution of these interaction probabilities as our prior distribution and estimate the uncertainty surrounding our $\lambda_{MLE}$. With some simple R code (function ``calculate\_parameters", \emph{Appendix S3}), we obtain prior parameters $\alpha$=0.998 and $\beta$=4.63. Using these priors in equations~\ref{mean} and~\ref{variance} above (or in the R function ``calculate\_distribution" in \emph{Appendix S3}), we find a prior $\bar\lambda$=0.177 and var($\lambda$)=0.026. Adding the observed data ($n=10$, $k=3$) and using the same code, we obtain posterior parameters $\alpha'$=4.00 and $\beta'$=11.6 and a posterior $\bar\lambda$=0.256 and var($\lambda$)=0.012. Comparing the posterior distribution to the prior, we see that the posterior is closer to the observed data and that the additional data about interactions between species $i$ and $j$ has reduced the variance. We may also wish to calculate a credible interval (analogous to the frequentist confidence interval). This is also quite straightforward in R (see function ``credible\_interval" in \emph{Appendix S3}). In this case, a 95\% credible interval for $\bar\lambda$ is (0.080, 0.491).
+
+
+        Now, consider the case where the two species have never been observed interacting across $n$ trials, i-e. $k=0$. The question is then ``what is the probability that these two species do not interact''? Since it is not possible to prove that the two species could never interact (strictly speaking, in a Bayesian approach $\lambda=0$ is impossible), we must fix a threshold below which we consider that there is no interaction ($\lambda \sim 0$). We call this threshold probability $\lambda*$. We then use the cumulative distribution function to estimate $P(\lambda<\lambda*|L=0,n)$ for different $n$. The function ``samples\_for\_threshold" in \emph{Appendix S3} calculates distribution function for $\lambda*$ with an increasing number of trials. This yields a surprising result: it requires \textgreater24 observations of no interactions to be 95\% sure that the interaction probability is smaller than $\lambda*$=0.1 (recall Fig.~\ref{upper_limits}, Box 2). Note the special case where there is no observation of the two species co-occurring, $n = 0$.  In this situation, the posterior distribution converges to the prior distribution since the data include no information on the probability with which species might interact should they co-occur.
 
 \clearpage
 
+% Definite second
 \section*{Appendix S2: Details of \emph{Salix} data collection}
 
       The \emph{Salix}-galler-parasitoid meta-network dataset collected 
@@ -157,69 +129,72 @@ alyssa.cirtwill@gmail.com\\
       and hymenopteran inquilines). The data were collected over 29 years 
       (1982-2010) at 374 unique locations across Europe ranging from Sicily to 
       the Arctic. Including repeated visits to a number of sites, the data set 
-      contains 641 site-visits. The meta-network consists of 1,173 different interactions 
+      contains 641 site-visits. Here we take the more conservative approach and pool visits to the same site for a sample size of 374 sub-networks.
+
+      The meta-network consists of 1,173 different interactions 
       between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 parasitoid 
       nodes. Interactions were determined by dissecting and rearing gall 
       inhabitants from 165,424 galls. Some sites were visited repeatedly, for a 
       total of 641 site-visits. We consider these to be repeated samples and 
       take the 374 unique sites as our sample size.
 
+\clearpage
+
+% Definite third
+\section*{Appendix S3: Results for \emph{Salix}-galler component}
+
+    \subsection*{Computing the prior and posterior distributions}
+
+      As with the galler-natural enemy component, we estimated frequencies of \emph{Salix}-galler interactions based on the normalised degree of each species (\emph{Appendix S5}). We obtained prior parameters of $\alpha$=8.72, $\beta$=305 for the \emph{Salix}-galler component. These prior parameters were then used to estimate the posterior distribution. 
+
+
+      For species where $n=0$ (3,986/4,992 \emph{Salix}-galler pairs in our dataset), estimates for the mean and variance of $\lambda_{ij}$ can be calculated directly from the prior distribution (\emph{Appendix S6}). For the \emph{Salix}-galler network, these parameters were: $\bar\lambda$=0.028, var($\lambda$)=8.60$\times$10$^{-5}$; note that this mean is much lower than that obtained using a prior based on~\citet[Data available from the Dryad Digital Repository: https://doi.org/10.5061/dryad.g7805]{Barbour2016}. Note that, despite the intensive sampling in the~\ref{Kopelke2017} dataset, most \emph{Salix}-galler pairs were never observed co-occurring (3,986/4,992; Fig.~\ref{histograms}).
+
+
+      \begin{figure}[h!]
+          \caption{\textbf{A)} Most pairs of \emph{Salix} and gallers were never observed co-occurring despite the high levels of replication in our example dataset. For those pairs that were observed together at least once ($n_{ij}>0$), the number of observed co-occurrences was generally small (\textless10). Here we show a histogram of the number of pairs of species observed co-occurring at least once. The 3986 \emph{Salix}-galler pairs never observed co-occurring are omitted from the histogram. \textbf{B)} Most pairs of species that were observed at the same site were never observed interacting. Here we show a histogram of the number of observed interactions within pairs of co-occurring species. Species which co-occurred but never interacted are included. \textbf{C)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. \emph{Salix}-galler pairs either are never observed interacting or interact almost every time they co-occur. IThe red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
+          \label{histograms}
+          \begin{center}
+          \includegraphics*[width=.8\textwidth]{figures/SG_histogram.eps}
+          \end{center}
+          \end{figure}
+
+
+      For species with $n>0$, the posterior distribution will depend on the values of $n$ and $k$. Here we are interested only in cases where $k = 0$. This gives $\alpha'$=$\alpha$ and $\beta'$=$\beta + n_{ij}$. For a pair of species which co-occurred at all 374 sites and was never observed to interact, the distribution for the \emph{Salix}-galler network would become $\bar\lambda_{ij}$=1.27 $\times$ 10$^{-2}$, var($\lambda_{ij}$)=1.82 $\times$ 10$^{-5}$. As $n$ decreases, the distribution widens and moves away from the origin (Fig.~\ref{Salix_pdfs}). The 95\% credible interval for hypothetical \emph{Salix}-galler pairs widened from (0.006, 0.022) if the pair co-occurred at all sites to (0.013, 0.049) if they co-occurred at none (Table~\ref{credints}). 
+
+      \begin{figure}[h!]
+        \caption{Using prior distributions based on the \emph{Salix}-galler network sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. Dashed lines indicate threshold probabilities of 0.1, 0.05, and 0.01.}
+        \label{Salix_pdfs}
+        \begin{center}
+        \includegraphics*[width=.7\textwidth]{figures/SG_pdfs_increasing_N_Zillis.eps}
+        \end{center}
+        \end{figure}
+
+
+    \subsection*{How many samples are required to reach a minimal precision}
+
+        In our dataset, the entire 95\% credible interval for the probability of an interaction between a \emph{Salix}-galler pair was (0.013, 0.049). We may therefore be 95\% confident that the interaction probability for \emph{Salix} and galler species that have not been observed co-occurring is below 0.05. As the peak of the prior distribution for the probability of interaction between \emph{Salix} and galler probabilities is around 0.02 (Fig.~\ref{Salix_pdfs}), to be 95\% confident that the interaction probability for these species is below 0.01 would require 1029 observed co-occurrences with no interaction - far more than the number of sites in the~\citep{Kopelke2017} dataset.
+
+
+    \subsection*{Scaling up to network metrics}
+
+      As with the galler-natural enemy component, we calculated posterior probability distributions for \emph{Salix}-galler pairs that were not observed interacting. For each posterior web, we calculated the connectance of each web, as well the mean links per \emph{Salix}, mean links per galler, and nestedness (NODF). Likewise, we created a suite of detection-filtered networks by randomly sampling 99\%, 95\%, 90\%, 80\%, 70\%, 60\%, and 50\% of the interactions included in each posterior network. We then calculated the same network properties as described above.
+
+
+      We find, perhaps not surprisingly, that the posterior webs for the Salix-galler network  had higher connectances than the original, observed web (C=0.028 for the observed web and 0.082 $\leq$ C $\leq$ 0.096 for the posterior webs; Fig.~\ref{posterior_webs}A). The number of links per \emph{Salix} species in the observed web ($L_{\emph{Salix}}$=2.71) was similar to those in the posterior webs (2.53 $\leq L_{\emph{Salix}} \leq$ 3.19; Fig~\ref{posterior_webs}B). The number of links per galler, however, was lower in the observed web ($L_{galler}$=1.47) than in the posterior webs, accounting for the increased connectance (4.67 $\leq L_{galler} \leq$ 5.88; Fig.~\ref{posterior_webs}D). There was a more substantial difference in the nestedness of the observed and posterior webs: the observed network had NODF=0.560 while the posterior networks were more nested (1.39 $\leq NODF \leq$ 1.94). Even the networks sampled with a detection filter of 50\% had non-zero nestedness (Fig.~\ref{posterior_webs}C). This last result highlights the potential for the possibility for network structure to vary when considering the possibility that unobserved species pairs may interact.
+
+
+  \begin{figure}[h!]
+    \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a single sub-network in the~\citet{Kopelke2017} dataset (Zillis). We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
+    \label{posterior_webs}    
+    \begin{center}
+    \includegraphics[width=.7\textwidth]{figures/SG_posterior_properties_Zillis.eps}
+    \end{center}
+    \end{figure}
 
 \clearpage
 
-
-\section*{Appendix S3: Obtaining prior interaction probabilities}
-
-    \subsection*{Degree distributions and interaction probabilities}
-
-      Obtaining degree distributions from the binary interaction 
-      network is straightforward. To do this, we simply divide the 
-      total number of observed interaction partners for each 
-      species (row or column sums) with the number of potential 
-      interaction partners (number of column or rows). Degree 
-      distributions calculated, we can then calculate the 
-      probability of each interaction as the product of the 
-      normalised degrees of the two species. For example, the 
-      probability of an interaction between two species with 
-      normalised degrees of 0.5 (each interacts with half of the 
-      available partners) is 0.25. R code used to do this follows:
-
-
-      \vspace{12pt}
-      \begin{em}
-      \noindent \hspace{2pt}\# Now get the degree distributions from the web\\
-      \noindent \hspace{2pt}deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# Remove one genotype that never interacted\\
-      \noindent \hspace{2pt}deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
-      \noindent \hspace{2pt}deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# Interaction probabilities are the product of plant and galler probabilities\\
-      \noindent \hspace{2pt}int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
-      \vspace{4pt}
-      \noindent \hspace{2pt}\# And for the galler-parasitoid web:\\
-      \noindent \hspace{2pt}deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
-      \noindent \hspace{2pt}deg\_dist\_parasitised=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
-      \noindent \hspace{2pt}gp\_int\_probs=as.numeric(deg\_dist\_parasitised\%$*$\%t(deg\_dist\_parasitoid))\\
-      \end{em}
-
-
-      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
-      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
-
-      %       # Now get the degree distributions from the web
-      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
-      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
-      % # Interaction probabilities are the product of plant and galler probabilities
-      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
-
-      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
-      % deg_dist_parasitised=colSums(GP_web)/nrow(GP_web)
-      % gp_int_probs=as.numeric(deg_dist_parasitised%*%t(deg_dist_parasitoid))
-
-
-\clearpage
-
+% Definite fourth
 \section*{Appendix S4: Analyses using alternative prior}
 
   We repeated our analyses using an alternative prior derived from a study of a similar \emph{Salix}-galler-natural enemy system in North America~\citep{Barbour2016,Barbour2016Dryad}. We note that this study used several genotypes of \emph{Salix hookeriana} rather than different \emph{Salix} species and so did not produce networks of similar size and connectedness to those in~\citep{Kopelke2017}.  To obtain the priors based on~\citet{Barbour2016}, we estimated frequencies of  \emph{S. hookeriana} genotype-galler interactions based on the normalised degree of each node (species or genotype) in each network component.
@@ -408,10 +383,203 @@ alyssa.cirtwill@gmail.com\\
       \end{center}
       \end{figure}
 
+\clearpage
+
+\section*{Appendix S5: Calculating the credible interval around a probability estimate}
+
+  Here we describe the derivation of the Clopper-Pearson credible interval for the estimated probability of interaction $\lambda$ of a pair of species observed co-occurring $n$ times and interacting $k$ times. As we are most interested in the probability of interaction between species pairs that have never been observed co-occurring, we consider only the case where $k=0$ over a variety of $n$. This is straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S2}). 
+
+
+  First, we must obtain the $\alpha$ and $\beta$ parameters for the prior distribution. In this study we obtained these parameters using the R~\citep{R} function fitdist from the package fitdistrplus~\citep{fitdistrplus}. Once $\alpha$ and $\beta$ are known, we can update them using our observed data. Specifically, we are interested in $\alpha'=\alpha+k$ and $\beta'=\beta+n-k$. These parameters can then be used to calculate a credible interval using the R~\citep{R} function qbeta. In the table below, we present the 95\% credible intervals for \emph{Salix}-galler and galler-natural enemy pairs with different numbers of observed co-occurrences ($n$) and no observed interactions ($k=0$), calculated using prior information derived from the Zillis sub-network~\citep{Kopelke2017}.
+
+      % % # R code to make the table:
+      % ns=c(0,1,2,5,10,15,20,25,50,100,150,200,374)
+      % output=matrix(nrow=length(ns),ncol=5)
+      % output[,1]=ns
+      % for(r in 1:nrow(output)){
+      %   interval1=credible_interval(calculate_parameters(sg_int_probs,ns[r],0),0.025,0.975)    
+      %   interval2=credible_interval(calculate_parameters(gp_int_probs,ns[r],0),0.025,0.975)    
+      %   output[r,2:3]=interval1
+      %   output[r,4:5]=interval2
+      % }
+      \medskip
+      \begin{table}
+        \label{credints}
+        \caption{Here we give the lower and upper bounds of 95\% credible intervals for the probability of interaction $\lambda$ between \emph{Salix}-galler or galler-natural enemy pairs that have been observed co-occurring $n$ times but have never been observed interacting.}
+        \begin{tabular}{l  c c  c c }
+        \multirow{2}{*}{$n$} & \multicolumn{2}{c}{\emph{Salix}-galler} & \multicolumn{2}{c}{galler-natural enemy}\\
+         & Lower bound & Upper bound & Lower bound & Upper bound \\
+        \hline
+        0   & 0.013 & 0.049 & 5.39 $\times10^{-4}$ & 0.304 \\
+        1   & 0.013 & 0.048 & 4.82 $\times10^{-4}$ & 0.276 \\
+        2   & 0.013 & 0.048 & 4.35 $\times10^{-4}$ & 0.253 \\
+        5   & 0.012 & 0.048 & 3.37 $\times10^{-4}$ & 0.203 \\
+        10  & 0.012 & 0.047 & 2.45 $\times10^{-4}$ & 0.152 \\
+        15  & 0.012 & 0.046 & 1.93 $\times10^{-4}$ & 0.121 \\
+        20  & 0.012 & 0.046 & 1.59 $\times10^{-4}$ & 0.101 \\
+        25  & 0.012 & 0.045 & 1.35 $\times10^{-4}$ & 0.087 \\
+        50  & 0.011 & 0.042 & 7.72 $\times10^{-5}$ & 0.050 \\
+        100 & 0.010 & 0.037 & 4.16 $\times10^{-5}$ & 0.027 \\
+        150 & 0.009 & 0.033 & 2.84 $\times10^{-5}$ & 0.019 \\
+        200 & 0.008 & 0.030 & 2.16 $\times10^{-5}$ & 0.014 \\
+        \hline
+        374 & 0.006 & 0.022 & 1.18 $\times10^{-5}$ & 0.008 \\
+        \hline
+        \end{tabular}
+      \end{table}
+
+\clearpage
+
+\section*{Appendix S6: Obtaining prior interaction probabilities}
+
+    \subsection*{Degree distributions and interaction probabilities}
+
+      Obtaining degree distributions from the binary interaction 
+      network is straightforward. To do this, we simply divide the 
+      total number of observed interaction partners for each 
+      species (row or column sums) with the number of potential 
+      interaction partners (number of column or rows). Degree 
+      distributions calculated, we can then calculate the 
+      probability of each interaction as the product of the 
+      normalised degrees of the two species. For example, the 
+      probability of an interaction between two species with 
+      normalised degrees of 0.5 (each interacts with half of the 
+      available partners) is 0.25. R code used to do this follows:
+
+
+      \vspace{12pt}
+      \begin{em}
+      \noindent \hspace{2pt}\# Now get the degree distributions from the web\\
+      \noindent \hspace{2pt}deg\_dist\_Salix=rowSums(prior\_web)/ncol(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Remove one genotype that never interacted\\
+      \noindent \hspace{2pt}deg\_dist\_Salix\textless-deg\_dist\_Salix[which(rowSums(prior\_web)\textgreater0)]\\
+      \noindent \hspace{2pt}deg\_dist\_galler=colSums(prior\_web)/nrow(prior\_web)\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# Interaction probabilities are the product of plant and galler probabilities\\
+      \noindent \hspace{2pt}int\_probs=as.numeric(deg\_dist\_galler\%$*$\%t(deg\_dist\_Salix))\\
+      \vspace{4pt}
+      \noindent \hspace{2pt}\# And for the galler-parasitoid web:\\
+      \noindent \hspace{2pt}deg\_dist\_parasitoid=rowSums(prior\_web\_para\_only)/ncol(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}deg\_dist\_parasitised=colSums(prior\_web\_para\_only)/nrow(prior\_web\_para\_only)\\
+      \noindent \hspace{2pt}gp\_int\_probs=as.numeric(deg\_dist\_parasitised\%$*$\%t(deg\_dist\_parasitoid))\\
+      \end{em}
+
+
+      % SG_web=read.csv('binary_prior_web_SG.csv',row.names=1)
+      % GP_web=read.csv('binary_prior_web_para_only.csv',row.names=1)
+
+      %       # Now get the degree distributions from the web
+      % deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)
+      % deg_dist_galler=colSums(SG_web)/nrow(SG_web)
+      % # Interaction probabilities are the product of plant and galler probabilities
+      % sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))
+
+      % deg_dist_parasitoid=rowSums(GP_web)/ncol(GP_web)
+      % deg_dist_parasitised=colSums(GP_web)/nrow(GP_web)
+      % gp_int_probs=as.numeric(deg_dist_parasitised%*%t(deg_dist_parasitoid))
+
+\clearpage
+
+\section*{Appendix S7: Calculating posterior distributions and confidence intervals}
+
+  The following simple functions are implemented in the R language. They are 
+  also provided as R code in a separate file.
+  Priordata is the list of interaction frequencies from the prior 
+  data, $n$ is the number of sites with observed co-occurrence of 
+  species $i$ and $j$, and $k$ is the number of sites with an 
+  observed interaction $ij$. When calculating the prior 
+  distribution, both $n$ and $k$ are 0. In the main text we assume 100\%
+  confidence in observed interactions and therefore consider only 
+  cases where $k$=0. Only $n$ varies between species pairs.
+
+
+  To calculate the parameters $\alpha$ and $\beta$ of a prior or 
+  posterior distribution:
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}calculate\_parameters\textless-function(priordata,n,k)\{\\
+  \vspace{4pt}
+    \# Calculate prior parameters\\
+    start=list(shape1=1,shape2=1)\\
+    pars=fitdistr(x=priordata,`beta',start=start,lower=c(0,0))\$estimate\\
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+  \vspace{4pt}
+    \# Update the parameters with data. If n=0 and k=0, no change.\\
+    alpha\_prime=alpha+k\\
+    beta\_prime=beta+n-k\\
+    pars2=c(alpha\_prime,beta\_prime)\\
+    return(pars2) \}
+  \end{em}
+  \vspace{12pt}
+
+
+    All of the following functions use the parameters returned by 
+    ``calculate\_parameters". To calculate the maximum likelihood estimates of 
+    the mean and variance of the probability of interaction $\lambda_{ij}$:
+
+    \vspace{12pt}
+    \begin{em}
+    \noindent \hspace{2pt}calculate\_distribution\textless-function(pars)\{\\
+     \vspace{4pt}
+     \# alpha and beta may be from a prior or posterior distribution\\
+      alpha=pars[[1]]\\
+      beta=pars[[2]]\\
+      \vspace{4pt}
+      \# Calculate the MLE of the mean\\
+      mu\_numerator=alpha\\
+      mu\_denominator=alpha+beta\\
+      mu=mu\_numerator/mu\_denominator\\
+      \vspace{4pt}
+      \# Calculate the MLE of the variance\\
+      sig\_numerator=alpha\*beta\\
+      den1=alpha+beta\\
+      den2=den1$**$2\\
+      sig\_denominator=den1$*$den2\\
+      sigma2=sig\_numerator/sig\_denominator\\
+      return(c(mu,sigma2))\}
+    \end{em}
+  \vspace{12pt}
+      
   \clearpage
 
-    \bibliographystyle{ecol_let} 
-    \bibliography{manual_abbrev}
+  To calculate a credible interval based on the prior or posterior distribution, for given lower and upper bounds:
+
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}credible\_interval\textless-function(pars,p\_lower,p\_upper)\{\\
+    \vspace{4pt}
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    lowCI=qbeta(p=p\_lower,shape1=alpha,shape2=beta)\\
+    highCI=qbeta(p=p\_upper,shape1=alpha,shape2=beta)\\
+    return(c(lowCI,highCI))\}
+  \end{em}
+  \vspace{12pt}
+
+  To calculate the number of samples required to reach a given level of confidence that the probability of interaction between two species ($\lambda_{ij}$) that have not been observed co-occurring is below a threshold value:
+
+
+  \vspace{12pt}
+  \begin{em}
+  \noindent \hspace{2pt}samples\_for\_threshold\textless-function(threshold,confidence,pars)\{\\
+    \vspace{4pt}
+    alpha=pars[[1]]\\
+    beta=pars[[2]]\\
+    n=seq(0,100,1)\\
+    k=0\\ 
+    cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)\\
+    samples=length(which(cdf\textless confidence))\\
+    return(samples) \}
+  \end{em}
+
+\clearpage
+
+  \bibliographystyle{ecol_let} 
+  \bibliography{manual_abbrev}
 
 \end{document}
 
