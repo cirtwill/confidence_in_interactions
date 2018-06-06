@@ -322,10 +322,10 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
 \section*{Acknowledgements}
 
-  The authors thank Daniel Cartensen for fruitful discussion of the ideas in this manuscript. We also thank K\'{e}vin Cazalles for providing feedback on the manuscript. The authors also appreciate support from the Swedish Research Council (VR) for grant \#2016-06872 (to TR). Additional funding was provided by a Formas grant (\#942-2015-1262) to AE.
+  The authors thank Daniel Cartensen for fruitful discussion of the ideas in this manuscript and K\'{e}vin Cazalles for providing feedback. The authors appreciate support from the Swedish Research Council (VR) for grant \#2016-06872 (to TR) from Formas for grant \#942-2015-1262 (to AE).
 
 
-\section*{Statement of authorship}
+\section*{Authors' contributions}
 
 DG designed the analytical approach. AC and DG wrote the code. AC performed statistical analyses. All authors contributed to writing and revising the manuscript.
 
@@ -366,7 +366,7 @@ All data used in this study have been independently published and are accessible
 
 
   \begin{figure}[h!]
-    \caption{Imperfect detection of interactions has a strong effect on the number of samples required to be confident that an interaction does not occur. Assume that we want to infer the probability of an interaction between two species, $i$ and $j$ and that this interaction is completely impossible (i.e. the true $\lambda=0$). When estimating $\lambda$, the number of observed interactions will follow a binomial distribution with number of interactions $k$ and number of observations $n$. Using this distribution, we can compute the credible interval of the estimated probability $\lambda$. A single observation of species co-occurrence reveals very little regarding the probability of the interaction as the credible interval for a pair of species with one observation essentially spans from 0 to 1. Only with 35 observations will the upper limit of the credible interval be lowered to 0.1 (dashed, red line). Thus, adding more observations is useful in controlling uncertainty, but the number of observations added needs to be very high. Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for $\lambda$ when $k=0$ ($i$ and $j$ have not been observed interacting) for a variety of $n$. A threshold interaction probability of 0.1 is indicated by the dashed red line. }
+    \caption{Imperfect detection of interactions increases the number of samples required to be confident that an interaction does not occur. Assume that we want to infer the probability of an interaction between two species, $i$ and $j$, and that this interaction is completely impossible (i.e. the true $\lambda=0$). When estimating $\lambda$, the number of observed interactions will follow a binomial distribution with number of interactions $k$ and number of observations $n$. Using this distribution, we can compute the credible interval of the estimated probability $\lambda$. A single observation of species co-occurrence reveals very little regarding the probability of the interaction as the credible interval for a pair of species with one observation essentially spans from 0 to 1. Only with 35 observations will the upper limit of the credible interval be lowered to 0.1 (dashed, red line). Thus, adding more observations is useful in controlling uncertainty, but the number of observations added needs to be very high. Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for $\lambda$ when $k=0$ ($i$ and $j$ have not been observed interacting) for a variety of $n$. A threshold interaction probability of 0.1 is indicated by the dashed red line. }
     \label{upper_limits}
     \begin{center}
     \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
@@ -377,8 +377,7 @@ All data used in this study have been independently published and are accessible
   \begin{figure}[h!]
     \caption{Using prior distributions based on the galler-natural enemy network sampled at a single site in~\citet{Kopelke2017}, we calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting ($k = 0$). 
     Posterior distributions for $\lambda$ narrow and approach zero as the number of observed co-occurrences ($n$) increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases.
-    Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. The number of samples required to obtain a 95\% credible interval below each threshold increases rapidly. It takes just over 20 observed co-occurrences to be 95\% confident that $\lambda<0.10$, approximately 50 co-occurrences to be 95\% confident that $\lambda<0.05$, and over 100 co-occurrences to be 95\% confident that $\lambda<0.01$. Increasing the desired confidence level will also increase the number of samples required.
-    }
+    Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. The number of samples required to obtain a 95\% credible interval below each threshold increases rapidly. It takes just over 20 observed co-occurrences to be 95\% confident that $\lambda<0.10$, approximately 50 co-occurrences to be 95\% confident that $\lambda<0.05$, and over 100 co-occurrences to be 95\% confident that $\lambda<0.01$.}
     \label{Salix_pdfs_cdfs}
     \begin{center}
     \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
@@ -396,7 +395,7 @@ All data used in this study have been independently published and are accessible
 
 
   \begin{figure}[h!]
-    \caption{Here we show the mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single sub-network in the~\citet{Kopelke2017} dataset (Zillis). We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
+    \caption{Mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single sub-network in the~\citet{Kopelke2017} dataset (Zillis) occupied a narrow range. We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean (+/- SD) network property (e.g., connectance) obtained from a set of 100 detection-filter networks. For each property and both network types, the detection-filter networks cover a broader range of network properties than the posterior-sampling networks. The value of each property decreases with the proportion of links included in the detection-filter networks; values in the original web are indicated by dashed lines.}
     \label{posterior_webs}    
     \begin{center}
     \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
