@@ -49,41 +49,45 @@ def read_property_lists(propfile):
 def configure_yaxes(prop,graph):
   graph.yaxis.tick.configure(onoff='on',minor_ticks=1,major_size=.5,place='normal',minor_size=.3,major_linewidth=1,minor_linewidth=1)
   if prop=='N_plants':
-    graph.world.ymax=15
+    graph.world.ymax=16
     graph.yaxis.tick.configure(major=3)
     graph.yaxis.label.configure(text="N(plants)",char_size=1,just=2,place='normal')
   elif prop=='N_gallers':
-    graph.world.ymax=20
+    graph.world.ymax=21
     graph.yaxis.tick.configure(major=4)
     graph.yaxis.label.configure(text="N(gallers)",char_size=1,just=2,place='normal')
   elif prop=='C':
-    graph.world.ymax=0.5
-    graph.yaxis.tick.configure(major=0.1)
-    graph.yaxis.ticklabel.configure(prec=1)
+    graph.world.ymax=0.35
+    graph.world.ymin=0.0
+    graph.yaxis.tick.configure(major=0.02)
+    graph.yaxis.ticklabel.configure(prec=2)
     graph.yaxis.label.configure(text="Connectance",char_size=1,just=2,place='normal')
   elif prop=='L_per_plant':
-    graph.world.ymax=20
-    graph.yaxis.tick.configure(major=4)
+    graph.world.ymax=12
+    graph.world.ymin=0
+    graph.yaxis.tick.configure(major=1)
     graph.yaxis.label.configure(text="Links per plant",char_size=1,just=2,place='normal')
   elif prop=='L_per_galler':
-    graph.world.ymax=15
+    graph.world.ymax=9
+    graph.world.ymin=0
     graph.yaxis.tick.configure(major=3)
     graph.yaxis.label.configure(text="Links per galler",char_size=1,just=2,place='normal')
   else:
-    graph.world.ymax=40
-    graph.yaxis.tick.configure(major=10)
+    graph.world.ymax=70
+    graph.world.ymin=0
+    graph.yaxis.tick.configure(major=5)
     graph.yaxis.label.configure(text='NODF',char_size=1,just=2,place='normal')
 
   return graph
 
-def format_graph(graph,prop,nettype,site):
+def format_graph(graph,prop):
   graph.yaxis.bar.linewidth=1
   graph.xaxis.bar.linewidth=1
   graph.frame.linewidth=1
 
   graph.world.xmin=0
   graph.world.xmax=4
-  graph.xaxis.tick.set_spec_ticks([1,2,3],[],tick_labels=['Original','Process uncertainty','Detection uncertainty'])
+  graph.xaxis.tick.set_spec_ticks([1,2,3],[],tick_labels=['Original','Process','Detection'])
   graph.xaxis.tick.configure(onoff='on',minor_ticks=0,major_size=.5,place='both',major_linewidth=1)
   graph.xaxis.ticklabel.configure(char_size=.75,angle=45)
 
@@ -116,17 +120,17 @@ def main():
   B_props=read_property_lists('../../data/simulation_example/B_props.tsv')
   C_props=read_property_lists('../../data/simulation_example/C_props.tsv')
 
-  for prop in ["N_plants","N_gallers","C","L_per_plant","L_per_galler","NODF"]:
+  for prop in ["C","L_per_plant","L_per_galler","NODF"]:
     graph=grace.add_graph(Panel)
-    graph=format_graph(graph,prop,nettype,site)
-
+    graph=format_graph(graph,prop)
+    print prop
     graph=populate_graph(graph,prop,A_props,B_props,C_props)
 
-    grace.multi(rows=2,cols=3,vgap=.04,hgap=.1)
-    grace.hide_redundant_labels()
-    grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Type of network",just=2,char_size=1.5,perpendicular_offset=0.05)
+  grace.multi(rows=4,cols=1,vgap=.04,hgap=.1)
+  grace.hide_redundant_labels()
+  # grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Type of network",just=2,char_size=1.5,perpendicular_offset=0.05)
 
-    grace.write_file('../../manuscript/figures/simulation_example.eps')
+  grace.write_file('../../manuscript/figures/simulation_example.eps')
 
   
 if __name__ == '__main__':

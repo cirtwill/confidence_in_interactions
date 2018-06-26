@@ -1,0 +1,1166 @@
+alla
+alla=mating(alla)
+alla
+alla=mating(alla)
+alla
+randommale
+randommale   <- as.integer(runif(1,1,4))
+randommale
+randommale   <- as.integer(runif(1,1,4))
+randommale
+randommale   <- as.integer(runif(1,1,4))
+randommale
+randommale   <- as.integer(runif(10,1,4))
+randommale
+randommale   <- as.integer(runif(10,1,4))
+randommale
+randommale   <- as.integer(runif(10,1,4))
+randommale
+randommale   <- as.integer(runif(1,1,4)) #randomly selecting witch male that are mating #
+      randomfemale <- as.integer(runif(1,1,4)) #randomly selecting witch femmale that are mating
+randommale
+randomfemale
+alla[1]<-1.25 + alla[1]#
+          alla[2]<-2.5  + alla[2]#
+          alla[3]<-1.25 + alla[3] #
+          alla[4]<-1.25 + alla[4]#
+          alla[5]<-2.5  + alla[5]#
+          alla[6]<-1.25 + alla[6]
+alla
+alla2[2]<-alla2[2]-1#
+          alla2[5]<-alla2[5]-1
+source()
+source('Desktop/nbid31/FinalProjects2017/PostersAndCode/Alyssaprojects/Code_MarcusLundquist.R')
+alla
+matris
+rowSums(matris)
+source('Desktop/nbid31/FinalProjects2017/PostersAndCode/Alyssaprojects/Code_KristineLindberg.R')
+x=600
+r*(1-x/600+1)
+x0 <- 10#
+#
+#Annual growth rate the last 10 years#
+r <- 1.15#
+#
+# Number of years of the simulation:#
+years <- 25#
+#
+# Assign a matrix for storing the poplation values#
+y <- matrix(NA, nrow=years,ncol=length(r))#
+colnames(y) <- 'Annual growth rate of 15%'#
+#
+# Calculating the popultion for every year#
+for(i in 1:years){#
+  if (i ==1){#
+    x<-x0#
+  }#
+  y[i] <- r*(1-x/600+1)*x#
+  x <-y[i]#
+}#
+#
+print(y)#
+#
+plot(1:years, y[,1], type = "b", pch = 0, ylim = c(0,max(y)+10), xlab = "Years", #
+     ylab = "Population", cex.lab = 1.35, main = "The wolf population without impact", #
+     cex.main = 1.65, lwd = 2)
+y <- matrix(NA, nrow=years,ncol=length(r))#
+colnames(y) <- 'Annual growth rate of 15%'#
+#
+# Calculating the popultion for every year#
+for(i in 1:years){#
+  if (i ==1){#
+    x<-x0#
+  }#
+  y[i] <- r*(1-x/600)*x#
+  x <-y[i]#
+}#
+#
+print(y)#
+#
+plot(1:years, y[,1], type = "b", pch = 0, ylim = c(0,max(y)+10), xlab = "Years", #
+     ylab = "Population", cex.lab = 1.35, main = "The wolf population without impact", #
+     cex.main = 1.65, lwd = 2)
+# Number of years of the simulation:#
+years <- 50#
+#
+# Assign a matrix for storing the poplation values#
+y <- matrix(NA, nrow=years,ncol=length(r))#
+colnames(y) <- 'Annual growth rate of 15%'#
+#
+# Calculating the popultion for every year#
+for(i in 1:years){#
+  if (i ==1){#
+    x<-x0#
+  }#
+  y[i] <- r*(1-x/600)*x#
+  x <-y[i]#
+}#
+#
+print(y)#
+#
+plot(1:years, y[,1], type = "b", pch = 0, ylim = c(0,max(y)+10), xlab = "Years", #
+     ylab = "Population", cex.lab = 1.35, main = "The wolf population without impact", #
+     cex.main = 1.65, lwd = 2)
+#initial population size (number of individuals year 16/17)#
+x0 <- 10#
+#
+#Annual growth rate the last 10 years#
+r <- 1.15#
+#
+# Number of years of the simulation:#
+years <- 25#
+#
+# Assign a matrix for storing the poplation values#
+y <- matrix(NA, nrow=years,ncol=length(r))#
+colnames(y) <- 'Annual growth rate of 15%'#
+#
+# Calculating the popultion for every year#
+for(i in 1:years){#
+  if (i ==1){#
+    x<-x0#
+  }#
+  y[i] <- r*(1-x/600+1)*x#
+  x <-y[i]#
+}#
+#
+print(y)#
+#
+plot(1:years, y[,1], type = "b", pch = 0, ylim = c(0,max(y)+10), xlab = "Years", #
+     ylab = "Population", cex.lab = 1.35, main = "The wolf population without impact", #
+     cex.main = 1.65, lwd = 2)
+citation(lme4)
+citation('lme4')
+citation('lmerTest')
+rsample()
+?sample
+vec=seq(1,10)
+vec
+sample(vec,2)
+library(lme4)
+library(lmerTest)
+su=c(0,1,4,6)
+fal=c(10,10,10,10)
+y=cbind(su,fa)
+y=cbind(su,fal)
+glmer(y~rnorm(4),family="binomial")
+glm(y~rnorm(4),family="binomial")
+su=c(0,.1,.4,.6)
+fal=c(1,1,1,1)
+glm(y~rnorm(4),family="binomial")
+fal=c(1,.9,.6,.4)
+su=c(0,.1,.4,.6)
+y=cbind(su,fal)
+glm(y~rnorm(4),family="binomial")
+glm(su~rnorm(4),family="binomial")
+setwd('Desktop/Git_repos/confidence_in_interactions/code/')
+load('handy_R_functions.R')
+source('handy_R_functions.R')
+subweb='Zillis'
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0#
+  for(r in 1:nrow(SG_dataset)){#
+    if(SG_dataset$interact[r]==0){#
+      pars=calculate_parameters(sg_int_probs,SG_dataset$cooccur[r],0)#
+      dist=calculate_distribution(pars)#
+      SG_dataset[r,7:8]=dist#
+    }#
+  }
+setwd('Zillis_prior/')
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0#
+  for(r in 1:nrow(SG_dataset)){#
+    if(SG_dataset$interact[r]==0){#
+      pars=calculate_parameters(sg_int_probs,SG_dataset$cooccur[r],0)#
+      dist=calculate_distribution(pars)#
+      SG_dataset[r,7:8]=dist#
+    }#
+  }
+pars
+sgpars=calculate_parameters(sg_int_probs,0,0)
+sgpars
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+gppars=calculate_parameters(gp_int_probs,0,0)
+gppars
+subweb=="Zillertal"
+subweb="Zillertal"
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0
+spars=calculate_parameters(sg_int_probs,0,0)
+√
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+gpars=calculate_parameters(gp_int_probs,0,0)
+spars
+gpars
+sdist=calculate_distribution(calculate_parameters(sg_int_probs,0,0))
+gdist=calculate_distribution(calculate_parameters(gp_int_probs,0,0))
+sdist
+gdist
+subweb='Zillis'
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+sdist=calculate_distribution(calculate_parameters(sg_int_probs,0,0))
+gdist=calculate_distribution(calculate_parameters(gp_int_probs,0,0))#
+>
+gdist=calculate_distribution(calculate_parameters(gp_int_probs,0,0))
+sdist
+gdist
+subweb
+sdist=calculate_distribution(calculate_parameters(sg_int_probs,374,0))
+gdist=calculate_distribution(calculate_parameters(gp_int_probs,374,0))
+sdist
+gdist
+subweb="Zillertal"
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+sdist=calculate_distribution(calculate_parameters(sg_int_probs,374,0))
+gdist=calculate_distribution(calculate_parameters(gp_int_probs,374,0))
+sdist
+gdist
+ls()
+credible_interval(sdist0)
+credible_interval(sdist)
+credible_interval(sdist,0.025,0.975)
+credible_interval
+credible_interval(calculate_parameters(sg_int_probs,0,0),0.025,0.975)
+subweb
+credible_interval(calculate_parameters(sg_int_probs,374,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,374,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,0,0),0.025,0.975)
+subweb="Zillis"
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+credible_interval(calculate_parameters(sg_int_probs,374,0),0.025,0.975)
+credible_interval(calculate_parameters(sg_int_probs,0,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,374,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,0,0),0.025,0.975)
+samples_for_threshold
+samples_for_threshold
+subweb
+subweb(0.1,0.95,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.1,0.95,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.1,0.05,calculate_parameters(sg_int_probs,0,0))
+calculate_parameters
+samples_for_threshold(0.01,0.05,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.05,0.05,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.05,0.95,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.01,0.95,calculate_parameters(sg_int_probs,0,0))
+ls()
+credible_interval
+credible_interval(calculate_parameters(sg_int_probs,0,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,0,0),0.025,0.975)
+SG_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_salix.csv',row.names=1)#
+  SG_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_SG_prior.csv',sep=''),row.names=1)#
+  deg_dist_Salix=rowSums(SG_web)/ncol(SG_web)#
+  deg_dist_galler=colSums(SG_web)/nrow(SG_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  sg_int_probs=as.numeric(deg_dist_galler%*%t(deg_dist_Salix))#
+  SG_dataset$post.mean<-1#
+  SG_dataset$post.sd<-0
+GP_dataset=read.csv('../../data/Salix_example/cooccur_interact_galler_parasit.csv',row.names=1)#
+  GP_web=read.csv(paste0('../../data/Salix_example/Zillis/',subweb,'_GP_prior.csv',sep=''),row.names=1)#
+  deg_dist_galler=rowSums(GP_web)/ncol(GP_web)#
+  deg_dist_paras=colSums(GP_web)/nrow(GP_web)#
+  # Interaction probabilities are the product of plant and galler probabilities#
+  gp_int_probs=as.numeric(deg_dist_paras%*%t(deg_dist_galler))#
+  GP_dataset$post.mean<-1#
+  GP_dataset$post.sd<-0
+credible_interval(calculate_parameters(sg_int_probs,0,0),0.025,0.975)
+credible_interval(calculate_parameters(gp_int_probs,0,0),0.025,0.975)
+calculate_distribution(calculate_parameters(gp_int_probs,0,0))
+calculate_distribution(calculate_parameters(sg_int_probs_int_probs,0,0))
+calculate_distribution(calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.1,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.05,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.01,0.95,calculate_parameters(gp_int_probs,0,0))
+threshold=0.1
+pars=calculate_parameters(gp_int_probs,0,0)
+confidence=0.95
+alpha=pars[[1]]#
+  beta=pars[[2]]#
+  n=seq(0,1000,1)#
+  k=0#
+  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)#
+  samples=length(which(cdf<confidence))
+cdg
+cdf
+plot(cdf)
+data=read.table('../../data/Salix_example/cooccur_interact_galler_salix.csv',header=TRUE,sep=',')
+head(data)
+range(data$cooccur)
+data=read.table('../../data/Salix_example/cooccur_interact_galler_parasit.csv',header=TRUE,sep=',')
+range(data$cooccur)
+subweb
+###### R code to generate data files:#
+Getting distributions:#
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}#
+#
+# Data are along rows for pythonic convenience#
+colnames(xdata)=c("N",seq(1,1000))#
+colnames(ydata)=c("N",seq(1,1000))#
+colnames(MLEs)=c("N","MLE","lower","upper")#
+#
+write.table(xdata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv',sep='\t')#
+write.table(ydata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv',sep='\t')#
+write.table(MLEs,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
+###### R code to generate data files:#
+Getting distributions:#
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}#
+#
+# Data are along rows for pythonic convenience#
+colnames(xdata)=c("N",seq(1,1000))#
+colnames(ydata)=c("N",seq(1,1000))#
+colnames(MLEs)=c("N","MLE","lower","upper")#
+#
+write.table(xdata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv',sep='\t')#
+write.table(ydata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv',sep='\t')#
+write.table(MLEs,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
+dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))
+n
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  print(n)#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}
+dist
+x
+hx
+MLE
+MLE=calculate_mean_MLE(sg_int_probs,n,0)
+source('../handy_R_functions.R')
+MLE=calculate_mean_MLE(sg_int_probs,n,0)
+source('../handy_R_functions.R')
+MLE=calculate_mean_MLE(sg_int_probs,n,0)
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  print(n)#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}
+length(ns)
+for(i in 1:length(ns)){}
+for(i in 1:length(ns)){print(i)}
+for(i in 1:length(ns)){print(ns[i])}
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  print(n)#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}
+olnames(xdata)=c("N",seq(1,1000))#
+colnames(ydata)=c("N",seq(1,1000))#
+colnames(MLEs)=c("N","MLE","lower","upper")#
+#
+write.table(xdata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv',sep='\t')#
+write.table(ydata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv',sep='\t')#
+write.table(MLEs,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv',sep='\t')#
+#
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(gp_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(gp_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(gp_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  print(n)#
+  dist=calculate_distribution(calculate_parameters(sg_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(sg_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(sg_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}#
+#
+# Data are along rows for pythonic convenience#
+colnames(xdata)=c("N",seq(1,1000))#
+colnames(ydata)=c("N",seq(1,1000))#
+colnames(MLEs)=c("N","MLE","lower","upper")#
+#
+write.table(xdata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_xvals.tsv',sep='\t')#
+write.table(ydata,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_yvals.tsv',sep='\t')#
+write.table(MLEs,file='../../data/Salix_example/Zillis/Salix_Galler/distfigure_MLEs.tsv',sep='\t')
+xdata=matrix(ncol=1001,nrow=12)#
+ydata=matrix(ncol=1001,nrow=12)#
+MLEs=matrix(ncol=4,nrow=12)#
+ns=as.vector(c(0,5,10,15,20,25,50,100,150,200,300,374))#
+for(i in 1:length(ns)){#
+  n=ns[i]#
+  dist=calculate_distribution(calculate_parameters(gp_int_probs,n,0))#
+  x=seq(-5,5,length=1000)*sqrt(dist[[2]])+dist[[1]]#
+  hx=dnorm(x,dist[[1]],sqrt(dist[[2]]))#
+  xdata[i,]=c(n,x)#
+  ydata[i,]=c(n,hx)#
+#
+  MLE=calculate_mean_MLE(gp_int_probs,n,0)#
+  interval=credible_interval(calculate_parameters(gp_int_probs,n,0),0.025,0.975)#
+  MLEs[i,]=c(n,MLE,interval)#
+#
+}#
+#
+# Data are along rows for pythonic convenience#
+colnames(xdata)=c("N",seq(1,1000))#
+colnames(ydata)=c("N",seq(1,1000))#
+colnames(MLEs)=c("N","MLE","lower","upper")#
+#
+write.table(xdata,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_xvals.tsv',sep='\t')#
+write.table(ydata,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_yvals.tsv',sep='\t')#
+write.table(MLEs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/distfigure_MLEs.tsv',sep='\t')
+pars=calculate_parameters(int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  # for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    # samples=length(which(cdf<confidence))#
+    CDFs[r,1]=threshold#
+    # CDFs[r,2]=confidence#
+    # CDFs[r,3]=samples#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+# }#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+# }#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+pars=calculate_parameters(int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    samples=length(which(cdf<confidence))#
+    CDFs[r,1]=threshold#
+    CDFs[r,2]=confidence#
+    CDFs[r,3]=samples#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+}#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+}
+pars=calculate_parameters(int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    samples=length(which(cdf<confidence))#
+    CDFs[r,1]=threshold#
+    CDFs[r,2]=confidence#
+    CDFs[r,3]=samples#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+}#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+pars=calculate_parameters(int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    samples=length(which(cdf<confidence))#
+    CDFs[r,1]=threshold#
+    CDFs[r,2]=confidence#
+    CDFs[r,3]=samples#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+}
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+gp_pars=calculate_parameters(gp_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+gp_CDFs=matrix(nrow=4,ncol=502)#
+colnames(gp_CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    gp_CDFs[r,1]=threshold#
+    gp_CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+gp_samples=matrix(nrow=12,ncol=3)#
+colnames(gp_samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.5,0.25,0.1,0.05)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    gp_samples[r,1]=threshold#
+    gp_samples[r,2]=confidence#
+    gp_samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')#
+write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')#
+# Galler-parasitoid stuff#
+######### R code to generate data files:#
+# % Getting cdfs:#
+gp_pars=calculate_parameters(gp_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+gp_CDFs=matrix(nrow=4,ncol=502)#
+colnames(gp_CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    gp_CDFs[r,1]=threshold#
+    gp_CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+gp_samples=matrix(nrow=12,ncol=3)#
+colnames(gp_samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    gp_samples[r,1]=threshold#
+    gp_samples[r,2]=confidence#
+    gp_samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')#
+write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+CDFs
+samples
+n
+cdf
+threshold
+samples
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1
+samples_for_threshold
+######## R code to generate data files:#
+% Getting cdfs:#
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}
+samples
+samples_for_threshold(0.01,0.95,sg_int_probs)
+source('calculating_prior_distributions.R')
+samples_for_threshold
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=4,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}
+samples
+samples_for_threshold(0.1,0.95,calculate_parameters(gp_int_probs))
+samples_for_threshold(0.1,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.05,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.001,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.01,0.95,calculate_parameters(gp_int_probs,0,0))
+samples_for_threshold(0.1,0.95,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.05,0.95,calculate_parameters(sg_int_probs,0,0))
+samples_for_threshold(0.01,0.95,calculate_parameters(sg_int_probs,0,0))
+alpha=pars[[1]]#
+  beta=pars[[2]]#
+  n=seq(0,1000,1)#
+  k=0#
+  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)
+threshold
+samples=length(which(cdf<confidence))
+samples
+cdf
+range(cdf)
+max(cdf)
+plot(cdf)
+alpha=pars[[1]]#
+  beta=pars[[2]]#
+  n=seq(0,2000,1)#
+  k=0#
+  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)#
+  samples=length(which(cdf<confidence))
+samples
+range(cdf)
+max(cdf)
+alpha=pars[[1]]#
+  beta=pars[[2]]#
+  n=seq(0,4000,1)#
+  k=0#
+  cdf=pbeta(threshold,shape1=alpha,shape2=beta+n)#
+  samples=length(which(cdf<confidence))
+samples
+source('../handy_R_functions.R')
+samples=matrix(nrow=12,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01,0.005)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}
+samples
+% Getting cdfs:#
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+CDFs=matrix(nrow=3,ncol=502)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=9,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+# Galler-parasitoid stuff#
+######### R code to generate data files:#
+# % Getting cdfs:#
+gp_pars=calculate_parameters(gp_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+gp_CDFs=matrix(nrow=3,ncol=502)#
+colnames(gp_CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    gp_CDFs[r,1]=threshold#
+    gp_CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+gp_samples=matrix(nrow=9,ncol=3)#
+colnames(gp_samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    n_obs=length(which(cdf<confidence))#
+    gp_samples[r,1]=threshold#
+    gp_samples[r,2]=confidence#
+    gp_samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')#
+write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+# Galler-parasitoid stuff#
+######### R code to generate data files:#
+# % Getting cdfs:#
+gp_pars=calculate_parameters(gp_int_probs,0,0)#
+n=seq(0,500,1)#
+#
+gp_CDFs=matrix(nrow=3,ncol=502)#
+colnames(gp_CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=gp_pars[[1]],shape2=gp_pars[[2]]+n)#
+    gp_CDFs[r,1]=threshold#
+    gp_CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+  }#
+gp_samples=matrix(nrow=9,ncol=3)#
+colnames(gp_samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,gp_pars)#
+    gp_samples[r,1]=threshold#
+    gp_samples[r,2]=confidence#
+    gp_samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(gp_samples,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samples_for_threshold.tsv',sep='\t')#
+write.table(gp_CDFs,file='../../data/Salix_example/Zillis/Galler_Parasitoid/samplefigure.tsv',sep='\t')
+samples
+samples######## R code to generate data files:#
+% Getting cdfs:#
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,2000,1)#
+#
+CDFs=matrix(nrow=3,ncol=2002)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=9,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+######## R code to generate data files:#
+% Getting cdfs:#
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,2000,1)#
+#
+CDFs=matrix(nrow=3,ncol=2002)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=9,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
+CDFs
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,2000,1)#
+#
+CDFs=matrix(nrow=3,ncol=2002)#
+colnames(CDFs)=c("Threshold",n)#
+r=1
+n
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:502]=cdf#
+    print(r)#
+    r=r+1#
+}
+CDFs=matrix(nrow=3,ncol=2002)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:2002]=cdf#
+    print(r)#
+    r=r+1#
+}
+CDFs
+######## R code to generate data files:#
+% Getting cdfs:#
+pars=calculate_parameters(sg_int_probs,0,0)#
+n=seq(0,2000,1)#
+#
+CDFs=matrix(nrow=3,ncol=2002)#
+colnames(CDFs)=c("Threshold",n)#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+    cdf=pbeta(threshold,shape1=pars[[1]],shape2=pars[[2]]+n)#
+    CDFs[r,1]=threshold#
+    CDFs[r,2:2002]=cdf#
+    print(r)#
+    r=r+1#
+}#
+samples=matrix(nrow=9,ncol=3)#
+colnames(samples)=c("Threshold","Confidence","Samples")#
+r=1#
+for(threshold in c(0.1,0.05,0.01)){#
+  for(confidence in c(0.9,0.95,0.975)){#
+    n_obs=samples_for_threshold(threshold,confidence,pars)#
+    samples[r,1]=threshold#
+    samples[r,2]=confidence#
+    samples[r,3]=n_obs#
+    print(r)#
+    r=r+1#
+  }#
+}#
+#
+write.table(samples,file='../../data/Salix_example/Zillis/Salix_Galler/samples_for_threshold.tsv',sep='\t')#
+write.table(CDFs,file='../../data/Salix_example/Zillis/Salix_Galler/samplefigure.tsv',sep='\t')
