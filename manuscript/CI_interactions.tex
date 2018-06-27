@@ -349,7 +349,7 @@ All data used in this study have been independently published and are accessible
     \caption{Three nested levels of uncertainty mean that an observed interaction matrix is unlikely to capture all of the interactions that can really occur at a site. Interaction uncertainty means that some inteactions that truly occur (black squares in True matrix) are less likely than others (grey squares; lighter grey is less likely) based on species traits. For example, lions are less likely to predate upon elephants than zebras. If our trait model is incomplete (e.g., if we neglect group hunting in lions), we might assume that elephants are too large to ever be prey for lions and assign this interaction a probability of 0.\\
     Process uncertainty describes the fact that interactions occur with different probabilities during any given sample. We show six example networks representing interactions observed over two days at three sites. Interactions which occur during fewer sampling days are less likely to be observed.\\
     Detection uncertainty reflects the fact that not all interactions are equally detectable. For example, interactions involving cryptic species are less likely to be seen.\\
-    After applying these three layers of uncertainty, some interactions which truly occur are very unlikely to be observed. An observed matrix sampled based on this matrix (lower right) is thus likely to contain far fewer interactions than the original, true matrix.}
+    After applying these three layers of uncertainty, some interactions which truly occur are very unlikely to be observed. The observed matrix (lower right) is a subsample of the true matrix, with the probability of observing each interaction depending on the interaction, process, and detection uncertainty associated with it. Note that some low-probability interactions (e.g., lion predation on zebra) are included while others (e.g., lion predation on elephants) are not.}
     \label{conceptual_fig}
     \begin{center}
     \includegraphics*[height=.5\textheight]{figures/conceptual_fig.eps}
@@ -363,7 +363,7 @@ All data used in this study have been independently published and are accessible
       \textbf{C)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. The red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
       \label{histograms}
       \begin{center}
-      % \includegraphics*[height=.6\textheight]{figures/GP_histogram.eps}
+      \includegraphics*[height=.6\textheight]{figures/GP_histogram.eps}
       \end{center}
       \end{figure}
 
@@ -372,7 +372,7 @@ All data used in this study have been independently published and are accessible
     \caption{Imperfect detection of interactions increases the number of samples required to be confident that an interaction never occurs. Assume that two species cannot interact (i.e., $\lambda=0$) and that the number of observed interactions follows a binomial distribution. Here we show the upper bound (solid black line) of a 95\% Cloper-Pearson true credible interval for the interaction probability $\lambda$ for a pair of species that has been observed co-occurring $n$ times but never interacting ($k = 0$). The upper limit of the credible interval only reaches 0.1 (dashed, red line) with 35 observations. Thus, adding more observations is useful in controlling uncertainty, but the number of observations added must be very high. }
     \label{upper_limits}
     \begin{center}
-    % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
+    \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
     \end{center}
     \end{figure}
 
@@ -383,7 +383,7 @@ All data used in this study have been independently published and are accessible
     Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. The number of samples required to obtain a 95\% credible interval below each threshold increases rapidly. It takes just over 20 observed co-occurrences to be 95\% confident that $\lambda<0.10$, approximately 50 co-occurrences to be 95\% confident that $\lambda<0.05$, and over 100 co-occurrences to be 95\% confident that $\lambda<0.01$.}
     \label{Salix_pdfs_cdfs}
     \begin{center}
-    % \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
+    \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
     \end{center}
     \end{figure}
 
@@ -401,7 +401,7 @@ All data used in this study have been independently published and are accessible
     \caption{Mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017} occupied a narrow range. To obtain distributions of network properties, we created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean (+/- SD) network property (e.g., connectance) obtained from a set of 100 detection-filter networks. The detection-filter networks cover a broader range of network properties than the posterior-sampling networks but the value of each property decreases as the strength of the detection filter increases. Values in the original web are indicated by dashed lines.}
     \label{posterior_webs}    
     \begin{center}
-    % \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
+    \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
     \end{center}
     \end{figure}
 
