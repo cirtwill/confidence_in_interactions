@@ -36,30 +36,30 @@
 
 \begin{document}
 
-\begin{letter}{\bf Professor Tim Coulson\\
-               Editor-in-Chief, Ecology Letters\\
-               Department of Zoology\\
-               University of Oxford\\
-               Oxford OX1 3PS, UK
+\begin{letter}{\bf Professor Rob Freckleton\\
+               Executive Editor, Methods in Ecology and Evolution\\
+               Department of Animal and Plant Sciences\\
+               University of Sheffield\\
+               Sheffield S10 2TN, UK
                                }
 
 % Borrowing heavily from the proposal
 
-\opening{Dear Prof. Coulson:}
+\opening{Dear Prof. Freckleton:}
 
-    My co-authors and I are pleased to submit the attached manuscript \emph{A quantitative framework for investigating the reliability of network construction} for consideration as a Novel Methods paper in \textbf{Ecology Letters} as per our previous correspondence with Senior Editor John Drake. As instructed, we have submitted the manuscript under the Ideas \& Perspectives mechanism (and following the associated formatting guidelines).
-
-
-    We begin the manuscript by reviewing the many sources of variation inherent in ecological networks. Some sources of variation can be reduced through improved sampling, but others are intrinsic properties of ecological communities. This uncertainty limits the accuracy of network studies which consider communities as static, invariant entities and demonstrates the need for descriptions of network structure that acknowledge and address the uncertainty surrounding estimates of interspecific interactions.
+    My co-authors and I are pleased to submit the attached manuscript \emph{A quantitative framework for investigating the reliability of emprical network construction} for consideration as a research article in \textbf{Methods in Ecology and Evolution}. The goals of this manuscript are A) to illustrate the extreme difficulty in fully sampling the set of interactions occurring within a community, B) to demonstrate the construction of networks treating each interaction probabilistically (based on prior information as well as available data), and C) to offer concrete recommendations that will facilitate the use of this framework in future work.
 
 
-    As a potential solution, we propose a Bayesian framework which partitions the uncertainty associated with missing interactions into explicit components and allows us to place confidence intervals around each estimated interaction probability. The Bayesian framework also facilitates the use of prior information (e.g., species traits) to reduce uncertainty around some interactions. We illustrate this framework using an extraordinarily  well-replicated set of plant-galler-parasitoid networks recently published as a data paper (Kopelke \emph{et al.}, 2017. \textbf{Ecology} 98: 1730). Using this dataset, we demonstrate how uncertainty surrounding each interaction probability affects network-level metrics. Our derivation of the Bayesian framework and quantitative examples are constructed so as to be accessible to readers with little or no prior experience with Bayesian statistics. We hope that this gentle introduction will help the broadest possible set of readers apply the framework we propose.
+    We argue that, because of multiple levels of uncertainty surrounding interactions between species, the set of observed interactions will almost certainly be a subset of the interactions that can occur in a community. Some interactions may be rare because of species traits (e.g., prey that are only consumed by the largest individuals of a predator species), others may be difficult to detect because they occur under conditions not conducive to sampling (e.g., during inclement weather or at night), and yet other interactions may be common but very difficult to detect (e.g., interactions involving species that are highly cryptic). We emphasize that some of these sources of uncertainty can be reduced with increased sampling but that, because it is easier to observe species than interactions between species, increased sampling will tend to add more unobserved than observed interactions to a matrix. We illustrate the problem using an extensively-sampled, spatially-replicated \emph{Salix}-galler-natural enemy system (Kopelke \emph{et al.}, 2017. \textbf{Ecology} 98: 1730).
 
 
-    The present work uses empirical material published as a data paper by one of the authors (Tomas Roslin). The cited paper, Kopelke \emph{et al.} (2017), presents the extremely high-quality dataset used in the present work but does not contain any analyses. As such, the present work is an entirely novel use of these data, which are also available to the full ecological community.
+    With extensive sampling being time- and resource-intensive and not a complete solution to the problems posed by interaction uncertainty, we suggest that researchers instead treat interactions probabilistically and incorporate prior information to set bounds on the probability of interaction between species that were not observed interacting. As mentioned above, a lack of observed interaction could have several causes and does not necessarily imply that the interaction truly does not occur. We demonstrate a simple Bayesian framework, including the selection of a prior distribution, and use it to predict the likely set of feasible interactions in our example \emph{Salix} system. Based on this framework, we close with a set of recommendations for both empiricists and theoreticians that should improve our ability to deal with the uncertainty inherent in ecological networks and compare networks across systems.
 
 
-    We appreciate the chance to submit one of the first Novel Methods papers at \textbf{Ecology Letters}. We are confident that the fundamental conceptual shift implied by our approach, accompanied by clear examples and easy-to-use scripts, can achieve the high standard you are looking for. We hope that you agree and eagerly await your reply.
+    We are aware that there are several studies already using various forms of Bayesian networks to treat interactions as probabilities. These efforts have, however, so far remained confined to fairly theoretical work. We believe that empirical ecologists will also find Bayesian networks a useful tool when planning field sampling and when describing and analysing their focal communities. Our goal with this manuscript is, therefore, to introduce a Bayesian line of thought in as approachable and broadly-applicable terms as possible. To that end, we provide simple R code that illustrates each step of our approach. 
+
+
+    We hope that the general nature of uncertainty around interactions, as well as the broadly-applicable solution we offer, will be of interest to the readership of \textbf{Methods in Ecology and Evolution}. We are confident that our worked example and easy-to-use scripts will provide a useful template for empiricists and theoreticians alike. We hope that you agree and eagerly await your reply.
 
 
 \closing{Best regards,}
@@ -74,6 +74,10 @@
 % Pedro Jordano pedroj@me.com Estacion Biologica de Donana CSIC
 % Phillip Staniczenko pstaniczenko@sesync.org National Socio-Environmental Synthesis Center (SESYNC) 
 % Louis-Félix Bersier louis-felix.bersier@unifr.ch Université de Fribourg
+% Paolo Guimaraes
+% Jason Tylianakis
+% ask Tomas for empiricists
+% Owen Petchey
 
 
 % Extra suggestion
