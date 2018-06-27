@@ -32,9 +32,9 @@ def read_property_lists(propfile):
         prop_dict["N_gallers"].append(float(line.split()[2]))
         prop_dict["C"].append((float(line.split()[3])))
       else:
-        prop_dict["N_plants"].append(15)
-        prop_dict["N_gallers"].append(20)
-        prop_dict["C"].append(0.5)
+        prop_dict["N_plants"].append(50)
+        prop_dict["N_gallers"].append(50)
+        prop_dict["C"].append(0.1)
       prop_dict["L_per_plant"].append(float(line.split()[-3]))
       prop_dict["L_per_galler"].append(float(line.split()[-2]))
       prop_dict["NODF"].append(float(line.split()[-1]))
@@ -57,25 +57,25 @@ def configure_yaxes(prop,graph):
     graph.yaxis.tick.configure(major=4)
     graph.yaxis.label.configure(text="N(gallers)",char_size=1,just=2,place='normal')
   elif prop=='C':
-    graph.world.ymax=0.35
-    graph.world.ymin=0.0
-    graph.yaxis.tick.configure(major=0.02)
+    graph.world.ymax=0.105
+    graph.world.ymin=0.06
+    graph.yaxis.tick.configure(major=0.01)
     graph.yaxis.ticklabel.configure(prec=2)
     graph.yaxis.label.configure(text="Connectance",char_size=1,just=2,place='normal')
   elif prop=='L_per_plant':
-    graph.world.ymax=12
-    graph.world.ymin=0
+    graph.world.ymax=6
+    graph.world.ymin=2
     graph.yaxis.tick.configure(major=1)
     graph.yaxis.label.configure(text="Links per plant",char_size=1,just=2,place='normal')
   elif prop=='L_per_galler':
-    graph.world.ymax=9
-    graph.world.ymin=0
-    graph.yaxis.tick.configure(major=3)
+    graph.world.ymax=6
+    graph.world.ymin=2
+    graph.yaxis.tick.configure(major=1)
     graph.yaxis.label.configure(text="Links per galler",char_size=1,just=2,place='normal')
   else:
-    graph.world.ymax=70
+    graph.world.ymax=40
     graph.world.ymin=0
-    graph.yaxis.tick.configure(major=5)
+    graph.yaxis.tick.configure(major=10)
     graph.yaxis.label.configure(text='NODF',char_size=1,just=2,place='normal')
 
   return graph
@@ -103,12 +103,15 @@ def format_graph(graph,prop):
 def populate_graph(graph,prop,A_props,B_props,C_props):
   original=graph.add_dataset([(1,A_props[prop][0],A_props[prop][1])],type='xydy')
   original.symbol.configure(shape=1,size=1,fill_color=2,color=2)
+  original.errorbar.configure(riser_linewidth=1,linewidth=1,length=3)
 
   process=graph.add_dataset([(2,B_props[prop][0],B_props[prop][1])],type='xydy')
   process.symbol.configure(shape=3,size=1,fill_color=6,color=1)
+  process.errorbar.configure(riser_linewidth=1,linewidth=1,length=3)
 
   detect=graph.add_dataset([(3,C_props[prop][0],C_props[prop][1])],type='xydy')
   detect.symbol.configure(shape=2,size=1,fill_color=10,color=10)
+  detect.errorbar.configure(riser_linewidth=1,linewidth=1,length=3)
 
   return graph
 
@@ -120,13 +123,13 @@ def main():
   B_props=read_property_lists('../../data/simulation_example/B_props.tsv')
   C_props=read_property_lists('../../data/simulation_example/C_props.tsv')
 
-  for prop in ["C","L_per_plant","L_per_galler","NODF"]:
+  for prop in ["C","L_per_plant","NODF","L_per_galler"]:
     graph=grace.add_graph(Panel)
     graph=format_graph(graph,prop)
     print prop
     graph=populate_graph(graph,prop,A_props,B_props,C_props)
 
-  grace.multi(rows=4,cols=1,vgap=.04,hgap=.1)
+  grace.multi(rows=2,cols=2,vgap=.04,hgap=.1)
   grace.hide_redundant_labels()
   # grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Type of network",just=2,char_size=1.5,perpendicular_offset=0.05)
 

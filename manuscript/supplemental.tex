@@ -586,7 +586,34 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S8: Calculating the credible interval around a probability estimate}
+\section*{Appendix S8: Simulating the effects of uncertainty on network structure}
+
+  To demonstrate the effects of nested interaction, process, and detection uncertainty on network structure, we can observe how the structure of randomly-generated networks changes as we add layers of uncertainty. We began by constructing 100 "true" networks with 50 plant species, 50 galler species, and a connectance of 0.1. We ensured that each network had at least one link per plant and per galler. For each network, we calculated the mean number of links per plant, mean number of links per galler, and nestedness (NODF) as described in the main text. For simplicity, we assume that there is no interaction uncertainty in this system (i.e., all interactions are either 100\% feasible or 100\% infeasible based on species' traits).
+
+
+  Taking each "true" network as a starting point, we then applied process uncertainty. The probability $p$ of the occurrance of each interaction on a given sampling day was assigned a random probability drawn from the uniform distribution. As the probability that an interaction will occur during sampling also depends on the probability of the two species co-occurring, we also assigned a random number of sampling days on which each species co-occurred. The number of co-occurrances, $n$, was drawn from a uniform distribution and could be any integer between 0 and 30 (our simulated number of sampling days), inclusive. The number of occurrances, $k$, of each interaction was then drawn from a binomial distribution based on $n$ and $p$. If the number of occurrances during sampling was greater than 0 and the interaction occurred in the true network, we included the interaction in the "process-filtered" network. As the inclusion of interactions in the process matrices is random, we created 100 process-filtered networks for each true network. For each network, we calculated the number of plants and gallers (after removing any species with no interactions), mean links per plant and per galler, connectance, and NODF.
+
+
+  Next, we applied a layer of detection uncertainty to create "detection-filtered" networks. As with the process-filtered networks, we randomly selected the number of times each species co-occurred, $n$, from a uniform distribution. We also randomly selected the probability, $p$, of detecting each interaction. To reflect the fact that some interactions are easy to observe but many will be more difficult (because one or both interaction partners are rare, cryptic, or difficult to rear in the lab), we drew $p$ from a beta distribution with shape parameters 2 and 10. We created 100 detection-filtered networks for each process-filtered network (10000 per true network). For each network, we calculated the number of plants and gallers (after removing any species with no interactions), mean links per plant and per galler, connectance, and NODF. Code used in this simulation example is contained in the file \emph{simulation_example.R}, uploaded separately.
+
+
+  With each additional layer of uncertainty, the number of plants and gallers included in the web decreased (state means here). The connectance and number of links per plant and per galler decreased significantly at each level (Fig.~\ref{sim_props}A,B,D). The effects of uncertainty on nestedness were less predictable. The process-filtered networks were significantly less nested than the original networks, but the variation in the detection-filtered webs was so great that there were no significant differences between the original and detection-filtered networks (Fig.~\ref{sim_props}C). This simulation demonstrates the fact that process and detection uncertainty mean that we are very unlikely to observe all of the interactions that can truly occur in a system, as well as the sometimes unpredictable effects this uncertainty can have on higher-order structures such as nestedness.
+
+
+  Note that this simulation uses several simplifying assumptions. For instance, we treat interactions as independent and ignore the possibility for, for example, competition between gallers. A thorough exploration of the effects of interaction contingency, different distributions of co-occurrences, etc. would be an interesting topic for future work but is beyond the scope of the current study. We also neglect interaction uncertainty in this example. Interaction uncertainty could be included by, for example, modelling interactions between individuals of each species. In this framework, individuals could vary in some trait (e.g., body size) that affects the interactions in which they participate. Very small or very large individuals might not participate in some interactions that are feasbile for most members of the species. 
+
+
+  \begin{figure}
+  \label{sim_props}
+  \caption{We created 100 random networks containing 50 plants and 50 gallers, with a connectance of 0.1. For each of these "original" networks, we created 100 process-filtered ("process") networks incorporating uncertainty around the occurrance of each interaction during sampling. For each "process" network, we further created 100 detection-filtered ("detection") networks incorporating uncertainty around the detection of each interaction. For each network, we show the mean (+/- SD) connectance, links per plant, nestedness (NODF), and links per galler.}
+  \begin{center}
+  \includegraphics*[width=\textwidth]{figures/simulation_example.eps}
+  \end{center}
+  \end{figure}
+
+\clearpage
+
+\section*{Appendix S9: Calculating the credible interval around a probability estimate}
 
   Here we describe the derivation of the Clopper-Pearson credible interval for the estimated probability of interaction $\lambda$ of a pair of species observed co-occurring $n$ times and interacting $k$ times. As we are most interested in the probability of interaction between species pairs that have never been observed co-occurring, we consider only the case where $k=0$ over a variety of $n$. This is straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S7}). 
 
