@@ -106,6 +106,9 @@ alyssa.cirtwill@gmail.com\\
 
 \section*{Appendix S2: Calculating uninformative and informative priors}
 
+    To create Bayesian distributions for the probability of interactions, we must begin with a prior distribution. This distribution reflects our prior knowledge (or lack thereof) about the likelihood of a given interaction. Priors may be selected to be uninformative, so as not to bias the posterior distribution in any particular direction, or may be informative and based on some prior knowledge about the system.
+
+
     \subsection*{Uninformative prior}
       
         In the absence of any external information, an uninformative prior is the most conservative hypothesis for the distribution of $\lambda$. The beta distribution is in this case a uniform distribution, specified with hyper parameters $\alpha=1$ and $\beta=1$. 
@@ -180,7 +183,7 @@ alyssa.cirtwill@gmail.com\\
       enemies (hymenopteran parasitoids and coleopteran, lepidopteran, dipteran, 
       and hymenopteran inquilines). The data were collected over 29 years 
       (1982-2010) at 374 unique locations across Europe ranging from Sicily to 
-      the Arctic. Including repeated visits to a number of sites, the data set 
+      the Arctic. Since the dataset includes repeated visits to a number of sites, the data set 
       contains 641 site-visits. Here we take the more conservative approach and pool visits to the same site for a sample size of 374 sub-networks.
 
       The meta-network consists of 1,173 different interactions 
@@ -196,7 +199,7 @@ alyssa.cirtwill@gmail.com\\
 
     \subsection*{Computing the prior and posterior distributions}
 
-      As with the galler-natural enemy component, we estimated frequencies of \emph{Salix}-galler interactions based on the normalised degree of each species (\emph{Appendix S6}). We obtained prior parameters of $\alpha$=8.72, $\beta$=305 for the \emph{Salix}-galler component. These prior parameters were then used to estimate the posterior distribution. 
+      As with the galler-natural enemy component (presented in the main text), we estimated frequencies of \emph{Salix}-galler interactions based on the normalised degree of each species (\emph{Appendix S6}). We obtained prior parameters of $\alpha$=8.72, $\beta$=305 for the \emph{Salix}-galler component. These prior parameters were then used to estimate the posterior distribution. 
 
 
       For species where $n=0$ (3,986/4,992 \emph{Salix}-galler pairs in our dataset), estimates for the mean and variance of $\lambda_{ij}$ can be calculated directly from the prior distribution (\emph{Appendix S6}). For the \emph{Salix}-galler network, these parameters were: $\bar\lambda$=0.028, var($\lambda$)=8.60$\times$10$^{-5}$; note that this mean is much lower than that obtained using a prior based on~\citet[Data available from the Dryad Digital Repository: https://doi.org/10.5061/dryad.g7805]{Barbour2016}. Note that, despite the intensive sampling in the~\ref{Kopelke2017} dataset, most \emph{Salix}-galler pairs were never observed co-occurring (3,986/4,992; Fig.~\ref{histograms}).
@@ -214,7 +217,7 @@ alyssa.cirtwill@gmail.com\\
       For species with $n>0$, the posterior distribution will depend on the values of $n$ and $k$. Here we are interested only in cases where $k = 0$. This gives $\alpha'$=$\alpha$ and $\beta'$=$\beta + n_{ij}$. For a pair of species which co-occurred at all 374 sites and was never observed to interact, the distribution for the \emph{Salix}-galler network would become $\bar\lambda_{ij}$=1.27 $\times$ 10$^{-2}$, var($\lambda_{ij}$)=1.82 $\times$ 10$^{-5}$. As $n$ decreases, the distribution widens and moves away from the origin (Fig.~\ref{Salix_pdfs}). The 95\% credible interval for hypothetical \emph{Salix}-galler pairs widened from (0.006, 0.022) if the pair co-occurred at all sites to (0.013, 0.049) if they co-occurred at none (Table~\ref{credints}). 
 
       \begin{figure}[h!]
-        \caption{Using prior distributions based on the \emph{Salix}-galler network sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. Dashed lines indicate threshold probabilities of 0.1, 0.05, and 0.01.}
+        \caption{Using prior distributions based on the \emph{Salix}-galler network sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top) approaches zero and the 95\% credible interval (lines at top) narrows as sample size increases. Dashed lines indicate threshold probabilities of 0.1, 0.05, and 0.01.}
         \label{Salix_pdfs}
         \begin{center}
         \includegraphics*[width=.7\textwidth]{figures/SG_pdfs_increasing_N_Zillis.eps}
