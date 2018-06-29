@@ -50,6 +50,7 @@ alyssa.cirtwill@gmail.com\\
 \setlength{\parindent}{15pt} 
 \clearpage
 
+\linenumbers
 
 \section*{Appendix S1: Mathematical framework}
 
@@ -206,10 +207,10 @@ alyssa.cirtwill@gmail.com\\
 
 
       \begin{figure}[h!]
-          \caption{\textbf{A)} Most pairs of \emph{Salix} and gallers were never observed co-occurring despite the high levels of replication in our example dataset. For those pairs that were observed together at least once ($n_{ij}>0$), the number of observed co-occurrences was generally small (\textless10). Here we show a histogram of the number of pairs of species observed co-occurring at least once. The 3986 \emph{Salix}-galler pairs never observed co-occurring are omitted from the histogram. \textbf{B)} Most pairs of species that were observed at the same site were never observed interacting. Here we show a histogram of the number of observed interactions within pairs of co-occurring species. Species which co-occurred but never interacted are included. \textbf{C)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. \emph{Salix}-galler pairs either are never observed interacting or interact almost every time they co-occur. IThe red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
+          \caption{\textbf{A)} Most pairs of \emph{Salix} and gallers were never observed co-occurring despite the high levels of replication in our example dataset. For those pairs that were observed together at least once ($n_{ij}>0$), the number of observed co-occurrences was generally small (\textless10). Here we show a histogram of the number of pairs of species observed co-occurring at least once. The 3986 \emph{Salix}-galler pairs never observed co-occurring are omitted from the histogram. \textbf{B)} Most pairs of species that were observed at the same site were never observed interacting. Here we show a histogram of the number of observed interactions within pairs of co-occurring species. Species which co-occurred but never interacted are included. \textbf{C)} Here we show, for each species pair, the number of observed interactions plotted against the number of observed co-occurrences. \emph{Salix}-galler pairs either are never observed interacting or interact almost every time they co-occur. The red, dashed line indicates a 1:1 relationship between interactions and co-occurrences.}
           \label{histograms}
           \begin{center}
-          \includegraphics*[width=.8\textwidth]{figures/SG_histogram.eps}
+          \includegraphics*[height=.7\textheight]{figures/SG_histogram.eps}
           \end{center}
           \end{figure}
 
@@ -220,7 +221,7 @@ alyssa.cirtwill@gmail.com\\
         \caption{Using prior distributions based on the \emph{Salix}-galler network sampled at a single site in~\citet{Kopelke2017}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for $\lambda$ ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top) approaches zero and the 95\% credible interval (lines at top) narrows as sample size increases. Dashed lines indicate threshold probabilities of 0.1, 0.05, and 0.01.}
         \label{Salix_pdfs}
         \begin{center}
-        \includegraphics*[width=.7\textwidth]{figures/SG_pdfs_increasing_N_Zillis.eps}
+        \includegraphics*[width=.9\textwidth]{figures/SG_pdfs_increasing_N_Zillis.eps}
         \end{center}
         \end{figure}
 
@@ -242,7 +243,7 @@ alyssa.cirtwill@gmail.com\\
       \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a single sub-network in the~\citet{Kopelke2017} dataset (Zillis). We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
       \label{posterior_webs}    
       \begin{center}
-      \includegraphics[width=.7\textwidth]{figures/SG_posterior_properties_Zillis.eps}
+      \includegraphics[width=.9\textwidth]{figures/SG_posterior_properties_Zillis.eps}
       \end{center}
       \end{figure}
 
@@ -401,7 +402,7 @@ alyssa.cirtwill@gmail.com\\
         \caption{Using prior distribution based on the \emph{Salix}-galler and galler-natural enemy networks in~\citet{Barbour2016}, we can calculate posterior distributions for the probability of interaction ($\lambda$) between two species that have not yet been observed interacting. Here we show posterior distributions for each $\lambda$ in each network ranging from the prior distribution ($n=0$ observed co-occurrence) to the distribution obtained when the pair of species has been observed co-occurring 100 times. The distribution narrows and approaches zero as the sample size increases. Likewise, the maximum likelihood estimator for the mean probability of interaction (diamonds at top of each panel) approaches zero and the 95\% credible interval (lines at top of each panel) narrows as sample size increases. \textbf{A)} The posterior distributions for the \emph{Salix}-galler component are always wider and farther from zero than those for \textbf{B)} the galler-natural enemy component. This is likely because the prior distribution for the galler-natural enemy component of the network was both narrower and had a mean closer to that in the~\citet{Kopelke2017} data than did the \emph{Salix}-galler component.}
         \label{Salix_pdfs}
         \begin{center}
-        \includegraphics*[width=.6\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
+        \includegraphics*[width=.65\textwidth]{figures/Salix_Galler_pdfs_increasing_N.eps}
         \end{center}
         \end{figure}
 
@@ -413,7 +414,7 @@ alyssa.cirtwill@gmail.com\\
         \caption{The number of samples required to achieve a given level of confidence that an interaction probability $\lambda_{ij}$ is below a given threshold varies with both parameters. With a low threshold, our confidence that $\lambda_{ij}$ is below the threshold increases rapidly with repeated observation of co-occurrence without interaction. Here we show the cumulative density functions for threshold probabilities of 0.5 (solid line), 0.25 (dashed line), 0.1 (dash-dot line), and 0.05 (dotted line) as well as the points at which the cdf reaches 0.90 (orange square), 0.95 (red circle), and 0.975 (blue diamond) for each threshold value. The large ticks along the x-axis indicate the number of samples associated with each of these points. Note that the number of samples required to reach any given threshold is larger for \textbf{A)} the \emph{Salix}-galler network than for \textbf{B)} the galler-natural enemy network. In the galler-natural enemy network, the credible interval for a pair of species with no observed co-occurrences was 0.364. All pairs of species therefore have $\lambda$\textless0.5.}
         \label{Salix_cdfs}
         \begin{center}
-        \includegraphics[width=.6\textwidth]{figures/Salix_Galler_samples_and_cdfs.eps}
+        \includegraphics[width=.65\textwidth]{figures/Salix_Galler_samples_and_cdfs.eps}
         \end{center}
         \end{figure}
 
@@ -432,7 +433,7 @@ alyssa.cirtwill@gmail.com\\
       \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a smaller, North American \emph{Salix}-galler-natural enemy system~\citep{Barbour2016,Barbour2016Dryad}. We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
       \label{posterior_webs}    
       \begin{center}
-      \includegraphics[width=.6\textwidth]{Figures/Salix_Galler_posterior_properties.eps}
+      \includegraphics[width=.65\textwidth]{Figures/Salix_Galler_posterior_properties.eps}
       \end{center}
       \end{figure}
 
@@ -597,7 +598,7 @@ alyssa.cirtwill@gmail.com\\
   Next, we applied a layer of detection uncertainty to create ``detection-filtered" networks. As with the process-filtered networks, we randomly selected the number of times each species co-occurred, $n$, from a uniform distribution. We also randomly selected the probability, $p$, of detecting each interaction. To reflect the fact that some interactions are easy to observe but many will be more difficult (because one or both interaction partners are rare, cryptic, or difficult to rear in the lab), we drew $p$ from a beta distribution with shape parameters 2 and 10. We created 100 detection-filtered networks for each process-filtered network (10000 per true network). For each network, we calculated the number of plants and gallers (after removing any species with no interactions), mean links per plant and per galler, connectance, and NODF. Code used in this simulation example is contained in the file \emph{simulation\_example.R}, uploaded separately.
 
 
-  With each additional layer of uncertainty, the number of plants and gallers included in the web decreased ([[state means here]]). The connectance and number of links per plant and per galler decreased significantly at each level (Fig.~\ref{sim_props}A,B,D). The effects of uncertainty on nestedness were less predictable. The process-filtered networks were significantly less nested than the original networks, but the variation in the detection-filtered webs was so great that there were no significant differences between the original and detection-filtered networks (Fig.~\ref{sim_props}C). This simulation demonstrates the fact that process and detection uncertainty mean that we are very unlikely to observe all of the interactions that can truly occur in a system, as well as the sometimes unpredictable effects this uncertainty can have on higher-order structures such as nestedness.
+  With each additional layer of uncertainty, the number of plants and gallers included in the web decreased (mean 49.8 of each species type in detection-filter webs and mean 48.6 of each type in process-filtered webs). The connectance and number of links per plant and per galler decreased significantly at each level (Fig.~\ref{sim_props}A,B,D; $p$\textless0.001 in all cases based on one-tailed Student's t tests). The effects of uncertainty on nestedness were less predictable, particularly in the detection-filtered webs where variability was much higher than in other web types. Nevertheless, mean nestedness was lower in detection-filtered webs than in the original webs ($t$=19.9, $p$\textless0.001) and lower in the process-filtered webs than the original and detection-filtered webs (Fig.~\ref{sim_props}C; $t$=32.8, $p$\textless0.001 and $t$=93.7, $p$\textless0.001). We note that these tests may reflect the large number of detection-filtered webs generated by our simulation. A single observed network drawn from these detection-filtered webs might well have a higher nestedness than the ``true" network. This simulation demonstrates the fact that process and detection uncertainty mean that we are very unlikely to observe all of the interactions that can truly occur in a system, as well as the sometimes unpredictable effects this uncertainty can have on higher-order structures such as nestedness.
 
 
   Note that this simulation uses several simplifying assumptions. For instance, we treat interactions as independent and ignore the possibility for, for example, competition between gallers. A thorough exploration of the effects of interaction contingency, different distributions of co-occurrences, etc. would be an interesting topic for future work but is beyond the scope of the current study. We also neglect interaction uncertainty in this example. Interaction uncertainty could be included by, for example, modelling interactions between individuals of each species. In this framework, individuals could vary in some trait (e.g., body size) that affects the interactions in which they participate. Very small or very large individuals might not participate in some interactions that are feasible for most members of the species. 
@@ -605,9 +606,9 @@ alyssa.cirtwill@gmail.com\\
 
   \begin{figure}
   \label{sim_props}
-  \caption{We created 100 random networks containing 50 plants and 50 gallers, with a connectance of 0.1. For each of these ``original" networks, we created 100 process-filtered ("process") networks incorporating uncertainty around the occurrence of each interaction during sampling. For each ``process" network, we further created 100 detection-filtered ("detection") networks incorporating uncertainty around the detection of each interaction. For each network, we show the mean (+/- SD) connectance, links per plant, nestedness (NODF), and links per galler.}
+  \caption{We created 100 random networks containing 50 plants and 50 gallers, with a connectance of 0.1. For each of these ``original" networks, we created 100 process-filtered (``process") networks incorporating uncertainty around the occurrence of each interaction during sampling. For each ``process" network, we further created 100 detection-filtered (``detection") networks incorporating uncertainty around the detection of each interaction. For each network, we show the mean (+/- SD) connectance, links per plant, nestedness (NODF), and links per galler.}
   \begin{center}
-  \includegraphics*[width=\textwidth]{figures/simulation_example.eps}
+  \includegraphics*[width=.9\textwidth]{figures/simulation_example.eps}
   \end{center}
   \end{figure}
 
