@@ -176,7 +176,7 @@ def format_graph(graph,prop,nettype,site):
       ytext="NODF"
     graph.yaxis.label.configure(text=ytext,char_size=1,just=2)
   graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.5,
-    loc=(0.635,3.8),loctype='world')
+    loc=(0.725,3),loctype='world')
   graph.panel_label.configure(placement='iul',char_size=.75,dx=.02,dy=.01)
   # if prop=='C' and nettype=='SG':
   #   graph.xaxis.label.configure(text='Salix-Galler',place='opposite',char_size=1.25,just=2,loctype='world')
@@ -244,8 +244,15 @@ def main():
 
       grace.multi(rows=2,cols=2,vgap=.04,hgap=.1)
       grace.hide_redundant_labels()
-      grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Percent of links detected",just=2,char_size=1.5,perpendicular_offset=0.05)
 
+      for graph in grace.graphs:
+        print graph.get_view()
+
+      grace.graphs[0].set_view(0.15, 0.7020588235294118, 0.4970588235294118, 0.95)
+      grace.graphs[1].set_view(0.5970588235294119, 0.7020588235294118, 0.95, 0.95)
+      grace.graphs[2].set_view(0.15, 0.4141176470588234, 0.4970588235294118, 0.6620588235294117)
+      grace.graphs[3].set_view(0.5970588235294119, 0.4141176470588234, 0.95, 0.6620588235294117)
+      grace.set_row_xaxislabel(colspan=(None,None),row=1,label="Percent of links detected",just=2,char_size=1.5,perpendicular_offset=0.075)
 
       grace.write_file('../../manuscript/figures/'+nettype+'_posterior_properties_'+site+'.eps')
 

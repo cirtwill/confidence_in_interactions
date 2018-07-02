@@ -213,7 +213,11 @@ def main():
       graph=populate_graph(graph,prop,nettype,obs,whiskers)
 
 
+
   grace.multi(rows=4,cols=2,vgap=.04,hgap=.07)
+  for graph in grace.graphs:
+    print graph.get_view()
+  grace.graphs[0].set_view(0.15,0.15,0.95,0.85)
   grace.hide_redundant_labels()
   grace.set_row_xaxislabel(colspan=(None,None),row=3,label="Percent of links detected",just=2,char_size=1,perpendicular_offset=0.05)
 
