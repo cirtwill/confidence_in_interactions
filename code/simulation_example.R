@@ -52,7 +52,7 @@ Make_B<-function(A,n_samples){
 # Detection probability might therefore follow a beta distribution with parameters 2 and 10
 
 # Assume that the number of co-occurrences for each species pair is uniformly distributed
-# Assume that the probability of detecting an interaction, for a given number of co-occurrences, is uniformly distributed
+# Assume that the probability of detecting an interaction, for a given number of co-occurrences, is beta distributed
 # The overall detection uncertainty is a binomial process depending on the number of co-occurrences and detection probability for each interaction
 
 Make_C<-function(B,n_samples){
@@ -87,7 +87,6 @@ test_network<-function(net){
 	NODF=nestedness(trimmed,null.models=FALSE)$temperature
 
 	properties=c(n_plants,n_gallers,C,mean_L_per_p,mean_L_per_g,NODF)
-	# properties=c(n_plants,n_gallers,C,mean_L_per_p,mean_L_per_g)
 	return(properties)
 }
 
@@ -98,27 +97,28 @@ test_network<-function(net){
 # colnames(B_props)=c("N_plants","N_gallers","C","L_per_plant","L_per_galler")
 # C_props=matrix(nrow=1000,ncol=5)
 # colnames(C_props)=c("N_plants","N_gallers","C","L_per_plant","L_per_galler")
-A_props=matrix(nrow=10,ncol=3)
+A_props=matrix(nrow=100,ncol=3)
 colnames(A_props)=c("L_per_plant","L_per_galler","NODF")
-B_props=matrix(nrow=100,ncol=6)
+B_props=matrix(nrow=10000,ncol=6)
 colnames(B_props)=c("N_plants","N_gallers","C","L_per_plant","L_per_galler","NODF")
-C_props=matrix(nrow=1000,ncol=6)
+C_props=matrix(nrow=1000000,ncol=6)
 colnames(C_props)=c("N_plants","N_gallers","C","L_per_plant","L_per_galler","NODF")
-for(a in 1:10){
+for(a in 1:100){
 	print(a)
 	A=Make_A(n_plants,n_gallers,connectance)
 	properties=test_network(A)
 	A_props[a,]=properties[4:6]
 	# A_props[a,]=properties[4:5]
-	for(b in 1:10){
+	for(b in 1:100){
 		B=Make_B(A,n_samples)
 		properties=test_network(B)
-		rownum=b+(a-1)*10
+		rownum=b+(a-1)*100
+		# print(rownum)
 		B_props[rownum,]=properties
-		for(c in 1:10){
+		for(c in 1:100){
 			C=Make_C(B,n_samples)
 			properties=test_network(C)
-			rownum2=c+(b-1)*10+(a-1)*100
+			rownum2=c+(b-1)*100+(a-1)*10000
 			C_props[rownum2,]=properties
 		}
 	}
