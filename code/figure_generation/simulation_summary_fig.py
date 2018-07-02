@@ -51,11 +51,11 @@ def configure_yaxes(prop,graph):
   if prop=='N_plants':
     graph.world.ymax=16
     graph.yaxis.tick.configure(major=3)
-    graph.yaxis.label.configure(text="N(plants)",char_size=1,just=2,place='normal')
+    graph.yaxis.label.configure(text="N(consumers)",char_size=1,just=2,place='normal')
   elif prop=='N_gallers':
     graph.world.ymax=21
     graph.yaxis.tick.configure(major=4)
-    graph.yaxis.label.configure(text="N(gallers)",char_size=1,just=2,place='normal')
+    graph.yaxis.label.configure(text="N(resources)",char_size=1,just=2,place='normal')
   elif prop=='C':
     graph.world.ymax=0.105
     graph.world.ymin=0.06
@@ -66,12 +66,12 @@ def configure_yaxes(prop,graph):
     graph.world.ymax=6
     graph.world.ymin=2
     graph.yaxis.tick.configure(major=1)
-    graph.yaxis.label.configure(text="Links per plant",char_size=1,just=2,place='normal')
+    graph.yaxis.label.configure(text="Links per consumer",char_size=1,just=2,place='normal')
   elif prop=='L_per_galler':
     graph.world.ymax=6
     graph.world.ymin=2
     graph.yaxis.tick.configure(major=1)
-    graph.yaxis.label.configure(text="Links per galler",char_size=1,just=2,place='normal')
+    graph.yaxis.label.configure(text="Links per resource",char_size=1,just=2,place='normal')
   else:
     graph.world.ymax=40
     graph.world.ymin=0
