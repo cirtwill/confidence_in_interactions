@@ -111,7 +111,7 @@ alyssa.cirtwill@gmail.com\\
     \item Here we develop the conceptual and analytical tools needed to capture uncertainty in the estimation of pairwise interactions. To define the problem, we identify the different contributions to the uncertainty of an interaction. We then outline a framework to quantify the uncertainty around each interaction by combining data on observed co-occurrences with prior knowledge. We illustrate this framework using perhaps the most extensively sampled network to date. 
     \item We found significant uncertainty in estimates for the probability of most pairwise interactions. This uncertainty can, however, be constrained with informative priors. This uncertainty scaled up to summary measures of network structure such as connectance or nestedness. By using a comprehensively sampled network as a test case, we find that even with informative priors we are likely to miss many interactions that may occur rarely or under different local conditions. 
     \item Overall, we demonstrate the utility of our approach, given the importance of acknowledging the uncertainty inherent in network studies, and the utility of treating interactions as probabilities in pinpointing areas where more study is needed. Most importantly, we stress that networks are best thought of as systems constructed from random variables, the stochastic nature of which must be acknowledged for an accurate representation. Doing so will fundamentally change networks analyses and yield greater realism.
-  % Can be up to 350 words for MEE. This is 290 exactly.
+  % Can be up to 350 words for MEE.
 \end{enumerate}
 
 
@@ -119,7 +119,7 @@ alyssa.cirtwill@gmail.com\\
 
 ecological networks; probabilistic interactions; Bayesian networks; sampling error; spatial variability; temporal variability; uncertainty
 
-% \linenumbers
+\linenumbers
 \clearpage
 
 \section*{Introduction}
@@ -329,10 +329,11 @@ All data used in this study have been independently published and are accessible
     \caption{Three nested levels of uncertainty mean that an observed interaction matrix is unlikely to capture all of the interactions that can really occur at a site. Interaction uncertainty means that some interactions that truly occur (black squares in True matrix) are less likely than others (grey squares; lighter grey is less likely) based on species traits. For example, lions are less likely to predate upon elephants than zebras. If our trait model is incomplete (e.g., if we neglect group hunting in lions), we might assume that elephants are too large to ever be prey for lions and assign this interaction a probability of 0.\\
     \indent Process uncertainty describes the fact that interactions occur with different probabilities in any given sample. We show six example networks representing interactions observed over two days at three sites. Interactions which occur during fewer sampling days are less likely to be observed.\\
     \indent Detection uncertainty reflects the fact that not all interactions are equally detectable. For example, interactions involving cryptic species are less likely to be seen.\\
-    \indent After applying these three layers of uncertainty, some interactions which truly occur are very unlikely to be observed. The observed matrix (lower right) is a subsample of the true matrix, with the probability of observing each interaction depending on the interaction, process, and detection uncertainty associated with it. Note that some low-probability interactions (e.g., lion predation on zebra) are included while others (e.g., lion predation on elephants) are not. For an illustration of the way in which these levels of uncertainty combine in simulated data, and the effects of uncertainty on network structure, see \emph{Appendix S1}.}
+    \indent After applying these three layers of uncertainty, some interactions which truly occur are very unlikely to be observed. The observed matrix (lower right) is a subsample of the true matrix, with the probability of observing each interaction depending on the interaction, process, and detection uncertainty associated with it. Note that some low-probability interactions (e.g., lion predation on zebra) are included while others (e.g., lion predation on elephants) are not. For an illustration of the way in which these levels of uncertainty combine in simulated data, and the effects of uncertainty on network structure, see \emph{Appendix S1}. Attributions for PhyloPic silhouette images are given in \emph{Appendix S1-A}.}
     \label{conceptual_fig}
     \begin{center}
     % \includegraphics*[height=.5\textheight]{figures/conceptual_fig.eps}
+    % \includegraphics*[height=.5\textheight]{Figure_1.eps}
     \end{center}
     \end{figure}
 
@@ -344,6 +345,7 @@ All data used in this study have been independently published and are accessible
       \label{histograms}
       \begin{center}
       % \includegraphics*[height=.6\textheight]{figures/GP_histogram.eps}
+      % \includegraphics*[height=.6\textheight]{Figure_2.eps}
       \end{center}
       \end{figure}
 
@@ -353,6 +355,7 @@ All data used in this study have been independently published and are accessible
     \label{upper_limits}
     \begin{center}
     % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
+    % \includegraphics*[width=.8\textwidth]{Figure_3.eps}
     \end{center}
     \end{figure}
 
@@ -364,6 +367,7 @@ All data used in this study have been independently published and are accessible
     \label{Salix_pdfs_cdfs}
     \begin{center}
     % \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
+    % \includegraphics*[width=.8\textwidth]{Figure_4.eps}
     \end{center}
     \end{figure}
 
@@ -373,6 +377,7 @@ All data used in this study have been independently published and are accessible
     \label{posterior_webs}    
     \begin{center}
     % \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
+    % \includegraphics[width=.8\textwidth]{Figure_5.eps}
     \end{center}
     \end{figure}
 
