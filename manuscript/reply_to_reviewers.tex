@@ -31,7 +31,11 @@
 \setcounter{page}{1}
 
 
+Changes: reducing discussion of different sources of uncertainty, increasing description of priors, added a bunch of refs, trying to frame our study more clearly.
 
+Still to do: framing, expand discussion of network metrics from sampled vs. predicted vs. expert knowledge networks... (ours reflect about 50\% of links observed, doesn't seem super out of line). Make clearer that we are modelling L but could also model X|L with independent $n$ and $k$ data within a single site. Maybe in the section introducing the model or introducing the case study?
+
+Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli?
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 {\Large \bf Reply to Associate Editor}
@@ -58,15 +62,20 @@
 		\begin{refquote}
 			Below I offer my thoughts on this well-written manuscript. Normally I condense my review into a few key points, but I found myself uncharacteristically divided with the paper as presented. At first, the introduction covers ground very well-trod by prior works and doesn’t really address its contribution. I was mostly frustrated by the rehashing of topics made by many previous papers, include many by the authors themselves. But then the paper seems to morph and pick up steam on L248. Rather than reaching towards an amorphous and grandiose “quantitative framework”, the authors briefly zoom into a very concise, and hugely important, question of choosing prior distributions for harnessing information among networks. This has been completely unexplored and merits attention. In ecology more broadly, priors are treated with timidity, as if we couldn’t dare to leverage past work on our current understanding. Personally, I have always felt limited by this standard. I applaud the authors for taking on this challenge, and I would like to see an introduction that merits and debates this question in much more detail. When should we use prior information? How do we go about constructing informed priors for networks? When can we use priors from the data in question? This is sometimes called approximate bayes (http://andrewgelman.com/2016/03/25/28321/), or empirical bayes, perhaps alluded to in the title, but not fully explained in the introduction. Should empirical priors be drawn from hyperpriors or fixed for each interaction? Can we combine qualitative information and quantitative information? This is all exciting ground that will open up new avenues for networks. Walking the reader through flat priors, informed priors and empirical priors is crucial for the importance of analysis to be understood by the reader. The use of empirical priors can be quite controversial, and should be atleast touched on in the discussion. \\
 			I’ve left my comments below on the introduction, but in my opinion, it should be almost wholly rewritten in favor of a more targeted question constructing networks using priors, which is the key novelty of the work and is mostly hidden by the current introduction. I’m not convinced any new analysis needs to be done, which speaks to the conflict between the current introduction and the actual data presented. I see the makings of a really nice paper here, and I’m confident the authors will be able to achieve this text revision.
+			\medskip
+			At the same time, the paper is clear and very readable. I wholly support the method and I think it is something critical that needs to be adopted by the community. \\
+			Having read the paper several times, I think that the authors are trying to cast their net too widely, even starting from the title. From that perspective, they don’t meet the expectation of new insight. However!! I was extremely interested in the brief discussion on using prior knowledge, especially the delicacy of trying to transfer information among networks (L248). My recommendation is to drastically reduce the grandiose attempt at a “quantitative framework for networks” (L1 – L246) and really zoom in on the contribution of transferring information among networks through informed priors.	Again L278, this is very well covered in concept by recent papers in MEE that include the authors of this work, as well as several by Weinstein, Bartomeus and others.
 			\end{refquote}
 
 
 		\textbf{R:} We thank the Reviewer for the suggestion to expand our discussion of prior selection, particularly with regard to approxmimate/empirical bayes. [[Expand refs to this]] We now walk through flat, informed, and empirical priors as suggested (lines XX-XX) and refer to the controversy surrounding empirical priors in our discussion (lines XX-XX).\\
-		We also appreciate the Reviewer's comments on our introduction. We feel that understanding the problem of uncertain detection of interactions is important motivation for a reader not already familiar with Bayesian procedures to wade through a larger discussion on priors. Therefore we have revised and, hopefully, streamlined our discussion but do not jump straight in to priors. We have, however, taken care to introduce our analysis as a worked example (lines XX-XX) and hope that this helps to reduce the conflict between the introduction and our data. [[Add something else about different priors? Add different priors to our analyses?]]
-		[[Definitely should expand this, but do we want to really focus on those?]][[not quite done]]
+			We also appreciate the Reviewer's comments on our introduction. We feel that understanding the problem of uncertain detection of interactions is important motivation for a reader not already familiar with Bayesian procedures to wade through a larger discussion on priors. Therefore we have revised and, hopefully, streamlined our discussion but do not jump straight in to priors. We have, however, taken care to introduce our analysis as a worked example (lines XX-XX) and hope that this helps to reduce the conflict between the introduction and our data. [[Add something else about different priors? Add different priors to our analyses?]]
+			[[Definitely should expand this, but do we want to really focus on those?]][[not quite done]]
+
+			We thank the Reviewer for their compliments and accept their suggestion that we are somewhat overexcited about our approach. We have refined the introduction to be more specific about the problem we are attempting to solve. We have also expanded our treatment of prior selection and hope that our paper now reads as achieving its goal.
 
 
-	2. Suggestion to add more literature [[in progress]]
+	2. Suggestion to add more literature [[done]]
 
 		\begin{refquote}
 		The introduction flows well and is thoughtfully laid out. Given the enormous amount of literature in the field, it is not possible to provide a full set of citations. However, it seems remiss to not consider Jordano (2016) in the sampling section.
@@ -101,7 +110,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} We thank the Reviewer for the literature suggestions and now include them in our introduction and/or discussion. We emphasize the board applicability of our appraoch across network types and where species traits affecting interaction probability may not be known. [[Make sure this comes through]] We hope that the contribution our manuscript makes is now clearer.
+		\textbf{R:} We thank the Reviewer for the literature suggestions and now include them in our introduction and/or discussion. We emphasize the board applicability of our approach across network types and systems with varying degrees of prior knowledge. We also emphasize that our approach is not restricted to species observed X times (as many predictive models are) and can include species not yet observed at a site (e.g., potential invaders). We hope that the contribution our manuscript makes is now clearer.
 
 
 	6. Potential contradiction [[done]]
@@ -112,17 +121,6 @@
 
 
 		\textbf{R:} We have now address questions relating to sampling in a dedicated box. We hope that the revisions make our stance on repeated sampling clearer and that there are no longer apparent contradictions.
-
-
-	7. Final comment on framing the study [[I think done?]]
-
-		\begin{refquote}
-		At the same time, the paper is clear and very readable. I wholly support the method and I think it is something critical that needs to be adopted by the community. \\
-		Having read the paper several times, I think that the authors are trying to cast their net too widely, even starting from the title. From that perspective, they don’t meet the expectation of new insight. However!! I was extremely interested in the brief discussion on using prior knowledge, especially the delicacy of trying to transfer information among networks (L248). My recommendation is to drastically reduce the grandiose attempt at a “quantitative framework for networks” (L1 – L246) and really zoom in on the contribution of transferring information among networks through informed priors.	Again L278, this is very well covered in concept by recent papers in MEE that include the authors of this work, as well as several by Weinstein, Bartomeus and others.
-		\end{refquote}
-
-
-		\textbf{R:} We thank the Reviewer for their compliments and accept their suggestion that we are somewhat overexcited about our approach. We have refined the introduction to be more specific about the problem we are attempting to solve. We have also expanded our treatment of prior selection and hope that our paper now reads as achieving its goal.
 
 
 	% 	Literature suggestions:
@@ -188,17 +186,22 @@
 		Comments to the Corresponding Author
 		Overall, I think this is a very good paper and makes an important contribution.  I think there are three main ways it can be improved: 1.      The simplest – do a better job of acknowledging what else has been done in the field – much of which has actually been done by the authors and their collaborators. ... 2.      Provide more clarity in descriptions making sure to consider how terms and ideas have been used previously. ... 3.      The set up (introduction) to the case study is quite odd and somehow seems off topic – or at least not logical based on what the reader has read up to that point.
 		I hope this review is helpful.  
+
+
+		More generally, the introduction does not really do justice to what has been done already – even the authors own work.  The problem in my view is that the community using better statistics – of which the authors are very important members – has not managed to communicate to most people studying networks and better methods are simply not being adopted.  The current paper is a very nice attempt to show the broader community that the Bayesian approach is not so complex and has many advantages.  I think this is a very important message and is what makes this paper an important contribution.  Further, the approach to parse out different types of uncertainty and suggestions for how to come-up with informative priors – is very useful.  The theory/method is well developed overall and provides an example – which is great.
+
 		\end{refquote}
 
 		\textbf{R:} We than the Reviewer for their literature suggestions and for demonstrating that our desire not to criticise hard-working empiricists could be misinterpreted as suggesting reduced sampling effort. We had not realised that anyone would consider such a possibility and have revised our manuscript to make it clearer that our approach is a complement to extensive sampling, not an excuse for poor sampling. 
 
-	1. Add more references to the literature [[in progress]]
+
+	1. Add more references to the literature [[done]]
 
 		\begin{refquote}
 		1.      The simplest – do a better job of acknowledging what else has been done in the field – much of which has actually been done by the authors and their collaborators.  Given that they know there work I won’t point that out (but they are under-siting this literature a bit) but they could consider Graham and Weinstein on-line early 2018 (I realize that this was just out when the author’s submitted but it has some very similar messages) and the empirical example of Weinstein and Graham in Ecology letters 2017.  I don’t think this would in any way diminish the importance of the current paper because I think the challenge in network ecology is to get people to use better quantitative methods.
 		\end{refquote}
 
-		\textbf{R:} We had not intended to write a review paper and did not wish to over-cite ourselves, but we take the Reviewer's point and have expanded our references to the literature. We have taken particular care to add references to Graham/Weinsten papers as two of the reviewers suggested work by these authors. We hope that we now adequately acknowledge previous work.
+		\textbf{R:} We had not intended to write a review paper and did not wish to over-cite ourselves, but we take the Reviewer's point and have expanded our references to the literature. We have taken particular care to add references to Graham/Weinsten papers as two of the reviewers suggested work by these authors. We hope that the introduction now presents a more thorough sample of previous work.
 
 		\begin{refquote}
 		Line 7.  It is certainly true that most networks are snapshots in time but there is a growing realization – including some nice examples (including those by the authors) that address this issue.  Maybe what you want to say is that we know that networks should not be considered static but we lack the tools – or ability to collect data – or whatever you think is the cause – to correct this situation. 
@@ -210,23 +213,45 @@
 				Despite this additional information, empirical descriptions of ecological networks are still often limited by a lack of data or tools to adequately incorporate variation in interactions into networks.
 			\end{quotation}
 
-		\begin{quotation}
+
+		\begin{refquote}
 		Line 30.  There are several conceptual and empirical attempts to consider detection probability – why aren’t these cited (work by Bartomeus comes to mind).\\
+		\end{refquote}
 
-		Line 36.  I certainly see value in the approach and the general ideas of these authors in particular but they should acknowledge the work that has been done by themselves and others!\\
+			\textbf{R:} We have added a citation to Bartomeus as requested.
 
-		Line 89.  In Weinstein and Graham (Ecology Letters) the processes modeled were trait matching (which you place in interaction uncertainty) and abundance (which is perhaps your process uncertainty??).  I find myself quite confused based on how you describe things in this MS (See text above) and how you cite the literature.\\
+		\begin{refquote}
+			Line 36.  I certainly see value in the approach and the general ideas of these authors in particular but they should acknowledge the work that has been done by themselves and others!\\
+		\end{refquote}
 
-		Line 148.  Please note that a paper with a very similar aim was recently published (Graham and Weinstein).  This does not to diminish the value of this study in any way, as multiple perspectives on quantitative solutions in network ecology are urgently needed….. but the other work should be considered. More generally, the introduction does not really do justice to what has been done already – even the authors own work.  The problem in my view is that the community using better statistics – of which the authors are very important members – has not managed to communicate to most people studying networks and better methods are simply not being adopted.  The current paper is a very nice attempt to show the broader community that the Bayesian approach is not so complex and has many advantages.  I think this is a very important message and is what makes this paper an important contribution.  Further, the approach to parse out different types of uncertainty and suggestions for how to come-up with informative priors – is very useful.  The theory/method is well developed overall and provides an example – which is great.\\
+		\textbf{R:} We have rephrased the end of this paragraph to mention previous predictive models dealing with uncertainty in interaction matrices.
+
+		\begin{refquote}
+		Line 89.  In Weinstein and Graham (Ecology Letters) the processes modeled were trait matching (which you place in interaction uncertainty) and abundance (which is perhaps your process uncertainty??).  I find myself quite confused based on how you describe things in this MS (See text above) and how you cite the literature.
+		\end{refquote}
+
+		\textbf{R:} We have revised this section and now no longer refer to the specifics of Weinstein and Graham at all. Instead, we discuss repeated sampling in a box dedicated to the question of whether sampling is useful (of course it is) and whether it can completely solve problems of uncertainty in ecological networks (almost certinaly not). We hope that this is less confusing.
+
+		\begin{refquote}
+		Line 148.  Please note that a paper with a very similar aim was recently published (Graham and Weinstein).  This does not to diminish the value of this study in any way, as multiple perspectives on quantitative solutions in network ecology are urgently needed….. but the other work should be considered. 
+		\end{refquote}
+
+		\textbf{R:} We had not seen the Graham and Weinstein paper when we first submitted our manuscript, but now cite it in the introduction. We have also revised this section in hopes of making the uniqueness of our framework (its simplicity and adaptability) clear. 
+
+		\begin{refquote}
 		Line 288.  I am pretty sure this idea is in the literature several times and should be cited.  Isn’t this the same as drawing a probability of interaction from a distribution where the distribution of each interaction is an output of the Bayesian method?\\
+		\end{refquote}
+
+		\textbf{R:} Yes, that is exactly the idea. We are also sure that this is a common approach and therefore hadn't cited it (in the same way one would not be likely to cite the prior users of common statistical tests). We have added a citation to~\citet{Vazquez2005,Guimera2009} as two examples and hope that this is sufficient.
+
+		\begin{refquote}
 		Line 352 – 358.  Citations are needed in this section as this has been suggested before.
 		\end{refquote}
 
+		\textbf{R:} Most of these lines refer specifically to our results, making it somewhat difficult to add citations. We have added citations where possible and rephrased this section to make it clearer when we are referring to work done in the present manuscript.
 
-		\textbf{R:}
 
-
-	2. Confusing terminology [[not done]]
+	2. Confusing terminology [[done]]
 
 		\begin{refquote}
 		2.      Provide more clarity in descriptions making sure to consider how terms and ideas have been used previously.  Two things come to mind – the use of terms and distinction between interaction and process uncertainty; and the somewhat contradictory sounding statements about if sampling more is actually good.
@@ -235,23 +260,36 @@
 		\end{refquote}
 
 
-		\textbf{R:} [[interaction and process uncertainty...]] We respond to the Reviewer's comments about sampling below.
+		\textbf{R:} We have revised this section of the introduction to both avoid introducing rigid terminology and make it clear that our model is not concerned with partitioning different sources of variation (indeed, we state that in many cases this is not possible using empirical data). Hopefully this will discourage readers from getting bogged down in trying to isolate which external factors cause which types of uncertainty (there is almost certainly overlap - e.g., bad weather could both reduce the probability that species will be active and interact and the probability that an interaction is observed if visibility is poor). We have also added a section (lines XX-XX) referring to "forbidden links" which address aspects of whether species can interact (which we had previously called interaction uncertainty) and whether they do interact at a particular site (previously process uncertainty). We hope that this addition clarifies the agreement of our manuscript with previous works listing sources of uncertainty.
+
+			\begin{quotation}
+
+        \textbf{Forbidden links}
+
+            Both of the above sources of uncertainty (i.e., whether species would be able to interact given their traits and whether they are able to interact at a particular place and time) are addressed in the concept of "forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling~\citep{Jordano1987}, physiological constraints~\citep{Jordano1987,More2012}, etc. are considered "structural zeros" that cannot be observed~\citep{Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are forbidden due to physiological constraints remain forbidden but links previously forbidden due to spatio-temporal mismatch could potentially occur. 
+
+      \end{quotation}
 
 
-	3. Introduction of the case study seems off-topic and illogical. [[not done - R1 also points out that this is a weak point]]
+	3. Introduction of the case study seems off-topic and illogical. [[done]]
 
 		\begin{refquote}
 		3.      The set up (introduction) to the case study is quite odd and somehow seems off topic – or at least not logical based on what the reader has read up to that point.
-		\end{refquote}
-
-		\textbf{R:} 
-
-		\begin{refquote}
-		Line 240.  I found the justification for the system a bit odd.  Is the goal to show the gaps in sampling or to apply the model described thus far to consider the 3 different types of uncertainty outlined?  At this point the reader is confused about the goal… \\
+		\medskip
+		Line 240.  I found the justification for the system a bit odd.  Is the goal to show the gaps in sampling or to apply the model described thus far to consider the 3 different types of uncertainty outlined?  At this point the reader is confused about the goal…
+		\medskip
 		Line 249.  The statement about training data is redundant with what is stated above – adjust writing.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We have expanded our introduction of the case study (lines XX-XX) to make it clear that we are using the highest-quality empirical network we can find as even such networks have uncertainty about unobserved interactions. This relates back to our point that urging increased sampling effort is not likely to solve problems of uncertainty as long as sampling is limited in number of methodologies, biased towards abundant or easy-to-identify species, restricted to particular spatial sites and/or environmental conditions (if the network is intended to be more general), or all of the above. We repeat this point in the discussion to ensure that the case study is relevant. We have also clarified our statement that strict Bayes does not allow empirical priors, but that they are an option for researchers that are more concerned about matching their prior to their study system than with strict formalism (lines XX-XX). As Reviewer 1 points out, this is somewhat controversial and we feel it is important to note the potential objection.
+
+		\begin{quotation}
+
+ 			To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (see \emph{Appendix S4} for details). 
+      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, we anticipate that there will be many pairs of species which were rarely or never observed together. To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. We then calculated an empirical prior and computed the posterior distribution of the probability of observing each as-yet-unobserved interaction in the future.
+      \medskip
+			While a strict Bayesian framework requires a prior distribution that does not rely on any information from the study at hand, such data are not always available. In that case, researchers must choose between using a less-informative prior (e.g., one based on distributions of links across a large set of networks) or an empirical prior based on some "training data" from the study. 
+		\end{quotation}
 
 
 	4. Misunderstanding of our point about sampling effort [[maybe done? in progress]]
@@ -275,7 +313,7 @@
 		Line 130.  The ideas here are largely a repeat from those above.  Further, while it may be true that we can sample too much – I think it is dangerous to suggest we should sample less – do the authors think that sampling across most network studies is sufficient (the opposite is stated in the discussion)?  I wonder if the argument is a bit more statistical than biological.
 		\end{refquote}
 
-		\textbf{R:} We agree that it is dangerous to suggest that anyone sample less, that is why we have not done so. We argue only that the amount of sampling required to be confident that co-occurring species do not interact is large -- likely beyond what is feasible for speciose systems given the limited resources available to many researchers. Sampling across most network studies is almost certainly not sufficient, but data which would allow readers to judge this (i.e., number of times each species is observed, independent of numbers of observed interactions) is not generally provided. We chose to be more charitable than the Reviewer and assume that those compiling empirical networks are sampling as much as possible given the constraints of their system and available resources. Infite sampling would, of course, be the best option but it is unlikely that researchers will be able to perpetually increase sampling.
+		\textbf{R:} We agree that it is dangerous to suggest that anyone sample less, that is why we have not done so. We argue only that the amount of sampling required to be confident that co-occurring species do not interact is large -- likely beyond what is feasible for speciose systems given the limited resources available to many researchers. Sampling across most network studies is almost certainly not sufficient, but data which would allow readers to judge this (i.e., number of times each species is observed, independent of numbers of observed interactions) is not generally provided. We chose to be more charitable than the Reviewer and assume that those compiling empirical networks are sampling as much as possible given the constraints of their system and available resources. Infinite sampling would, of course, be the best option but it is unlikely that researchers will be able to perpetually increase sampling.
 
 		\begin{refquote}
 		Line 144.  I am much more comfortable with this statement than how sampling effort should be considered and I would suggest moving this up and then explaining how even if we sample well we need to consider uncertainty for the reasons you mention in the previous section.  Please note that you make the same point in your discussion on line 338.
@@ -311,7 +349,7 @@
 			\end{quotation}
 
 
-	7. Why not always model probabilities of co-occurrance? [[done]]
+	7. Why not always model probabilities of co-occurrence? [[done]]
 
 		\begin{refquote}
 		Line 142.  But shouldn’t you model the probability of two species co-occurring?  The authors have a paper doing this…. Is that not a good idea?
@@ -340,13 +378,17 @@
 		\textbf{R:} The redundant line has been removed. Thank you for pointing this out.
 
 
-	10. Unsure about the point of filtering networks [[not done]]
+	10. Unsure about the point of filtering networks [[done]]
 
 		\begin{refquote}
 		Line 295 to 302.  I would think that this second step (i.e., filtered networks) is to explore sampling not to determine how networks will be influenced by uncertainty?  Do you need the filtering step to evaluate uncertainty (as written it seems that this is the case)?
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} The filtering was intended to show how uncertainty likely warps our current understanding of network properties like connectance. If we do not observe 20-50\% of the interactions in a network, then many network properties in the published literature will be inaccurate. Even worse, networks compiled under different levels of uncertainty (e.g., species with more or less variable traits, or studies with multiple sampling methods or only one) or with different sampling efforts will have network structure metrics that are inaccurate to different degrees. Filtering networks in the way that we do could give an idea of how many networks are missing, but we do not think it is necessary to evaluate uncertainty (we believe that examining the posterior distributions directly is a better approach there). We have rephrased these lines (XX-XX) to emphasize that the filtered networks are intended to demonstrate the consequences of uncertainty more than anything else.
+
+		\begin{quotation}
+			Measures of network structure which are based on empirical networks that are missing interactions may differ substantially from the values that would be obtained if detection certainty and variation in interactions over space and time could be removed. To demonstrate this, we created a suite of filtered networks for each posterior network. 
+		\end{quotation}
 
 
 	11. Skepticism about sampling requirements to be sure interactions do not occur [[done]]
@@ -402,13 +444,13 @@
 		\textbf{R:} We have cited addition literature as recommended by Reviewer 1, including a paper by Jordano. If the Reviewer has any suggestions of specific papers that they feel are missing, we would be happy to consider them as well. Note, however, that we do not intend our manuscript to be a complete review of the literature surrounding interaction probabilities. We hope that the citations we have added appear more balanced to the Reviewer.
 
 
-	3. Demand for praise of weighted metrics [[not done]]
+	3. Comment on weighted metrics [[done]]
 
 		\begin{refquote}
 		L36ff The authors should note the value of weighted metrics in taking account of sampling biases.
 		\end{refquote}
 
-		\textbf{R:} This is slightly confusing. How do weighted metrics account for sampling biases, exactly? Especially if species abundances are not assessed independently from interactions, it seems like weighted metrics would be more succeptable to sampling bias than unweighted metrics (as the weights will also be affected by differences in detectability). [[Is this acutally useful?]]
+		\textbf{R:} We do not see how weighted metrics (which we infer mean metrics including interaction strength/frequencies based on the Reviewer's comment below) account for sampling biases. It seems to us that measures of interaction strength should be \emph{more} susceptible to sampling biases, not less, as abundant species are both more likely to have their interactions recorded and more likely to have these interactions recorded as strong/frequent. We have rephrased the introduction so that the original line 36 no longer appears. If the Reviewer strongly feels that weighted metrics somehow do sampling biases, we must ask for clarification as to why. We are willing to add a note as requested, but only if we are convinced that weighted metrics are indeed useful in this regard.
 
 
 	4. Demand for extension to weighted networks [[not done]]
@@ -417,7 +459,10 @@
 		L45 It is a shame not to give some idea of how the method could be extended (or is this the intention of the authors?). For empirical analysis of networks it is rare to use binary networks given the value of weighted networks for taking account of sampling biases. Indeed, I am much less concerned about whether an interaction never occurs, and much more concerned with the frequency of occurrence.
 		\end{refquote}
 
-		\textbf{R:} Unfortunately, the use of binary networks is not as rare as the Reviewer thinks, particularly in food webs where it is often difficult to quantify interaction strengths or frequencies in the field. We absolutely agree that weighted networks are much more valuable when they are available but did not wish to exclude those without such data. [[Do we want to add a bit of non-binary stuff or just make it clearer that we are talking about feasibility and that probabilities of occurrance could be layered on later?]]
+		\textbf{R:} As stated above, we do not agree that weighted networks reduce sampling biases. Moreover, we disagree that it is rare to use binary networks as most food webs (for example) are still binary. It takes an even greater sampling effort to quantify interaction strengths than the presence and absence of links, so for species-rich systems in particular there simply are not many high-quality weighted networks published. If the Reviewer is only concerned about weighted interactions, we congratulate them on their tractable study system. Nevertheless, we do not wish to exclude the many researchers who are not so fortunate.
+		\smallskip
+		To model frequencies of interactions, ...
+			 [[Do we want to add a bit of non-binary stuff or just make it clearer that we are talking about feasibility and that probabilities of occurrance could be layered on later?]]
 
 
 	5. The one valuable section is poorly-integrated with the rest of the paper. [[not done]]
@@ -429,62 +474,26 @@
 
 		\textbf{R:}
 
-
-	6. Process uncertainty poorly defined, many quibbles about sampling [[done?]]
+	6. Process uncertainty poorly defined. [[done]]
 
 		\begin{refquote}
 		L76ff ‘Process uncertainty’ is not defined. The simplistic example of interaction uncertainty (fish eating a cactus) does not help the reader understand the detail of what is meant by ‘interaction uncertainty’. The two examples of ‘local constraints’ (weather and habitat) are operating on completely different temporal scales (note – it is defined differently in L109). I would regard the issue of weather as much closer to detection uncertainty (e.g. for a pollinator, it would be likely to be interacting if the weather was better), whereas the issue of habitat is closer to the authors’ ‘interaction uncertainty’ (the species don’t interact because they are not, or never, co-occurring in a habitat). Also if the species occur in different habitats then with an appropriate spatial scale of sampling then they do not co-occur – so the issue seems redundant. [[I suspect that the authors are thinking of a meta- or master network in much of their study, but this is not clear (or I have misunderstood and it needs to be explained better), i.e. the predicted presence of an interaction is not the presence of an interaction at the local site (taking detection and process uncertainty into account) but the ability to assess ‘interaction uncertainty’.]][[This is a bit separate from their issue]]
 		\end{refquote}
 
-		\textbf{R:} It seems our descriptions of interaction uncertainty and process uncertainty were both unclear, as the Reviewer has badly mixed them up. We have expanded the paragraph introducing the different levels of uncertainty to include plain-language questions addressed by each level of uncertainty; hopefully this will help to avoid confusion at the outset.
-			
-			\begin{quotation}
 
-				As a conceptual guide to the factors affecting this process, we describe three nested levels of uncertainty: interaction uncertainty, process uncertainty, and detection uncertainty (Fig.~\ref{conceptual_fig}). These levels roughly address the questions: "Could species $i$ and $j$ interact?", "Do they interact at this site/time?" and "Do we observe the interaction?".
-
-			\end{quotation}
-
-		We have also added a paragraph to explain the interaction uncertainty explicitly \emph{does not} depend on co-occurrence; only on species traits. The Reviewer is not correct that habitat belongs in interaction uncertainty as species which do not currently share a habitat might still interact if one is introduced into the other's habitat (for example). We now state this explicitly.
-
-			\begin{quotation}
-
-				Note that interaction uncertainty does not depend upon whether species $i$ and $j$ actually co-occur. Ecologists are often interested in predicting which species are likely to interact following an introduction~\citep{} or range shift~\citep{}. In such cases, models based on trait matching can give some information about $\lambda$ while past co-occurance will, of course, not yield much insight.
-
-			\end{quotation}
-
-		Process uncertainty covers factors which prevent an interaction which \emph{can occur} from actually occurring at particular places/times. This includes factors which mean that two potentially interactive species do not co-occur (e.g., habitat requirements) as well as factors which reduce interaction probability between co-occurring species (weather, abundances, etc.). We have rephrased the first line of this section to make this explicit.
-
-			\begin{quotation}
-				
-				Assuming that an interaction is feasible (i.e., $L=1$; species traits do not prohibit an interaction if they should co-occur), an interaction still not occur at a particular place or time. 
-
-			\end{quotation}
-
-		Weather likely affects both process uncertainty and detection uncertainty. For pollination, pollinators are much less likely to interact in the rain (process uncertainty) and the lower visibility may mean that some interactions which do occur are missed (detection uncertainty). We have added a paragraph in the section describing detection uncertainty to make it clear that some external factors can affect multiple types of uncertainty. 
-
-			\begin{quotation}
-
-				Note that some exteral factors can affect both process and detection uncertainty. For example, rare species are less likely to interact at a given site due to neutral processes (process uncertainty)~\citep{}. Interactions involving rare species are also less likely to be detected (detection uncertainty), unless more sampling effort is focused on rare than common species~\citep{}. Similarly, bad weather can make interactions such as pollination less likely by reducing pollinator activity~\citep{}. For those pollinators which do venture forth in poor conditions, bad weather might also reduce visibility and therefore increase detection uncertainty.	
-
-			\end{quotation}
-
-		The Reviewer is correct that increasing sampling effort to include more interaction-promoting weather, sites, etc. will reduce process uncertainty. It would also be possible to gerrymander the spatial scale of sampling such that non-interacting species do not co-occur, but we would not advocate selecting a study site to avoid particular species. The appropriate spatial and temporal scale of sampling is an important question, but it is not the question we are addressing here. Instead, we have added a line to include the Reviewer's point that expanded sampling can help to address process uncertainty and left it at that.
-
-			\begin{quotation}
-
-			Expanding sampling to cover a broader spatial or temporal range (e.g., sampling in a variety of microhabitats or during a variety of weather conditions) will also help to reduce process uncertainty if resource constraints permit.
-
-		\end{quotation}
+		\textbf{R:} As our manuscript is not concerned with partitioning sources of uncertainty, we felt it was unproductive to get bogged down in a debate over the precise definitions of process vs. interaction uncertainty and which external influences might contribute to which sources (there is enough overlap that simple statements such as "bad weather increases process uncertainty" are, at best, incomplete). To remove this problem, we have rephrased the introduction and discussion to refer to the questions of whether two species \emph{can} interact under ideal conditions and whether they \emph{do} interact at a given site and time. We hope that this reframing, and the addition of clear statements that our framework is not intended to separate different sources of uncertainty, will remove the Reviewer's confusion.
+		\smallskip
+		Our mention of habitat as a factor affecting the probability of species interacting at a site was not intended to refer to species using different habitats, but rather the possibility that habitat type might affect interaction probabilities. For example, a more open patch of forest might have different interaction probabilities than a denser patch even if the same set of species use both patches. Of course the Reviewer is correct that habitat also affects which species are present at a site. We include co-occurrence in process uncertainty since co-occurrence does not tell us much about whether an interaction is feasible under ideal conditions (which would certainly include co-occurrence). This speaks to our point above that external factors (habitat, weather, etc.) can affect multiple levels of uncertainty at once. In fact, habitat also likely affects detection uncertainty since it is often harder to observe interactions in dense vegetation. So, in short, separating sources of uncertainty based on the external factors which contribute to them is not a particularly useful endeavour.
 
 
-	7. Point about temporal scales of interaction [[done?]]
+	7. Point about temporal scales of interaction [[done]]
 
 		\begin{refquote}
 		L76ff Different interactions occur at different temporal scales, so it is important to consider where the role of this study lies. For instance, a pollinator-flower interaction is quick (and even the evidence of it, e.g. pollen on the insect, is not long-lasting) whereas an active gall-former interaction could be present for a couple of months and could be detected for even longer (on senescing leaves).
 		\end{refquote}
 
 
-		\textbf{R:} Long-term interactions may be easier to detect, but we do not see how this affects process uncertainty. Spatial variation in interaction probabilities will affect all interaction types, as does variation in abundances between years, so we cannot conceive of any interactions that are exempt from this issue. The timescale of an interaction (and the evidence it leaves) does affect detection uncertainty, so we have added a note in that section. Long-term interactions may fail to be detected, however, and we now add an example to make it clear that detection uncertainty applies to even long-term interacitons such as gall-forming.
+		\textbf{R:} Long-term interactions may be easier to detect, but we do not see how this affects process uncertainty. Spatial variation in interaction probabilities will affect all interaction types, as does variation in abundances between years, so we cannot conceive of any interactions that are exempt from this issue. The timescale of an interaction (and the evidence it leaves) does affect detection uncertainty, so we have added a note in that section. Long-term interactions may fail to be detected, however, and we now add an example to make it clear that detection uncertainty applies to even long-term interactions such as gall-forming (indeed, our results suggest that uncertainty in gall-forming is quite high).
 
 			\begin{quotation}
 
@@ -499,7 +508,7 @@
 		I was struggling to really understand what the authors were really trying to model (partly because of the lack of a link between the theoretical and empirical parts of the paper). Are the authors trying to estimate L (the probability that an interaction is feasible or not – I would describe this as a ‘master’ or meta- network), or is it that they are trying to estimate X|L (the probability that the interaction locally occurs)? I would be interested in both, but the second aspect seemed to be ignored in the gall-former example.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} In the case study, we are modelling L (the probability that an interaction is feasible). We do not have quantitative data within sites in our dataset, so we cannot isolate the probability of detecting an interaction at a site from the probability that the interaction occurs. This is also the probability we were most interested in. We do note, however, that one could also model X|L using the same framework if there were independent counts of co-occurrences and interactions within a single site. 
 
 
 	9. ?? [[not done]]
@@ -561,14 +570,20 @@
 		\textbf{R:}
 
 
-	16. Filtering seems arbitrary [[not done]]
+	16. Filtering seems arbitrary [[done]]
 
 		\begin{refquote}
 		L298 These seem arbitrary. It is not clear what is filtered, or its justification – is it the unique interactions, unique interaction per site or samples? How do these compare to typical sampling effort?
 		\end{refquote}
 
-		\textbf{R:} The filtering threshold were arbitrary and intended solely to demonstrate how decreasing detection probability might shape the network actually collected in the field. We had believed that our example network was extremely well-sampled and therefore clustered filtering thesholds closer to p(detection)=1; as it appears that even this very intesively sampled network did not detect many interactions we have changed to a broader and more even set of filtering thresholds. We have also revised this section to make it clear what is being filtered [[to do]].\\
-		Unfortunately, we do cannot compare our filtered networks to many published networks as detection probabilities are not often estimated or reported. We do note, however, that Bascompte (2013) also reports quite low proportions of detected interactions ([[exact #]]). This suggests that the low detection probabilities we infer are not unique to our study. We have added a note comparing our results with Bascompte's [[to do]] and an explicit call for future researchers to report estimates of their detection probabilities [[to do]].
+		\textbf{R:} We have rephrased lines XX-XX to make it clearer that the filtered networks are intended to demonstrate how network structure changes as uncertainty increases (and we miss more interactions). As stated, we filtered networks created using the posterior distributions. There are therefore no sites or samples in question here. We are simply retaining a random 90\%-10\% of the interactions (or removing a random 10\%-90\%; these are equivalent) of the interactions in the "true" (posterior) network. We hope that this rephrasing is clearer. 
+
+			\begin{quotation}
+				Measures of network structure which are based on empirical networks that are missing interactions may differ substantially from the values that would be obtained if detection certainty and variation in interactions over space and time could be removed. To demonstrate this, we created a suite of filtered networks for each posterior network. Taking a posterior network as the "true" network, we randomly sampled 90\%, 80\%, 70\%, 60\%, 50\%, 40\%, 30\%, 20\%, and 10\% of the interactions to create a new "filtered" network.
+			\end{quotation}
+
+
+		Note that our model is not concerned with partitioning different sources of variation; the filtering levels we present therefore represent uncertainty from all sources. As such, comparing them directly to "typical sampling effort" would be an apples-to-oranges comparison. We do note that~\citet{Weinstein2017a} found a detectability of 23.3\% for interactions despite high sampling effort,~\citet{Jordano2016} found that about half of unobserved interactions did not qualify as "forbidden links", and~\citet{Bartomeus2013} found that 59\% of interactions were detected. We therefore do not think that the range of filtering levels we applied were particularly unreasonable (although we note that none of the above studies refer to plant-galler networks). That said, the Reviewer is correct that the values we chose were absolutely arbitrary. To make this clear, we now filter in 10\% increments from 90\% to 10\% to illustrate a broader range of uncertainty.
 
 
 	17. Expand discussion of results on line 321 [[not done]]
@@ -577,7 +592,7 @@
 		L321 This is a really important and interesting set of results that are worthy of greater discussion. The issue of metrics from sampled networks is important, but gets lost in the paper. Please expand upon this.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} [[This is the network metrics bit - need to expand in discussion.]]
 
 
 \clearpage
