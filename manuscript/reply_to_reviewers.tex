@@ -35,7 +35,7 @@ Changes: reducing discussion of different sources of uncertainty, increasing des
 
 Still to do: framing, expand discussion of network metrics from sampled vs. predicted vs. expert knowledge networks... (ours reflect about 50\% of links observed, doesn't seem super out of line). Make clearer that we are modelling L but could also model X|L with independent $n$ and $k$ data within a single site. Maybe in the section introducing the model or introducing the case study?
 
-Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli?
+Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli? Worthwhile to add a demo of Jensen's inequality?
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 {\Large \bf Reply to Associate Editor}
@@ -102,7 +102,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:} While we feel that a short introduction to the beta distribution is important to bring researchers new to Bayesian statistics up to speed (and give them some keywords to Google), we accept the Reviewer's suggestion to reduce the amount of space given to the beta. We have therefore moved the description of basic properties to Appendix S2. The remaining paragraph introducing the beta distribution now leads directly into the section describing prior selection.
 
 
-	5. Novelty of the study not clear in current framing [[not done? Done? Clearer?]]
+	5. Novelty of the study not clear in current framing [[done]]
 
 		\begin{refquote}
 		I’m wrestling with the novelty of the work as presented and whether it reaches the standard for publication at MEE. Certainly, much of this logic is laid out in other works. The authors are well aware of this and have made significant contributions to this topic in the last few years. In particular, the authors should try to be much more explicit about the contribution they hope to offer that hasn’t been covered. ...
@@ -465,14 +465,22 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 			 [[Do we want to add a bit of non-binary stuff or just make it clearer that we are talking about feasibility and that probabilities of occurrance could be layered on later?]]
 
 
-	5. The one valuable section is poorly-integrated with the rest of the paper. [[not done]]
+	5. Description of causes of uncertainty poorly integrated with the case study [[done]]
 
 		\begin{refquote}
 		L50 This is a nice and clearly explained description of the problem that many network ecologists ignore, or are unaware of.
-		Section from L50. This section is valuable, but had very weak links with the empirical analysis later in the paper. For instance in the example of the gall-formers, there was not formal discussion about the different sources of uncertainty. [[So we need to state more clearly that we cannot distinguish these after the fact.]]
+		Section from L50. This section is valuable, but had very weak links with the empirical analysis later in the paper. For instance in the example of the gall-formers, there was not formal discussion about the different sources of uncertainty. 
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} As we state in the section \textbf{Estimating uncertainty}, we usually cannot distinguish different sources of uncertainty in empirical data. Those studies which attempt to do so (e.g.,~\citet{Graham2018}) remove process uncertainty by assuming constant interaction probabilities during a short, intense sampling period and also assume that we know the true set of feasible interactions. This may be the case for Graham and Weinstein's relatively small and well-studied system but is not likely to be true for systems containing hundreds of species, systems containing recently-arrived species, systems just beginning to be studied, etc.
+		\smallskip
+		To make this more clear, we have rephrased this section and added a line (lines XX-XX) stating that we usually cannot determine the cause of all the zeros in an interaction matrix (we can identify obviously unfeasible interactions, but likely cannot say whether a zero for a rare species is because we did not observe enough individuals, there were not enough individuals to perform a particular interaction, or because the interaction is acutally unfeasible). We hope that this revision makes it clearer that the description of different sources of uncertainty is a conceptual guide only.
+
+
+		\begin{quotation}
+			An observed link definitely occurred, but there are multiple reasons why a given link may not be observed \emph{whether or not the interaction truly occurred}. Moreover, given an unobserved interaction in an empirical dataset, we often cannot determine why the interaction did not occur \emph{post hoc}. The detection of any interaction is a stochastic process subject to many levels of uncertainty. As a conceptual guide to the factors affecting this process, we describe three nested levels of uncertainty that roughly address the questions: "Could species $i$ and $j$ interact?", "Do they interact?" and "Do we observe the interaction?" (Fig.~\ref{conceptual_fig}). 
+		\end{quotation}
+
 
 	6. Process uncertainty poorly defined. [[done]]
 
@@ -502,22 +510,26 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 			\end{quotation}
 
 
-	8. Confusion about goal of modelling [[not done]]
+	8. Confusion about goal of modelling [[done]]
 
 		\begin{refquote}
 		I was struggling to really understand what the authors were really trying to model (partly because of the lack of a link between the theoretical and empirical parts of the paper). Are the authors trying to estimate L (the probability that an interaction is feasible or not – I would describe this as a ‘master’ or meta- network), or is it that they are trying to estimate X|L (the probability that the interaction locally occurs)? I would be interested in both, but the second aspect seemed to be ignored in the gall-former example.
 		\end{refquote}
 
-		\textbf{R:} In the case study, we are modelling L (the probability that an interaction is feasible). We do not have quantitative data within sites in our dataset, so we cannot isolate the probability of detecting an interaction at a site from the probability that the interaction occurs. This is also the probability we were most interested in. We do note, however, that one could also model X|L using the same framework if there were independent counts of co-occurrences and interactions within a single site. 
+		\textbf{R:} In the case study, we are modelling L (the probability that an interaction is feasible). We do not have quantitative data within sites in our dataset, so we cannot isolate the probability of detecting an interaction at a site from the probability that the interaction occurs. This is also the probability we were most interested in. We do note, however, that one could also model X|L using the same framework if there were independent counts of co-occurrences and interactions within a single site. We now state throughout the manuscript that we are interested in compiling the metaweb, the set of interaction which can feasibly occur. In particular, this is now specified in the introduction. We hope that our goal is now crystal clear.
+
+		\begin{quotation}
+			To supplement repeated sampling efforts and reduce uncertainty around unobserved interactions, we suggest researchers use prior knowledge of the same or similar systems. Here, we outline a Bayesian approach to combining repeated sampling and prior knowledge in order to assemble a metaweb. We then demonstrate this approach using an intensively and repeatedly sampled empirical dataset. Finally, we show how a probabilistic understanding of a metaweb allows us to establish confidence intervals around measures of network structure.
+			\end{quotation}
 
 
-	9. ?? [[not done]]
+	9. Misunderstanding of how biased sampling does not solve problems of uncertainty [[done]]
 
 		\begin{refquote}
 		L136 This is a completely different issue, that you do not address in the paper.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We do not believe that biased sampling is a completely different issue as the tendency for some interactions to be sampled more easily than others clearly contributes to varying levels of detection uncertainty. Increasing sampling effort will not do much good if we repeatedly sample the same common interactions and very rarely identify any new interactions. We now address questions about whether or not sampling more will remove uncertainty in a dedicated box. We still mention the fact that increased sampling will not reduce uncertainty evenly across interactions as this is an important point to consider when designing sampling protocols and when analysing empirical data. We also point out that combining sampling types is a partial solution to this problem; if different sampling methods have different biases, they may partially cancel each other out. We believe that this addresses the question as much as possible given our focus on analysing collected data rather than collecting new data.
 
 
 	10. Explain Bayesian approach more simply [[done]]
@@ -529,36 +541,45 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:} We have expanded our description of different types of priors and when researchers might prefer one over another. Following a comment from Reviewer 1 we have removed much of the mathematical background for the Bayesian approach, but this material is still present in the supplemental material. We hope that this simplifies the approach adequately.
 
 
-	11. Integrate L155ff with previous section [[not done]]
+	11. Integrate L155ff with previous section [[done]]
 
 		\begin{refquote}
 		L155ff I think it would be helpful for this section to be integrated with the previous section. It relies on the reader putting quite a lot of work in to understand the link between the two.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We have removed much of the preferatory text explaining which quantity we are most interested in ($\lambda$) and now more explicitly state our goals at the end of the introduction. We hope that the transition to the methods is now less work for a reader.
 
 
-	12. Ideas presented in L209, L262, L310 are important but explained too briefly [[not done]]
+	12. Ideas presented in L209, L262, L310 are important but explained too briefly [[done]]
 
 		\begin{refquote}
 		L209ff This seems a really important set of ideas, but they are exemplified very briefly and very simplistically in the paper (L262, L310). I would have appreciated a much clearer explanation and example.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We are not quite sure what the Reviewer is asking here. $\alpha$ and $\beta$ truly are quite simple (as simple as the mean and standard deviation of a normal distribution) so there is not much more to say about them in themselves. We have expanded our discussion of different types of priors and how they may be obtained, and we hope that this clarifies matters for the Reviewer. We also note that a simple worked example, with accompanying R code, is provided in \emph{Appendix S3} so that readers can see exactly how to obtain $\alpha$ and $\beta$. In case the point of confusion is the idea that $\alpha$ and $\beta$ can be specified or derived depending on the type of prior desired, we have added a line (lines XX-XX) spelling this out.
+
+		\begin{quotation}
+			Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution of $\lambda$, which follows a beta distribution. These are called hyper parameters and may be chosen to obtain an intentionally uninformative prior or derived using prior information to create an informed or empirical prior. 
+			\end{quotation}
 
 
-	13. Reframe line 241 in terms of solutions rather than difficulties [[not done]]
+	13. Reframe line 241 in terms of solutions rather than difficulties [[done]]
 
 		\begin{refquote}
 		L241 I wonder if you could phrase this more positively as ‘solutions’ rather than just ‘difficulties’?
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We appreciate the Reviewer's desire for optimism, but we also selected a high-quality dataset specifically in order to demonstrate that empirically sampling all of the feasible interactions in a system is very unlikely. A lower-quality dataset would work just as well with our framework but would not highlight these difficulties so well. We have therefore kept this line as-is but have added another line (XX-XX) to show how the Bayesian framework provides a partial solution to the problems inherent in even high-quality empirical data.
+
+		\begin{quotation}
+		 The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, we anticipate that there will be many pairs of species which were rarely or never observed together. Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb.
+		 \end{quotation}
 
 
-	14. Line 283 seems to be a very important point and should be explained more clearly [[not done]]
+	14. Line 283 seems to be a very important point and should be explained more clearly [[done]]
 
-		\textbf{R:}
+		\textbf{R:} Due to space constraints, we cannot provide an extensive description of Jensen's inequality here. As it is quite easy to look up the inequality by name, we are confident that interested readers can find a description to whatever level of detail suits their interest. 
+		[[We could potentially add a demo in a new Appendix. Is this worthwhile?]]
 
 
 	15. Line 291: does assuming probability of 1 for observed interactions introduce bias? [[done]]
