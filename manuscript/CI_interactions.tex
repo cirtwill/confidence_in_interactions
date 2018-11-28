@@ -276,7 +276,12 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
     \subsubsection*{Choosing a prior distribution}  [[expand]]
       [[expand]]
 
-      Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution of $\lambda$, which follows a beta distribution. These are called hyper parameters and may be chosen to obtain an intentionally uninformative prior or derived using prior information to create an informed or empirical prior. The prior may be chosen to be uninformative, if no external information is available, or may draw on information such as distributions of connectance across webs, degree distributions, or trait-matching functions (see \emph{Appendix S3} for details and a simple quantitative example). 
+      The choice of prior distribution will reflect the goal of a study, the amount of prior knowledge available, and the strength of researchers' belief in that prior knowledge. Note that there is no 'correct' prior as long as we do not know the true distribution of interaction probabilities~\citep{Spiegelhalter2000}. The goal is to select a reasonable prior that reflects our assumptions about the true distribution, and then adjust this prior with observed data as it becomes available. When in doubt, it is also possible to model interaction probabilities using a variety of priors and then compare results~\citep{Spiegelhalter2000}.
+
+
+
+
+      Parameters $\alpha$ and $\beta$ determine the shape of the prior distribution of $\lambda$, which follows a beta distribution. These are called hyperparameters and may be chosen to obtain an intentionally uninformative prior or derived using prior information to create an informed or empirical prior. The prior may be chosen to be uninformative, if no external information is available, or may draw on information such as distributions of connectance across webs, degree distributions, or trait-matching functions (see \emph{Appendix S3} for details and a simple quantitative example). 
 
 
       It is important to ensure that an informative prior accurately reflects the focal  system. For example, if the system is a large network containing many plant species and insects from different families, it is inappropriate to use a prior distribution drawn from a small network describing interactions between different genotypes of a single plant species and a set of closely-related insects. The similarity of traits across genotypes within a species means that an insect which interacts with one genotype is likely to interact with many others. Trait differences between species mean that a species-species network will likely contain fewer interactions than a genotype-species network. Similarly, highly-aggregated networks containing nodes which represent whole classes or families are likely to have very different structures than networks where most nodes represent single species as aggregated nodes are likely to have more interaction partners than single species.
@@ -286,10 +291,14 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
       \textbf{Uninformative priors}
 
-        An uninformative prior is chosen so as not to bias the posterior distribution in any particular direction. That is, all of the information will come from the observed data. For pairs of species with little or no observed data, an uninformative prior will leave large variance about $\lambda$ and reflect our lack of knowledge about the pair. Since we model $\lambda$ as a Bernoulli trial, the appropriate uninformative prior is Jeffreys prios: a beta distribution with $\alpha$=$\beta$=0.5. The sum of $\alpha$ and $\beta$ is roughly equivalent to the weight of the prior, so Jeffreys prior has equal weight to a single observation. An uninformative prior is most appropriate when considering a novel system or a system where the only prior knowledge available directly relates to the question we wish to analyse.
+        An uninformative prior is chosen so as not to bias the posterior distribution in any particular direction. That is, all of the information will come from the observed data. For pairs of species with little or no observed data, an uninformative prior will leave large variance about $\lambda$ and reflect our lack of knowledge about the pair. Since we model $\lambda$ as a Bernoulli trial, the appropriate uninformative prior is Jeffreys prios: a beta distribution with $\alpha$=$\beta$=0.5. The sum of $\alpha$ and $\beta$ is roughly equivalent to the weight of the prior, so Jeffreys prior has equal weight to a single observation. An uninformative prior is most appropriate when considering a novel system where we have no strong prior knowledge about the distribution of interactiom probabilities, where it is very important to limit the number of subjective assumptions~\citep{Berger2006}, or where we wish to account for the possibility that $\alpha$ and $\beta$ may vary~\citep{Leyland2005}.
 
 
       \textbf{Informed priors}
+ 
+        AKA "reference Bayes"~\citep{Spiegelhalter2000}
+
+        We already give a few detailed cases in Appendix 3...
 
         In most cases, researchers will be able to draw upon prior knowledge for at least some interactions. One very simple example is the assumption that, in a food web, plants will not consume any prey. There is very little uncertainty around the lack of a observed predation of any plant upon any animal in the system, regardless of how often the plant and animal are observed together. 
 
@@ -309,7 +318,14 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
         See \emph{Appendix S3} for a simple quantitative example using degree distributions to obtain $\alpha$ and $\beta$.
 
 
-      \textbf{Empirical priors} [[using data from the data in question]][[contentious]][[should these be drawn from hyperpriors or fixed for each interaction]]
+      \textbf{Empirical priors} 
+
+        As well as calculating uninformative priors or informed priors (by specifying $\alpha$ and $\beta$ or deriving them from data outside the study system), it is possible to estimate $\alpha$ and $\beta$ directly from the data being analysed. This is known as Empirical Bayes~\citep{Casella1985}. In empirical Bayes, we fit a beta distribution to interaction probabilities observed in the empirical data (or some portion thereof, where a pilot study has been performed) or calculated using some property of the empirical data (in the case study below, we use species' degree distributions). Empirical Bayes is used in medical testing~\citep{Copas1972,Spiegelhalter2000} and disease modelling~\citep{Leyland2005,Brooks2015}, and is easily applicable to ecological systems. It is most useful where researchers do not wish to use an uninformative prior but data from a sufficiently similar system are not available (as in our case study).
+
+
+        Despite its practicality, empirical Bayes has been criticized for being overly subjective~\citep{Berger2006} and because estimating hyperparameters from data serves as an approximation of some true hyperparameters which remain unknown~\citep{}.
+
+      [[using data from the data in question]][[contentious]][[should these be drawn from hyperpriors or fixed for each interaction]]
 
 
   \subsection*{An empirical example}
@@ -361,6 +377,9 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
   % Poisot2015 - also found that NODF was higher in the empirical data than in sims. 
 
 \section*{Discussion}
+
+  A benefit of Bayesian estimation is that it allows us to make our assumptions more explicit (e.g., assuming that funding source for a medical trial may affect the reported outcome~\citep{Spiegelhalter2000}).
+
 
   Real interaction networks vary over several dimensions~\citep{Kitching1987,Olesen2011a,Pires2011a,Baiser2012,Fodrie2015,Novak2015}, leading to pervasive under-estimation of interactions in published networks~\citep{Jordano2016}. Even in the most extensive data set that we could find, there was very little empirical data for each species pair. Most pairs of species were not observed co-occurring even once, less than 10\% of species pairs were observed interacting, and no pairs were observed to co-occur frequently enough to conclude that their probability of interacting was below 0.01. This suggests that limited sampling is a major source of uncertainty in empirical networks, in agreement with~\citet{Jordano2016,Weinstein2017a,Weinstein2017}. This dataset also illustrates the problem of pairs of species which were observed interacting did not interact in all of the samples in which they co-occurred. Increasing sampling is therefore likely to add more zeros than ones to an interaction network.
 
