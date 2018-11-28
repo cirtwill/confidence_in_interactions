@@ -520,13 +520,13 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:}
 
 
-	10. Explain Bayesian approach more simply [[done?]]
+	10. Explain Bayesian approach more simply [[done]]
 
 		\begin{refquote}
 		L147 Your Bayesian approach seems important, especially the prior information, and I would have appreciated it being explained more simply.
 		\end{refquote}
 
-		\textbf{R:} This comment conflicts with Reviewer 1's request that we remove much of our early description of the Bayesian framework on the grounds that it is easy to Google. As one way to address both comments, we have revised the manuscript to more clearly position our analysis of the willow-galler network as a worked example. We hope that the Reviewer will find it easier to understand our framework by following along with an example than would be the case if we expanded our abstract discussion.
+		\textbf{R:} We have expanded our description of different types of priors and when researchers might prefer one over another. Following a comment from Reviewer 1 we have removed much of the mathematical background for the Bayesian approach, but this material is still present in the supplemental material. We hope that this simplifies the approach adequately.
 
 
 	11. Integrate L155ff with previous section [[not done]]
@@ -561,13 +561,19 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:}
 
 
-	15. Line 291: does assuming probability of 1 for observed interactions introduce bias? [[not done]]
+	15. Line 291: does assuming probability of 1 for observed interactions introduce bias? [[done]]
 
 		\begin{refquote}
 		L291 I have wondered about this – does assuming a probability of 1 for observed interactions create a bias? The observed interactions are a stochastic set of the possible interactions, so by treating observed interactions as 1 and other (equally likely?) unobserved interactions as <1 will surely bias the network metrics. I’m not sure of the solution and would welcome thoughts on this in the paper.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} As we are concerned with the metaweb (the set of feasible interactions) rather than the interactions which occurr at a given site on a given day, we do not think that assuming a probability of 1 for observed interactions introduces bias in our study. We have added a justification of setting the probability of observed interactions to 1 in \emph{Appendix S2}. Note that each posterior web is a prediction of the true metaweb and not a local realization of some interactions drawn from the feasible set. These local webs are more akin to our "filtered webs" in which observed interactions are not guaranteed to appear. We have also added a line (lines XX-XX) to make this clear.
+		\medskip
+		This is an interesting point, however, as systems with a large risk of false positives (e.g., pollination networks which assume all flower visitors provide pollination service) would be biased by assuming all observed interactions are truly feasible. Assuming that all interactions which are known to be feasible actually occur at each site would also introduce bias - I suspect that this is what the Reviewer may be thinking of. As described above, our study cannot isolate $\chi$ (the probability that a feasible interaction occurs at a particular site), so this is not a relevant question for the present work. Future studies with much, much more detailed data may be able to shed light on this.
+
+		\begin{quotation}
+			we created a suite of 100 webs by randomly sampling from each posterior distribution. Each of these webs is a prediction of the structure of the metaweb.
+		\end{quotation}
 
 
 	16. Filtering seems arbitrary [[done]]

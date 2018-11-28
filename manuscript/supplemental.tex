@@ -153,6 +153,9 @@ alyssa.cirtwill@gmail.com\\
     \noindent where the function $B$ is the beta function. The posterior distribution of $\lambda$ therefore follows the beta distribution with new parameters $\alpha'= \alpha+k$ and $\beta'=\beta+n-k$. 
 
 
+    For interactions which were observed in at least one site ($k$\textgreater$0$), we can set the poseterior probability to 1 as long as the risk of a false positive is low. That is, when constructing a metaweb we can assume that an interaction observed at least once is truly feasible. The case study presented in the main text refers to a plant-galler network compiled by rearing galling insects obtained from galls; in each case, the plant-galler interaction definitely occurred and we are confident in the identification of both species involved (see \emph{Appendix S4} for details). Where the risk of false positives is higher (e.g., plant-pollinator networks where an observed flower visitor may not actually provide a pollination service), it may not be appropriate to assume $\lambda=$ wherever $k$\textgreater$0$. In such cases, we can model the posterior probabilities of observed interactions just as we do those that were not observed.
+
+
   \subsection*{Properties of the beta distribution}
   
     %   It is common to perform analyses that require calculating higher-order network properties in interaction networks. The fact that the posterior distribution of $\lambda$ follows a beta distribution makes it straightforward to compute moments and other properties needed for these analyses. 
