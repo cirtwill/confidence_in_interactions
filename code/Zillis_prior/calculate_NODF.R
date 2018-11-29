@@ -13,7 +13,8 @@ site="Zillis"
     propdir<-"../../data/Zillis_webs/gp_detection_filter/"
     }
     print(webtype)
-    props<-c(0.5,0.6,0.7,0.8,0.9,0.95,0.99)
+    props<-c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9)
+    # props<-c(0.5,0.6,0.7,0.8,0.9,0.95,0.99)
     nesttable<-matrix(nrow=700,ncol=5)
     colnames(nesttable)<-c("Web","Proportion","Obs_NODF","Sample_mean","Sample_SD")
     k<-1      
