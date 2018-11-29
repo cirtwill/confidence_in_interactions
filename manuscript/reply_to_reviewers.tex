@@ -31,11 +31,11 @@
 \setcounter{page}{1}
 
 
-Changes: reducing discussion of different sources of uncertainty, increasing description of priors, added a bunch of refs, trying to frame our study more clearly.
+% Changes: reducing discussion of different sources of uncertainty, increasing description of priors, added a bunch of refs, trying to frame our study more clearly. Changed filtering to reflect all uncertainty, not just detection (more accurate, hopefully less confusing). No box needed, just "Why sample" section.
 
-Still to do: framing, expand discussion of network metrics from sampled vs. predicted vs. expert knowledge networks... (ours reflect about 50\% of links observed, doesn't seem super out of line). Make clearer that we are modelling L but could also model X|L with independent $n$ and $k$ data within a single site. Maybe in the section introducing the model or introducing the case study?
 
-Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli? Worthwhile to add a demo of Jensen's inequality?
+% Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli? Worthwhile to add a demo of Jensen's inequality?
+% To do: expand discussion of our results as much as possible given space constraints.
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 {\Large \bf Reply to Associate Editor}
@@ -47,17 +47,26 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 
 	\end{refquote}
 
-	\textbf{R:} We appreciate the thoughtful feedback by the four referees. We take particular note of the comments regarding the structure and grounding of our introduction and have worked to address this. Reviewer 2's comments take a different view of the purpose and scope of the manuscript than the other reviewers; we respect their ideas but feel that some are beyond the scope of the present manuscript. In particular, we do not feel that a full simulation study is necessary given the simplicity of our framework. We emphasize that we are not introducing a software package (although we do provide simple code to aid those who are new to the field), nor are we introducing an entirely new framework (as the other Reviewers point out, many components of our approach have been touched on by previous work). The novelty and impact of our work lies in connecting a Bayesian statistical approach to the problem of limited and uneven sampling (driven by difference in species abundances, detectabilities, constrained time and budgets, etc.) and, we hope, in making this method more accessable to those without extensive statistical or modelling experience. Because of the difference between Reviewer 2 and the other Reviewers, we have opted to prioritise the majority view and focused first on comments by Reviewers 1, 3, and 4. We hope that, in the course of these revisions, we have at least partially adressed Reviewer 2's concertns as well. 
+	\textbf{R:} We appreciate the thoughtful feedback by the four referees. We take particular note of the comments regarding the structure and grounding of our introduction and have worked to address this. Reviewer 2's comments take a different view of the purpose and scope of the manuscript than the other reviewers; we respect their ideas but feel that some are beyond the scope of the present manuscript. In particular, we do not feel that a full simulation study is necessary given the simplicity of our framework. We emphasize that we are not introducing a software package (although we do provide simple code to aid those who are new to the field), nor are we introducing an entirely new framework (as the other Reviewers point out, many components of our approach have been touched on by previous work). The novelty and impact of our work lies in connecting a Bayesian statistical approach to the problem of limited and uneven sampling (driven by difference in species abundances, detectabilities, constrained time and budgets, etc.) and, we hope, in making this method more accessible to those without extensive statistical or modelling experience. Because of the difference between Reviewer 2 and the other Reviewers, we have opted to prioritise the majority view and focused first on comments by Reviewers 1, 3, and 4. We hope that, in the course of these revisions, we have at least partially addressed Reviewer 2's concerns as well. 
+	\smallskip
+	We have taken Reviewer 1's suggestion that we expand upon the different types of priors available and reasons for choosing one over the other. We also now offer a brief discussion about concerns over the subjectivity of prior selection. We argue that a great deal of subjectivity is baked into the compilation of empirical networks and that a Bayesian approach can be seen as making this subjectivity explicit. We hope that this will encourage empiricists to explicitly use their system-specific knowledge to create reasonable priors, as likely already occurs subconsciously (as in the designation of "forbidden links"). We hope that our revision more clearly frames the importance of uncertainty in ecological networks and positions a simple Bayesian approach as a partial solution (together with high-quality sampling, of course). 
+	\smallskip
+	We have also added many references to prior work. While the present study is not intended to be a full review of the literature, we certainly do not wish to downplay other workers in the area.
+	\smallskip
+	Finally, several of the Reviewers appeared to believe that we were advocating for reduced sampling effort. That is emphatically not the case (we find the idea absurd), and we have revised the manuscript to be clearer about the fact that increased sampling effort can reduce some sources of uncertainty. We hope that it is now clear that the Bayesian framework we promote is a complement to high sampling effort.
+
+
+	Once again, we thank the Associate Editor and Reviewers for their comments and hope that our revised manuscript will satisfy their concerns.
 
 \newpage
 
 
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
-{\Large \bf Reply to Reviewer \#1}
+{\Large \bf Reply to Reviewer \#1} [[done]]
 % ---------------------------------------
 
-	1. Suggestion to refocus on prior selection [[not done]]
+	1. Suggestion to refocus on prior selection [[done]]
 
 		\begin{refquote}
 			Below I offer my thoughts on this well-written manuscript. Normally I condense my review into a few key points, but I found myself uncharacteristically divided with the paper as presented. At first, the introduction covers ground very well-trod by prior works and doesn’t really address its contribution. I was mostly frustrated by the rehashing of topics made by many previous papers, include many by the authors themselves. But then the paper seems to morph and pick up steam on L248. Rather than reaching towards an amorphous and grandiose “quantitative framework”, the authors briefly zoom into a very concise, and hugely important, question of choosing prior distributions for harnessing information among networks. This has been completely unexplored and merits attention. In ecology more broadly, priors are treated with timidity, as if we couldn’t dare to leverage past work on our current understanding. Personally, I have always felt limited by this standard. I applaud the authors for taking on this challenge, and I would like to see an introduction that merits and debates this question in much more detail. When should we use prior information? How do we go about constructing informed priors for networks? When can we use priors from the data in question? This is sometimes called approximate bayes (http://andrewgelman.com/2016/03/25/28321/), or empirical bayes, perhaps alluded to in the title, but not fully explained in the introduction. Should empirical priors be drawn from hyperpriors or fixed for each interaction? Can we combine qualitative information and quantitative information? This is all exciting ground that will open up new avenues for networks. Walking the reader through flat priors, informed priors and empirical priors is crucial for the importance of analysis to be understood by the reader. The use of empirical priors can be quite controversial, and should be atleast touched on in the discussion. \\
@@ -68,11 +77,11 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 			\end{refquote}
 
 
-		\textbf{R:} We thank the Reviewer for the suggestion to expand our discussion of prior selection, particularly with regard to approxmimate/empirical bayes. [[Expand refs to this]] We now walk through flat, informed, and empirical priors as suggested (lines XX-XX) and refer to the controversy surrounding empirical priors in our discussion (lines XX-XX).\\
-			We also appreciate the Reviewer's comments on our introduction. We feel that understanding the problem of uncertain detection of interactions is important motivation for a reader not already familiar with Bayesian procedures to wade through a larger discussion on priors. Therefore we have revised and, hopefully, streamlined our discussion but do not jump straight in to priors. We have, however, taken care to introduce our analysis as a worked example (lines XX-XX) and hope that this helps to reduce the conflict between the introduction and our data. [[Add something else about different priors? Add different priors to our analyses?]]
-			[[Definitely should expand this, but do we want to really focus on those?]][[not quite done]]
-
-			We thank the Reviewer for their compliments and accept their suggestion that we are somewhat overexcited about our approach. We have refined the introduction to be more specific about the problem we are attempting to solve. We have also expanded our treatment of prior selection and hope that our paper now reads as achieving its goal.
+		\textbf{R:} We thank the Reviewer for the suggestion to expand our discussion of prior selection, particularly with regard to approxmimate/empirical Bayes. Although we are somewhat space-limited, we have expanded our description of different priors available and why a researcher might choose one over another (lines XX-XX). We also touch upon the controversy over using empirical priors (lines XX-XX) although we were unable to find many references addressing this in detail. If the Reviewer has particular works in mind, we would be more than happy to include them. We hope that this expanded description will be a better guide for empiricists who may not be familiar with Bayesian statistics.
+		\medskip
+		We also appreciate the Reviewer's comments on our introduction. We feel that understanding the problem of uncertain detection of interactions is important motivation for a reader not already familiar with Bayesian procedures to wade through a larger discussion on priors. Therefore we have revised and, hopefully, streamlined our discussion but do not jump straight in to priors. We have, however, taken care to introduce our analysis as a worked example (lines XX-XX) and hope that this helps to reduce the conflict between the introduction and our data. 
+		\medskip
+		We thank the Reviewer for their compliments and accept their suggestion that we are somewhat overexcited about our approach. We have refined the introduction to be more specific about the problem we are attempting to solve. We have also expanded our treatment of prior selection and hope that our paper now reads as achieving its goal.
 
 
 	2. Suggestion to add more literature [[done]]
@@ -81,7 +90,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		The introduction flows well and is thoughtfully laid out. Given the enormous amount of literature in the field, it is not possible to provide a full set of citations. However, it seems remiss to not consider Jordano (2016) in the sampling section.
 		\end{refquote}
 
-		\textbf{R:} We thank the Reviewer for their compliments to our introduction and for the recommendation of Jordano 2016. We have incorporated this reference as suggested. Following comments from other reviewers, we have refined and slightly restructured our introduction in the hope of more clearly establishing the goal of our manuscript ('narrowing our net'). We hope that this revised introduction will also meet with the Reviewer's approval. [[done]]
+		\textbf{R:} We thank the Reviewer for their compliments to our introduction and for the literature recommendations. We have incorporated these reference as suggested. Following comments from other reviewers, we have refined and slightly restructured our introduction in the hope of more clearly establishing the goal of our manuscript ('narrowing our net'). We hope that this revised introduction will also meet with the Reviewer's approval. 
 
 
 	3. Suggestion to de-emphasize MLE estimate and get straight to Bayes [[done]]
@@ -90,7 +99,19 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		It’s a bit confusing to lead the reader towards a Bayesian analysis, and then immediately start with the MLE estimate. Why is this needed at all? (L162-186). Just start at 187?
 		\end{refquote}
 
-		\textbf{R:} The section on the MLE estimate was designed to illustrate the large sample sizes needed in the absence of a Bayesian framework. Upon reflection, we see have moved this demonstration to a box dealing specifically with sampling. We now begin with the Bayesian beta distribution as suggested. [[I think done?]]
+		\textbf{R:} The MLE estimate is part of the Bayesian framework as it dictates the shape of the distribution we use. We now introduce the MLE formally within this context (lines XX-XX) and take care to be explicit when using it to explore the sample size needed in the absence of prior knowledge later (lines XX-XX).
+
+		Lines XX-XX:
+
+		\begin{quotation}
+			The basis of a Bayesian approach to modelling the probability that an interaction occurs ($\lambda$) is combining the maximum likelihood estimate (MLE) of $\lambda$ with a prior distribution (described in the next section) and a normalising function. The MLE of $\lambda$ can be modelled as a Bernoulli trial based on the number of observed interactions $k$ and observed co-occurrances $n$: $\lambda = \frac{k}{n}$. The most appropriate prior distribution for a probability such as $\lambda$ is the beta distribution:
+		\end{quotation}
+
+		Lines XX-XX:
+
+		\begin{quotation}
+			The number of observed co-occurrences needed to believe that an unobserved interaction cannot occur is very high (about 35; Fig.~\ref{upper_limits}), and most datasets will not include this level of sampling for all pairs of species~\citep{Bartomeus2013}.
+		\end{quotation}
 
 
 	4. Suggestion to remove moments of the beta distribution [[done]]
@@ -120,7 +141,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\end{refquote}
 
 
-		\textbf{R:} We have now address questions relating to sampling in a dedicated box. We hope that the revisions make our stance on repeated sampling clearer and that there are no longer apparent contradictions.
+		\textbf{R:} We now address questions of sampling in the subsection \textbf{Why can't we sample more?}. We hope that this revision makes it clear that sampling should be as high-quality as possible but that sampling is unlikely to completely remove uncertainty.
 
 
 	% 	Literature suggestions:
@@ -135,7 +156,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 
 % ----------------------------------------------------------------------
 % ---------------------------------------------------------------------
-{\Large \bf Reply to Referee \#2}
+{\Large \bf Reply to Referee \#2} [[not started]]
 % ---------------------------------------
 
 	I do not know what to do with this.
@@ -230,7 +251,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		Line 89.  In Weinstein and Graham (Ecology Letters) the processes modeled were trait matching (which you place in interaction uncertainty) and abundance (which is perhaps your process uncertainty??).  I find myself quite confused based on how you describe things in this MS (See text above) and how you cite the literature.
 		\end{refquote}
 
-		\textbf{R:} We have revised this section and now no longer refer to the specifics of Weinstein and Graham at all. Instead, we discuss repeated sampling in a box dedicated to the question of whether sampling is useful (of course it is) and whether it can completely solve problems of uncertainty in ecological networks (almost certinaly not). We hope that this is less confusing.
+		\textbf{R:} We have revised this section and now no longer refer to the specifics of Weinstein and Graham at all. Instead, we discuss repeated sampling in a section dedicated to the question of whether sampling is useful (of course it is) and whether it can completely solve problems of uncertainty in ecological networks (almost certinaly not). We hope that this is less confusing.
 
 		\begin{refquote}
 		Line 148.  Please note that a paper with a very similar aim was recently published (Graham and Weinstein).  This does not to diminish the value of this study in any way, as multiple perspectives on quantitative solutions in network ecology are urgently needed….. but the other work should be considered. 
@@ -286,15 +307,15 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\begin{quotation}
 
  			To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (see \emph{Appendix S4} for details). 
-      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, we anticipate that there will be many pairs of species which were rarely or never observed together. To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. We then calculated an empirical prior and computed the posterior distribution of the probability of observing each as-yet-unobserved interaction in the future.
-      \medskip
-			While a strict Bayesian framework requires a prior distribution that does not rely on any information from the study at hand, such data are not always available. In that case, researchers must choose between using a less-informative prior (e.g., one based on distributions of links across a large set of networks) or an empirical prior based on some "training data" from the study. 
+      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, we anticipate that there will be many pairs of species which were rarely or never observed together. Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. We then calculated an empirical prior and computed the posterior distribution of the probability of an as-yet-unobserved interaction being feasible ($\lambda$).
+      We analysed both the \emph{Salix}-galler and galler-natural enemy components of the network but, for brevity, present only the latter here (see~\emph{Appendix S5} for \emph{Salix}-galler results).
+
 		\end{quotation}
 
 
-	4. Misunderstanding of our point about sampling effort [[maybe done? in progress]]
+	4. Misunderstanding of our point about sampling effort [[done]]
 
-		\textbf{R:} We believe that the Reviewer has badly misunderstood the point of our comments on sampling effort. Several of their comments suggest that we are advocating for reducing sampling effort. This is emphatically not the case. Rather, we assumed that field researchers already sample to the maximum extent possible given their time and resource constraints and so a call to "sample more" would not be helpful. We now address this assumption explicitly in a box dedicated to the potential for sampling effort to reduce uncertainty about interactions. Below, we address the Reviewer's sampling-related comments one by one.
+		\textbf{R:} We believe that the Reviewer has badly misunderstood the point of our comments on sampling effort. Several of their comments suggest that we are advocating for reducing sampling effort. This is emphatically not the case. Rather, we assumed that field researchers already sample to the maximum extent possible given their time and resource constraints and so a call to "sample more" would not be helpful. We now address this assumption explicitly in a section dedicated to the potential for sampling effort to reduce uncertainty about interactions (\textbf{Why can't we sample more?}. Below, we address the Reviewer's sampling-related comments one by one.
 
 
 		\begin{refquote}
@@ -319,14 +340,23 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		Line 144.  I am much more comfortable with this statement than how sampling effort should be considered and I would suggest moving this up and then explaining how even if we sample well we need to consider uncertainty for the reasons you mention in the previous section.  Please note that you make the same point in your discussion on line 338.
 		\end{refquote}
 
+		\textbf{R:} We are pleased that this point was clear and have made sure to include it in our revision.
 
 		\begin{refquote}
 		Line 319.  It is clear that these are large samples but if interaction among co-occurring species was greater than you need lower samples – correct?  Should this be made clear?  Otherwise, we maybe can just never get enough data!
 		\end{refquote}
 
+		\textbf{R:} We are specifically speaking about interactions which were never observed. As interaction networks tend to be sparse, there will always be many of these. If interaction frequencies were higher among species that co-occurred, then we would have fewer unobserved interactions but the sample sizes needed to be confident that an unobserved interaction does not occur would not change (perhaps our threshold for deciding to believe a zero might, which is why we provide sample sizes for several thresholds). The Reviewer has hit the nail on the head with the idea that it is extremely hard to get enough data to be sure about every interaction. This is why prior knowledge can be so useful!
+
 		\begin{refquote}
 		Line 338 to 342.  Throughout I am confused if the authors suggest more sampling is good or bad…  At the end of the paragraph it seems it isn’t so great to sample more because you end up with these annoying “0” values…??????
 		\end{refquote}
+
+		\textbf{R:} We had written our first draft with the assumption that empirical ecologists are well aware that large sample sizes are important and that they should sample as much as possible. Given that, repeating the call to sample more seemed more likely to come across as patronizing than helpful. We did not anticipate that anyone would read the omission of such a call a statement that anyone should sample \emph{less}. In our revised manuscript, we collect our discussion of sampling into a dedicated section. We hope that this will make it clearer that sampling is very important but cannot completely eliminate uncertainty (except perhaps in some very species-poor and unusually static systems, but these are certainly rare). As to adding more zeros than ones specifically, this is only "bad" in the sense that it gives us more high-uncertainty cells in the interaction matrix. We take the view that it is better to have "known unknowns" than "unknown unknowns" and it is certainly better to know about more of the species in a community than fewer, but finding a single individual of a rare species will not reduce uncertainty in the web. We have added a line (XX-XX) specifically to address this.
+
+		\begin{quotation}
+			we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions (Fig.~\ref{histograms}C). While this improves our understanding of the set of species present in the community, it introduces yet more uncertainty into the interaction matrix. Note that it is better to identify the set of potential interactions than to miss a species, so sampling effort should not be reduced in order to exclude rare species.
+		\end{quotation}
 
 
 	5. Eliminate redundant "because" on line 23 [[done]]
@@ -426,13 +456,13 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:} As we did not intend to write a review, we understand the Reviewer's complaint. This shows that we did not clearly establish the purpose of our manuscript, and we hope that our revision corrects this. In particular, we hope that we have established the relevance of our method and offered enough of an explanation that empiricists will be able to apply it. Our goal is to increase access to a statistical technique which we see as complementary to high-quality field work, and we believe that the Reviewer's comments will help us to achieve this.
 
 
-	1. Paper is poorly structured [[not done]]
+	1. Paper is poorly structured [[done?]]
 
 		\begin{refquote}
 		However, I felt that the structuring of the paper made it a challenge to understand and apply. It felt like the paper itself had been written in different sections (by different authors?) with not enough links between the sections. I also felt that there was a strong theoretical component, which is important, but there needed to be a stronger link with the issues around empirical ecology, as explained below.
 		\end{refquote}
 
-		\textbf{R:}
+		\textbf{R:} We have revised the manuscript with an eye to clarifying the flow between sections. We hope that it is now clear that our proposed framework is designed to use Bayesian theory to complement empirical networks and empiricists' detailed knowledge of their systems. 
 
 
 	2. Add more citations [[done]]
@@ -453,7 +483,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		\textbf{R:} We do not see how weighted metrics (which we infer mean metrics including interaction strength/frequencies based on the Reviewer's comment below) account for sampling biases. It seems to us that measures of interaction strength should be \emph{more} susceptible to sampling biases, not less, as abundant species are both more likely to have their interactions recorded and more likely to have these interactions recorded as strong/frequent. We have rephrased the introduction so that the original line 36 no longer appears. If the Reviewer strongly feels that weighted metrics somehow do sampling biases, we must ask for clarification as to why. We are willing to add a note as requested, but only if we are convinced that weighted metrics are indeed useful in this regard.
 
 
-	4. Demand for extension to weighted networks [[not done]]
+	4. Demand for extension to weighted networks [[not done - do we want to do this?]]
 
 		\begin{refquote}
 		L45 It is a shame not to give some idea of how the method could be extended (or is this the intention of the authors?). For empirical analysis of networks it is rare to use binary networks given the value of weighted networks for taking account of sampling biases. Indeed, I am much less concerned about whether an interaction never occurs, and much more concerned with the frequency of occurrence.
@@ -529,7 +559,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		L136 This is a completely different issue, that you do not address in the paper.
 		\end{refquote}
 
-		\textbf{R:} We do not believe that biased sampling is a completely different issue as the tendency for some interactions to be sampled more easily than others clearly contributes to varying levels of detection uncertainty. Increasing sampling effort will not do much good if we repeatedly sample the same common interactions and very rarely identify any new interactions. We now address questions about whether or not sampling more will remove uncertainty in a dedicated box. We still mention the fact that increased sampling will not reduce uncertainty evenly across interactions as this is an important point to consider when designing sampling protocols and when analysing empirical data. We also point out that combining sampling types is a partial solution to this problem; if different sampling methods have different biases, they may partially cancel each other out. We believe that this addresses the question as much as possible given our focus on analysing collected data rather than collecting new data.
+		\textbf{R:} We do not believe that biased sampling is a completely different issue as the tendency for some interactions to be sampled more easily than others clearly contributes to varying levels of detection uncertainty. Increasing sampling effort will not do much good if we repeatedly sample the same common interactions and very rarely identify any new interactions. We now address questions about whether or not sampling more will remove uncertainty in a dedicated section (\textbf{Why can't we just sample more?}). We still mention the fact that increased sampling will not reduce uncertainty evenly across interactions as this is an important point to consider when designing sampling protocols and when analysing empirical data. We also point out that combining sampling types is a partial solution to this problem; if different sampling methods have different biases, they may partially cancel each other out. We believe that this addresses the question as much as possible given our focus on analysing collected data rather than collecting new data.
 
 
 	10. Explain Bayesian approach more simply [[done]]
@@ -613,7 +643,7 @@ Ask for help: how would we expand this to interaction frequencies? Still with th
 		Note that our model is not concerned with partitioning different sources of variation; the filtering levels we present therefore represent uncertainty from all sources. As such, comparing them directly to "typical sampling effort" would be an apples-to-oranges comparison. We do note that~\citet{Weinstein2017a} found a detectability of 23.3\% for interactions despite high sampling effort,~\citet{Jordano2016} found that about half of unobserved interactions did not qualify as "forbidden links", and~\citet{Bartomeus2013} found that 59\% of interactions were detected. We therefore do not think that the range of filtering levels we applied were particularly unreasonable (although we note that none of the above studies refer to plant-galler networks). That said, the Reviewer is correct that the values we chose were absolutely arbitrary. To make this clear, we now filter in 10\% increments from 90\% to 10\% to illustrate a broader range of uncertainty.
 
 
-	17. Expand discussion of results on line 321 [[not done]]
+	17. Expand discussion of results on line 321 [[not done - will take this after we see about space]]
 
 		\begin{refquote}
 		L321 This is a really important and interesting set of results that are worthy of greater discussion. The issue of metrics from sampled networks is important, but gets lost in the paper. Please expand upon this.
