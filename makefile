@@ -5,6 +5,12 @@
 #$......
 # $@ is short for "the target of this rule"
 
+
+# To calculate the alpha, beta, etc. presented in the main text, run code/Zillis_prior/calculating_prior_distributions.R
+# Then enter calculate_distribution(calculate_parameters(gp_int_probs,0,0)) for the prior
+# calculate_distribution(calculate_parameters(gp_int_probs,374,0)) for the most informed posterior
+
+
 # Introduce a phony target to make everything run
 all : manuscript/CI_interactions.pdf
 
@@ -36,11 +42,11 @@ data/Zillis_webs/%_%_table_%.tsv : data/Zillis_webs/posterior/*.web code/calcula
   cd ../../
   
 
-# Calculate NODF of original posterior webs
-data/randomised_webs/%_NODF_table.tsv : code/calculate_NODF.R data/randomised_webs/*/*.web randomised_webs/*/*/*.web
-  cd code && \
-  Rscript calculate_NODF.R && \
-  cd ../
+# # Calculate NODF of original posterior webs
+# data/randomised_webs/%_NODF_table.tsv : code/calculate_NODF.R data/randomised_webs/*/*.web randomised_webs/*/*/*.web
+#   cd code/ && \
+#   Rscript calculate_NODF.R && \
+#   cd ../
 
 
 # Calculate NODF of Zillis and Zillertal posterior webs
