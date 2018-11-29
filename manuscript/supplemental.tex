@@ -184,40 +184,11 @@ alyssa.cirtwill@gmail.com\\
 
 \section*{Appendix S3: Calculating uninformative and informative priors}
 
-    To create Bayesian distributions for the probability of interactions, we must begin with a prior distribution. This distribution reflects our prior knowledge (or lack thereof) about the likelihood of a given interaction. Priors may be selected to be uninformative, so as not to bias the posterior distribution in any particular direction, or may be informative and based on some prior knowledge about the system.
+    To create Bayesian distributions for the probability of interactions, we must begin with a prior distribution. This distribution reflects our prior knowledge (or lack thereof) about the likelihood of a given interaction. Priors may be selected to be uninformative, so as not to bias the posterior distribution in any particular direction, or may be informative and based on some prior knowledge about the system. Here we demonstrate how to calculate a prior distribution using a known set of degrees. The degree of a node in a network is defined as its number of connections to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network and the normalised degree (i.e., degree divided by the number of potential interaction partners) could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to inform the prior distribution. The degree distribution could come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows researchers to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. That is, we can use detection probabilities for interactions between abundant species to set bounds on detection probabilities for interactions involving rare species.
 
 
-    \subsection*{Uninformative prior}
-      
-        In the absence of any external information, an uninformative prior is the most conservative hypothesis for the distribution of $\lambda$. The beta distribution is in this case a uniform distribution, specified with hyper parameters $\alpha=1$ and $\beta=1$. 
+    If our focal network describes a system similar to that in a known network, we can use the distribution of interaction probabilities in that network to inform our prior. The probability of any interaction $L_{ij}$ depends on the degrees of species $i$ and $j$. Using normalised degrees $\Delta_i$ and $\Delta_j$, we can obtain the probability of interaction $L_{ij}$=$\Delta_i\times\Delta_j$. Similar to the procedure for degree distribution, the distribution of these interaction probabilities can be used to establish a prior distribution before any data from the focal network are collected. For distributions of either degrees or interaction probabilities, the procedure for the estimation of the hyper parameters follows the same approach as described above for connectance except that each measurement is at the individual interaction level instead of the network level.
 
-    \subsection*{Distribution of connectance}
-      
-        The ecological network literature boasts a collection of networks for which connectance has been calculated and for which we can thus define the connectance distribution. Connectance is measured as $C = L/S^2$, where $L$ is the number of interactions and $S$ is the number of species. It measures the filling of an interaction matrix and thereby expresses the average probability that any two species interact with each other. If we know only the mean $\overline{C}$ and the variance $\sigma_C^2$ of the distribution of $C$, then the beta parameters could be computed as follows using the method of moments:
-
-        \begin{equation}
-        \alpha = \overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
-        \end{equation}
-
-        \begin{equation}
-        \beta = (1-\overline{C})(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) .
-        \end{equation}
-  
-
-    \subsection*{Degree distribution or interaction probabilities}
-
-        The degree of a node in a network is defined as its number of connections to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network and the normalised degree (i.e., degree divided by the number of potential interaction partners) could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to inform the prior distribution. The degree distribution could come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows researchers to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. That is, we can use detection probabilities for interactions between abundant species to set bounds on detection probabilities for interactions involving rare species.
-
-
-        If our focal network describes a system similar to that in a known network, we can use the distribution of interaction probabilities in that network to inform our prior. The probability of any interaction $L_{ij}$ depends on the degrees of species $i$ and $j$. Using normalised degrees $\Delta_i$ and $\Delta_j$, we can obtain the probability of interaction $L_{ij}$=$\Delta_i\times\Delta_j$. Similar to the procedure for degree distribution, the distribution of these interaction probabilities can be used to establish a prior distribution before any data from the focal network are collected. For distributions of either degrees or interaction probabilities, the procedure for the estimation of the hyper parameters follows the same approach as described above for connectance except that each measurement is at the individual interaction level instead of the network level.
-
-
-    \subsection*{Trait-matching function} 
-
-        As a fourth and final approach, it may be possible to obtain the prior distribution of $\lambda$ using the outcome of a trait-matching model, provided such a model has been parameterised using external data and relevant traits are available. In such a case, the prior distribution would follow the function $P(\lambda|\mathbf{T})=f(\mathbf{T})$ based on a set of traits for both species $\mathbf{T}$. There are several techniques available to perform this inference of interaction probability, some of which are Bayesian, and we refer interested readers to~\citet{Bartomeus2016} and~\citet{Weinstein2017} for recent reviews about this topic. Note that in this case the prior might not be beta-distributed and numerical methods might be required to compute the posterior distribution.  
-
-
-        Trait-matching functions reduce uncertainty around the feasibility of interactions. Interactions between species with extremely mis-matched traits are very unlikely, and we can therefore be more confident that an unobserved interaction does not occur. This approach could be extended to models including environmental or phenological constraints, allowing researchers to reduce process uncertainty as well. Such models are, however, likely to be large and therefore may pose a risk of over-fitting.
 
     \subsection*{A quantitative example}
 
