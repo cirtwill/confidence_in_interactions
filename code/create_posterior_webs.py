@@ -153,7 +153,8 @@ def main():
     random_ints=posterior_sampling(pdict) # Calculate a set of random trails for each int
     write_posterior_webs(random_ints,postdir) # Create a set of random posterior webs
 
-    for proportion in [0.5,0.6,0.7,0.8,0.9,0.95,0.99]:
+
+    for proportion in [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]:
       print nettype, proportion
     # proportion=0.8 # Eventually I probably want to do this for different proportions of links detected
       filter_posterior_webs(postdir,proportion,altdir)

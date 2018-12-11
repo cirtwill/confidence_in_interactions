@@ -14,3 +14,9 @@ manuscript/.DS_Store
 code/.Rapp.history
 code/figure_generation/.Rapp.history
 
+# Randomizations that will just clog up the repo
+# Especially the ones from the bad prior...
+
+data/randomised_webs/posterior/*.web
+data/randomised_webs/gp_detection_filter/*/*.web
+data/randomised_webs/detection_filter/*/*.web
