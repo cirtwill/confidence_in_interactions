@@ -42,11 +42,13 @@ data/Zillis_webs/%_%_table_%.tsv : data/Zillis_webs/posterior/*.web code/calcula
   cd ../../
   
 
-# # Calculate NODF of original posterior webs
-# data/randomised_webs/%_NODF_table.tsv : code/calculate_NODF.R data/randomised_webs/*/*.web randomised_webs/*/*/*.web
-#   cd code/ && \
-#   Rscript calculate_NODF.R && \
-#   cd ../
+# Create subwebs, calculate properties of original webs
+data/randomised_webs/%_NODF_table.tsv : code/calculate_NODF.R code/calculate_sim_network_properties.py code/create_posterior_webs.py data/Salix_example/Salix_Galler/posterior_probabilities.tsv
+  cd code/ && \
+  python create_posterior_webs.py && \
+  python calculate_sim_network_properties.py && \
+  Rscript calculate_NODF.R && \
+  cd ../
 
 
 # Calculate NODF of Zillis and Zillertal posterior webs
@@ -65,27 +67,27 @@ manuscript/figures/Salix_Galler_histogram.eps : code/figure_generation/observati
   python observation_interaction_histogram.py && \
   cd ../../
 
-# Rainboy pdf figure
-manuscript/figures/Salix_Galler_pdfs_increasing_N_Zillis.eps : code/figure_generation/pdfs_and_N.py data/Salix_example/Zillis/*/distfigure_*vals.tsv data/Salix_example/Zillis/*/distfigure_MLEs.tsv
+# Making figures
+manuscript/figures/GPr_pdfs_increasing_N_Zillis.eps : code/figure_generation/pdfs_and_N.py data/Salix_example/Zillis/*/distfigure_*vals.tsv data/Salix_example/Zillis/*/distfigure_MLEs.tsv
   # Datafiles generated with R code at top of fig file
   cd code/figure_generation && \
   python pdfs_and_N.py && \
   cd ../../
 
-# Posterior property figure, Barbour prior
+# Posterior property figure, Barbour prior, shows SG and GP in one figure
 manuscript/figures/Salix_Galler_posterior_properties.eps : code/figure_generation/posterior_property_dotplot.py data/randomised_webs/*_table.tsv
   cd code/figure_generation && \
   python posterior_property_dotplot.py &&\
   cd ../../
 
 # Posterior property figure, Zillis prior
-manuscript/figures/Salix_Galler_posterior_properties_Zillis.eps : code/figure_generation/Zillis_posterior_plots.py data/Zillis_webs/*_table_*.tsv
+manuscript/figures/GP_posterior_properties_Zillis.eps : code/figure_generation/Zillis_posterior_plots.py data/Zillis_webs/*_table_*.tsv
   cd code/figure_generation && \
   python Zillis_posterior_plots.py && \
   cd ../../
 
 # Samples to hit a threshold, in SI?
-manuscript/figures/Salix_Galler_samples_and_cdfs_Zillis.eps : code/figure_generation/samples_for_thresholds.py data/Salix_example/Zillis/*/samplefigure.tsv data/Salix_example/Zillis/*/samples_for_threshold.tsv
+manuscript/figures/GP_samples_and_cdfs_Zillis.eps : code/figure_generation/samples_for_thresholds.py data/Salix_example/Zillis/*/samplefigure.tsv data/Salix_example/Zillis/*/samples_for_threshold.tsv
   # Datafiles generated with R code at top of fig file
   cd code/figure_generation && \
   python samples_for_thresholds.py && \

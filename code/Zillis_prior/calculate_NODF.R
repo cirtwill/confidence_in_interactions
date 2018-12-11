@@ -15,7 +15,7 @@ site="Zillis"
     print(webtype)
     props<-c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9)
     # props<-c(0.5,0.6,0.7,0.8,0.9,0.95,0.99)
-    nesttable<-matrix(nrow=700,ncol=5)
+    nesttable<-matrix(nrow=900,ncol=5)
     colnames(nesttable)<-c("Web","Proportion","Obs_NODF","Sample_mean","Sample_SD")
     k<-1      
     for(i in 1:100){
@@ -27,7 +27,7 @@ site="Zillis"
       web<-as_adjacency_matrix(G,type="both",names=TRUE,sparse=FALSE)
       NODF<-nestednodf(web,order=TRUE,weighted=FALSE,wbinary=FALSE)$statistic["NODF"]
       # Extract relevant filter webs
-      for(j in 1:7){
+      for(j in 1:length(props)){
         filterwebs<-as.character(list.files(path=paste0(propdir,props[j],sep=''),full.names=TRUE,pattern=paste0('P',i,'_',site,'_',sep='')))
         templist<-matrix(nrow=100,ncol=1)
         # Calculate mean and SD for NODFs

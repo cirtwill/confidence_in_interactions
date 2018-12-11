@@ -95,14 +95,14 @@ def main():
 
   for nettype in ['SG','GP']:
     # Starting with C
-    summary_dict={'C':{0.5:{},0.6:{},0.7:{},0.8:{},0.9:{},0.95:{},0.99:{}},
-    'LS':{0.5:{},0.6:{},0.7:{},0.8:{},0.9:{},0.95:{},0.99:{}},
-    'LP':{0.5:{},0.6:{},0.7:{},0.8:{},0.9:{},0.95:{},0.99:{}}  }
+    summary_dict={'C':{0.1:{},0.2:{},0.3:{},0.4:{},0.5:{},0.6:{},0.7:{},0.8:{},0.9:{}},
+    'LS':{0.1:{},0.2:{},0.3:{},0.4:{},0.5:{},0.6:{},0.7:{},0.8:{},0.9:{}},
+    'LP':{0.1:{},0.2:{},0.3:{},0.4:{},0.5:{},0.6:{},0.7:{},0.8:{},0.9:{}}  }
 
     for post_number in range(1,101):
       gallers,salixes,links=web_reader(webdir,0,post_number,0,nettype)
       obsC,obsLS,obsLP=calculate_original_properties(gallers,salixes,links)
-      for proportion in [0.5,0.6,0.7,0.8,0.9,0.95,0.99]:
+      for proportion in [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]:
       # for proportion in [0.9,0.95,0.99]:
         filtered_C=[]
         filtered_LS=[]
