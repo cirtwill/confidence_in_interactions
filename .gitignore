@@ -18,5 +18,6 @@ code/figure_generation/.Rapp.history
 # Especially the ones from the bad prior...
 
 data/randomised_webs/posterior/*.web
+data/randomised_webs/gp_posterior/*.web
 data/randomised_webs/gp_detection_filter/*/*.web
 data/randomised_webs/detection_filter/*/*.web
