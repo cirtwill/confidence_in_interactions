@@ -21,3 +21,7 @@ data/randomised_webs/posterior/*.web
 data/randomised_webs/gp_posterior/*.web
 data/randomised_webs/gp_detection_filter/*/*.web
 data/randomised_webs/detection_filter/*/*.web
+data/Zillis_webs/posterior/*.web
+data/Zillis_webs/gp_posterior/*.web
+data/Zillis_webs/gp_detection_filter/*/*.web
+data/Zillis_webs/detection_filter/*/*.web
