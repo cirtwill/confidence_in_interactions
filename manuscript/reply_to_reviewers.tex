@@ -188,31 +188,98 @@ Preamble.
 		\textbf{R:} This comment echoes the impression of Reviewers 1 (above) and 3 (below) that we do not give adequate attention to previous work. As stated above, we have now added many further pointers to previous work, and also been much more explicit regarding whom we try to reach with what message in the current paper.
 
 
-	2. Non-independence of interactions not accounted for [written, not done]
+	2. Non-independence of interactions not accounted for [done]
 
 		\begin{refquote}
 			2/ network oversight: the approach considers that the interactions are independent, which is not the case in real data. Indeed, the paper is supposed to be “network-oriented“ but the methodology deals with independent interactions (e.g. the variables L,T,X and D introduced lines 62,77,101 are for instance not indexed by ij which could have suggested that the interactions were seen as a whole). Consequently, the mathematical framework remains quite simple and may not reflect nor model the processes governing the actual detection of interactions. Despite of this drawback, the proposed method is interesting but at least the authors should add some discussion on the limits of dealing with independent interactions,
 		\end{refquote}
 
 
-		\textbf{R:} We agree wholeheartedly that ecological interactions are often not independent. Indeed, we refer several times to the effect of species' abundances on their probabilities of interacting. This effect alone will introduce non-independence in interaction probabilities, as all interactions involving a common species will be more likely than they would be if that species was rare. That said, we also agree that we do not explicitly discuss the non-independence of interactions. In part, this is by design. We explicitly want to keep our mathematical framework quite simple so that it is easily applicable to a wide variety of situations (including those where the nature of non-independence among interactions is not known). Nevertheless, to encourage readers to consider non-independence when designing their priors we are happy to take the Reviewer's suggestion and index our variables by ij and add a line noting that the assumption of independent interactions may not hold. 
+		\textbf{R:} We agree wholeheartedly that ecological interactions are often not independent. Indeed, some of the priors we discuss (e.g., those incorporating species' abundances or trait-matching) will introduce covariance between interactions. The Reviewer is correct that we did not initially mention this non-independence explicitly. Our aim is to keep our mathematical framework simple so that it is easy for those not familiar with Bayesian analysis to adopt. Nevertheless, non-independence of interactions is an important consideration. We are therefore happy to index all variables referring to interactions by ij and we have added an explicit statement (lines XX-XX) that some priors treat interactions independently while others will introduce covariance (e.g., by species). 
 
 
+		Lines XX-XX:
 
-	3/ identifiability: the reader would appreciate that the authors discuss and prove the identifiability of the model. Indeed, the three levels of uncertainity are nested but one could wonder whether different parameters at the three levels can fit the same data with the same quality (i.e. no identifiability).  I would suggest this point to be addressed in a specific section.
+		\begin{quotation}
+		    The shape parameters, or hyperparameters, may be set to particular values or derived from some data (see below). Note that the hyperparameters may be set to the same values for all interactions, allowed to vary independently for all interactions, or may incorporate non-independence betwween interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits).
+		\end{quotation}
 
-	4/ absence of simulations: the authors proposed an original approach based on a bayesian framework. Beyond the identifiability question (see above), the reader can question the power of the method. Usually, a methodological proposal comes with a complete simulation study that is supposed to show  the proposed model is adapted/suitable to the question and efficient to solve it. In the paper in its present form, the authors assume that the reader will be convinced by the results obtained on a single real dataset… In my opinion, the reader can’t be fairly convinced: how powerfull is the method? what can we say about the priors? how much data (n, k) is necessary to expect good results? An so on… Only a well-conducted simulation study can answer these questions.
 
-	5/ results\&discussion too short: the reader is surprised to read 27 lines of raw results only… Given the amount of new methodology that is proposed, one can expect a complete description of its pros and cons. Obvisouly, a simulation study (see above) would enrich the results part. Forgetting about the length of these parts, it is still difficult to catch the key messages from the text, and it is not obvious to relate discussion and the obtained results (for instance,from l.343 to l.351).
+	3. Question about identifiability of the model [done]
 
-	6/ lack of rigorous notations: it is possible to understand the approach with the present notations but some improvements can help the reader because there are a series of inconsistencies. Here are some suggestions. The authors chose upper case letters L,T ,X,D for single entities whereas the mathematician is used to expect matrices or constants in upper case. Traditionaly, given species i and j, we would consider interaction $L_ij$, feasibility $X_ij$, detectionability $D_ij$...
-	Still, what is T?? not defined, never reused: is it a characteristics on i, on j, on both?
-	How can be D<1 on l.169? D=0 or 1 since it says if an interaction is detectable or not...
-	Moreover, L is reused later but is the number of interactions (l.100 supp.mat)…
-	What is “N” in Figure 4? is it “n”? What is $n_ij$ and $k_ij$ l.266? Never defined, never reused.
-	In the beginning of the paper, $\lambda$ is a probability (l.62) but it becomes a random variable (l.164): it would be more consistent to introduce before the notion of hyperparameters  (l.209-213) and to explain we consider that $\lambda$ is drawn into its distribution.
+		\begin{refquote}
 
+			the reader would appreciate that the authors discuss and prove the identifiability of the model. Indeed, the three levels of uncertainity are nested but one could wonder whether different parameters at the three levels can fit the same data with the same quality (i.e. no identifiability).  I would suggest this point to be addressed in a specific section.
+
+		\end{refquote}
+
+
+		\textbf{R:} We believe that this comment stems from a lack of clarity about the goal of our model. It is not designed to separate the three levels of uncertainty or introduce parameters at particular levels. The only inputs are a prior distribution, which could refer to any level of uncertainty applicable to the study at hand, and post-hoc counts of interactions and co-occurrences. Using only the observed data, it is impossible to separate the three levels of uncertainty and our model does not aim to do so (as stated in lines XX-XX and lines XX-XX). We therefore do not believe that an in-depth discussion of identifiability would add much value to the manuscript and, in the interest of space, have decided not to include one.
+
+
+		Lines XX-XX:
+
+
+		\begin{quotation}
+			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig.~\ref{conceptual_fig}). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+		\end{quotation}
+
+
+		Lines XX-XX:
+
+
+		\begin{quotation}
+			Note that these Bayesian models of $\lambda_{ij}$ are designed to quantify (and reduce) the total uncertainty about $\lambda_{ij}$. They do not address any of the nested sources of uncertainty in particular except through the choice of prior.
+		\end{quotation}
+
+
+	4. Request for a simulation study [done; thanks Tomas]
+
+
+		\begin{refquote}
+			the authors proposed an original approach based on a bayesian framework. Beyond the identifiability question (see above), the reader can question the power of the method. Usually, a methodological proposal comes with a complete simulation study that is supposed to show  the proposed model is adapted/suitable to the question and efficient to solve it. In the paper in its present form, the authors assume that the reader will be convinced by the results obtained on a single real dataset… In my opinion, the reader can’t be fairly convinced: how powerfull is the method? what can we say about the priors? how much data (n, k) is necessary to expect good results? An so on… Only a well-conducted simulation study can answer these questions.
+		\end{refquote}
+
+
+		\textbf{R:} We agree with the Reviewer that a full simulation study, based on recreating the sources of uncertainty in a data set generated from known processes, is an excellent way to demonstrate the power of a novel method. The novelty and impact of our work, however, is not in the method itself (several other Reviewers rightly point out that similar approaches have occasionally been used before) but in connecting a Bayesian statistical approach to the problem of limited and uneven sampling of networks and, we hope, in making this method more accessible to those without extensive statistical or modelling experience. In other words, what we try to achieve here is to alert empirical ecologists constructing and analyzing networks to the uncertainties built into their work. We then try to provide them with simple tools for grasping the extent and consequences of typical patterns. Please note that other Reviewers (as expressed by Reviewer 3 in particular) find this a highly worthwhile objective. 
+
+
+		What Reviewer 2 proposes would be more suitable for an entirely novel method and is substantially beyond the scope of the present study. There is indubitably a place for simulation studies in order to find the most powerful method once a variety of tools are in common use, especially for researchers aiming to convince modellers that their tool is more powerful. Our manuscript, however, is not aimed at those already comfortable with Bayesian approaches but rather at those who may be aware of the problems of uneven uncertainty but not aware of any way to include this information in their analyses. We are confident that even a very simple model which incorporates the differences in sampling across interactions (as ours does) is more powerful than a model which ignores this information completely, and we therefore do not intend to conduct a full-scale simulation study. We accept that this means that those already using more intricate Bayesian methods are unlikely to switch to our simpler version; it was never our intention that they should do so.
+
+
+	5. Request for an extended results and discussion section [no actual response, just words]
+
+
+		\begin{refquote}
+			5/ results\&discussion too short: the reader is surprised to read 27 lines of raw results only… Given the amount of new methodology that is proposed, one can expect a complete description of its pros and cons. Obvisouly, a simulation study (see above) would enrich the results part. Forgetting about the length of these parts, it is still difficult to catch the key messages from the text, and it is not obvious to relate discussion and the obtained results (for instance,from l.343 to l.351).
+		\end{refquote}
+
+
+		\textbf{R:} We very much appreciate the Reviewer's point that the results and discussion do not clearly illustrate the point of the manuscript. Although we have not conducted a simulation study (see above), we have extensively revised these sections in order to highlight the main thread through the manuscript. Due to space limitations, we were unable to greatly expand either section (we prioritise the introduciton and methods, which lay out the problem of uncertainty in networks and how it can be partially addressed), but we hope that the results now more clearly demonstrate how a Bayesian approach can address the uncertainty inherent in sampling.
+
+
+	6. Suggestions to improve notation [done? unless anyone else can figure out the last part...]
+
+
+	\begin{refquote}
+		6/ lack of rigorous notations: it is possible to understand the approach with the present notations but some improvements can help the reader because there are a series of inconsistencies. Here are some suggestions. The authors chose upper case letters L,T ,X,D for single entities whereas the mathematician is used to expect matrices or constants in upper case. Traditionaly, given species i and j, we would consider interaction $L_ij$, feasibility $X_ij$, detectionability $D_ij$... \\
+		Still, what is T?? not defined, never reused: is it a characteristics on i, on j, on both? \\
+		How can be D<1 on l.169? D=0 or 1 since it says if an interaction is detectable or not... \\
+		Moreover, L is reused later but is the number of interactions (l.100 supp.mat)… \\
+		What is “N” in Figure 4? is it “n”? What is $n_ij$ and $k_ij$ l.266? Never defined, never reused. \\
+		In the beginning of the paper, $\lambda$ is a probability (l.62) but it becomes a random variable (l.164): it would be more consistent to introduce before the notion of hyperparameters  (l.209-213) and to explain we consider that $\lambda$ is drawn into its distribution.
 	\end{refquote}
+
+
+	\textbf{R:} 
+		\begin{itemize}
+			\item As described above, we have now indexed $L$, $T$, $X$, $D$, etc. by $ij$. 
+			\item $T$ describes trait matching, so it is a characterisation on $i$ and $j$ together. 
+			\item $D$ can be \textless1 because some interactions are detectable but with a lower probability due to limitations in sampling techniques, sampling time, etc. With infinite monitoring time and capacity, all $D_{ij}$ would indeed be 0 or 1, but given real-world constraints that lead to otherwise-detectable interactions being missed, we feel it makes sense to discuss $0<D_{ij}<1$. For instance, consider a predator feeding upon two prey. If one of the prey (A) has many hard parts and is digested slowly, while the other has no hard parts and is digested quickly (B), the interaction involving prey A will be more detectable than the interaction involving prey B. The interaction with prey B is does not have D=0, because the interaction might be observed directly or through examination of gut contents very soon after B was consumed, but we cannot say that D=1 because we are quite likely not to detect this interaction in any given sample.
+			\item Using L to mean the number of interactions is incredibly common in the food-web literature, especially when defining connectance (as in the instance the Reviewer points out - now included in the main text). That said, we appreciate that this useage may confuse mathematicians. We therefore now define the number of interactions as N and hope that this is less puzzling.
+			\item Yes, the N on figure 4 should have been $n_{ij}$. This has been corrected. As discussed above, $n$ and $k$ are now always indexed by $ij$. 
+			\item We do not catch what the Reviewer is aiming at here. We hope that our revised introduction and methods have addressed this point; if not, we request that the Reviewer kindly provide some more detail so that we can address his/her concern.
+
 
 	Minor points:
 
