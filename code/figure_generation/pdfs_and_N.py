@@ -144,12 +144,14 @@ def format_graph(graph,nettype):
     graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
       loc=(0.08,35),loctype='world',size=2)
     # graph.add_drawing_object(DrawText,text="N",x=0.665,y=35.5,char_size=.75,just=2,loctype='world')
-    graph.add_drawing_object(DrawText,text="N",x=0.085,y=35.5,char_size=.75,just=2,loctype='world')
+    graph.add_drawing_object(DrawText,text=\
+      LatexString('n\sij'),x=0.085,y=35.5,char_size=.75,just=2,loctype='world')
   elif nettype=='GP':
     graph.legend.configure(box_linestyle=0,fill=0,fill_pattern=0,char_size=.75,
       loc=(0.25,35),loctype='world',size=2)
     # graph.add_drawing_object(DrawText,text="N",x=0.665,y=35.5,char_size=.75,just=2,loctype='world')
-    graph.add_drawing_object(DrawText,text="N",x=0.265,y=35.5,char_size=.75,just=2,loctype='world')
+    graph.add_drawing_object(DrawText,text=\
+      LatexString('n\sij'),x=0.265,y=35.5,char_size=.75,just=2,loctype='world')
   graph.panel_label.configure(placement='iur',char_size=.75,dx=.02,dy=.02)
 
 
