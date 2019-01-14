@@ -101,7 +101,38 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S2: Mathematical framework}
+\section*{Appendix S2: Can we reduce uncertainty by sampling more?}
+
+  
+        The absence of an interaction on a given day could be because it was not feasible [$P(L_{ij}) = 0$], was feasible but did not occur because of local conditions during sampling ($P(X_{ij}|L_{ij} = 1) = 0$], or was feasible and occurred during sampling but could not be observed [$P(D_{ij}|X_{ij} = 1,L_{ij} = 1) = 0$]. Note that some exteral factors can affect more than one level of uncertainty. For example, rare species are less likely to interact at a given site due to neutral processes~\citep{Jordano2016,Graham2018}. Interactions involving rare species are also less likely to be detected, unless more sampling effort is focused on rare than common species~\citep{Bartomeus2013,Jordano2016}. Thus, abundance affects both the probability of an interaction occurring at a particular site \emph{and} our ability to observe the interaction. 
+
+
+        When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig.~\ref{conceptual_fig}). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+
+
+        The obvious rule of thumb to reduce uncertainty is ``sample more". Where resources permit, increasing sample sizes will reduce uncertainty about the upper bound of the interaction probability and will also increase the probability of detecting unlikely or cryptic interactions (e.g., interactions where $L_{ij} = 1$ but process or detection uncertainty is high). Despite these benefits, we note that there are limits to the utility of increased sampling. Since the probability of observing the co-occurrence of two species will always be higher than the probability of observing their interaction (since the probability of interaction is conditional on both interaction partners being present), we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions (Fig.~\ref{histograms}C). While this improves our understanding of the set of species present in the community, it introduces yet more uncertainty into the interaction matrix. Note that it is better to identify the set of potential interactions than to miss a species, so sampling effort should not be reduced in order to exclude rare species.
+
+
+        An added complication is that increased sampling will not reduce uncertainty evenly across interactions. To record an interaction between species $i$ and $j$, we need to identify both partners correctly (a non-trivial problem in many food webs; e.g.~\citealp{Kaartinen2011,Roslin2016}). For both molecular and rearing techniques, certain types of interactions may go unnoticed due to technical challenges~\citep{Wirta2014}. This can bias the set of recorded interactions towards those that are easier to observe~\citep{Carstensen2014,Jordano2016}. Combining multiple sampling types can reduce this type of bias~\citep{Wirta2014,Jordano2016}. Nevertheless, despite substantial improvements in recent decades, most available interaction networks are still undersampled and, moreover, are only subsets of larger communities~\citep{Bartomeus2013,Jordano2016}. 
+
+
+        In short, high-quality sampling is an essential component of ecological network construction and increasing sampling (length of time, number of sites, number of distinct methods, etc.) can reduce some of the uncertainty about unobserved interactions. We believe, however, that empirical researchers generally sample to the maximum extent possible given constraints of time, resources, and study sites. This practical constraint means that reducing one source of uncertainty is likely to increase another source (e.g., sampling intensively at a single site may reduce detection uncertainty but will increase uncertainty due to variation between sites). The number of observed co-occurrences needed to believe that an unobserved interaction cannot occur is very high (about 35; Fig.~\ref{upper_limits}), and most datasets will not include this level of sampling for all pairs of species~\citep{Bartomeus2013}. For pairs of species with fewer observations, we can reduce uncertainty by combining the observed data available with prior knowledge about the system. This is straightforward to do using a Bayesian approach, as detailed in the main text.
+
+        \begin{figure}[h!]
+          \caption{Imperfect detection of interactions increases the number of samples required to be confident that an interaction never occurs. Assume that two species cannot interact (i.e., $\lambda=0$) and that the number of observed interactions follows a binomial distribution depending upon the number of observed interactions $k$ and observed co-occurrances $n$. The maximum likelihood estimate (MLE) for $\lambda_{ij}$ is $\lambda_{MLE}=\frac{k}{n}$. Note that $\lambda_{ij}$ is not a point estimate but rather a random variable with an unknown distribution. This means that if $k = 0$ in a given sample, this does not necessarily imply that the two species will never interact. Rather, $k = 0$ implies that `no interaction' is the most likely outcome when the species do co-occur but there is nonetheless some chance that the two species \emph{could} interact.\\
+          Importantly, we can estimate the variance of $\lambda_{ij}$ as well as the MLE; available methods include the \emph{Wilson score interval}, the \emph{Clopper-Pearson interval}, and the \emph{Agresti-Coull interval} (for details, see [\citealp{Brown2001}]). The distribution of the MLE for $\lambda_{ij}$ thus obtained is a key part of the Bayesian distribution for $\lambda_{ij}$.
+          Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for the interaction probability $\lambda_{ij}$ for a pair of species that has been observed co-occurring $n$ times but never interacting ($k = 0$). The upper limit of the credible interval only reaches 0.1 (dashed, red line) with 35 observations. Thus, adding more observations is useful in controlling uncertainty, but the number of observations added must be very high unless we have some other reason to believe that an interaction cannot occur (i.e., a strong prior).}
+          \label{upper_limits}
+          \begin{center}
+          % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
+          % \includegraphics*[width=.8\textwidth]{Figure_3.eps}
+          \end{center}
+          \end{figure}
+
+
+\clearpage
+
+\section*{Appendix S3: Mathematical framework}
 
   \subsection*{A naive quantification of uncertainty}
 
@@ -182,7 +213,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S3: Calculating uninformative and informative priors}
+\section*{Appendix S4: Calculating uninformative and informative priors}
 
     To create Bayesian distributions for the probability of interactions, we must begin with a prior distribution. This distribution reflects our prior knowledge (or lack thereof) about the likelihood of a given interaction. Priors may be selected to be uninformative, so as not to bias the posterior distribution in any particular direction, or may be informative and based on some prior knowledge about the system. Here we demonstrate how to calculate a prior distribution using a known set of degrees. The degree of a node in a network is defined as its number of connections to other nodes. The degree distribution of a network is then the probability distribution of these degrees over the whole network and the normalised degree (i.e., degree divided by the number of potential interaction partners) could therefore be interpreted as an interaction probability. It is consequently possible to use the degree distribution to inform the prior distribution. The degree distribution could come from several networks, from a similar network (e.g. a known network at slightly different location) or from the network of interest if interaction probabilities for some species are already documented. The latter approach allows researchers to apply information from known, abundant species to the rarest species for which interactions are less frequently documented. That is, we can use detection probabilities for interactions between abundant species to set bounds on detection probabilities for interactions involving rare species.
 
@@ -224,7 +255,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S4: Details of \emph{Salix} data collection}
+\section*{Appendix S5: Details of \emph{Salix} data collection}
 
       The \emph{Salix}-galler-parasitoid meta-network dataset collected 
       by~\citet{Kopelke2017} consists of a single community type sampled across 
@@ -244,7 +275,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S5: Results for \emph{Salix}-galler component}
+\section*{Appendix S6: Results for \emph{Salix}-galler component}
 
     \subsection*{Computing the prior and posterior distributions}
 
@@ -297,7 +328,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S6: Analyses using alternative prior}
+\section*{Appendix S7: Analyses using alternative prior}
 
   We repeated our analyses using an alternative prior derived from a study of a similar \emph{Salix}-galler-natural enemy system in North America~\citep{Barbour2016,Barbour2016Dryad}. We note that this study used several genotypes of \emph{Salix hookeriana} rather than different \emph{Salix} species and so did not produce networks of similar size and connectedness to those in~\citep{Kopelke2017}.  To obtain the priors based on~\citet{Barbour2016}, we estimated frequencies of  \emph{S. hookeriana} genotype-galler interactions based on the normalised degree of each node (species or genotype) in each network component.
 
@@ -487,7 +518,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S7: Obtaining prior interaction probabilities}
+\section*{Appendix S8: Obtaining prior interaction probabilities}
 
     \subsection*{Degree distributions and interaction probabilities}
 
@@ -538,7 +569,7 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S8: R code for calculating posterior distributions and confidence intervals}
+\section*{Appendix S9: R code for calculating posterior distributions and confidence intervals}
 
   The following simple functions are implemented in the R language. They are 
   also provided as R code in a separate file.
@@ -635,7 +666,49 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-\section*{Appendix S9: Calculating the credible interval around a probability estimate}
+\section*{Appendix S10: Calculating network properties using posterior distributions}
+
+  Once we have calculated posterior distributions for the probability of each interaction, we can simulate networks that might be observed if we could sample sufficiently to elminate some of the uncertainty in empirical networks. Using these posterior networks, it is straightforward to obtain a plausible distribution for network properties of the predicted ``true'' community. Note that these network properties may differ substantially from those of the observed network. Here we demonstrate this process with the galler-parasitoid component of the network described in ~\citet{Kopelke2017}.
+
+  \subsection*{Methods}
+
+        \subsubsection*{Scaling up to network metrics}
+
+      Researchers are often interested in measures of network structure rather than the network itself. Computing most network metrics is straightforward when the different $\lambda_{ij}$ of the adjacency matrix are known and assumed not to vary~\citep{Poisot2016}. Incorporating variance in $\lambda_{ij}$ into these calculations, however, is not so easy. Computation of these metrics involves non-linear functions. By Jensen's inequality~\citep{Jensen1906}, this means that the average of a network metric (a function of stochastic interactions) is not the same as the network metric calculated based on the average interaction probability. Thus, any uncertainty in the values of $\lambda_{ij}$ could bias both the mean and variance of network metrics, giving misleading results (simulated in \emph{Appendix S1}). One way to avoid this situation is to calculate the properties of a suite of simulated networks~\citep{Vazquez2005,Guimera2009}.
+
+
+      Using the prior distributions and procedures described above, we calculated posterior probability distributions for species pairs that were not observed interacting. Using these posterior distributions and assuming probabilities of 1 for pairs of species that were observed interacting (see \emph{Appendix S2} for a justification), we created a suite of 100 webs by randomly sampling from each posterior distribution. Each of these webs is a prediction of the structure of the metaweb. After obtaining these posterior networks, we calculated, as examples of commonly-used network properties, the connectance of each web, as well as the mean number of links per galler and per natural enemy, and the nestedness (NODF) of the network. This gives us an estimate for each property reflecting our uncertainty about $\lambda_{ij}$.
+
+
+      Measures of network structure which are based on empirical networks that are missing interactions may differ substantially from the values that would be obtained if detection certainty and variation in interactions over space and time could be removed. To demonstrate this, we created a suite of filtered networks for each posterior network. Taking a posterior network as the "true" network, we randomly sampled 90\%, 80\%, 70\%, 60\%, 50\%, 40\%, 30\%, 20\%, and 10\% of the interactions to create a new "filtered" network. This gradient is akin to a gradient of uncertainty in the network (e.g., due to varying sampling effort or intraspecific trait variability). For each level of uncertainty, we created 100 randomly-sampled networks per posterior-probability network (giving 100 posterior networks and 1000 filtered networks). We calculated the same network properties as described above for all posterior and filtered networks.
+
+
+  \subsection*{Results}
+
+      Scaling up to network structure, we found that the connectance and mean links per galler and natural enemy were much lower in the observed web (C=0.078, $L_{galler}$=9.99, and $L_{natural enemy}$=7.45, respectively) than in the posterior webs (0.186 $\leq$ C $\leq$ 0.198, 13.4 $\leq L_{galler} \leq$ 14.6, and 23.4 $\leq L_{natural enemy} \leq$ 25.0). When the detection probability was relatively low (i.e., 50\%), however, the properties of randomised networks became similar to those in the observed webs (Fig.~\ref{posterior_webs}A,B,D). Nestedness was higher in the observed network (NODF=6.85) than in the posterior webs (6.31 $\leq NODF \leq$ 6.82; Fig.~\ref{posterior_webs}C), indicating that the posterior webs include many more interactions between specialists than the observed network. In addition, the stronger the detection filter, the farther apart were the nestedness of the observed and posterior webs. This suggests that the interactions included in the observed network are not a random subset of those included in the posterior webs. In general, the observed network is most similar to simulated networks where only half of the plausible links are detected. 
+
+
+
+  \begin{figure}[h!]
+    \caption{Mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017} occupied a narrow range. To obtain distributions of network properties, we created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``filtered" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean (+/- SD) network property (e.g., connectance) obtained from a set of 100 filtered networks. The filtered networks cover a broader range of network properties than the posterior-sampling networks but the value of each property decreases as the strength of the detection filter increases. Values in the original web are indicated by dashed lines.}
+    \label{posterior_webs}    
+    \begin{center}
+    % \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
+    % \includegraphics[width=.8\textwidth]{Figure_5.eps}
+    \end{center}
+    \end{figure}
+
+
+
+
+  \bibliographystyle{ecol_let} 
+  \bibliography{manual}
+
+
+
+\clearpage
+
+\section*{Appendix S11: Calculating the credible interval around a probability estimate}
 
   Here we describe the derivation of the Clopper-Pearson credible interval for the estimated probability of interaction $\lambda$ of a pair of species observed co-occurring $n$ times and interacting $k$ times. As we are most interested in the probability of interaction between species pairs that have never been observed co-occurring, we consider only the case where $k=0$ over a variety of $n$. This is straightforward to do in R (see the function ``credible\_interval" in \emph{Appendix S7}). 
 
@@ -680,8 +753,11 @@ alyssa.cirtwill@gmail.com\\
 
 \clearpage
 
-  \bibliographystyle{ecol_let} 
-  \bibliography{manual_abbrev}
+
+    \bibliographystyle{ecol_let} 
+    \bibliography{manual_abbrev} % Abbreviate journal titles.
+
+
 
 \end{document}
 
