@@ -170,7 +170,7 @@ Preamble.
 
 % ----------------------------------------------------------------------
 % ---------------------------------------------------------------------
-{\Large \bf Reply to Reviewer \#2} [[not started]]
+{\Large \bf Reply to Reviewer \#2} [[done?]]
 % ---------------------------------------
 
 	The Reviewer stated that our manuscript ``tackles a very interesting problem, quantifying the uncertainity of interactions" which he/she rates as ``one of the hottest topics in the field". He/she also points out that ``the introduction is particularly pleasant to read" and that we framed the problem well. The Reviewer also pointed out a number of weaknesses to the manuscript that we respond to one-by-one. In general, we feel that the Reviewer's comments reflect a high degree of statistical expertise; expertise that we do not expect to be shared by the bulk of our intended audience (empirical ecologists assembing new ecological networks). We have therefore prioritised comments by this and the other Reviewers that seemed most likely to improve the manuscript for readers who are relatively new to Bayesian analysis over concerns most relevant to a highly knowledgeable reader. We hope that our revised manuscript makes this target audience clearer, and that we have addressed the Reviewer's key concerns with our revision.
@@ -221,7 +221,7 @@ Preamble.
 
 
 		\begin{quotation}
-			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig.~\ref{conceptual_fig}). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig. 1). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
 		\end{quotation}
 
 
@@ -261,38 +261,140 @@ Preamble.
 	6. Suggestions to improve notation [done? unless anyone else can figure out the last part...]
 
 
-	\begin{refquote}
-		6/ lack of rigorous notations: it is possible to understand the approach with the present notations but some improvements can help the reader because there are a series of inconsistencies. Here are some suggestions. The authors chose upper case letters L,T ,X,D for single entities whereas the mathematician is used to expect matrices or constants in upper case. Traditionaly, given species i and j, we would consider interaction $L_ij$, feasibility $X_ij$, detectionability $D_ij$... \\
-		Still, what is T?? not defined, never reused: is it a characteristics on i, on j, on both? \\
-		How can be D<1 on l.169? D=0 or 1 since it says if an interaction is detectable or not... \\
-		Moreover, L is reused later but is the number of interactions (l.100 supp.mat)… \\
-		What is “N” in Figure 4? is it “n”? What is $n_ij$ and $k_ij$ l.266? Never defined, never reused. \\
-		In the beginning of the paper, $\lambda$ is a probability (l.62) but it becomes a random variable (l.164): it would be more consistent to introduce before the notion of hyperparameters  (l.209-213) and to explain we consider that $\lambda$ is drawn into its distribution.
-	\end{refquote}
+		\begin{refquote}
+			6/ lack of rigorous notations: it is possible to understand the approach with the present notations but some improvements can help the reader because there are a series of inconsistencies. Here are some suggestions. The authors chose upper case letters L,T ,X,D for single entities whereas the mathematician is used to expect matrices or constants in upper case. Traditionaly, given species i and j, we would consider interaction $L_ij$, feasibility $X_ij$, detectionability $D_ij$... \\
+			Still, what is T?? not defined, never reused: is it a characteristics on i, on j, on both? \\
+			How can be D<1 on l.169? D=0 or 1 since it says if an interaction is detectable or not... \\
+			Moreover, L is reused later but is the number of interactions (l.100 supp.mat)… \\
+			What is “N” in Figure 4? is it “n”? What is $n_ij$ and $k_ij$ l.266? Never defined, never reused. \\
+			In the beginning of the paper, $\lambda$ is a probability (l.62) but it becomes a random variable (l.164): it would be more consistent to introduce before the notion of hyperparameters  (l.209-213) and to explain we consider that $\lambda$ is drawn into its distribution.
+		\end{refquote}
 
 
-	\textbf{R:} 
-		\begin{itemize}
-			\item As described above, we have now indexed $L$, $T$, $X$, $D$, etc. by $ij$. 
-			\item $T$ describes trait matching, so it is a characterisation on $i$ and $j$ together. 
-			\item $D$ can be \textless1 because some interactions are detectable but with a lower probability due to limitations in sampling techniques, sampling time, etc. With infinite monitoring time and capacity, all $D_{ij}$ would indeed be 0 or 1, but given real-world constraints that lead to otherwise-detectable interactions being missed, we feel it makes sense to discuss $0<D_{ij}<1$. For instance, consider a predator feeding upon two prey. If one of the prey (A) has many hard parts and is digested slowly, while the other has no hard parts and is digested quickly (B), the interaction involving prey A will be more detectable than the interaction involving prey B. The interaction with prey B is does not have D=0, because the interaction might be observed directly or through examination of gut contents very soon after B was consumed, but we cannot say that D=1 because we are quite likely not to detect this interaction in any given sample.
-			\item Using L to mean the number of interactions is incredibly common in the food-web literature, especially when defining connectance (as in the instance the Reviewer points out - now included in the main text). That said, we appreciate that this useage may confuse mathematicians. We therefore now define the number of interactions as N and hope that this is less puzzling.
-			\item Yes, the N on figure 4 should have been $n_{ij}$. This has been corrected. As discussed above, $n$ and $k$ are now always indexed by $ij$. 
-			\item We do not catch what the Reviewer is aiming at here. We hope that our revised introduction and methods have addressed this point; if not, we request that the Reviewer kindly provide some more detail so that we can address his/her concern.
+		\textbf{R:} 
+			\begin{itemize}
+				\item As described above, we have now indexed $L$, $T$, $X$, $D$, etc. by $ij$. 
+				\item $T$ describes trait matching, so it is a characterisation on $i$ and $j$ together. 
+				\item $D$ can be \textless1 because some interactions are detectable but with a lower probability due to limitations in sampling techniques, sampling time, etc. With infinite monitoring time and capacity, all $D_{ij}$ would indeed be 0 or 1, but given real-world constraints that lead to otherwise-detectable interactions being missed, we feel it makes sense to discuss $0<D_{ij}<1$. For instance, consider a predator feeding upon two prey. If one of the prey (A) has many hard parts and is digested slowly, while the other has no hard parts and is digested quickly (B), the interaction involving prey A will be more detectable than the interaction involving prey B. The interaction with prey B is does not have D=0, because the interaction might be observed directly or through examination of gut contents very soon after B was consumed, but we cannot say that D=1 because we are quite likely not to detect this interaction in any given sample.
+				\item Using L to mean the number of interactions is incredibly common in the food-web literature, especially when defining connectance (as in the instance the Reviewer points out - now included in the main text). That said, we appreciate that this useage may confuse mathematicians. We therefore now define the number of interactions as N and hope that this is less puzzling.
+				\item Yes, the N on figure 4 should have been $n_{ij}$. This has been corrected. As discussed above, $n$ and $k$ are now always indexed by $ij$. 
+				\item We do not catch what the Reviewer is aiming at here. We hope that our revised introduction and methods have addressed this point; if not, we request that the Reviewer kindly provide some more detail so that we can address his/her concern.
+			\end{itemize}
 
 
-	Minor points:
+	7. l.62: define formally T [done]
 
-	-l.62: define formally T
-	-l.244: this is weird to mention that the analysis has been done on another dataset but that the results will not be discussed… What is the interest for the reader?
-	-l.149: since the authors consider the interactions are independent, there is morally no network in the approach (except the result)
-	-l.252: not clear. Why this choice?
-	-l.259: not clear
-	-l.278: the authors investigate the consequence of uncertainity on network metrics. This question is of peculiar interest, but here it is restricted to the connectance and nestedness. Why these two metrics? Why not others? What is the impact of integrating incertainity into the metrics computation? (we guess the answers but we could expect the authors develop these points).
-	l.291: explain better the simulation procedure
-	l.306: given the shape of the distribution (exponential), the mean is not an appropriate indicator.
-	l.327: what does it mean? How is it possible?
 
+		\textbf{R}: We now define $T_{ij}$ as ``some function describing trait-matching between species $i$ and $j$ $\mathbf{T_{ij}}$". This definition is intentionally open-ended as we foresee that $T_{ij}$ could be binary (traits are compatible or not) or continuous with a wide array of distributions.
+
+
+	8. Clarify the point of analysing the data using an alternative prior [done]
+
+		
+		\begin{refquote}	
+			-l.244: this is weird to mention that the analysis has been done on another dataset but that the results will not be discussed… What is the interest for the reader?
+		\end{refquote}
+
+
+		\textbf{R}: We have removed the reference to the analysis and now explain more thoroughly how the choice of an unsuitable prior can result in unrealistic posterior distributions, as this is the interest for the reader.
+
+
+	9. No ``moral network" [not sure about this one.]
+
+		\begin{refquote}
+			-l.149: since the authors consider the interactions are independent, there is morally no network in the approach (except the result)
+		\end{refquote}
+
+
+		\textbf{R}: We do not agree with this assessment. We do not explicitly consider the interactions to be independent, although we also do not explicitly define a dependence structure (we did not have data on species abundances or preferences that would allow us to do this). Even had we specifically stated that interactions are considered independent, this would not be unique among network analyses (see e.g., ...). To us, non-independence of interactions is not necessary when considering a network. All that is essential is the endeavour to better understand a community of interacting species, which our study does aim to do. 
+
+
+	10. l.252: not clear. Why this choice? [done]
+
+
+		\textbf{R:} We have expanded the description of the reasoning behind our choice of prior and hope that the following is clearer:
+
+
+		Lines 369-373:
+
+
+		\begin{quotation}
+			researchers must choose between using a less-informative prior (e.g., one based on distributions of links across a large set of networks) or an empirical prior based on some ”training data” from the study. Here, we opted for the latter and created priors using a single sub-network from the middle of the geographical distribution of the Kopelke et al. (2017) dataset. 
+		\end{quotation}
+
+
+	11. l.259: not clear [done]
+	
+		
+		\textbf{R:} We have expanded our explanation of how mis-matched priors can give unrealistic results. We hope that the following is clearer:
+
+
+		Lines 373-379:
+
+
+		\begin{quotation}
+			To demonstrate how the use of data from a different system can affect the prior distribution and conclusions based on it, we repeated our analyses using priors derived from a much smaller Salix-galler-natural enemy system based around genotypes of a single Salix species (Barbour et al., 2016, Data available from the Dryad Digital Repository: https://doi.org/10.5061/dryad.g7805). This smaller system was much more densely-connected than that described in Kopelke et al. (2017) and provided unreasonable distributions for interaction probabilities (Appendix S6 ).
+		\end{quotation}
+
+
+	12. Why connectance and nestedness? [done?]
+
+
+		\begin{refquote}
+			-l.278: the authors investigate the consequence of uncertainity on network metrics. This question is of peculiar interest, but here it is restricted to the connectance and nestedness. Why these two metrics? Why not others? What is the impact of integrating incertainity into the metrics computation? (we guess the answers but we could expect the authors develop these points).
+		\end{refquote}
+
+
+		\textbf{R:} We chose connectance and nestedness (together with degree distributions) as simple examples of commonly-assessed network properties that would be familiar to most readers working with ecological networks. Obviously these are not the only parameters of interest, but we do not have space to provide an exhaustive analysis of how uncertainty in the computation of network metrics affects different network properties. Our aim was simply to show that including uncertainty in interactions (and accounting for the possibility that many interactions are not observed) can dramatically change our perception of network metrics. A full discussion of how and why these values differ is better suited to either an exhaustive simulation study or an experimental study where different sources of uncertainty can be controlled to some degree. We now state that these four properties were chosen as illustrative examples (lines 425-428).
+
+
+		\begin{quotation}
+			After obtaining these posterior networks, we calculated, as examples of commonly-used network properties, the connectance of each web, as well as the mean number of links per galler and per natural enemy, and the nestedness (NODF) of the network.
+		\end{quotation}
+
+
+	13. l.291: explain better the simulation procedure [done]
+	
+
+		\textbf{R:} In the interest of space, we have added an extended description of the sampling procedure in \emph{Appendix S2}. 
+
+
+		Lines 420-425:
+
+
+		\begin{quotation}
+			Using the prior distributions and procedures described above, we calculated posterior probability distributions for species pairs that were not observed interacting. Using these posterior distributions and assuming probabilities of 1 for pairs of species that were observed interacting (see Appendix S2 for a justification), we created a suite of 100 webs by randomly sampling from each posterior distribution. Each of these webs is a prediction of the structure of the metaweb.
+		\end{quotation}
+
+
+	14. l.306: given the shape of the distribution (exponential), the mean is not an appropriate indicator. [done]
+
+
+		\textbf{R:} The mean may not be the best indicator with which to describe the shape of the distribution, but we hope that the Reviewer will agree that it gets the point across (co-occurrences are rare; the specific values are not of great importance). Nevertheless, we now include both mean and median in order to better reflect the exponential distribution of the data.
+
+
+		Lines XX-XX:
+
+
+		\begin{quotation}
+			the total number of co-occurrences was generally low (mean=3.87, median=2; Fig. 2A). The bulk (92.24\%) of these co-occurring species pairs were never observed interacting. Of those pairs that did interact, the incidence of interaction was also low (mean=4.04, median=2; Fig. 2B) and was lower than the number of observed co-occurrences (Fig. 2C).
+		\end{quotation}
+
+
+	15. What does higher nestedness in the observed networks mean? How is it possible? [done]
+
+
+		\textbf{R:} Nestedness being higher in the observed networks simply means that the additional interactions predicted by our model tend not to be between generalists and specialists and, as such, do not contribute strongly to nestedness. This is actually somewhat intuitive - ``specialists" in the observed data are exactly those species for which we are most likely to be missing interactions, and interactions between specialists and the most likely to be predicted to occur but not have been observed. Due to the tight word limit, we do not have space to discuss this extensively in the manuscript but have added brief interpretations in the results.
+
+
+		Lines XX-XX:
+
+
+		\begin{quotation}
+			Nestedness was higher in the observed network (NODF=6.85) than in the posterior webs (6.31 $\leq NODF \leq$ 6.82; Fig. 5C), indicating that the posterior webs include many more interactions between specialists than the observed network. In addition, the stronger the detection filter, the farther apart were the nestedness of the observed and posterior webs. This suggests that the interactions included in the observed network are not a random subset of those included in the posterior webs.
+		\end{quotation}
+
+\clearpage
 
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
@@ -383,7 +485,7 @@ Preamble.
 
         \textbf{Forbidden links}
 
-            Both of the above sources of uncertainty (i.e., whether species would be able to interact given their traits and whether they are able to interact at a particular place and time) are addressed in the concept of "forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling~\citep{Jordano1987}, physiological constraints~\citep{Jordano1987,More2012}, etc. are considered "structural zeros" that cannot be observed~\citep{Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are forbidden due to physiological constraints remain forbidden but links previously forbidden due to spatio-temporal mismatch could potentially occur. 
+            Both of the above sources of uncertainty (i.e., whether species would be able to interact given their traits and whether they are able to interact at a particular place and time) are addressed in the concept of "forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling~\citep{Jordano1987}, physiological constraints~\citep{Jordano1987}, etc. are considered "structural zeros" that cannot be observed~\citep{Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are forbidden due to physiological constraints remain forbidden but links previously forbidden due to spatio-temporal mismatch could potentially occur. 
 
       \end{quotation}
 
@@ -525,7 +627,7 @@ Preamble.
 
 		\textbf{R:} The point of our method is not actually to quantify the amount of sampling needed. Although the ideal sampling effort \emph{can} be calculated using the framework we put forward (as we demonstrate), the real point is to quantify how uncertain we are that an interaction we do not observe really does not occur. Given this, we do not think that recommending uncertainty be explicitly stated undermines our point at all. 
 		\smallskip
-		The Reviewer's suggestion that we might need fewer samples for species that are "specialized or bound to interact for some other reason" reflects a very strong prior. In this case, yes we would need fewer samples for the species concerned. With sufficiently strong priors, it is not necessary to sample at all! For example, in most food webs it is assumed that basal resources will never consume prey even if a given resource and a given animal are never observed co-occurring and it is generally accepted that there is very low uncertainty about these zeros. In many cases, the assumptions involved in excluding interactions are less clear-cut and different researchers may disagree about which species are "bound to interact" (or not to interact). The concept of pollination syndromes is one example - many flower visitors are less rigidly specialized on particular flower types than initially thought~\citep{}. To address such "forbidden links", we now suggest that researchers explicitly state both the uncertainty about data-based zeros and the assumptions by which they create structural zeros. This will allow future researchers to evaluate the uncertainty about all interactions in a network as the state of expert knowledge changes. We hope that this expanded recommendation (lines XX-XX) is clearer.
+		The Reviewer's suggestion that we might need fewer samples for species that are "specialized or bound to interact for some other reason" reflects a very strong prior. In this case, yes we would need fewer samples for the species concerned. With sufficiently strong priors, it is not necessary to sample at all! For example, in most food webs it is assumed that basal resources will never consume prey even if a given resource and a given animal are never observed co-occurring and it is generally accepted that there is very low uncertainty about these zeros. In many cases, the assumptions involved in excluding interactions are less clear-cut and different researchers may disagree about which species are "bound to interact" (or not to interact). The concept of pollination syndromes is one example - many flower visitors are less rigidly specialized on particular flower types than initially thought~\citep{Ollerton2009}. To address such "forbidden links", we now suggest that researchers explicitly state both the uncertainty about data-based zeros and the assumptions by which they create structural zeros. This will allow future researchers to evaluate the uncertainty about all interactions in a network as the state of expert knowledge changes. We hope that this expanded recommendation (lines XX-XX) is clearer.
 
 
 		\begin{quotation}
@@ -535,7 +637,7 @@ Preamble.
 		\end{quotation}
 
 
-\newpage
+\clearpage
 
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
@@ -631,7 +733,7 @@ Preamble.
 
 			\begin{quotation}
 
-				Some types of interactions will have higher detection uncertainty than others (e.g., pollination or predation often take place very quickly while parasitism can last for months or years). Even long-term interactions, however, can be missed, especially if species are difficult to identify or if not all individuals of a species share the interaction. Parasites, for example, are often concentrated in only a few individuals~\citep{Lagrue2017}. If these infected individuals do not happen to be included in a sample, their interactoins will be missed.
+				Some types of interactions will have higher detection uncertainty than others (e.g., pollination or predation often take place very quickly while parasitism can last for months or years). Even long-term interactions, however, can be missed, especially if species are difficult to identify or if not all individuals of a species share the interaction. Parasites, for example, are often concentrated in only a few individuals~\citep{Lagrue2015}. If these infected individuals do not happen to be included in a sample, their interactoins will be missed.
 
 			\end{quotation}
 
