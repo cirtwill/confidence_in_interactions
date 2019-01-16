@@ -77,7 +77,9 @@ alyssa.cirtwill@gmail.com\\
   \end{center}
   \end{figure}
 
+
 \clearpage
+
 
 \section*{Appendix S1-A: Attributions for PhyloPic images used in Figure 1 (main text)}
 
@@ -107,10 +109,10 @@ alyssa.cirtwill@gmail.com\\
         The absence of an interaction on a given day could be because it was not feasible [$P(L_{ij}) = 0$], was feasible but did not occur because of local conditions during sampling ($P(X_{ij}|L_{ij} = 1) = 0$], or was feasible and occurred during sampling but could not be observed [$P(D_{ij}|X_{ij} = 1,L_{ij} = 1) = 0$]. Note that some exteral factors can affect more than one level of uncertainty. For example, rare species are less likely to interact at a given site due to neutral processes~\citep{Jordano2016,Graham2018}. Interactions involving rare species are also less likely to be detected, unless more sampling effort is focused on rare than common species~\citep{Bartomeus2013,Jordano2016}. Thus, abundance affects both the probability of an interaction occurring at a particular site \emph{and} our ability to observe the interaction. 
 
 
-        When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig.~\ref{conceptual_fig}). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+        When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij} = 0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig. 1, main text). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij}) = k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
 
 
-        The obvious rule of thumb to reduce uncertainty is ``sample more". Where resources permit, increasing sample sizes will reduce uncertainty about the upper bound of the interaction probability and will also increase the probability of detecting unlikely or cryptic interactions (e.g., interactions where $L_{ij} = 1$ but process or detection uncertainty is high). Despite these benefits, we note that there are limits to the utility of increased sampling. Since the probability of observing the co-occurrence of two species will always be higher than the probability of observing their interaction (since the probability of interaction is conditional on both interaction partners being present), we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions (Fig.~\ref{histograms}C). While this improves our understanding of the set of species present in the community, it introduces yet more uncertainty into the interaction matrix. Note that it is better to identify the set of potential interactions than to miss a species, so sampling effort should not be reduced in order to exclude rare species.
+        The obvious rule of thumb to reduce uncertainty is ``sample more". Where resources permit, increasing sample sizes will reduce uncertainty about the upper bound of the interaction probability and will also increase the probability of detecting unlikely or cryptic interactions (e.g., interactions where $L_{ij} = 1$ but process or detection uncertainty is high). Despite these benefits, we note that there are limits to the utility of increased sampling. Since the probability of observing the co-occurrence of two species will always be higher than the probability of observing their interaction (since the probability of interaction is conditional on both interaction partners being present), we will accumulate observations of co-occurrences faster than we will accumulate observations of interactions (Fig. 2C, main text). While this improves our understanding of the set of species present in the community, it introduces yet more uncertainty into the interaction matrix. Note that it is better to identify the set of potential interactions than to miss a species, so sampling effort should not be reduced in order to exclude rare species.
 
 
         An added complication is that increased sampling will not reduce uncertainty evenly across interactions. To record an interaction between species $i$ and $j$, we need to identify both partners correctly (a non-trivial problem in many food webs; e.g.~\citealp{Kaartinen2011,Roslin2016}). For both molecular and rearing techniques, certain types of interactions may go unnoticed due to technical challenges~\citep{Wirta2014}. This can bias the set of recorded interactions towards those that are easier to observe~\citep{Carstensen2014,Jordano2016}. Combining multiple sampling types can reduce this type of bias~\citep{Wirta2014,Jordano2016}. Nevertheless, despite substantial improvements in recent decades, most available interaction networks are still undersampled and, moreover, are only subsets of larger communities~\citep{Bartomeus2013,Jordano2016}. 
@@ -501,18 +503,18 @@ alyssa.cirtwill@gmail.com\\
     \subsection*{Scaling up to network metrics}
 
 
-      We find, perhaps not surprisingly, that the posterior webs for the Salix-galler network all had much higher connectance than the original, observed web (C=0.028 for the observed web and 0.528 $\leq$ C $\leq$ 0.568 for the posterior webs; Fig.~\ref{posterior_webs}A). Likewise, the number of links per \emph{Salix} and galler species in the observed web ($L_{\emph{Salix}}$=2.71 and $L_{galler}$=1.47, respectively) were much lower than those predicted in the posterior webs (27.4 $\leq L_{\emph{Salix}} \leq$ 29.5 and 50.6 $\leq L_{galler} \leq $54.5, respectively; Fig.~\ref{posterior_webs}C,E), even when filtering with a detection probability of only 50\%. Nestedness was also much higher in the posterior networks (14.2 $\leq NODF \leq$ 15.4; Fig.~\ref{posterior_webs}G) than in the observed network (NODF=0.560). There are two possible explanations for these discrepancies: either the data of~\citet{Barbour2016} is simply too different from that of~\citet{Kopelke2017} to offer an appropriate prior for our dataset, or the true detection probability for links between \emph{Salix} and galler species is much less than 50\%. As the scale of the two datasets is quite different (genotypes of a single \emph{Salix} species in~\citet{Barbour2016}, various \emph{Salix} species in our dataset), we suspect the former is more likely.
+      We find, perhaps not surprisingly, that the posterior webs for the Salix-galler network all had much higher connectance than the original, observed web (C=0.028 for the observed web and 0.528 $\leq$ C $\leq$ 0.568 for the posterior webs; Fig.~\ref{posterior_webs_Barbour}A). Likewise, the number of links per \emph{Salix} and galler species in the observed web ($L_{\emph{Salix}}$=2.71 and $L_{galler}$=1.47, respectively) were much lower than those predicted in the posterior webs (27.4 $\leq L_{\emph{Salix}} \leq$ 29.5 and 50.6 $\leq L_{galler} \leq $54.5, respectively; Fig.~\ref{posterior_webs_Barbour}C,E), even when filtering with a detection probability of only 50\%. Nestedness was also much higher in the posterior networks (14.2 $\leq NODF \leq$ 15.4; Fig.~\ref{posterior_webs_Barbour}G) than in the observed network (NODF=0.560). There are two possible explanations for these discrepancies: either the data of~\citet{Barbour2016} is simply too different from that of~\citet{Kopelke2017} to offer an appropriate prior for our dataset, or the true detection probability for links between \emph{Salix} and galler species is much less than 50\%. As the scale of the two datasets is quite different (genotypes of a single \emph{Salix} species in~\citet{Barbour2016}, various \emph{Salix} species in our dataset), we suspect the former is more likely.
 
 
-      Considering the galler-natural enemy networks, the connectance, mean links per galler, and mean links per natural enemy were also much lower in the observed web (C=0.078, $L_{galler}$=9.99, and $L_{natural enemy}$=7.45, respectively) than in the posterior webs (0.183 $\leq$ C $\leq$ 0.196, 17.5 $\leq L_{galler} \leq$ 18.9, and 23.0 $\leq L_{natural enemy} \leq$ 24.8). When the detection probability was relatively low (i.e., 50\%), however, the properties of randomised networks became similar to those in the observed webs (Fig.~\ref{posterior_webs}B,D,F). Nestedness was higher in the observed network (NODF=6.85) than in the posterior networks (6.30 $\leq NODF \leq$ 6.74; Fig.~\ref{posterior_webs}H), but network structure was much more similar in the observed and posterior galler-natural enemy networks than in the \emph{Salix}-galler networks. The~\citet{Barbour2016} network likely provides a better prior here than for the \emph{Salix}-galler networks, as both networks included different galler and natural enemy species. Although the two networks differ vastly in scale, and the inclusion of multiple \emph{Salix} species likely causes structural differences from~\citet{Barbour2016} despite the similar resolution of gallers and natural enemies, this result nevertheless suggests that even such a large and well-replicated network as that in~\citet{Kopelke2017} is missing many interactions. This should be a strong warning to researchers comparing structural characteristics between networks - small structural differences are likely to be masked by substantial noise resulting from sampling uncertainty.
+      Considering the galler-natural enemy networks, the connectance, mean links per galler, and mean links per natural enemy were also much lower in the observed web (C=0.078, $L_{galler}$=9.99, and $L_{natural enemy}$=7.45, respectively) than in the posterior webs (0.183 $\leq$ C $\leq$ 0.196, 17.5 $\leq L_{galler} \leq$ 18.9, and 23.0 $\leq L_{natural enemy} \leq$ 24.8). When the detection probability was relatively low (i.e., 50\%), however, the properties of randomised networks became similar to those in the observed webs (Fig.~\ref{posterior_webs_Barbour}B,D,F). Nestedness was higher in the observed network (NODF=6.85) than in the posterior networks (6.30 $\leq NODF \leq$ 6.74; Fig.~\ref{posterior_webs_Barbour}H), but network structure was much more similar in the observed and posterior galler-natural enemy networks than in the \emph{Salix}-galler networks. The~\citet{Barbour2016} network likely provides a better prior here than for the \emph{Salix}-galler networks, as both networks included different galler and natural enemy species. Although the two networks differ vastly in scale, and the inclusion of multiple \emph{Salix} species likely causes structural differences from~\citet{Barbour2016} despite the similar resolution of gallers and natural enemies, this result nevertheless suggests that even such a large and well-replicated network as that in~\citet{Kopelke2017} is missing many interactions. This should be a strong warning to researchers comparing structural characteristics between networks - small structural differences are likely to be masked by substantial noise resulting from sampling uncertainty.
 
 
 
       \begin{figure}[ht]
       \caption{Here we show the mean connectance, links per resource (\emph{Salix} in the \emph{Salix}-galler networks and gallers in the galler-natural enemy networks), links per consumer, and nestedness (NODF) for networks assembled using posterior distributions based on a smaller, North American \emph{Salix}-galler-natural enemy system~\citep{Barbour2016,Barbour2016Dryad}. We created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``detection-filter" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean network property (e.g., connectance) obtained from a set of 100 detection-filter networks, plotted against the value of the network property in the posterior-sampling network used to create the detection-filter networks. For each property and both network types, the posterior-sampling networks cover a relatively small range of network properties than the range covered by networks with varying detection probabilities. The value of each property decreases with the proportion of links included in the detection-filter networks.}
-      \label{posterior_webs}    
+      \label{posterior_webs_Barbour}    
       \begin{center}
-      \includegraphics[width=.65\textwidth]{Figures/Salix_Galler_posterior_properties.eps}
+      \includegraphics[width=.65\textwidth]{figures/Salix_Galler_posterior_properties.eps}
       \end{center}
       \end{figure}
 
@@ -668,7 +670,7 @@ alyssa.cirtwill@gmail.com\\
 
 \section*{Appendix S10: Calculating network properties using posterior distributions}
 
-  Once we have calculated posterior distributions for the probability of each interaction, we can simulate networks that might be observed if we could sample sufficiently to elminate some of the uncertainty in empirical networks. Using these posterior networks, it is straightforward to obtain a plausible distribution for network properties of the predicted ``true'' community. Note that these network properties may differ substantially from those of the observed network. Here we demonstrate this process with the galler-parasitoid component of the network described in ~\citet{Kopelke2017}.
+  Once we have calculated posterior distributions for the probability of each interaction, we can simulate networks that might be observed if we could sample sufficiently to elminate some of the uncertainty in empirical networks. Using these posterior networks, it is straightforward to obtain a plausible distribution for network properties of the predicted ``true'' community. This extends earlier work establishing probabilistic forms of network properties (e.g.,~\citet{Poisot2015}) by allowing us to calculate higher moments of network properties rather than only the mean. Note that these network properties may differ substantially from those of the observed network. Here we demonstrate this process with the galler-parasitoid component of the network described in ~\citet{Kopelke2017}.
 
   \subsection*{Methods}
 
@@ -697,12 +699,6 @@ alyssa.cirtwill@gmail.com\\
     % \includegraphics[width=.8\textwidth]{Figure_5.eps}
     \end{center}
     \end{figure}
-
-
-
-
-  \bibliographystyle{ecol_let} 
-  \bibliography{manual}
 
 
 
@@ -754,8 +750,11 @@ alyssa.cirtwill@gmail.com\\
 \clearpage
 
 
-    \bibliographystyle{ecol_let} 
-    \bibliography{manual_abbrev} % Abbreviate journal titles.
+
+\bibliographystyle{ecol_let} 
+\bibliography{manual}
+
+
 
 
 
