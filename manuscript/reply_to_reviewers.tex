@@ -244,7 +244,7 @@
 
 
 		\begin{quotation}
-			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig.~\ref{conceptual_fig}). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig. 1). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
 		\end{quotation}
 
 
@@ -447,7 +447,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} When revising the manusript we removed line 7 and no longer refer to networks as snapshots.
+		\textbf{R:} When revising the manuscript we removed line 7 and no longer refer to networks as snapshots.
 
 
 		\begin{refquote}
@@ -537,7 +537,7 @@
 		  \subsection*{An empirical example}
 
 		      To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (see \emph{Appendix S5} for details). 
-		      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig.~\ref{histograms}). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
+		      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig. 2). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
 		      % To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. 
 		      We calculated an empirical prior and computed the posterior distribution of the probability of an as-yet-unobserved interaction being feasible ($\lambda_{ij}$). We analysed both the \emph{Salix}-galler and galler-natural enemy components of the network but, for brevity, present only the latter here (see~\emph{Appendix S6} for \emph{Salix}-galler results).
 		\end{quotation}
@@ -627,10 +627,10 @@
 		\end{refquote}
 
 
-		\textbf{R:} Modelling the probability of co-occurrence is an option for many systems (e.g., aquatic food webs where ranges of fish species are fairly well-known, as in~\citet{Gravel2013}). It may also be possible to separate the probability of observing an interaction at a particular location into a metaweb component (the focus of the current manuscript) and a co-occurrence probability as in~\citep{Gravel2018}. This addresses the question of interaction probabilities at specific locations, however, in contrast to our focus on metaweb interaction probabilities.
+		\textbf{R:} Modelling the probability of co-occurrence is an option for many systems (e.g., aquatic food webs where ranges of fish species are fairly well-known, as in~\citet{Gravel2013}). It may also be possible to separate the probability of observing an interaction at a particular location into a metaweb component (the focus of the current manuscript) and a co-occurrence probability, as in~\citep{Gravel2018}. This addresses the question of interaction probabilities at specific locations, however, in contrast to our focus on metaweb interaction probabilities.
 
 
-		In some systems, however, the factors affecting probabilities of co-occurrence may not be known. We therefore cannot suggest modelling co-occurrence as a panacea. Instead, we now emphasise that co-occurrence probabilities are one thing that could be included in a prior (section beginning line 231). [[Add a ref to Gravel 2018?]]
+		In some systems, however, the factors affecting probabilities of co-occurrence may not be known. We therefore cannot suggest modelling co-occurrence as a panacea. Instead, we now emphasise that co-occurrence probabilities are one thing that could be included in a prior (section beginning line 231). 
 
 
 		The fact remains that a lack of observed interactions between species which do not co-occur tells us nothing about whether these species \emph{could} interact if they should begin to co-occur (e.g., following a range shift). Following the Reviewer's suggestion, we have revised our manuscript to clarify our terminology. In particular, we have taken care to specify which level of uncertainty we are addressing at different points in the manuscript. We hope that this will remove some of the confusion about whether or not modelling different components of uncertainty/sampling more is a good idea. 
@@ -666,7 +666,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} The filtering was intended to show how uncertainty likely warps our current understanding of network properties like connectance. If we do not observe 20-50\% of the interactions in a network, then many network properties in the published literature will be inaccurate. Even worse, networks compiled under different levels of uncertainty (e.g., species with more or less variable traits, or studies with multiple sampling methods versus only one) or with different sampling efforts will have network structure metrics that are inaccurate to different degrees. Filtering networks in the way that we do could give an idea of how many networks are missing, but we do not think it is necessary to evaluate uncertainty (we believe that examining the posterior distributions directly is a better approach there). Due to length restrictions, we have moved this anslysis to an appendix (\emph{Appendix S10}) and haverephrased these lines to emphasise that the filtered networks are intended to demonstrate the consequences of uncertainty more than anything else.
+		\textbf{R:} The filtering was intended to show how uncertainty likely warps our current understanding of network properties like connectance. If we do not observe 20-50\% of the interactions in a network, then many network properties in the published literature will be inaccurate. Even worse, networks compiled under different levels of uncertainty (e.g., species with more or less variable traits, or studies with multiple sampling methods versus only one) or with different sampling efforts will have network structure metrics that are inaccurate to different degrees. Filtering networks in the way that we do could give an idea of how many networks are missing, but we do not think it is necessary to evaluate uncertainty (we believe that examining the posterior distributions directly is a better approach there). Due to length restrictions, we have moved this analysis to an appendix (\emph{Appendix S10}) and have rephrased these lines to emphasise that the filtered networks are intended to demonstrate the consequences of uncertainty more than anything else.
 
 
 		\begin{quotation}
@@ -688,7 +688,7 @@
 		The Reviewer's suggestion that we might need fewer samples for species that are ``specialised or bound to interact for some other reason'' reflects a very strong prior. In this case, yes we would need fewer samples for the species concerned. With sufficiently strong priors, it is not necessary to sample at all! For example, in most food webs it is assumed that basal resources will never consume prey even if a given resource and a given animal are never observed co-occurring and it is generally accepted that there is very low uncertainty about these zeros. In many cases, the assumptions involved in excluding interactions are less clear-cut and different researchers may disagree about which species are ``bound to interact'' (or not to interact). The concept of pollination syndromes is one example - many flower visitors are less rigidly specialised on particular flower types than initially thought~\citep{Ollerton2009}. To address such ``forbidden links``, we now suggest that researchers explicitly state both the uncertainty about data-based zeros and the assumptions by which they create structural zeros. This will allow future researchers to evaluate the uncertainty about all interactions in a network as the state of expert knowledge changes. We hope that this expanded recommendation (lines XX-XX) is clearer.
 
 
-		Finally, we emphasize that the estimate of 30-50 samples does not refer to the \emph{Salix}-galler-natural enemy test system but to a much more general interpretation of the problem. Without a prior distribution and with \emph{no prior information}, as long as we assume that interaction probabilities follow a beta distribution it will take 30-50 observations of two species co-occurring to be 95-99\% confident that the species do not interact. Sampling requirements will be much less if an interaction was observed (note that in the empirical example we assume an interaction was feasible if it was observed even once).
+		Finally, we emphasise that the estimate of 30-50 samples does not refer to the \emph{Salix}-galler-natural enemy test system but to a much more general interpretation of the problem. Without a prior distribution and with \emph{no prior information}, as long as we assume that interaction probabilities follow a beta distribution it will take 30-50 observations of two species co-occurring to be 95-99\% confident that the species do not interact. Sampling requirements will be much less if an interaction was observed (note that in the empirical example we assume an interaction was feasible if it was observed even once).
 
 
 \clearpage
@@ -757,24 +757,21 @@
 		\end{refquote}
 
 
-		\textbf{R:} As we state in the section \textbf{Estimating uncertainty}, we usually cannot distinguish different sources of uncertainty in empirical data. Those studies which attempt to do so (e.g.,~\citet{Graham2018}) remove process uncertainty by assuming constant interaction probabilities during a short, intense sampling period and also assume that we know the true set of feasible interactions. This may be the case for Graham and Weinstein's relatively small and well-studied system but is not likely to be true for systems containing hundreds of species, systems containing recently-arrived species, systems just beginning to be studied, etc.
+		\textbf{R:} As we state in the section \textbf{Estimating uncertainty}, we usually cannot distinguish different sources of uncertainty in empirical data. Those studies which attempt to do so (e.g.,~\citet{Graham2018}) remove process uncertainty by assuming constant interaction probabilities during a short, intense sampling period and also assume that we know the true set of feasible interactions. This may be the case for Graham and Weinstein's relatively small and well-studied system but is not likely to be true for systems containing hundreds of species, systems containing recently-arrived species, systems just beginning to be studied, etc. A more generally-applicable approach is to test explicitly whether species always interact when co-occurring, whether interaction probability depends on the probability of co-occurrence, and whether both co-occurrence and interaction probabilities depend upon environmental conditions, as in~\citet{Gravel2018}. Note, however, that this study refers to the probability of an interaction occurring in a local realisation of a food web while we are concerned with metawebs in the present study.
 		
 
 		To make this clearer, we have rephrased this section and added a line (lines 61-68) stating that we usually cannot determine the cause of all the zeros in an interaction matrix (we can identify obviously unfeasible interactions, but likely cannot say whether a zero for a rare species is because we did not observe enough individuals, there were not enough individuals to perform a particular interaction, or because the interaction is actually unfeasible). We hope that this revision makes it clearer that the description of different sources of uncertainty is a conceptual guide only.
 
 
 		\begin{quotation}
-			While an observed link definitely occurred (assuming correct identification of the species involved), a given link may not be observed for many reasons, \emph{whether or not it truly occurred} (Fig.~\ref{conceptual_fig}). Moreover, given an unobserved interaction in an empirical dataset, we often cannot determine why the interaction was not observed \emph{post hoc}. The detection of any interaction is a stochastic process subject to many levels of uncertainty. As a conceptual guide, we describe three nested levels of uncertainty that roughly address the questions: ``Could species $i$ and $j$ interact?", ``Did they interact during sampling?", and ``Did we observe the interaction?"
+			While an observed link definitely occurred (assuming correct identification of the species involved), a given link may not be observed for many reasons, \emph{whether or not it truly occurred} (Fig. 1). Moreover, given an unobserved interaction in an empirical dataset, we often cannot determine why the interaction was not observed \emph{post hoc}. The detection of any interaction is a stochastic process subject to many levels of uncertainty. As a conceptual guide, we describe three nested levels of uncertainty that roughly address the questions: ``Could species $i$ and $j$ interact?", ``Did they interact during sampling?", and ``Did we observe the interaction?"
 		\end{quotation}
-
-
-		For the Reviewer's interest, some of the authors in the present manuscript investigated environmental variables and co-occurrence as potential sources of variance and found that most of the variability was driven by co-occurrence. This is analogous to the effect of abundance, but at a larger scale (where many abundances are locally 0). These analyses are described in [[Add ref!!!]]
 
 
 	6. Process uncertainty poorly defined.
 
 		\begin{refquote}
-		L76ff `Process uncertainty' is not defined. The simplistic example of interaction uncertainty (fish eating a cactus) does not help the reader understand the detail of what is meant by `interaction uncertainty'. The two examples of `local constraints' (weather and habitat) are operating on completely different temporal scales (note – it is defined differently in L109). I would regard the issue of weather as much closer to detection uncertainty (e.g. for a pollinator, it would be likely to be interacting if the weather was better), whereas the issue of habitat is closer to the authors' `interaction uncertainty' (the species don't interact because they are not, or never, co-occurring in a habitat). Also if the species occur in different habitats then with an appropriate spatial scale of sampling then they do not co-occur – so the issue seems redundant. [[I suspect that the authors are thinking of a meta- or master network in much of their study, but this is not clear (or I have misunderstood and it needs to be explained better), i.e. the predicted presence of an interaction is not the presence of an interaction at the local site (taking detection and process uncertainty into account) but the ability to assess `interaction uncertainty'.]][[This is a bit separate from their issue]]
+		L76ff `Process uncertainty' is not defined. The simplistic example of interaction uncertainty (fish eating a cactus) does not help the reader understand the detail of what is meant by `interaction uncertainty'. The two examples of `local constraints' (weather and habitat) are operating on completely different temporal scales (note – it is defined differently in L109). I would regard the issue of weather as much closer to detection uncertainty (e.g. for a pollinator, it would be likely to be interacting if the weather was better), whereas the issue of habitat is closer to the authors' `interaction uncertainty' (the species don't interact because they are not, or never, co-occurring in a habitat). Also if the species occur in different habitats then with an appropriate spatial scale of sampling then they do not co-occur – so the issue seems redundant. I suspect that the authors are thinking of a meta- or master network in much of their study, but this is not clear (or I have misunderstood and it needs to be explained better), i.e. the predicted presence of an interaction is not the presence of an interaction at the local site (taking detection and process uncertainty into account) but the ability to assess `interaction uncertainty'.
 		\end{refquote}
 
 
@@ -784,7 +781,7 @@
 		Our mention of habitat as a factor affecting the probability of species interacting at a site was not intended to refer to species using different habitats, but rather the possibility that habitat type might affect interaction probabilities. For example, a more open patch of forest might have different interaction probabilities than a denser patch even if the same set of species use both patches. The Reviewer is clearly correct that habitat also affects which species are present at a site. We included co-occurrence in process uncertainty since co-occurrence does not tell us much about whether an interaction is feasible under ideal conditions (which would certainly include co-occurrence). This speaks to our point above that external factors (habitat, weather, etc.) can affect multiple levels of uncertainty at once. In fact, habitat also likely affects detection uncertainty since it is often harder to observe interactions in dense vegetation. So, in short, separating sources of uncertainty based on the external factors which contribute to them is not a particularly useful endeavour and we have revised the manuscript to steer readers away from it.
 
 
-	7. Point about temporal scales of interaction [[done]]
+	7. Point about temporal scales of interaction
 
 
 		\begin{refquote}
@@ -813,7 +810,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} In the case study, we are modelling L (the probability that an interaction is feasible). We do not have quantitative data within sites in our dataset, so we cannot isolate the probability of detecting an interaction at a site from the probability that the interaction occurs. This is also the probability we were most interested in. We do note, however, that one could also model X|L using the same framework if there were independent counts of co-occurrences and interactions within a single site. [[Add ref to the 2018 paper that does this]] does just this. We now state throughout the manuscript that we are interested in compiling the metaweb, the set of interaction which can feasibly occur. We hope that our goal is now crystal clear.
+		\textbf{R:} In the case study, we are modelling L (the probability that an interaction is feasible). We do not have quantitative data within sites in our dataset, so we cannot isolate the probability of detecting an interaction at a site from the probability that the interaction occurs. This is also the probability we were most interested in. We do note, however, that one could also model X|L using the same framework if there were independent counts of co-occurrences and interactions within a single site. \citet{Gravel2018} does just this. We now state throughout the manuscript that we are interested in compiling the metaweb, the set of interaction which can feasibly occur. We hope that our goal is now crystal clear.
 
 
 	9. Misunderstanding of how biased sampling does not solve problems of uncertainty
@@ -887,7 +884,7 @@
 		\textbf{R:} Due to space constraints, we have refrained from adding an extensive description of Jensen's inequality here, but are confident that readers can find a fuller description in the online literature if they choose.
 
 
-	15. Line 291: does assuming probability of 1 for observed interactions introduce bias? [[done]]
+	15. Line 291: does assuming probability of 1 for observed interactions introduce bias?
 
 
 		\begin{refquote}
