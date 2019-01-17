@@ -55,7 +55,7 @@
 	Because of the difference between Reviewer 2 and the other Reviewers, we have opted to prioritise the majority view and focused first on comments by Reviewers 1, 3, and 4. However, we hope and trust that, in the course of these revisions, we have at least partially addressed Reviewer 2's concerns as well. 
 
 
-	As a key point of departure for our revision, we have taken Reviewer 1's suggestion that we expand upon the different types of priors available and reasons for choosing one over the other. We also now offer a brief discussion about concerns over the subjectivity of prior selection. We argue that a great deal of subjectivity is baked into the compilation of empirical networks and that a Bayesian approach can be seen as making this subjectivity explicit. We hope that this will encourage empiricists to explicitly use their system-specific knowledge to create reasonable priors, as likely already occurs subconsciously (as in the designation of ``forbidden links``). 
+	As a key point of departure for our revision, we have taken Reviewer 1's suggestion that we expand upon the different types of priors available and reasons for choosing one over the other. We also now offer a brief discussion about concerns over the subjectivity of prior selection. We argue that a great deal of subjectivity is baked into the compilation of empirical networks and that a Bayesian approach can be seen as making this subjectivity explicit. We hope that this will encourage empiricists to explicitly use their system-specific knowledge to create reasonable priors, as likely already occurs subconsciously (as in the designation of ``forbidden links''). 
 
 
 	Overall, we hope that our revision more clearly frames the importance of uncertainty in ecological networks and positions a simple Bayesian approach as a partial solution (together with high-quality sampling, of course). 
@@ -84,10 +84,10 @@
 			\end{refquote}
 
 
-		\textbf{R:} We thank the Reviewer for his/her positive evaluation, and have done our utmost to reframe and tighten the introduction and framing of the paper. In doing so, we have happily adopted the suggestion to expand our discussion of prior selection, particularly with regard to approximate/empirical Bayes. Although we are somewhat space-limited, we have expanded our description of the different priors available and why a researcher might choose one over another (section beginning with line 200). We also touch upon the controversy over using empirical priors (lines 283-289) although we were unable to find many references addressing this in detail. We hope that this expanded description will be a better guide for empiricists who may not be familiar with Bayesian statistics.
+		\textbf{R:} We thank the Reviewer for his/her positive evaluation, and have done our utmost to reframe and tighten the introduction and framing of the paper. In doing so, we have happily adopted the suggestion to expand our discussion of prior selection, particularly with regard to approximate/empirical Bayes. Although we are somewhat space-limited, we have expanded our description of the different priors available and why a researcher might choose one over another (section beginning with line 201). We also touch upon the controversy over using empirical priors (lines 293-298) although we were unable to find many references addressing this in detail. We hope that this expanded description will be a better guide for empiricists who may not be familiar with Bayesian statistics.
 
 
-		In implementing the Reviewer's comments on our introduction, we believe that most readers who are less familiar with Bayesian procedures will need a quick outline of the problem of uncertain detection of interactions in order to be motivated to dive into the larger discussion of priors. We stress that our intended target audience is empirical ecologists working on network description who likely have a different skillset than that of the Reviewer. We also note that Reviewer 2 found that \emph{``The introduction is particularly pleasant to read and the problem is well stated``}, praise which we would hate to lose. Therefore we have revised and streamlined our introduction but still refrain from jumping straight into prior selection. We have, however, taken care to introduce our analysis as a worked example (lines 200-201) and hope that this helps to reduce the conflict between the introduction and our data. 
+		In implementing the Reviewer's comments on our introduction, we believe that most readers who are less familiar with Bayesian procedures will need a quick outline of the problem of uncertain detection of interactions in order to be motivated to dive into the larger discussion of priors. We stress that our intended target audience is empirical ecologists working on network description who likely have a different skillset than that of the Reviewer. We also note that Reviewer 2 found that \emph{``The introduction is particularly pleasant to read and the problem is well stated``}, praise which we would hate to lose. Therefore we have revised and streamlined our introduction but still refrain from jumping straight into prior selection. We have, however, taken care to introduce our analysis as a worked example (lines 300-301) and hope that this helps to reduce the conflict between the introduction and our data. 
 
 
 		Overall, we thank the Reviewer for their compliments and accept their suggestion that we are somewhat overexcited about our approach. Thus, we have refined the introduction to be more specific about the problem we are attempting to solve. We have also expanded our treatment of prior selection and hope that our paper now reads as achieving its goal.
@@ -112,14 +112,14 @@
 		\end{refquote}
 
 
-		\textbf{R:} The MLE estimate is part of the Bayesian framework as it dictates the shape of the distribution that we use. Moreover, it helps to formalise our argument that most networks are undersampled, justifying the Bayesian approach and the use of priors to reduce/set bounds around the resulting uncertainty. We therefore feel that it is important to keep some discussion of the MLE estimate in the manuscript. We now introduce the MLE formally within this context (lines 179-184) and take care to be explicit when using it to explore the sample size needed in the absence of prior knowledge later (caption of Figure S2, \emph{Appendix S2}}).
+		\textbf{R:} The MLE estimate is part of the Bayesian framework as it dictates the shape of the distribution that we use. Moreover, it helps to formalise our argument that most networks are undersampled, justifying the Bayesian approach and the use of priors to reduce/set bounds around the resulting uncertainty. We therefore feel that it is important to keep some discussion of the MLE estimate in the manuscript. We now introduce the MLE formally within this context (lines 178-184) and take care to be explicit when using it to explore the sample size needed in the absence of prior knowledge later (caption of Figure S2, \emph{Appendix S2}}).
 
 
-		Lines 179-184:
+		Lines 178-184:
 
 
 		\begin{quotation}
-			The basis of a Bayesian approach to modelling the probability that an interaction between species $i$ and $j$ occurs ($\lambda_{ij}$) is combining the maximum likelihood estimate (MLE) of $\lambda_{ij}$ with a prior distribution (described in the next section) and a normalising function. The MLE of $\lambda_{ij}$ can be modelled as a Bernoulli trial based on the number of observed interactions $k_ij$ and observed co-occurrences $n_{ij}$: $\lambda_{ij}=\frac{k_{ij}}{n_{ij}}$. The most appropriate prior distribution for $\lambda_{ij}$ is the beta distribution:
+			The basis of a Bayesian approach to modelling the probability that an interaction between species $i$ and $j$ occurs ($\lambda_{ij}$) is combining the maximum likelihood estimate (MLE) of $\lambda_{ij}$ with a prior distribution (described in the next section) and a normalising function. The MLE of $\lambda_{ij}$ can be computed from the number of observed interactions $k_ij$ and observed co-occurrences $n_{ij}$: $\lambda_{ij}=\frac{k_{ij}}{n_{ij}}$. The most appropriate prior distribution for $\lambda_{ij}$ is the beta distribution ...
 		\end{quotation}
 
 
@@ -127,7 +127,7 @@
 
 
 		\begin{quotation}
-			The number of observed co-occurrences needed to believe that an unobserved interaction cannot occur is very high (about 35; Fig. 3), and most datasets will not include this level of sampling for all pairs of species~\citep{Bartomeus2013}.
+			The number of observed co-occurrences needed to believe that an unobserved interaction cannot occur is very high (about 35; Fig. S2), and most datasets will not include this level of sampling for all pairs of species~\citep{Bartomeus2013}.
 		\end{quotation}
 
 
@@ -162,7 +162,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} We now address questions of sampling in the paragraph beginning with line 168 and in Appendix S2. We hope that this revision makes it clear that sampling should be as high-quality as possible but that sampling is unlikely to completely remove uncertainty.
+		\textbf{R:} We now address questions of sampling in the paragraph beginning with line 166 and in Appendix S2. We hope that this revision makes it clear that sampling should be as high-quality as possible but that sampling is unlikely to completely remove uncertainty.
 
 
 	% 	Literature suggestions:
@@ -206,22 +206,22 @@
 		\end{refquote}
 
 
-		\textbf{R:} We agree wholeheartedly that ecological interactions are often not independent. Indeed, some of the priors we discuss (e.g., those incorporating species' abundances or trait-matching) will introduce covariance between interactions. The Reviewer is correct that we did not initially mention this non-independence explicitly. Our aim is to keep our mathematical framework simple so that it is easy for those not familiar with Bayesian analysis to adopt. Nevertheless, non-independence of interactions is an important consideration. We are therefore happy to index all variables referring to interactions by ij and we have added explicit statements (lines 186-190 and 248-255) that some priors treat interactions independently while others will introduce covariance (e.g., by species). 
+		\textbf{R:} We agree wholeheartedly that ecological interactions are often not independent. Indeed, some of the priors we discuss (e.g., those incorporating species' abundances or trait-matching) will introduce covariance between interactions. The Reviewer is correct that we did not initially mention this non-independence explicitly. Our aim is to keep our mathematical framework simple so that it is easy for those not familiar with Bayesian analysis to adopt. Nevertheless, non-independence of interactions is an important consideration. We are therefore happy to index all variables referring to interactions by ij and we have added explicit statements (lines 185-188 and 251-259) that some priors treat interactions independently while others will introduce covariance (e.g., by species). 
 
 
-		Lines 186-190:
+		Lines 185-188:
 
 
 		\begin{quotation}
-		    The shape parameters, or hyperparameters, may be set to particular values or derived from some data (see below). Note that the hyperparameters may be set to the same values for all interactions, allowed to vary independently for all interactions, or may incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits).
+		    The shape parameters, or hyperparameters, may be set to particular values or derived from data (see below). They may be the same for all interactions, allowed to vary independently across interactions, or incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits).
 		\end{quotation}
 
 
-		Lines 248-255:
+		Lines 251-259:
 
 
 		\begin{quotation}
-			Multiple sources of information can be combined into a single model (e.g., the the $K$ nearest neighbour (KNN) algorithm, which identifies likely interaction partners based on similarity to known partners~\citep{DesjardinsProulx}). This would result in a highly informative prior that would, moreover, account for some of the non-independence in interaction probabilities. 
+			Multiple sources of information can be combined into a single model (e.g., the the $K$ nearest neighbour (KNN) algorithm, which identifies likely interaction partners based on similarity to known partners~\citep{DesjardinsProulx2017}). This would result in a highly informative prior that would, moreover, account for some of the non-independence in interaction probabilities. 
 
 
 	        Using an informative prior like these tailors the level of uncertainty surrounding each interaction and may account for non-independence of interactions (as in abundance-based or KNN models).
@@ -230,6 +230,7 @@
 
 	3. Question about identifiability of the model
 
+
 		\begin{refquote}
 
 			the reader would appreciate that the authors discuss and prove the identifiability of the model. Indeed, the three levels of uncertainty are nested but one could wonder whether different parameters at the three levels can fit the same data with the same quality (i.e. no identifiability).  I would suggest this point to be addressed in a specific section.
@@ -237,22 +238,22 @@
 		\end{refquote}
 
 
-		\textbf{R:} We believe that this comment stems from a lack of clarity about the goal of our model. It is not designed to separate the three levels of uncertainty or introduce parameters at particular levels. The only inputs are a prior distribution, which could refer to any level of uncertainty applicable to the study at hand, and post-hoc counts of interactions and co-occurrences. Using only the observed data, it is impossible to separate the three levels of uncertainty and our model does not aim to do so (as stated in lines 159-167 and lines 199-201). We therefore do not believe that an in-depth discussion of identifiability would add much value to the manuscript and, in the interest of space, have decided not to include one. Instead, we refer interested readers to~\citet{Weinstein2017} which does attempt to separate sources of uncertainty.
+		\textbf{R:} We believe that this comment stems from a lack of clarity about the goal of our model. It is not designed to separate the three levels of uncertainty or introduce parameters at particular levels. The only inputs are a prior distribution, which could refer to any level of uncertainty applicable to the study at hand, and post-hoc counts of interactions and co-occurrences. Using only the observed data, it is impossible to separate the three levels of uncertainty and our model does not aim to do so (as stated in lines 159-165 and lines 198-200). We therefore do not believe that an in-depth discussion of identifiability would add much value to the manuscript and, in the interest of space, have decided not to include one. Instead, we refer interested readers to~\citet{Weinstein2017} which does attempt to separate sources of uncertainty.
 
 
-		Lines 159-167:
+		Lines 159-165:
 
 
 		\begin{quotation}
-			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which could occur but did not at a particular sampling site or which occurred but were not detected (Fig. 1). Unfortunately, this is not possible for most interactions (except those where we know an interaction is truly not feasible). That is, we generally do not know \emph{why} an interaction was not observed, only that it was not. An empirical ecologist will instead measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, the question becomes: how can we reduce the uncertainty around our estimated interaction probability?
+			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which were feasible but did not occur during sampling or  were not detected (Fig. 1). An empirical ecologist will measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, how can we reduce the uncertainty around our estimated interaction probability?
 		\end{quotation}
 
 
-		Lines 199-201:
+		Lines 198-200:
 
 
 		\begin{quotation}
-			 Note that these models of $\lambda_{ij}$ do not distinguish between sources of uncertainty except through the choice of prior. For a model which attempts to separate sources of uncertainty, see~\citet{Weinstein2017}.
+			 Note that these models of $\lambda_{ij}$ are designed to i) quantify and ii) reduce the total uncertainty about $\lambda_{ij}$. They do not distinguish between sources of uncertainty except through the choice of prior.
 		\end{quotation}
 
 
@@ -342,7 +343,7 @@
 		\textbf{R:} We have expanded the description of the reasoning behind our choice of prior and hope that the following is clearer:
 
 
-		Lines 320-324:
+		Lines 321-326:
 
 
 		\begin{quotation}
@@ -356,11 +357,11 @@
 		\textbf{R:} We have expanded our explanation of how mis-matched priors can give unrealistic results. We hope that the following is clearer:
 
 
-		Lines 324-326:
+		Lines 326-328:
 
 
 		\begin{quotation}
-			To demonstrate how a poor choice of prior can give unreasonable posterior distributions, we repeated our analyses using priors derived from a much smaller system (\emph{Appendix S7}).
+			To demonstrate how a poor choice of prior can give unreasonable posterior distributions, we repeated our analyses using priors derived from a much smaller system (\emph{Appendix S7}). 
 		\end{quotation}
 
 
@@ -372,7 +373,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} We chose connectance and nestedness (together with degree distributions) as simple examples of commonly-assessed network properties that would be familiar to most readers working with ecological networks. Obviously these are not the only parameters of interest, but we do not have space to provide an exhaustive analysis of how uncertainty in the computation of network metrics affects different network properties. Our aim was simply to show that including uncertainty in interactions (and accounting for the possibility that many interactions are not observed) can dramatically change our perception of network metrics. A full discussion of how and why these values differ is better suited to either an exhaustive simulation study or an experimental study where different sources of uncertainty can be controlled to some degree. We now state that these four properties were chosen as illustrative examples (lines 425-428).
+		\textbf{R:} We chose connectance and nestedness (together with degree distributions) as simple examples of commonly-assessed network properties that would be familiar to most readers working with ecological networks. Obviously these are not the only parameters of interest, but we do not have space to provide an exhaustive analysis of how uncertainty in the computation of network metrics affects different network properties. Our aim was simply to show that including uncertainty in interactions (and accounting for the possibility that many interactions are not observed) can dramatically change our perception of network metrics. A full discussion of how and why these values differ is better suited to either an exhaustive simulation study or an experimental study where different sources of uncertainty can be controlled to some degree. We now state that these four properties were chosen as illustrative examples (Appendix S10).
 
 
 		\begin{quotation}
@@ -386,21 +387,18 @@
 		\textbf{R:} In the interest of space, we have added an extended description of the sampling procedure in \emph{Appendix S2}. 
 
 
-		Lines 420-425:
-
-
 		\begin{quotation}
 			Using the prior distributions and procedures described above, we calculated posterior probability distributions for species pairs that were not observed interacting. Using these posterior distributions and assuming probabilities of 1 for pairs of species that were observed interacting (see Appendix S2 for a justification), we created a suite of 100 webs by randomly sampling from each posterior distribution. Each of these webs is a prediction of the structure of the metaweb.
 		\end{quotation}
 
 
-	14. l.306: given the shape of the distribution (exponential), the mean is not an appropriate indicator. [done]
+	14. l.306: given the shape of the distribution (exponential), the mean is not an appropriate indicator. 
 
 
 		\textbf{R:} The mean may not be the best indicator with which to describe the shape of the distribution, but we hope that the Reviewer will agree that it gets the point across (co-occurrences are rare; the specific values are not of great importance). Nevertheless, we now include both mean and median in order to better reflect the exponential distribution of the data.
 
 
-		Lines XX-XX:
+		Lines 354-357:
 
 
 		\begin{quotation}
@@ -408,13 +406,13 @@
 		\end{quotation}
 
 
-	15. What does higher nestedness in the observed networks mean? How is it possible? [done]
+	15. What does higher nestedness in the observed networks mean? How is it possible? 
 
 
 		\textbf{R:} Nestedness being higher in the observed networks simply means that the additional interactions predicted by our model tend not to be between generalists and specialists and, as such, do not contribute strongly to nestedness. This is actually somewhat intuitive - ``specialists'' in the observed data are exactly those species for which we are most likely to be missing interactions, and interactions between specialists and the most likely to be predicted to occur but not have been observed. Due to the tight word limit, we do not have space to discuss this extensively in the manuscript but have added brief interpretations in the results.
 
 
-		Lines XX-XX:
+		Appendix S10:
 
 
 		\begin{quotation}
@@ -508,13 +506,13 @@
 		\end{refquote}
 
 
-		\textbf{R:} We have revised this section of the introduction to both avoid introducing rigid terminology and make it clear that our model is not concerned with partitioning different sources of variation (indeed, we state that in many cases this is not possible using empirical data). Hopefully this will discourage readers from getting bogged down in trying to isolate which external factors cause which types of uncertainty (there is almost certainly overlap - e.g., bad weather could both reduce the probability that species will be active and interact and the probability that an interaction is observed if visibility is poor). We have also added a section (beginning line 117) referring to ``forbidden links'' which addresses overlap between the questions of whether species can interact (which we had previously called interaction uncertainty) and whether they do interact at a particular site (previously process uncertainty). We hope that this addition clarifies the agreement of our manuscript with previous works listing sources of uncertainty.
+		\textbf{R:} We have revised this section of the introduction to both avoid introducing rigid terminology and make it clear that our model is not concerned with partitioning different sources of variation (indeed, we state that in many cases this is not possible using empirical data). Hopefully this will discourage readers from getting bogged down in trying to isolate which external factors cause which types of uncertainty (there is almost certainly overlap - e.g., bad weather could both reduce the probability that species will be active and interact and the probability that an interaction is observed if visibility is poor). We have also added a section (beginning line 119) referring to ``forbidden links'' which addresses overlap between the questions of whether species can interact (which we had previously called interaction uncertainty) and whether they do interact at a particular site (previously process uncertainty). We hope that this addition clarifies the agreement of our manuscript with previous works listing sources of uncertainty.
 
 
-			\begin{quotation}
+		\begin{quotation}
         \textbf{Forbidden links}
 
-            Both whether species can ever interact and whether they interact at a particular place and time have been discussed in the context of ``forbidden links``~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling, physiological constraints, etc. are considered ``structural zeros'' that cannot be observed~\citep{Jordano1987,Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are impossible due to physiological constraints remain forbidden but links previously ``forbidden'' by spatio-temporal mismatch could potentially occur. 
+            Both whether species can ever interact and Both whether species can ever interact and whether they interact at a particular place and time have been discussed in the context of ``forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling, physiological constraints, etc. are considered ``structural zeros" that cannot be observed~\citep{Jordano1987,Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are impossible due to physiological constraints remain forbidden but links previously ``forbidden" by spatio-temporal mismatch could potentially occur.
       \end{quotation}
 
 
@@ -530,14 +528,14 @@
 		\end{refquote}
 
 
-		\textbf{R:} We have expanded our introduction of the case study (beginning line 295) to make it clear that we are using the highest-quality empirical network we can find as even such networks have uncertainty about unobserved interactions. This relates back to our point that urging increased sampling effort is not likely to solve problems of uncertainty as long as sampling is limited in the number of methodologies that can be applied, biased towards abundant or easy-to-identify species, restricted to particular spatial sites and/or environmental conditions (if the network is intended to be more general), or all of the above. Given budgetary constraints, it is extremely likely that empirical ecologists cannot sample as intensively and extensively as they would like and therefore some uncertainty is likely to remain. We repeat this point in the discussion to ensure that the case study is relevant. We have also clarified our statement that a strict application of Bayesian statistics does not allow empirical priors, but that they are an option for researchers that are more concerned about matching their prior to their study system than with strict formalism (lines 296-293). As Reviewer 1 points out, this is somewhat controversial and we feel it is important to note the potential objection.
+		\textbf{R:} We have expanded our introduction of the case study (beginning line 302) to make it clear that we are using the highest-quality empirical network we can find as even such networks have uncertainty about unobserved interactions. This relates back to our point that urging increased sampling effort is not likely to solve problems of uncertainty as long as sampling is limited in the number of methodologies that can be applied, biased towards abundant or easy-to-identify species, restricted to particular spatial sites and/or environmental conditions (if the network is intended to be more general), or all of the above. Given budgetary constraints, it is extremely likely that empirical ecologists cannot sample as intensively and extensively as they would like and therefore some uncertainty is likely to remain. We repeat this point in the discussion to ensure that the case study is relevant. We have also clarified our statement that a strict application of Bayesian statistics does not allow empirical priors, but that they are an option for researchers that are more concerned about matching their prior to their study system than with strict formalism (lines 293-296). As Reviewer 1 points out, this is somewhat controversial and we feel it is important to note the potential objection.
 
 
 		\begin{quotation}
 		  \subsection*{An empirical example}
 
-		      To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (see \emph{Appendix S5} for details). 
-		      The high spatiotemporal resolution of this dataset make it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig. 2). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
+		      To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (\emph{Appendix S5}). 
+		      The high spatiotemporal resolution of this dataset makes it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig.~\ref{histograms}). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
 		      % To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. 
 		      We calculated an empirical prior and computed the posterior distribution of the probability of an as-yet-unobserved interaction being feasible ($\lambda_{ij}$). We analysed both the \emph{Salix}-galler and galler-natural enemy components of the network but, for brevity, present only the latter here (see~\emph{Appendix S6} for \emph{Salix}-galler results).
 		\end{quotation}
@@ -630,7 +628,7 @@
 		\textbf{R:} Modelling the probability of co-occurrence is an option for many systems (e.g., aquatic food webs where ranges of fish species are fairly well-known, as in~\citet{Gravel2013}). It may also be possible to separate the probability of observing an interaction at a particular location into a metaweb component (the focus of the current manuscript) and a co-occurrence probability, as in~\citep{Gravel2018}. This addresses the question of interaction probabilities at specific locations, however, in contrast to our focus on metaweb interaction probabilities.
 
 
-		In some systems, however, the factors affecting probabilities of co-occurrence may not be known. We therefore cannot suggest modelling co-occurrence as a panacea. Instead, we now emphasise that co-occurrence probabilities are one thing that could be included in a prior (section beginning line 231). 
+		In some systems, however, the factors affecting probabilities of co-occurrence may not be known. We therefore cannot suggest modelling co-occurrence as a panacea. Instead, we now emphasise that co-occurrence probabilities are one thing that could be included in a prior (section beginning line 238). 
 
 
 		The fact remains that a lack of observed interactions between species which do not co-occur tells us nothing about whether these species \emph{could} interact if they should begin to co-occur (e.g., following a range shift). Following the Reviewer's suggestion, we have revised our manuscript to clarify our terminology. In particular, we have taken care to specify which level of uncertainty we are addressing at different points in the manuscript. We hope that this will remove some of the confusion about whether or not modelling different components of uncertainty/sampling more is a good idea. 
@@ -644,7 +642,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} Following suggestions by this Reviewer and another, we have substantially expanded our discussion of different options for priors (including the trait-based and co-occurrence models the Reviewer points out). We have also added an explicit statement that researchers wishing to test the influence of a particular trait (for example) should \emph{not} include that trait in their prior (lines 252-255). We hope that this statement, and the expanded discussion of different types of priors more generally, allay the Reviewer's concerns. 
+		\textbf{R:} Following suggestions by this Reviewer and another, we have substantially expanded our discussion of different options for priors (including the trait-based and co-occurrence models the Reviewer points out). We have also added an explicit statement that researchers wishing to test the influence of a particular trait (for example) should \emph{not} include that trait in their prior (lines 260-263). We hope that this statement, and the expanded discussion of different types of priors more generally, allay the Reviewer's concerns. 
 
 
 		\begin{quotation}
@@ -685,7 +683,7 @@
 		\textbf{R:} The point of our method is not actually to quantify the amount of sampling needed. Although the ideal sampling effort \emph{can} be calculated using the framework we put forward (as we demonstrate), the real point is to quantify how uncertain we are that an interaction we do not observe really does not occur. Given this, we do not think that recommending uncertainty be explicitly stated undermines our point. 
 
 
-		The Reviewer's suggestion that we might need fewer samples for species that are ``specialised or bound to interact for some other reason'' reflects a very strong prior. In this case, yes we would need fewer samples for the species concerned. With sufficiently strong priors, it is not necessary to sample at all! For example, in most food webs it is assumed that basal resources will never consume prey even if a given resource and a given animal are never observed co-occurring and it is generally accepted that there is very low uncertainty about these zeros. In many cases, the assumptions involved in excluding interactions are less clear-cut and different researchers may disagree about which species are ``bound to interact'' (or not to interact). The concept of pollination syndromes is one example - many flower visitors are less rigidly specialised on particular flower types than initially thought~\citep{Ollerton2009}. To address such ``forbidden links``, we now suggest that researchers explicitly state both the uncertainty about data-based zeros and the assumptions by which they create structural zeros. This will allow future researchers to evaluate the uncertainty about all interactions in a network as the state of expert knowledge changes. We hope that this expanded recommendation (lines XX-XX) is clearer.
+		The Reviewer's suggestion that we might need fewer samples for species that are ``specialised or bound to interact for some other reason'' reflects a very strong prior. In this case, yes we would need fewer samples for the species concerned. With sufficiently strong priors, it is not necessary to sample at all! For example, in most food webs it is assumed that basal resources will never consume prey even if a given resource and a given animal are never observed co-occurring and it is generally accepted that there is very low uncertainty about these zeros. In many cases, the assumptions involved in excluding interactions are less clear-cut and different researchers may disagree about which species are ``bound to interact'' (or not to interact). The concept of pollination syndromes is one example - many flower visitors are less rigidly specialised on particular flower types than initially thought~\citep{Ollerton2009}. To address such ``forbidden links``, we now suggest that researchers explicitly state both the uncertainty about data-based zeros and the assumptions by which they create structural zeros. This will allow future researchers to evaluate the uncertainty about all interactions in a network as the state of expert knowledge changes. We hope that this expanded recommendation (lines 399-402) is clearer.
 
 
 		Finally, we emphasise that the estimate of 30-50 samples does not refer to the \emph{Salix}-galler-natural enemy test system but to a much more general interpretation of the problem. Without a prior distribution and with \emph{no prior information}, as long as we assume that interaction probabilities follow a beta distribution it will take 30-50 observations of two species co-occurring to be 95-99\% confident that the species do not interact. Sampling requirements will be much less if an interaction was observed (note that in the empirical example we assume an interaction was feasible if it was observed even once).
@@ -760,11 +758,11 @@
 		\textbf{R:} As we state in the section \textbf{Estimating uncertainty}, we usually cannot distinguish different sources of uncertainty in empirical data. Those studies which attempt to do so (e.g.,~\citet{Graham2018}) remove process uncertainty by assuming constant interaction probabilities during a short, intense sampling period and also assume that we know the true set of feasible interactions. This may be the case for Graham and Weinstein's relatively small and well-studied system but is not likely to be true for systems containing hundreds of species, systems containing recently-arrived species, systems just beginning to be studied, etc. A more generally-applicable approach is to test explicitly whether species always interact when co-occurring, whether interaction probability depends on the probability of co-occurrence, and whether both co-occurrence and interaction probabilities depend upon environmental conditions, as in~\citet{Gravel2018}. Note, however, that this study refers to the probability of an interaction occurring in a local realisation of a food web while we are concerned with metawebs in the present study.
 		
 
-		To make this clearer, we have rephrased this section and added a line (lines 61-68) stating that we usually cannot determine the cause of all the zeros in an interaction matrix (we can identify obviously unfeasible interactions, but likely cannot say whether a zero for a rare species is because we did not observe enough individuals, there were not enough individuals to perform a particular interaction, or because the interaction is actually unfeasible). We hope that this revision makes it clearer that the description of different sources of uncertainty is a conceptual guide only.
+		To make this clearer, we have rephrased this section and added a line (lines 65-72) stating that we usually cannot determine the cause of all the zeros in an interaction matrix (we can identify obviously unfeasible interactions, but likely cannot say whether a zero for a rare species is because we did not observe enough individuals, there were not enough individuals to perform a particular interaction, or because the interaction is actually unfeasible). We hope that this revision makes it clearer that the description of different sources of uncertainty is a conceptual guide only.
 
 
 		\begin{quotation}
-			While an observed link definitely occurred (assuming correct identification of the species involved), a given link may not be observed for many reasons, \emph{whether or not it truly occurred} (Fig. 1). Moreover, given an unobserved interaction in an empirical dataset, we often cannot determine why the interaction was not observed \emph{post hoc}. The detection of any interaction is a stochastic process subject to many levels of uncertainty. As a conceptual guide, we describe three nested levels of uncertainty that roughly address the questions: ``Could species $i$ and $j$ interact?", ``Did they interact during sampling?", and ``Did we observe the interaction?"
+			While an observed link definitely occurred (assuming species are correctly identified), a link may not be observed for many reasons, \emph{whether or not it truly occurred} (Fig. 1). Moreover, given an unobserved interaction in an empirical dataset, we often cannot determine why the interaction was not observed \emph{post hoc}. The detection of any interaction is a stochastic process subject to many levels of uncertainty. As a conceptual guide, we describe three nested levels of uncertainty that roughly address the questions: ``Could species $i$ and $j$ interact?", ``Did they interact during sampling?", and ``Did we observe the interaction?"
 		\end{quotation}
 
 
@@ -789,17 +787,17 @@
 		\end{refquote}
 
 
-		\textbf{R:} Long-term interactions may be easier to detect, but this does not necessarily translate into reduced process uncertainty. Spatial variation in interaction probabilities will affect all interaction types, as does variation in abundances between years, so we cannot conceive of any interactions that are exempt from this issue. The timescale of an interaction (and the evidence it leaves) does affect detection uncertainty, so we have added a note in that section (lines 137-140). Long-term interactions may still fail to be detected, however, and we now add an example to make it clear that detection uncertainty applies to even long-term interactions such as gall-forming (indeed, our results suggest that uncertainty in gall-forming is quite high). 
+		\textbf{R:} Long-term interactions may be easier to detect, but this does not necessarily translate into reduced process uncertainty. Spatial variation in interaction probabilities will affect all interaction types, as does variation in abundances between years, so we cannot conceive of any interactions that are exempt from this issue. The timescale of an interaction (and the evidence it leaves) does affect detection uncertainty, so we have added a note in that section (lines 143-1246). Long-term interactions may still fail to be detected, however, and we now add an example to make it clear that detection uncertainty applies to even long-term interactions such as gall-forming (indeed, our results suggest that uncertainty in gall-forming is quite high). 
 
 
 		Perhaps more important is the effect of sampling interval. As sampling time increases toward infinity, interaction probabilities should converge to 0 or 1 with no uncertainty. As we discuss, however, sampling times are limited by resources, the trade-off between sampling a single site intensively versus many sites, etc. Any interaction could therefore occur outside of the sampling window and hence be missed.
 
 
-		Lines 137-140:
+		Lines 143-146:
 
 
 		\begin{quotation}
-			The probability of detecting an interaction will also depend on the duration of the interaction and its evidence, the species involved, and the individuals sampled~\citep{Wells2013,Lagrue2015,Cirtwill2016,Weinstein2017}. 
+			The probability of detecting an interaction also depends on the duration of the interaction and its evidence, the species involved, and the individuals sampled~\citep{Wells2013,Lagrue2015,Cirtwill2016,Weinstein2017}. 
 		\end{quotation}
 
 	8. Confusion about goal of modelling
@@ -854,11 +852,11 @@
 		\end{refquote}
 
 
-		\textbf{R:} We are not quite sure what the Reviewer is asking here. $\alpha$ and $\beta$ truly are quite simple (as simple as the mean and standard deviation of a normal distribution) so there is not much more to say about them in themselves. We have expanded our discussion of different types of priors and how they may be obtained, and we hope that this clarifies matters for the Reviewer. We also note that a simple worked example, with accompanying R code, is provided in \emph{Appendix S4} so that readers can see exactly how to obtain $\alpha$ and $\beta$. In case the point of confusion is the idea that $\alpha$ and $\beta$ can be specified or derived depending on the type of prior desired, we have added a line (lines 181-185) spelling this out.
+		\textbf{R:} We are not quite sure what the Reviewer is asking here. $\alpha$ and $\beta$ truly are quite simple (as simple as the mean and standard deviation of a normal distribution) so there is not much more to say about them in themselves. We have expanded our discussion of different types of priors and how they may be obtained, and we hope that this clarifies matters for the Reviewer. We also note that a simple worked example, with accompanying R code, is provided in \emph{Appendix S4} so that readers can see exactly how to obtain $\alpha$ and $\beta$. In case the point of confusion is the idea that $\alpha$ and $\beta$ can be specified or derived depending on the type of prior desired, we have added a line (lines 185-188) spelling this out.
 
 
 		\begin{quotation}
-			The shape parameters, or hyperparameters, may be set to particular values or derived from some data (see below). They may be set to the same values for all interactions, allowed to vary independently for all interactions, or incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits). 
+			The shape parameters, or hyperparameters, may be set to particular values or derived from data (see below). They may be the same for all interactions, allowed to vary independently across interactions, or incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits).
 			\end{quotation}
 
 
@@ -870,12 +868,7 @@
 		\end{refquote}
 
 
-		\textbf{R:} We appreciate the Reviewer's desire for optimism, but we also selected a high-quality dataset specifically in order to demonstrate that empirically sampling all of the feasible interactions in a system is very unlikely. A lower-quality dataset would work just as well with our framework but would not highlight these difficulties so well. We have therefore kept this line as-is but have expanded the paragraph (301-307) to show how the Bayesian framework provides a partial solution to the problems inherent in even high-quality empirical data.
-
-
-		\begin{quotation}
-		 The high spatiotemporal resolution of this dataset makes it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig. 2). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
-		 \end{quotation}
+		\textbf{R:} We appreciate the Reviewer's desire for optimism and have tried to reframe the manuscript in order to present Bayesian approaches as a partial solution to problems of uncertainty.
 
 
 	14. Line 283 seems to be a very important point and should be explained more clearly

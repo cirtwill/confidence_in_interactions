@@ -70,8 +70,8 @@ alyssa.cirtwill@gmail.com\\
 
 
   \begin{figure}
-  \label{sim_props}
   \caption{We created 100 random networks containing 50 consumers and 50 resources, with a connectance of 0.1. For each of these ``original" networks, we created 100 process-filtered (``process") networks incorporating uncertainty around the occurrence of each interaction during sampling. For each ``process" network, we further created 100 detection-filtered (``detection") networks incorporating uncertainty around the detection of each interaction. For each network, we show the mean (+/- SD) connectance, links per consumer, nestedness (NODF), and links per resource.}
+  \label{sim_props}
   \begin{center}
   \includegraphics*[width=.9\textwidth]{figures/simulation_example.eps}
   \end{center}
@@ -83,7 +83,8 @@ alyssa.cirtwill@gmail.com\\
 
 \section*{Appendix S1-A: Attributions for PhyloPic images used in Figure 1 (main text)}
 
-  \begin{table}
+
+  \begin{table}[h!]
   \caption{Attributions for silhouette images taken from PhyloPic.org and used in Figure 1 (\emph{main text}). Terms for the CC BY-NC-SA 3.0 license can be found at \emph{https://creativecommons.org/licenses/by-nc-sa/3.0/}. Terms for the CC BY 3.0 license can be found at \emph{https://creativecommons.org/licenses/by/3.0/}.}
   \begin{tabular}{l|l m{10cm}}
   Image & PhyloPic taxon & Attribution \\
@@ -101,7 +102,9 @@ alyssa.cirtwill@gmail.com\\
   \end{tabular}
   \end{table}
 
+
 \clearpage
+
 
 \section*{Appendix S2: Can we reduce uncertainty by sampling more?}
 
@@ -126,7 +129,7 @@ alyssa.cirtwill@gmail.com\\
           Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for the interaction probability $\lambda_{ij}$ for a pair of species that has been observed co-occurring $n$ times but never interacting ($k = 0$). The upper limit of the credible interval only reaches 0.1 (dashed, red line) with 35 observations. Thus, adding more observations is useful in controlling uncertainty, but the number of observations added must be very high unless we have some other reason to believe that an interaction cannot occur (i.e., a strong prior).}
           \label{upper_limits}
           \begin{center}
-          % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
+          \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
           % \includegraphics*[width=.8\textwidth]{Figure_3.eps}
           \end{center}
           \end{figure}
@@ -191,26 +194,26 @@ alyssa.cirtwill@gmail.com\\
 
   \subsection*{Properties of the beta distribution}
   
-    %   It is common to perform analyses that require calculating higher-order network properties in interaction networks. The fact that the posterior distribution of $\lambda$ follows a beta distribution makes it straightforward to compute moments and other properties needed for these analyses. 
+      It is common to perform analyses that require calculating higher-order network properties in interaction networks. The fact that the posterior distribution of $\lambda$ follows a beta distribution makes it straightforward to compute moments and other properties needed for these analyses. 
 
 
-    %   The \textbf{average} of $\lambda$ is: 
-    %       \begin{equation}
-    %         \bar{\lambda} = \frac{\alpha+k}{\alpha+\beta+n} ,
-    %         \label{mean}
-    %       \end{equation}
+      The \textbf{average} of $\lambda$ is: 
+          \begin{equation}
+            \bar{\lambda} = \frac{\alpha+k}{\alpha+\beta+n} ,
+            \label{mean}
+          \end{equation}
 
-    %     and its \textbf{variance} is:  
-    %       \begin{equation}
-    %         Var(\lambda|k) = \frac{(\alpha + k)(\beta + n - k)}{(\alpha + \beta + n)^{2}(\alpha + \beta + n +1)}
-    %         \label{variance}
-    %       \end{equation}
+        and its \textbf{variance} is:  
+          \begin{equation}
+            Var(\lambda|k) = \frac{(\alpha + k)(\beta + n - k)}{(\alpha + \beta + n)^{2}(\alpha + \beta + n +1)}
+            \label{variance}
+          \end{equation}
 
-    %     The \textbf{mode} of the distribution is:
-    %       \begin{equation}
-    %         \hat{\lambda} = \frac{\alpha + k - 1}{\alpha + \beta + n - 2} .
-    %         \label{mode}
-    %       \end{equation}
+        The \textbf{mode} of the distribution is:
+          \begin{equation}
+            \hat{\lambda} = \frac{\alpha + k - 1}{\alpha + \beta + n - 2} .
+            \label{mode}
+          \end{equation}
 
 
 \clearpage
@@ -695,7 +698,7 @@ alyssa.cirtwill@gmail.com\\
     \caption{Mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017} occupied a narrow range. To obtain distributions of network properties, we created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``filtered" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean (+/- SD) network property (e.g., connectance) obtained from a set of 100 filtered networks. The filtered networks cover a broader range of network properties than the posterior-sampling networks but the value of each property decreases as the strength of the detection filter increases. Values in the original web are indicated by dashed lines.}
     \label{posterior_webs}    
     \begin{center}
-    % \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
+    \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
     % \includegraphics[width=.8\textwidth]{Figure_5.eps}
     \end{center}
     \end{figure}
@@ -703,6 +706,7 @@ alyssa.cirtwill@gmail.com\\
 
 
 \clearpage
+\newpage
 
 \section*{Appendix S11: Calculating the credible interval around a probability estimate}
 
@@ -722,7 +726,7 @@ alyssa.cirtwill@gmail.com\\
       %   output[r,4:5]=interval2
       % }
       \medskip
-      \begin{table}
+      \begin{table}[h!]
         \label{credints}
         \caption{Here we give the lower and upper bounds of 95\% credible intervals for the probability of interaction $\lambda$ between \emph{Salix}-galler or galler-natural enemy pairs that have been observed co-occurring $n$ times but have never been observed interacting.}
         \begin{tabular}{l  c c  c c }
