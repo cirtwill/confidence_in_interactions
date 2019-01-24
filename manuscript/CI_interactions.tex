@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+ \documentclass[12pt]{article}
 \usepackage{amsmath} 
 \usepackage[dvips]{graphicx}
 \usepackage{multirow} 
@@ -42,7 +42,7 @@
 \title{A quantitative framework for investigating the reliability of empirical network construction}
 
 
-\author{Alyssa R. Cirtwill$^{1\dagger}$, \&  Anna Ekl\"{o}f$^{1}$, Tomas Roslin$^{2}$, Kate Wootton$^{2}$, Dominique Gravel$^{3}$}
+\author{Alyssa R. Cirtwill$^{1,2\dagger}$, \&  Anna Ekl\"{o}f$^{1}$, Tomas Roslin$^{3}$, Kate Wootton$^{3}$, Dominique Gravel$^{4}$}
 \date{
 % \begin{minipage}[h]{0.6\textwidth}
 \small$^1$ Department of Physics,\\
@@ -50,12 +50,17 @@ Chemistry and Biology (IFM)\\
 Link\"{o}ping University\\
 Link\"{o}ping, Sweden\\
 \medskip
-\small$^2$ Department of Ecology\\ 
+\small$^2$ Current address: Department of Ecology,\\
+Environment, and Plant Sciences (DEEP)\\
+Stockholm University\\
+Stockholm, Sweden\\
+\medskip
+\small$^3$ Department of Ecology\\ 
 P.O. Box 7044\\ 
 Swedish University of Agricultural Sciences \\ 
 SE-750 07 Uppsala, Sweden\\
 \medskip
-\small$^3$ D\'{e}partement de biologie\\ 
+\small$^4$ D\'{e}partement de biologie\\ 
 Universit\'{e} de Sherbrooke\\ 
 Sherbrooke, Canada
 \medskip
@@ -94,7 +99,7 @@ alyssa.cirtwill@gmail.com\\
 % \end{minipage}\begin{minipage}[h]{0.4\textwidth}
 % \begin{itemize}
 % \item Abstract word count: 290
-% \item Main text word count: 6993, excluding abstract % Limit is 6000-7000 including figs, tables, references. 
+% \item Main text word count: 6997, excluding abstract % Limit is 6000-7000 including figs, tables, references. 
 % \end{itemize}
 % \end{minipage}
 % }
@@ -170,7 +175,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
         \subsubsection*{Could the species interact?} 
 
           Fundamentally, some interactions are feasible while others are not~\citep{Poisot2015}. Assuming that the feasibility of interactions depends on the traits of species involved, we can define the probability of an interaction $L_{ij}$ between species $i$ and $j$ given some function describing trait matching $\mathbf{T_{ij}}$ as $P(L_{ij}|\mathbf{T_{ij}})=\lambda_{ij}$~\citep{Bartomeus2013,Gravel2013,Weinstein2017}. In some cases the traits prohibiting an interaction are known and there will be little uncertainty about $\lambda_{ij}$. Generally, however, the traits that might prohibit an interaction are unknown~\citep{Dormann2017} and uncertainty about $\lambda_{ij}$ will be high. 
-          An unobserved interaction may have $\lambda_{ij}>0$, and the associated zero in an interaction matrix might be false. Using a trait-matching model can reduce uncertainty about $\lambda_{ij}$~\citep{Jordano2016}. As these models improve, $\lambda_{ij}$ should either tend to 0 or to 1. Nevertheless, every model is imperfect and lacks information that could be used to define constraints on at least some interactions~\citep{Dormann2017}. This leaves some uncertainty about whether some species pairs could interact.
+          An unobserved interaction may have $\lambda_{ij}>0$, and the associated zero in an interaction matrix might be false. Trait-matching models can reduce uncertainty about $\lambda_{ij}$~\citep{Jordano2016}. As these models improve, $\lambda_{ij}$ should either tend to 0 or to 1. Nevertheless, every model is imperfect and lacks information that could be used to define constraints on at least some interactions~\citep{Dormann2017}. This leaves some uncertainty about whether some species pairs could interact.
 
 
         \subsubsection*{Did the species interact during sampling?} 
@@ -199,10 +204,10 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
     %One reason for this is the effect of factors such as abundance  on multiple levels of uncertainty. Rare species are less likely to interact at a given site due to neutral processes~\citep{Jordano2016,Graham2018} and interactions involving rare species are less likely to be detected~\citep{Bartomeus2013,Jordano2016}. Thus, abundance affects both $P(X_{ij})$ and $P(D_{ij})$. 
 
 
-    When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which were feasible but did not occur during sampling or  were not detected (Fig.~\ref{conceptual_fig}). An empirical ecologist will measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, how can we reduce the uncertainty around our estimated interaction probability?
+    When considering a metaweb, we wish to separate unobserved interactions where $L_{ij}=0$ (unfeasible interactions) from interactions which were feasible but did not occur during sampling or were not detected (Fig.~\ref{conceptual_fig}). An empirical ecologist will measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, how can we reduce the uncertainty around our estimated interaction probability?
 
 
-    One obvious way to reduce uncertainty is to increase sampling. High sample sizes will reduce uncertainty about the upper bound of $\lambda_{ij}$ and increase the probability of detecting unlikely or cryptic interactions (where $L_{ij}=1$ but $\chi_{ij}$ or $\delta_{ij}$ is low). In some systems, targeted sampling of particular species pairs could reduce especially high uncertainties about $\lambda_{ij}$, but this will not be possible everywhere (e.g., in host-parasitoid systems where parasitoid identities are unknown during sample collection). High-quality sampling is crucial in studies of empirical networks, but there are limits to the ability of sampling to reduce uncertainty (\emph{Appendix S2, Fig. S2}). As a complement to improved sampling, we can also reduce uncertainty by leveraging prior knowledge about the system using a Bayesian approach, as detailed below.
+    One obvious way to reduce uncertainty is to increase sampling. High sample sizes will reduce uncertainty about the upper bound of $\lambda_{ij}$ and increase the probability of detecting unlikely or cryptic interactions (where $L_{ij}=1$ but $\chi_{ij}$ or $\delta_{ij}$ is low). In some systems, targeted sampling could also reduce especially high uncertainties about $\lambda_{ij}$, but this will not be possible everywhere (e.g., in host-parasitoid systems where parasitoid identities are unknown during sampling). High-quality sampling is crucial in studies of empirical networks, but there are limits to the ability of sampling to reduce uncertainty (\emph{Appendix S2, Fig. S2}). As a complement to improved sampling, we can also reduce uncertainty by leveraging prior knowledge about the system using a Bayesian approach, as detailed below.
 
 
 \section*{Approach}
@@ -292,7 +297,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
         Using an informative prior tailors the level of uncertainty surrounding each interaction and may account for non-independence of interactions (as in abundance-based or KNN models). Despite these benefits, informative priors often involve many assumptions and carry a risk of over-fitting. Also note that researchers wishing to test whether a particular trait influences interaction probabilities should either exclude that trait from their prior or model the network using priors which include and exclude the trait of interest (as in~\citet{Weinstein2017,Weinstein2017a}).
 
 
-        Alternatively, one can develop a prior based on the properties of a set of published networks (i.e., ``empirical" or ``reference Bayes"~\citet{Spiegelhalter2000}). This type of prior entails only one assumption: that the focal network has similar structural properties to those of published networks. For example, connectance ($C=N/S^2$, where $N$ is the number of interactions and $S$ is the number of species) is available for many networks. The distribution of published connectances can be used to predict the distribution of interaction probabilities in a new network. If we know the mean $\overline{C}$ and variance $\sigma_C^2$ of a distribution of connectances, then the hyperparameters are:
+        Alternatively, one can develop a prior based on the properties of a set of published networks (``empirical" or ``reference Bayes"~\citet{Spiegelhalter2000}). This type of prior entails only one assumption: that the focal network has similar structural properties to those of published networks. For example, connectance ($C=N/S^2$, where $N$ is the number of interactions and $S$ is the number of species) is available for many networks. The distribution of published connectances can be used to predict the distribution of interaction probabilities in a new network. If we know the mean $\overline{C}$ and variance $\sigma_C^2$ of a distribution of connectances, then the hyperparameters are:
 
         \begin{equation}
         \alpha_{ij}=\overline{C}(\frac{\overline{C}(1-\overline{C})}{\sigma_C^2}-1) ,
@@ -309,7 +314,7 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
         If a similar dataset is not available, it is also possible to use data from the study at hand to develop a prior (i.e., ``approximate Bayes"~\citet{Gelmanblog})~\citep{Spiegelhalter2000}. This approach is used in medical testing~\citep{Spiegelhalter2000} and disease modelling~\citep{Leyland2005} using information from pilot studies and can easily be applied to ecological systems. Returning to the example of degree distributions, approximate Bayes allows us to use information from abundant and easily-sampled species to predict interaction probabilities for species which were observed only rarely. Despite its practicality, approximate Bayes has been criticised for being overly subjective~\citep{Berger2006} and because estimating hyperparameters from data serves as an approximation of some true hyperparameters which remain unknown~\citep{Gelmanblog}. We therefore encourage researchers to carefully consider whether external data or an appropriate trait model is available before opting for a prior based on some of their own data. Nevertheless, there are likely to be many situations where approximate Bayes provides the best way to describe the uncertainty in the dataset. We therefore illustrate this approach in the following empirical example.
 
 
-  \section*{An empirical example}
+  \section*{Empirical example}
 
       To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (\emph{Appendix S5}). 
       The high spatiotemporal resolution of this dataset makes it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig.~\ref{histograms}). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
@@ -319,13 +324,13 @@ ecological networks; probabilistic interactions; Bayesian networks; sampling err
 
     \subsubsection*{Computing the prior and posterior distributions}
 
-        To treat each interaction as a Bayesian probability, we will combine the observed data with a distribution based on prior information. As we lack a trait-based model or similar published network, we will use data from a single sub-network from the middle of the geographical distribution of the~\citet{Kopelke2017} dataset to inform our prior distribution. This simulates an empirical Bayes model using a pilot site to inform the prior distribution. A site in the middle of the geographic distribution was chosen in order to minimise bias towards species at any geographic extreme. To demonstrate how a poor choice of prior can give unreasonable posterior distributions, we repeated our analyses using priors derived from a much smaller system (\emph{Appendix S7}). 
+        To treat each interaction as a Bayesian probability, we combine observed data with a distribution based on prior information. As we lack a trait-based model or similar published network, we use data from a single sub-network from the middle of the geographical distribution of the~\citet{Kopelke2017} dataset to inform our prior distribution. This simulates an empirical Bayes model using a pilot site to inform the prior distribution. A site in the middle of the geographic distribution was selected in order to minimise bias towards species at any geographic extreme. To demonstrate how a poor choice of prior can give unreasonable posterior distributions, we repeated our analyses using priors derived from a much smaller system (\emph{Appendix S7}). 
 
 
-        To obtain priors, we estimated interaction frequencies based on the normalised degree of each species (see \emph{Appendix S8} for details and code). Using these prior parameters, we then estimated the posterior distributions of interaction probabilities $\lambda_{ij}$. For species without observed interactions ($n=0$), the posterior distribution is identical to the prior distribution. For species where $n>0$, we can update the prior distribution with data. If we consider only pairs of species which were observed co-occurring but not interacting, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. This gives $\alpha_{ij}'$=$\alpha_{ij}$ and $\beta_{ij}'$=$\beta_{ij} + n_{ij}$. We calculated posterior distributions and 95\% credible intervals (function ``credible\_interval";~\emph{Appendix S9}) for species with $n$ ranging between 0 and 374, the total number of sites in our dataset. 
+        To obtain priors, we estimated interaction frequencies based on the normalised degree of each species (details and code in \emph{Appendix S8}). Using these prior parameters, we then estimated the posterior distributions of interaction probabilities $\lambda_{ij}$. For species without observed interactions ($n=0$), the posterior distribution is identical to the prior distribution. For species where $n>0$, we can update the prior distribution with data. If we consider only pairs of species which were observed co-occurring but not interacting, $k_{ij}$ is always 0 and only $n_{ij}$ will vary between species pairs. This gives $\alpha_{ij}'$=$\alpha_{ij}$ and $\beta_{ij}'$=$\beta_{ij}+n_{ij}$. We calculated posterior distributions and 95\% credible intervals (function ``credible\_interval";~\emph{Appendix S9}) for species with $n$ ranging between 0 and 374, the total number of sites in our dataset. 
 
 
-        Rather than calculating credible intervals for a posterior distribution after collecting data, we may wish to know how many observations are necessary to be confident that two co-occurring species do not interact (note that the beta distribution can never equal 0 or 1). The number of samples needed will depend on both our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. We calculated the number of samples required to reach 95\% confidence that $\lambda_{ij}$ was below thresholds of 0.1, 0.05, and 0.01 as examples (function ``samples\_for\_threshold";~\emph{Appendix S9}). Finally, we may be interested in measures of network structure rather than the network itself. We can use posterior distributions of interactions to generate plausible ``true'' networks that would be obtained if sampling uncertainty could be eliminated and use these networks to estimate many network properties (worked example in \emph{Appendix S10}).
+        Rather than credible intervals for a posterior distribution after collecting data, we be interested in the number of observations necessary to be confident that two co-occurring species do not interact (note that the beta distribution can never equal 0 or 1). The number of samples needed will depend on our desired level of confidence and the threshold below which we assume that two species are unlikely to ever interact. We calculated the number of samples required to reach 95\% confidence that $\lambda_{ij}$ was below thresholds of 0.1, 0.05, and 0.01 as examples (function ``samples\_for\_threshold";~\emph{Appendix S9}). Finally, we may be interested in measures of network structure. We can use posterior distributions of interactions to generate plausible ``true'' networks that would be obtained if sampling uncertainty could be eliminated and use these networks to estimate many network properties (worked example in \emph{Appendix S10}).
 
 
     % \subsubsection*{Scaling up to network metrics}
@@ -388,7 +393,7 @@ All data used in this study have been independently published and are accessible
 \end{spacing}
 \clearpage
 
-% \captionsetup{singlelinecheck=false, font={stretch=2}}
+\captionsetup{singlelinecheck=false, font={stretch=2}}
 
 \section*{Figures}
 
@@ -399,7 +404,7 @@ All data used in this study have been independently published and are accessible
     \indent After combining these layers of uncertainty, some interactions which truly occur are very unlikely to be observed. The observed matrix (bottom) is a subsample of the true matrix where the probability of observing each interaction depends upon multiple layers of uncertainty. Note that some low-probability interactions (e.g., lion predation on zebra) are included while others (e.g., lion predation on elephants) are not. For an illustration of the way in which these levels of uncertainty combine in simulated data, and the effects of uncertainty on network structure, see \emph{Appendix S1}. Attributions for images are given in \emph{Appendix S1-A}.}
     \label{conceptual_fig}
     \begin{center}
-    \includegraphics*[height=.45\textheight]{figures/conceptual_fig.eps}
+    % \includegraphics*[height=.45\textheight]{figures/conceptual_fig.eps}
     % \includegraphics*[height=.5\textheight]{Figure_1.eps}
     \end{center}
     \end{figure}
@@ -411,7 +416,7 @@ All data used in this study have been independently published and are accessible
       \textbf{C)} For each species pair, the number of observed interactions plotted against the number of observed co-occurrences. The red, dashed line indicates a 1:1 relationship.}
       \label{histograms}
       \begin{center}
-      \includegraphics*[height=.6\textheight]{figures/GP_histogram.eps}
+      % \includegraphics*[height=.6\textheight]{figures/GP_histogram.eps}
       % \includegraphics*[height=.6\textheight]{Figure_2.eps}
       \end{center}
       \end{figure}
@@ -434,7 +439,7 @@ All data used in this study have been independently published and are accessible
     Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. The number of samples required to obtain a 95\% credible interval below each threshold increases rapidly. It takes just over 20 observed co-occurrences to be 95\% confident that $\lambda_{ij}<0.10$ but over 100 co-occurrences to be 95\% confident that $\lambda_{ij}<0.01$.}
     \label{Salix_pdfs_cdfs}
     \begin{center}
-    \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
+    % \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
     % \includegraphics*[width=.8\textwidth]{Figure_4.eps}
     \end{center}
     \end{figure}

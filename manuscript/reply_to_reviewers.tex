@@ -119,7 +119,7 @@
 
 
 		\begin{quotation}
-			The basis of a Bayesian approach to modelling the probability that an interaction between species $i$ and $j$ occurs ($\lambda_{ij}$) is combining the maximum likelihood estimate (MLE) of $\lambda_{ij}$ with a prior distribution (described in the next section) and a normalising function. The MLE of $\lambda_{ij}$ can be computed from the number of observed interactions $k_ij$ and observed co-occurrences $n_{ij}$: $\lambda_{ij}=\frac{k_{ij}}{n_{ij}}$. The most appropriate prior distribution for $\lambda_{ij}$ is the beta distribution ...
+			The basis of a Bayesian approach to modelling the probability that an interaction between species $i$ and $j$ occurs ($\lambda_{ij}$) is combining the maximum likelihood estimate (MLE) of $\lambda_{ij}$ with a prior distribution (described in the next section) and a normalising function. The MLE of $\lambda_{ij}$ can be computed from the number of observed interactions $k_{ij}$ and observed co-occurrences $n_{ij}$: $\lambda_{ij}=\frac{k_{ij}}{n_{ij}}$. The most appropriate prior distribution for $\lambda_{ij}$ is the beta distribution: ...
 		\end{quotation}
 
 
@@ -224,7 +224,7 @@
 			Multiple sources of information can be combined into a single model (e.g., the the $K$ nearest neighbour (KNN) algorithm, which identifies likely interaction partners based on similarity to known partners~\citep{DesjardinsProulx2017}). This would result in a highly informative prior that would, moreover, account for some of the non-independence in interaction probabilities. 
 
 
-	        Using an informative prior like these tailors the level of uncertainty surrounding each interaction and may account for non-independence of interactions (as in abundance-based or KNN models).
+	        Using an informative prior tailors the level of uncertainty surrounding each interaction and may account for non-independence of interactions (as in abundance-based or KNN models).
 	    \end{quotation}
 
 
@@ -245,7 +245,7 @@
 
 
 		\begin{quotation}
-			When considering a metaweb, we wish to separate the unobserved interactions where $L_{ij}=0$ (i.e., unfeasible interactions) from interactions which were feasible but did not occur during sampling or  were not detected (Fig. 1). An empirical ecologist will measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, how can we reduce the uncertainty around our estimated interaction probability?
+			When considering a metaweb, we wish to separate unobserved interactions where $L_{ij}=0$ (unfeasible interactions) from interactions which were feasible but did not occur during sampling or were not detected (Fig. 1). An empirical ecologist will measure the marginal probability $P(L_{ij})=k_{ij}/n_{ij}$, where $k_{ij}$ is the number of observed interactions between species $i$ and $j$ and $n_{ij}$ the number of observed co-occurrences. Given this information, how can we reduce the uncertainty around our estimated interaction probability?
 		\end{quotation}
 
 
@@ -347,7 +347,7 @@
 
 
 		\begin{quotation}
-			As we lack a trait-based model or similar published network, we will use data from a single sub-network from the middle of the geographical distribution of the~\citet{Kopelke2017} dataset to inform our prior distribution. This simulates an empirical Bayes model using a pilot site to inform the prior distribution. A site in the middle of the geographic distribution was chosen in order to minimise bias towards species at any geographic extreme.
+			As we lack a trait-based model or similar published network, we use data from a single sub-network from the middle of the geographical distribution of the~\citet{Kopelke2017} dataset to inform our prior distribution. This simulates an empirical Bayes model using a pilot site to inform the prior distribution. A site in the middle of the geographic distribution was selected in order to minimise bias towards species at any geographic extreme.
 		\end{quotation}
 
 
@@ -512,7 +512,7 @@
 		\begin{quotation}
         \textbf{Forbidden links}
 
-            Both whether species can ever interact and whether they interact at a particular place and time have been discussed in the context of ``forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling, physiological constraints, etc. are considered ``structural zeros" that cannot be observed~\citep{Jordano1987,Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are impossible due to physiological constraints remain forbidden but links previously ``forbidden" by spatio-temporal mismatch could potentially occur.
+             Both whether species can ever interact and whether they interact at a particular place and time have been discussed in the context of ``forbidden links"~\citep{Jordano2016}. In this framework, all links which are prevented by spatio-temporal uncoupling, physiological constraints, etc. are considered ``structural zeros" that cannot be observed~\citep{Jordano1987,Jordano2016}. We conceptually distinguish between physiological constraints and spatio-temporal uncoupling to allow for cases in which a species is introduced to a new habitat, expands its range, or shifts phenology~\citep{Gravel2013}. In such cases, links which are impossible due to physiological constraints remain forbidden but links previously ``forbidden" by spatio-temporal mismatch could potentially occur.
       \end{quotation}
 
 
@@ -532,10 +532,10 @@
 
 
 		\begin{quotation}
-		  \textbf{An empirical example}
+		  \textbf{Empirical example}
 
-		      To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (\emph{Appendix S5}). 
-		      The high spatiotemporal resolution of this dataset makes it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig.~\ref{histograms}). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
+		     To illustrate the process of constructing a Bayesian network to quantify uncertainty about interactions, we use the comprehensively-sampled system of willows (\emph{Salix}), herbivorous gallers, and their natural enemies described by~\citet{Kopelke2017}. This dataset consists of a single community type sampled across Europe over 29 years and at 374 unique locations. The meta-network consists of 1,173 different interactions between 52 \emph{Salix} nodes, 92 herbivore nodes, and 126 natural enemy nodes (\emph{Appendix S5}). 
+		      The high spatiotemporal resolution of this dataset makes it ideal for illustrating the difficulties in completely sampling a network; even with such an unusually high sampling effort, there were many pairs of species which were rarely or never observed together and about which we therefore have high uncertainty about interaction probabilities (Fig. 2). Using the Bayesian framework above, we can identify which potential interactions are more and less uncertain, allowing us to better predict the true structure of the metaweb. 
 		      % To show the gaps in sampling, we compared the frequencies of observed co-occurrences and interactions. 
 		      We calculated an empirical prior and computed the posterior distribution of the probability of an as-yet-unobserved interaction being feasible ($\lambda_{ij}$). We analysed both the \emph{Salix}-galler and galler-natural enemy components of the network but, for brevity, present only the latter here (see~\emph{Appendix S6} for \emph{Salix}-galler results).
 		\end{quotation}
@@ -798,7 +798,7 @@
 
 
 		\begin{quotation}
-			The probability of detecting an interaction also depends on the duration of the interaction and its evidence, the species involved, and the individuals sampled~\citep{Wells2013,Lagrue2015,Cirtwill2016,Weinstein2017}. 
+			The probability of detecting an interaction also depends on the duration of the interaction and its evidence, the species involved, and the individuals sampled~\citep{Wells2013,Lagrue2015,Cirtwill2016,Weinstein2017}.
 		\end{quotation}
 
 	8. Confusion about goal of modelling
@@ -857,7 +857,7 @@
 
 
 		\begin{quotation}
-			The shape parameters, or hyperparameters, may be set to particular values or derived from data (see below). They may be the same for all interactions, allowed to vary independently across interactions, or incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits).
+			The shape parameters, or hyperparameters, may be set to particular values or derived from data (see below). They may be the same for all interactions, allowed to vary independently across interactions, or incorporate non-independence between interactions (e.g., when the shape of the prior distribution depends upon species' abundances or traits). 
 			\end{quotation}
 
 
