@@ -1,0 +1,138 @@
+\documentclass[12pt]{letter}
+
+\usepackage[britdate]{LiU-letter}
+\usepackage{times}
+\usepackage{letterbib}
+\usepackage{geometry}
+\usepackage[round]{natbib}
+\usepackage{graphicx}
+\geometry{a4paper}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\usepackage[running]{lineno}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[margin=10pt,font=small,labelfont=bf]{caption}
+
+%\usepackage{natbib}
+% \bibpunct[; ]{(}{)}{;}{a}{,}{;}
+
+\newenvironment{refquote}{\bigskip \begin{it}}{\end{it}\smallskip}
+
+\newenvironment{figure}{}
+
+
+\begin{document}
+
+
+
+\newpage
+
+\setcounter{page}{1}
+
+
+% Changes: reducing discussion of different sources of uncertainty, increasing description of priors, added a bunch of refs, trying to frame our study more clearly. Changed filtering to reflect all uncertainty, not just detection (more accurate, hopefully less confusing). No box needed, just ``Why sample'' section.
+
+
+% Ask for help: how would we expand this to interaction frequencies? Still with the Bernoulli? Worthwhile to add a demo of Jensen's inequality?
+% To do: expand discussion of our results as much as possible given space constraints.
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+{\Large \bf Reply to Associate Editor}
+% ---------------------------------------
+
+
+	\begin{refquote}
+		
+		Thank you for the extensive and detailed reply to the comments of the referees. Your revised manuscript was sent back to one of the referees who reviewed the original version. As you will see, he is very positive about the revised version and has now signed his review. The only outstanding issue is the addition of some discussion about how to detect potential problems with the priors. I agree with this suggestion as one of the most common criticisms of Bayesian methods is precisely the use of priors.
+
+	\end{refquote}
+
+
+	\textbf{R:} We appreciate the additional comments from the Referee, and agree that prior detection can be quite a challenge. We are therefore quite happy to add to our discussion about how to detect potential problems. Note, however, that after making the additions requested by the previous round of reviews our manuscript was very close to the standard word limit for \textbf{Methods in Ecology and Evolution}. To meaningfully expand our discussion of how to detect problems with priors we must therefore ask for more space. We have kept our addition to the discussion as succinct as possible, and the revised manuscript is now approximately XXXX words. We hope that this will be an acceptable length for publication in \textbf{Methods in Ecology and Evolution}.
+
+
+	Thanks again to the Associate Editor and Reviewer for their comments. We believe that the manuscript has been much improved by their feedback.
+
+
+\newpage
+
+
+% ----------------------------------------------------------------------
+% ----------------------------------------------------------------------
+{\Large \bf Reply to Reviewer \#1 (Ben Weinstein)}
+% ---------------------------------------
+
+	\begin{refquote}
+
+		I am reviewer 1 from the first submission. 
+
+		The text is remarkably improved. It is focused and clear. The authors do a good job of identifying the contribution of their work. I appreciate the authors willingness to rewrite much of the paper based on the suggestions of the reviewers. 
+
+		I think the authors miss one key discomfort with empirical bayes. It seems vaguely anti-ecology, because it assumes that we can L289 : “use information from abundant and easily-sampled species to predict interaction probabilities for species which were observed only rarely.”  A common goal in network ecology is to describe interaction frequencies by using niche-based proxies (phylogeny, traits, etc). If it was a simply a matter that most networks had the same degree distribution, then predicting networks would be much easier than it is. In fact, we are really bad at predicting pairwise interactions (see Olito and Fox), even when we get the emergent structure of the network correct. Yet empirical bayes assumes a kind of commonality among all networks to help narrow the posteriors. I think the authors need to speak to this concern.
+
+
+		Sincerely, 
+
+		Ben Weinstein
+
+	\end{refquote}
+
+
+	We thank the Reviewer for his further feedback and address each point (prefaced by \textbf{R:}) below.
+
+	1. Re-emphasize Figure 3.
+
+		\begin{refquote}
+
+			Figure 3 is fun and deserves a bit more central place in the discussion. 
+
+		\end{refquote}
+
+
+		\textbf{R:} We thank the Reviewer for his complement to Figure 3. Although we wish to keep any additions as brief as possible, we are happy to add a short reference to Figure 3 in the discussion as part of an example of how to use our simple Bayesian framework when thinking about insects moving into new communities (e.g., as climate changes). We hope that this puts the figure in a more central place, as intended. We also now compare this reasonable posterior pdf with an un-reasonable one generated by a poor choice of prior, which should further highlight this figure.
+
+
+		Lines XX-XX:
+
+		\begin{quotation}
+
+			Such approaches are particularly useful when considering interactions involving species entering new ranges due to climate change or introductions. Our framework could, for example, be used to predict the probability of interaction between a galler and parasitoid at a new site on the frontier of their ranges. If the species have not been observed co-occurring at other sites, we would expect them to interact with a probability of approximately 0.1 rather than assuming that they will not interact because they have not been observed interacting elsewhere (Fig.~\ref{Salix_pdfs_cdfs}). Understanding species' interactions in novel or changing communities is important for a variety of conservation questions~\citep{Bartomeus2013,Gravel2013}, and a Bayesian approach using a trait-matching model or data from species' current ranges could help us to anticipate how species will integrate into new communities. 
+
+		\end{quotation}
+
+
+	2. 
+
+
+	3. Include material from \emph{Appendix 7} in the main text
+
+		\begin{refquote}
+		
+			My final lingering concern is that something like appendix 7 seems important and should be included in the text? Was this done because of space limitations? I think the authors can appeal to the editor that the paper merits the extra space. As a compromise there could to be atleast a paragraph on what can go wrong and what that looks like. I think a figure would be useful here. If the informed/empirical priors are too narrow, the data will not really move the posterior. The authors certainly acknowledge it in various places, but it needs to be clearer to the reader.
+
+		\end{refquote}
+
+
+		\textbf{R:} This material was indeed placed in an appendix because of space constraints. We have added a figure showing results with the other prior and a paragraph summarizing \emph{Appendix 7}. As we do not wish to be too demanding with regard to extra space (and our manuscript was essentially at the standard length limit after the last revision), we hope that these smaller additions will be enough to emphasize the potential for spurious results after poor prior choices.
+
+
+	3. Reduce citations by Graham and Weinstein
+
+		\begin{refquote}
+
+			To be perfectly honest, I feel more than a bit uncomfortable with the amount that Graham and Weinstein are cited in the introduction. I count 18 times. It would be more than sufficient to cite the work in the appropriate places and move on. I understand that the reviewers asked for a broader sense of the literature, but I think the authors have gone a bit overboard. I don’t know how often a reviewer asks the authors to cite himself less, but I assure you the reason that the paper is improved is not because I am cited nearly twenty times.
+
+
+		\end{refquote}
+
+
+
+\clearpage
+
+    \bibliographystyle{ecol_let} 
+    \bibliography{manual} % Abbreviate journal titles.
+
+
+
+\end{document}
