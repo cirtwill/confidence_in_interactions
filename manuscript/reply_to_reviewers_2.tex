@@ -49,7 +49,7 @@
 	\end{refquote}
 
 
-	\textbf{R:} We appreciate the additional comments from the Referee, and agree that prior detection can be quite a challenge. We are therefore quite happy to add to our discussion about how to detect potential problems. Note, however, that after making the additions requested by the previous round of reviews our manuscript was very close to the standard word limit for \textbf{Methods in Ecology and Evolution}. To meaningfully expand our discussion of how to detect problems with priors we must therefore ask for more space. We have kept our addition to the discussion as succinct as possible, and the revised manuscript is now approximately XXXX words. We hope that this will be an acceptable length for publication in \textbf{Methods in Ecology and Evolution}.
+	\textbf{R:} We appreciate the additional comments from the Referee, and agree that prior detection can be quite a challenge. We are therefore quite happy to add to our discussion about how to detect potential problems. Note, however, that after making the additions requested by the previous round of reviews our manuscript was very close to the standard word limit for \textbf{Methods in Ecology and Evolution}. To meaningfully expand our discussion of how to detect problems with priors we must therefore ask for more space. We have kept our addition to the discussion as succinct as possible, and the revised manuscript is now approximately 7433 words. We hope that this additional length is justified by our efforts to address the Reviewer's remaining concerns.
 
 
 	Thanks again to the Associate Editor and Reviewer for their comments. We believe that the manuscript has been much improved by their feedback.
@@ -79,7 +79,7 @@
 
 	We thank the Reviewer for his further feedback and address each point (prefaced by \textbf{R:}) below.
 
-	1. Re-emphasize Figure 3. [[done]]
+	1. Re-emphasize Figure 3. 
 
 		\begin{refquote}
 
@@ -91,11 +91,11 @@
 		\textbf{R:} We thank the Reviewer for his complement to Figure 3. Although we wish to keep any additions as brief as possible, we are happy to add a short reference to Figure 3 in the discussion as part of an example of how to use our simple Bayesian framework when thinking about insects moving into new communities (e.g., as climate changes). We hope that this puts the figure in a more central place, as intended. We also now include a similar figure demonstrating the effect of a change in prior on the posterior pdf's obtained for the \emph{Salix}-galler networks and hope that this also helps to emphasize these results.
 
 
-		Lines XX-XX:
+		Lines 379-389:
 
 		\begin{quotation}
 
-			Such approaches are particularly useful when considering interactions involving species entering new ranges due to climate change or introductions. Our framework could, for example, be used to predict the probability of interaction between a galler and parasitoid at a new site on the frontier of their ranges. If the species have not been observed co-occurring at other sites, we would expect them to interact with a probability of approximately 0.1 rather than assuming that they will not interact because they have not been observed interacting elsewhere (Fig.~\ref{Salix_pdfs_cdfs}). Understanding species' interactions in novel or changing communities is important for a variety of conservation questions~\citep{Bartomeus2013,Gravel2013}, and a Bayesian approach using a trait-matching model or data from species' current ranges could help us to anticipate how species will integrate into new communities. 
+			Such approaches are particularly useful when considering interactions involving species entering new ranges due to climate change or introductions. Our framework could, for example, be used to predict the probability of interaction between a galler and parasitoid at a new site on the frontier of their ranges. If the species have not been observed co-occurring at other sites, we would expect them to interact with a probability of approximately 0.1 rather than assuming that they will not interact because they have not been observed interacting elsewhere (Fig. 3). Understanding species' interactions in novel or changing communities is important for a variety of conservation questions~\citep{Bartomeus2013,Gravel2013}, and a Bayesian approach using a trait-matching model or data from species' current ranges could help us to anticipate how species will integrate into new communities. 
 
 		\end{quotation}
 
@@ -125,6 +125,9 @@
 		We believe that including an expanded reference to \emph{Appendix S7} as suggested below will help to address some of these concerns by demonstrating that empirical Bayes should \emph{not} be based on networks which have major differences from the focal system as this will lead to unreasonable predictions (in our case, although the taxa and interaction types involved were similar, the taxonomic resolution in the \citet{Barbour2016} and \citet{Kopelke2017} were very different). To reinforce this point and make the role of empirical Bayes as a solution in the absence of trait-based models and/or trait information, we have made several minor revisions to the section introducing informative priors. We hope that these changes will be sufficient to illustrate the drawbacks to empirical Bayes without being overly discouraging for those who lack the necessary information to construct more detailed informative priors.
 
 
+		In lines 258-262 we state that empirical Bayes is an option if information about traits is lacking but that an empirical Bayes prior does not vary between species pairs:
+
+
 		\begin{quotation}
 
 			Alternatively, if information on the traits affecting interaction probabilities is lacking, one can develop a prior based on the properties of a set of published networks (``empirical" or ``reference Bayes"~\citet{Spiegelhalter2000}). This type of prior does not vary between species pairs but entails only one assumption: that the focal network has similar structural properties to those of some published networks. 
@@ -132,7 +135,7 @@
 		\end{quotation} 
 
 
-		In lines XX-XX we explicitly state that the networks used to build an empirical Bayes prior should be similar to the focal system:
+		In lines 264-266 we explicitly state that the networks used to build an empirical Bayes prior should be similar to the focal system:
 
 
 		\begin{quotation}
@@ -142,7 +145,7 @@
 		\end{quotation}
 
 
-		In lines XX-XX we reiterate the fact that an empirical Bayes prior does not vary between pairs of species and that the networks used to build the prior should be similar to the focal network:
+		In lines 269-272 we reiterate the fact that an empirical Bayes prior does not vary between pairs of species and that the networks used to build the prior should be similar to the focal network. We also acknowledge the possibility that published data are derived from under-sampled data and therefore will underestimate interaction probabilities
 
 
 		\begin{quotation}
@@ -152,7 +155,19 @@
 		\end{quotation}
 
 
-	3. Include material from \emph{Appendix 7} in the main text [[done]]
+		Finally, please note that we do discuss caveats to the empirical Bayes approach in lines 272-281, including the possibility that priors based on substantailly different systems will be misleading (with reference to \emph{Appendix S7}) and that published data may reflect under-sampled data:
+
+
+		\begin{quotation}
+
+			When using network summary statistics or degree distributions, it is important to consider whether the available information reflects what we believe about the network. Given the likelihood that most published networks are undersampled~\citep{Jordano2016}, it may be wise to include only the highest-quality networks available in a prior. Likewise, only the degree distribution for a similar system is likely to be a reasonable prior for a focal system. For example, if the focal system is large and contains a diverse array of species, it would be inappropriate to use a prior distribution drawn from a small network describing closely-related taxa (demonstrated in \emph{Appendix S7}). Similarly, data from a network where nodes are resolved to different taxonomic levels than the focal network are likely to have quite different properties and would not be an appropriate prior.
+
+		\end{quotation}
+
+
+
+
+	3. Include material from \emph{Appendix 7} in the main text
 
 		\begin{refquote}
 		
@@ -164,17 +179,17 @@
 		\textbf{R:} This material was indeed placed in an appendix because of space constraints. We have added a figure showing the posterior distributions obtained from both priors and a paragraph summarizing \emph{Appendix 7}. As we do not wish to be too demanding with regard to extra space (and our manuscript was essentially at the standard length limit after the last revision), we hope that these smaller additions will be enough to emphasize the potential for spurious results after poor prior choices. Also note that the results for the galler-parasitoid community were somewhat similar. In order to more clearly demonstrate the potentially large effects of prior choice, we therefore showcase the results from \emph{Salix}-galler networks in this paragraph.
 
 
-		Lines XX-XX:
+		Lines 390-405:
 
 		\begin{quotation}
 
-		  Note that, as in all Bayesian analyses, our results do depend on the prior chosen. To demonstrate this, we repeated our analyses using a prior derived from a study of gallers found on several genotypes of \emph{Salix hookeriana} and the parasites which emerged from them (\citealp{Barbour2016,Barbour2016Dryad}; \emph{Appendix S7}). Although the study system is similar to that in~\citet{Kopelke2017}, the network is quite different due to using different genotypes of a single \emph{Salix} species rather than several \emph{Salix} species as the basis for sampling. While this had a relatively small effect on our expectations for the galler-parasitoid community (\emph{Appendix S7}), the prior based on \citep{Barbour2016} resulted in very high probabilities of interaction between \emph{Salix} and galler pairs that were not observed interacting (Fig.~\ref{prior_comparison}). No amount of additional sampling would allow us to conclude that a given \emph{Salix}-galler pair did not interact with a threshold interaction probability of 0.01. This is reasonable for the situation described in~\citet{Barbour2016}, as it is very likely that gallers which can interact with one \emph{S. hookeriana} genotype can interact with most others, but is not reasonable for the more diverse community in~\citet{Kopelke2017}. This demonstrates the importance of conducting a "sanity check" on the posterior distribution obtained from any given prior.
+		  Note that, as in all Bayesian analyses, our results do depend on the prior chosen. To demonstrate this, we repeated our analyses using a prior derived from a study of gallers found on several genotypes of \emph{Salix hookeriana} and the parasites which emerged from them (\citealp{Barbour2016,Barbour2016Dryad}; \emph{Appendix S7}). Although the study system is similar to that in~\citet{Kopelke2017}, the network is quite different due to using different genotypes of a single \emph{Salix} species rather than several \emph{Salix} species as the basis for sampling. While this had a relatively small effect on our expectations for the galler-parasitoid community (\emph{Appendix S7}), the prior based on \citep{Barbour2016} resulted in very high probabilities of interaction between \emph{Salix} and galler pairs that were not observed interacting (Fig. 4). No amount of additional sampling would allow us to conclude that a given \emph{Salix}-galler pair did not interact with a threshold interaction probability of 0.01. This is reasonable for the situation described in~\citet{Barbour2016}, as it is very likely that gallers which can interact with one \emph{S. hookeriana} genotype can interact with most others, but is not reasonable for the more diverse community in~\citet{Kopelke2017}. This demonstrates the importance of conducting a "sanity check" on the posterior distribution obtained from any given prior.
 
 		\end{quotation}
 
 
 
-	3. Reduce citations by Graham and Weinstein [[done]]
+	3. Reduce citations by Graham and Weinstein 
 
 		\begin{refquote}
 
