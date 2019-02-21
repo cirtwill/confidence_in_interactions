@@ -100,7 +100,7 @@
 		\end{quotation}
 
 
-	2. 
+	2. Emphasize the drawbacks of empirical Bayes
 
 
 		\begin{refquote}
@@ -110,21 +110,46 @@
 		\end{refquote}
 
 
-		\textbf{R:} We agree that pairwise interactions are often difficult to predict and that different networks can have quite different degree distributions (or whichever other network property you like).  We disagree, however, that empirical Bayes assumes commonality among all networks. Rather, we argue that given some \emph{a priori} similarity among networks (e.g., similar taxa, similar habitats, similar interaction types, similar numbers of species, etc.), we can use that similarity to set bounds on our expectations about pairwise interactions. Including clearly dissimilar networks in the set of networks used to create an empirical Bayesian prior would not be reasonable. We do point out some of the potential for false results due to the use of very different networks for the prior and posterior in our paragraph on degree distribution, and have added a few more references to the pitfalls of empirical Bayes.
+		\textbf{R:} We do not share the Reviewer's highly negative view of empirical Bayes. Perhaps this is a matter of perspective: the Reviewer's work seems to focus on a system where a great deal of information about the traits structuring interactions is known and trait values are available for almost all species. In such a system it is absolutely best to use a trait-based model to predict interactions. This is why we began our section on informative priors with trait-based models and only introduce empirical and approximate Bayes as solutions where trait information/models are lacking or where over-fitting is a strong concern. Most of the authors of this manuscript are more used to such relatively information-poor systems. In these cases, we agree that empirical Bayes is not perfect but argue that it is much better than nothing (or an uninformative prior, as long as a somewhat similar network is available).
 
 
-		We would also like to add that we began our discussion of informed priors with trait-based models because these models are likely to give the best results in terms of which specific interactions are most likely. We introduce empirical Bayes for those situations where researchers do not have a strong idea of the "niche-based proxies" structuring interactions in a given site. In such a situation, we still maintain that using information available from well-sampled species or other networks is likely to be better than nothing. For example, we know that empirical networks in general tend to be rather sparse and the well-sampled species in a community probably do not interact will all possible partners, so it is not reasonable to assume that every unobserved interaction truly occurs (leaving a completely connected network) except in extremely unusual circumstances. Granted, this is quite an extreme example, but it illustrates the point. 
+		The Jeffreys prior gives a maximum likelihood estimate of 0.5 for the probability of an interaction between two species which have never been observed together. Based on our understanding of ecological systems, this seems highly unlikely. Certainly species differ in many ways, but they also do have some similarities, such as limited foraging time and somewhat consistent morphologies. Because of behavioural, morphological, or temporal limits to the number of partners with which a given species can interact, most ecological networks are sparse and most well-sampled species interact with only a small subset of their potential partners (extreme generalists in highly nested mutualistic networks being a notable exception). We can therefore reasonably expect that a species entering a new habitat, for example, will interact with far fewer than half of the available partners. If we do not know which traits strongly affect interactions involving the focal species, or if those traits are not known for all of the species in the network, we cannot use a trait-based model to predict interaction frequencies. This leaves empirical and approximate Bayes as the only viable options unless we are willing to revert to the assumption that unobserved interactions never occur. Certainly empirical Bayes is not perfect, but we are strongly confident that it is still gives more reasonable expectations than ignoring the ecological networks literature.
 
 
-		The Reviewer is quite correct that an empirical Bayes framework does not tell us which interactions are most likely to truly occur (assuming equal observations of co-occurrences). While there are many studies which aim to identify the exact set of interactions which occur, there are also others that are more concerned with the structure of the network as a whole. In such cases, and absent the information necessary to build a more specific model, we feel that empirical Bayes can still be a useful tool. We hope that our additions to this section will now instill an appropriate level of caution in readers without making it seem as though empirical Bayes is completely useless. After all, we do have some faith in our empirical Bayes example.
+		Moreover, while we agree that empirical Bayes does not take differences in niche proxies into account, this may not be crucial in all studies. Researchers are often more interested in the overall structure of the network or in some emergent property such as stability than in the relationships between niche proxies and interaction frequencies. In such cases, the number of additional interactions we expect to be observed with further sampling is likely more important than the exact identity of those interactions, and an empirical Bayes approach is reasonable if a good trait-based model and trait information or not available. 
 
 
-		Lines XX-XX:
+		Finally, we must disagree with the Reviewer's contention that ``empirical Bayes assumes a kind of commonality among all networks". This is not so; empirical Bayes only assumes some commonality between the focal network and those used to construct the prior. We have revised the text to emphasize the need to use similar networks to construct an empicial Bayes prior and note that \emph{Appendix S7} demonstrates the pitfalls of basing an empirical Bayes prior on a network with little commonality with the focal system. 
+
+
+		We believe that including an expanded reference to \emph{Appendix S7} as suggested below will help to address some of these concerns by demonstrating that empirical Bayes should \emph{not} be based on networks which have major differences from the focal system as this will lead to unreasonable predictions (in our case, although the taxa and interaction types involved were similar, the taxonomic resolution in the \citet{Barbour2016} and \citet{Kopelke2017} were very different). To reinforce this point and make the role of empirical Bayes as a solution in the absence of trait-based models and/or trait information, we have made several minor revisions to the section introducing informative priors. We hope that these changes will be sufficient to illustrate the drawbacks to empirical Bayes without being overly discouraging for those who lack the necessary information to construct more detailed informative priors.
+
 
 		\begin{quotation}
 
+			Alternatively, if information on the traits affecting interaction probabilities is lacking, one can develop a prior based on the properties of a set of published networks (``empirical" or ``reference Bayes"~\citet{Spiegelhalter2000}). This type of prior does not vary between species pairs but entails only one assumption: that the focal network has similar structural properties to those of some published networks. 
 
 		\end{quotation} 
+
+
+		In lines XX-XX we explicitly state that the networks used to build an empirical Bayes prior should be similar to the focal system:
+
+
+		\begin{quotation}
+
+			The distribution of published connectances can be used to predict the distribution of interaction probabilities in a new network that is similar to those used to construct the prior (same type of interaction, similar taxonomic resolution, habitat, etc.).
+
+		\end{quotation}
+
+
+		In lines XX-XX we reiterate the fact that an empirical Bayes prior does not vary between pairs of species and that the networks used to build the prior should be similar to the focal network:
+
+
+		\begin{quotation}
+
+		Note that here the prior distribution will be the same for all interaction probabilities. It is also possible to interpret other network properties (e.g., species degrees) in a similar network(s) as interaction probabilities and use these to create a prior (worked example in \emph{Appendix S4}).
+
+		\end{quotation}
 
 
 	3. Include material from \emph{Appendix 7} in the main text [[done]]
