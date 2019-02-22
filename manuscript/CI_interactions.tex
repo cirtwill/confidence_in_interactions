@@ -405,32 +405,20 @@ All data used in this study have been independently published and are accessible
       \end{figure}
 
 
-  % \begin{figure}[h!]
-    %   \caption{Imperfect detection of interactions increases the number of samples required to be confident that an interaction never occurs. Assume that two species cannot interact (i.e., $\lambda=0$) and that the number of observed interactions follows a binomial distribution depending upon the number of observed interactions $k$ and observed co-occurrences $n$. The maximum likelihood estimate (MLE) for $\lambda_{ij}$ is $\lambda_{MLE}=\frac{k}{n}$. Note that $\lambda_{ij}$ is not a point estimate but rather a random variable with an unknown distribution. This means that if $k=0$ in a given sample, this does not necessarily imply that the two species will never interact. Rather, $k=0$ implies that `no interaction' is the most likely outcome when the species do co-occur but there is nonetheless some chance that the two species \emph{could} interact.\\
-    %   Importantly, we can estimate the variance of $\lambda_{ij}$ as well as the MLE; available methods include the \emph{Wilson score interval}, the \emph{Clopper-Pearson interval}, and the \emph{Agresti-Coull interval} (for details, see [\citealp{Brown2001}]). The distribution of the MLE for $\lambda_{ij}$ thus obtained is a key part of the Bayesian distribution for $\lambda_{ij}$.
-    %   Here we show the upper bound (solid black line) of a 95\% Clopper-Pearson true credible interval for the interaction probability $\lambda_{ij}$ for a pair of species that has been observed co-occurring $n$ times but never interacting ($k=0$). The upper limit of the credible interval only reaches 0.1 (dashed, red line) with 35 observations. Thus, adding more observations is useful in controlling uncertainty, but the number of observations added must be very high unless we have some other reason to believe that an interaction cannot occur (i.e., a strong prior).}
-    %   \label{upper_limits}
-    %   \begin{center}
-      % \includegraphics*[width=.8\textwidth]{figures/upper_limit_DG.eps}
-    %   % \includegraphics*[width=.8\textwidth]{Figure_3.eps}
-    %   \end{center}
-    %   \end{figure}
-
-
   \begin{figure}[h!]
     \caption{Posterior distributions for the interaction probability ($\lambda_{ij}$) for two species that have not been observed interacting ($k_{ij}=0$), based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017}. Posterior distributions (curves) and 95\% credible intervals (lines at top of panel) for $\lambda_{ij}$ narrow and approach zero as the number of observed co-occurrences ($n_{ij}$) increases. Diamonds indicate the maximum likelihood estimator for the mean probability of interaction.
     Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. The number of samples required to obtain a 95\% credible interval below each threshold increases rapidly. It takes just over 20 observed co-occurrences to be 95\% confident that $\lambda_{ij}<0.10$ but over 100 co-occurrences to be 95\% confident that $\lambda_{ij}<0.01$.}
     \label{Salix_pdfs_cdfs}
     \begin{center}
     \includegraphics*[width=.8\textwidth]{figures/GP_pdfs_increasing_N_Zillis.eps}
-    % \includegraphics*[width=.8\textwidth]{Figure_4.eps}
+    % \includegraphics*[width=.8\textwidth]{Figure_3.eps}
     \end{center}
     \end{figure}
 
 
   \begin{figure}[h!]
     \caption{Posterior distributions for the interaction probability ($\lambda_{ij}$) for two species that have not been observed interacting ($k_{ij}=0$), A) based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017} and B) based on a network describing interactions between gallers and several genotypes of \emph{Salix hookeriana} from~\citet{Barbour2016}. Posterior distributions (curves) and 95\% credible intervals (lines at top of panel) for $\lambda_{ij}$ narrow and approach zero as the number of observed co-occurrences ($n_{ij}$) increases. Diamonds indicate the maximum likelihood estimator for the mean probability of interaction.
-    Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. Note that the prior obtained from~\citet{Barbour2016} constrains the MLE  of $\lambda_{ij}$ above 0.01.}
+    Dashed lines indicate threshold probabilities of 0.01, 0.05, and 0.1. Note that both priors constrain the MLE of $\lambda_{ij}$ above 0.1 and that the posterior probability distributions become similar for very high $n$.}
     \label{prior_comparison}
     \begin{center}
     \includegraphics*[width=.8\textwidth]{figures/SG_pdfs_prior_comparison.eps}
@@ -438,14 +426,7 @@ All data used in this study have been independently published and are accessible
     \end{center}
     \end{figure}
 
-  % \begin{figure}[h!]
-  %   \caption{Mean connectance, links per galler, nestedness (NODF), and links per natural enemy for networks assembled using posterior distributions based on a single site (Zillis in Graub\"{u}nden, Switzerland) from~\citet{Kopelke2017} occupied a narrow range. To obtain distributions of network properties, we created 100 ``posterior-sampling" networks and then, for each of these, created 100 ``filtered" networks by randomly sampling 50\%-99\% of the interactions included in the posterior-sampling network. This simulates imperfect detection of interactions in the field. Each point represents the mean (+/- SD) network property (e.g., connectance) obtained from a set of 100 filtered networks. The filtered networks cover a broader range of network properties than the posterior-sampling networks but the value of each property decreases as the strength of the detection filter increases. Values in the original web are indicated by dashed lines.}
-  %   \label{posterior_webs}    
-  %   \begin{center}
-  %   % \includegraphics[width=.8\textwidth]{figures/GP_posterior_properties_Zillis.eps}
-  %   % \includegraphics[width=.8\textwidth]{Figure_5.eps}
-  %   \end{center}
-  %   \end{figure}
+
 
 
 \clearpage
